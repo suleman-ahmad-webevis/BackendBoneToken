@@ -5,9 +5,9 @@ const { checkUser, requireAuth } = require("../middleware/authMiddleware");
 
 const router = Router();
 
-router.get("/products", requireAuth, product_Get);
+router.get("/products", product_Get);
 router.post("/products", requireAuth, product_Post);
-router.put("/products/:id", requireAuth, product_Update);
+router.put("/products/:id",requireAuth, product_Update);
 router.delete("/products/:id", requireAuth, product_Delete);
 router.get("/products/category", requireAuth, product_Category);
 

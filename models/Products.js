@@ -3,12 +3,15 @@ const mongoose = require('mongoose')
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please enter the name of product.'],
-        lowercase: true
+        required: [true, 'Please enter the name of product.']
     },
     description: {
         type: String,
         required: [true, 'Please enter description of product.']
+    },
+    price: {
+        type: Number,
+        required: [true, 'Please enter a price for the product.']
     },
     productImage: {
         data: Buffer,

@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const userRoutes = require('./routers/userRoutes');
@@ -12,6 +13,8 @@ const { checkUser } = require('./middleware/authMiddleware');
 require('dotenv').config()
 
 const app = express()
+
+app.use((cors()))
 
 app.use(express.static('public'));
 
