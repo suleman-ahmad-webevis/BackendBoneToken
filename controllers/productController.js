@@ -1,16 +1,6 @@
 const Product = require("../models/Products");
-const multer = require("multer");
-
-const Storage = multer.diskStorage({
-    destination: "public/uploads",
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "_" + file.originalname);
-    },
-});
-
-const upload = multer({
-    storage: Storage,
-}).single("productImage");
+const cloudinary = require('../utils/cloudinary')
+const path = require('path')
 
 const handleErrors = (err) => {
     const error = {};
@@ -24,83 +14,94 @@ const handleErrors = (err) => {
 };
 
 module.exports.product_Post = async (req, res, next) => {
-    upload(req, res, (err) => {
-        if (err) {
-            res.send(err.message)
-        } else {
-            const product = new Product({
-                productImage: {
-                    data: req.file.filename,
-                    contentType: "image/jpeg",
-                },
-                name: req.body.name,
-                description: req.body.description,
-                rating: req.body.rating,
-                category: req.body.category,
-                usedorNew: req.body.usedorNew,
-                gender: req.body.gender,
-                height: req.body.height,
-                weight: req.body.weight,
-                color: req.body.color,
-                season: req.body.season
-            });
-            product.save()
-                .then((result) => {
-                    res.send(result);
-                    next();
-                })
-                .catch((err) => {
-                    const error = handleErrors(err);
-                    res.send(error);
-                    next();
-                });
-        }
-    });
-};
+    try {
+        const uploaded_img = await cloudinary.uploader.upload(req.file.path)
+        const product = new Product({
+            name: req.body.name,
+            price: req.body.price,
+            productImage: uploaded_img.secure_url,
+            cloudinaryId: uploaded_img.public_id,
+            description: req.body.description,
+            rating: req.body.rating,
+            category: req.body.category,
+            usedorNew: req.body.usedorNew,
+            gender: req.body.gender,
+            height: req.body.height,
+            weight: req.body.weight,
+            color: req.body.color,
+            season: req.body.season
+        })
+        await product.save();
+        res.json(product)
+    }
+    catch (err) {
+        const error = handleErrors(err);
+        res.send(error);
+        next();
+    }
+}
 
-module.exports.product_Get = (req, res) => {
-    Product.find({}, (err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            res.send(data);
-        }
-    });
+
+module.exports.product_Get = async (req, res) => {
+    try {
+        const data = await Product.find()
+        res.json(data)
+    }
+    catch (err) {
+        const error = handleErrors(err)
+        res.send(error)
+    }
 };
 
 module.exports.product_Update = async (req, res) => {
-    await Product.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
-        .then((data) => {
-            console.log(data)
-            if (!data) {
-                return res.status(404).send();
-            }
-            res.send(data);
-        }).catch((err) => {
-            const error = handleErrors(err)
-            res.send(error)
-        })
+    try{
+        const product = await Product.findById(req.params.id);
+        await cloudinary.uploader.destroy(product.cloudinaryId);
+        const updated_img = await cloudinary.uploader.upload(req.file.path);
+        const data = {
+            name: req.body.name || product.name,
+            price: req.body.price || product.price,
+            productImage: updated_img.secure_url || product.productImage,
+            cloudinaryId: updated_img.public_id || product.cloudinaryId,
+            description: req.body.description || product.description,
+            rating: req.body.rating || product.rating,
+            category: req.body.category || product.category,
+            usedorNew: req.body.usedorNew || product.usedorNew,
+            gender: req.body.gender || product.gender,
+            height: req.body.height || product.height,
+            weight: req.body.weight || product.weight,
+            color: req.body.color || product.color,
+            season: req.body.season || product.season
+        }
+        product = await Product.findByIdAndUpdate(req.params.id, data, {new: true});
+        res.json(product)
+    }
+    catch(err) {
+        const error = handleErrors(err)
+        res.send(error)
+    }
 }
 
 module.exports.product_Delete = async (req, res) => {
-    await Product.findByIdAndDelete(req.params.id, (err, data) => {
-        if (err) {
-            const error = handleErrors(err)
-            res.send(error)
-        }
-        else {
-            res.send(data)
-        }
-    })
+    try {
+        const product = await Product.findById(req.params.id);
+        await cloudinary.uploader.destroy(product.cloudinaryId);
+        await product.remove()
+        res.json(product)
+    }
+    catch (err) {
+        const error = handleErrors(err)
+        res.send(error)
+    }
 }
 
 module.exports.product_Category = async (req, res) => {
-    await Product.find({ category: req.body.category })
-    .then(data => {
-        res.send(data)
-    })
-    .catch(err => {
-        const error = handleErrors(err)
-        res.send(error)
-    })
+   try{
+    const product = await Product.find({category: req.body.category});
+    res.send(product)
+   }
+   catch(err) {
+    const error = handleErrors(err)
+    res.send(error)
+   }
 }

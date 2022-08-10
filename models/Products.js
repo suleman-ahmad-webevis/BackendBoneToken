@@ -14,8 +14,10 @@ const ProductSchema = new mongoose.Schema({
         required: [true, 'Please enter a price for the product.']
     },
     productImage: {
-        data: Buffer,
-        contentType: String
+        type: String,
+    },
+    cloudinaryId: {
+        type: String,
     },
     rating: {
         type: Number,

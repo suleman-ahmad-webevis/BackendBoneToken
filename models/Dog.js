@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 
 const DogSchema = new mongoose.Schema({
     dogImage: {
-        data: Buffer,
-        contentType: String
+        type: String,
+    },
+    cloudinaryId: {
+        type: String,
     },
     ownerName: {
         type: String,
