@@ -2,13 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
 const userRoutes = require('./routers/userRoutes');
 const dogRoutes = require('./routers/dogRoutes');
 const productRoutes = require('./routers/productRoutes')
 const cartRoutes = require('./routers/cartRoutes')
-const { checkUser } = require('./middleware/authMiddleware');
+const { checkUser } = require('./utils/auth');
+
 
 require('dotenv').config()
 
@@ -21,14 +20,6 @@ app.use(express.static('public'));
 app.use(express.json())
 
 app.use(cookieParser())
-
-app.use(session({
-  secret: process.env.SESSION_KEY,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true, maxAge: 180 * 60 * 1000},
-  store: MongoStore.create({ mongoUrl: process.env.DB_URI })
-}))
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(process.env.DB_PORT))

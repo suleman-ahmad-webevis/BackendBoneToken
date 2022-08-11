@@ -45,6 +45,9 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please enter your street number.']
     },
+    addition: {
+        type: String
+    },
     city: {
         type: String,
         required: [true, 'Please enter your city.'],

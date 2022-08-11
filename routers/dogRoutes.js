@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {dog_Post,dog_Get,dog_Update, dog_Delete} = require("../controllers/dogController");
-const { requireAuth } = require("../middleware/authMiddleware");
+const { requireAuth } = require("../utils/auth");
 const upload = require('../utils/multer')
 
 
