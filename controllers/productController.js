@@ -17,19 +17,9 @@ module.exports.product_Post = async (req, res, next) => {
     try {
         const uploaded_img = await cloudinary.uploader.upload(req.file.path)
         const product = new Product({
-            name: req.body.name,
-            price: req.body.price,
             productImage: uploaded_img.secure_url,
             cloudinaryId: uploaded_img.public_id,
-            description: req.body.description,
-            rating: req.body.rating,
-            category: req.body.category,
-            usedorNew: req.body.usedorNew,
-            gender: req.body.gender,
-            height: req.body.height,
-            weight: req.body.weight,
-            color: req.body.color,
-            season: req.body.season
+            ...req.body
         })
         await product.save();
         res.json(product)
@@ -43,18 +33,32 @@ module.exports.product_Post = async (req, res, next) => {
 
 
 module.exports.product_Get = async (req, res) => {
-    try {
-        const data = await Product.find()
-        res.json(data)
+    let { searchText } = req.query;
+    console.log("The searchText", searchText);
+    let query = {
+        //$and performs a logical AND operation on an array of one or more expressions (<expression1>, <expression2>, and so on) and selects the documents that satisfy all the expressions.
+        $and: [{}],
+    };
+    if (searchText) {
+        query.$and.push({
+            $or: [
+                //The RegExp object is used for matching text with a pattern.
+                { category: { $regex: ".*" + searchText + ".*", $options: "i" } },
+                { name: { $regex: ".*" + searchText + ".*", $options: "i" } },
+            ],
+        });
     }
-    catch (err) {
-        const error = handleErrors(err)
-        res.send(error)
+    try {
+        const data = await Product.find(query);
+        res.json(data);
+    } catch (err) {
+        const error = handleErrors(err);
+        res.send(error);
     }
 };
 
 module.exports.product_Update = async (req, res) => {
-    try{
+    try {
         const product = await Product.findById(req.params.id);
         await cloudinary.uploader.destroy(product.cloudinaryId);
         const updated_img = await cloudinary.uploader.upload(req.file.path);
@@ -73,10 +77,10 @@ module.exports.product_Update = async (req, res) => {
             color: req.body.color || product.color,
             season: req.body.season || product.season
         }
-        product = await Product.findByIdAndUpdate(req.params.id, data, {new: true});
+        product = await Product.findByIdAndUpdate(req.params.id, data, { new: true });
         res.json(product)
     }
-    catch(err) {
+    catch (err) {
         const error = handleErrors(err)
         res.send(error)
     }
@@ -96,12 +100,12 @@ module.exports.product_Delete = async (req, res) => {
 }
 
 module.exports.product_Category = async (req, res) => {
-   try{
-    const product = await Product.find({category: req.body.category});
-    res.send(product)
-   }
-   catch(err) {
-    const error = handleErrors(err)
-    res.send(error)
-   }
+    try {
+        const product = await Product.find({ category: req.body.category });
+        res.send(product)
+    }
+    catch (err) {
+        const error = handleErrors(err)
+        res.send(error)
+    }
 }

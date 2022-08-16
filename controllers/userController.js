@@ -38,9 +38,8 @@ const createToken = (id) => {
 }
 
 module.exports.register_Post = async (req, res) => {
-    const { firstName, lastName, email, phone, password, confirmPassword, street, streetNumber, addition, city, state, postCode, country } = req.body;
     try {
-        const user = await User.create({ firstName, lastName, email, phone, password, confirmPassword, street, streetNumber, addition, city, state, postCode, country })
+        const user = await User.create({...req.body})
         const token = createToken(user._id)
         res.cookie('jwt', token, { httpOnly: true, expiresIn: maxAge * 1000 })
         res.status(201).json({ user: user._id })

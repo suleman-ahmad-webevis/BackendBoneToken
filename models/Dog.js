@@ -13,9 +13,8 @@ const DogSchema = new mongoose.Schema({
         lowercase: true,
     },
     dogBreeder: {
-        type: String,
-        lowercase: true,    
-        required: [true, 'Please enter an email.']
+        type: Boolean,
+        required: true
     },
     kennelName: {
         type: String,

@@ -26,29 +26,9 @@ module.exports.dog_Post = async (req, res, next) => {
   try {
     const uploaded_img = await cloudinary.uploader.upload(req.file.path)
     const dog = new Dog({
+      ...req.body,
       dogImage: uploaded_img.secure_url,
-      cloudinaryId: uploaded_img.public_id,
-      ownerName: req.body.ownerName,
-      dogBreeder: req.body.dogBreeder,
-      kennelName: req.body.kennelName,
-      microchipNumber: req.body.microchipNumber,
-      dogName: req.body.dogName,
-      breed: req.body.breed,
-      dogGender: req.body.dogGender,
-      dob: req.body.dob,
-      showName: req.body.showName,
-      showCountry: req.body.showCountry,
-      showPlace: req.body.showPlace,
-      showJudge: req.body.showJudge,
-      showClass: req.body.showClass,
-      showDate: req.body.showDate,
-      insurancePolicy: req.body.insurancePolicy,
-      insuranceContact: req.body.insuranceContact,
-      insuranceStart: req.body.insuranceStart,
-      insuranceExpire: req.body.insuranceExpire,
-      vaccination: req.body.vaccination,
-      vaccinationSerial: req.body.vaccinationSerial,
-      vaccinationExpiry: req.body.vaccinationExpiry,
+      cloudinaryId: uploaded_img.public_id
     });
     dog.save()
     res.status(200).send(dog._id)

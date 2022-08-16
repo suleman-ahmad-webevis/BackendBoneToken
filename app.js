@@ -1,31 +1,30 @@
-const express = require('express')
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
-const userRoutes = require('./routers/userRoutes');
-const dogRoutes = require('./routers/dogRoutes');
-const productRoutes = require('./routers/productRoutes')
-const cartRoutes = require('./routers/cartRoutes')
-const { checkUser } = require('./utils/auth');
+const express = require("express");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const userRoutes = require("./routers/userRoutes");
+const dogRoutes = require("./routers/dogRoutes");
+const productRoutes = require("./routers/productRoutes");
+const cartRoutes = require("./routers/cartRoutes");
+const { checkUser } = require("./utils/auth");
 
+require("dotenv").config();
 
-require('dotenv').config()
+const app = express();
 
-const app = express()
+app.use(cors());
 
-app.use((cors()))
+app.use(express.static("public"));
 
-app.use(express.static('public'));
+app.use(express.json());
 
-app.use(express.json())
+app.use(cookieParser());
 
-app.use(cookieParser())
-
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(process.env.DB_PORT))
   .then(() => console.log(`Server started running on port ${process.env.DB_PORT}`))
   .catch((err) => console.log(err));
 
-app.get('*', checkUser)
+app.get("*", checkUser);
 
-app.use(userRoutes, dogRoutes, productRoutes, cartRoutes)
+app.use(userRoutes, dogRoutes, productRoutes, cartRoutes);
