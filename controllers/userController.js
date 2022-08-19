@@ -39,8 +39,9 @@ const createToken = (id) => {
 
 module.exports.register_Post = async (req, res) => {
     try {
-        const user = await User.create({...req.body})
+        const user = await User.create({ ...req.body })
         const token = createToken(user._id)
+        console.log(token)
         res.cookie('jwt', token, { httpOnly: true, expiresIn: maxAge * 1000 })
         res.status(201).json({ user: user._id })
     }
@@ -55,10 +56,10 @@ module.exports.login_Post = async (req, res) => {
     try {
         const user = await User.login(email, password)
         const token = createToken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, expiresIn: maxAge * 1000 })
-        res.status(201).json({ user: user._id })
+        res.status(201).json({ user: user._id, token })
     }
     catch (err) {
+        console.log(err)
         const errors = await handleErrors(err)
         res.status(400).json({ errors })
         next()

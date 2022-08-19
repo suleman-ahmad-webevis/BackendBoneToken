@@ -1,17 +1,9 @@
 const Dog = require("../models/Dog");
 const cloudinary = require('../utils/cloudinary')
 
-const handleErrors = (err) => {
+const handleErrors = async (err) => {
   console.log(err);
   let error = { microchipNumber: "", vaccinationSerial: "" };
-  if (err.code === 11000) {
-    if (err.message.includes("microchipNumber")) {
-      error.microchipNumber = "Microchip number already exists.";
-    }
-    if (err.message.includes("vaccinationSerial")) {
-      error.vaccinationSerial = "Vaccination serial number already exists.";
-    }
-  }
 
   if (err.message.includes("dog validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
@@ -19,23 +11,31 @@ const handleErrors = (err) => {
     });
   }
 
+  const dogMicrochip = await Dog.findOne({ email: req.body.microchipNumber })
+    if (dogMicrochip) { error.microchipNumber = 'Microchip number already exists' } else { error.microchipNumber = '' }
+
+    const dogSerial = await Dog.findOne({ phone: req.body.vaccinationSerial })
+    if (dogSerial) { error.vaccinationSerial = 'Vaccination serial number already exists' } else { error.vaccinationSerial = '' }
+
   return error;
 };
 
 module.exports.dog_Post = async (req, res, next) => {
   try {
-    const uploaded_img = await cloudinary.uploader.upload(req.file.path)
+    const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage)
+    console.log(uploaded_img)
     const dog = new Dog({
       ...req.body,
       dogImage: uploaded_img.secure_url,
       cloudinaryId: uploaded_img.public_id
     });
+    console.log(dog)
     dog.save()
-    res.status(200).send(dog._id)
+    res.status(200).send(dog)
   }
   catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
+    console.log(err)
+    res.send(err);
     next();
   }
 }
@@ -55,7 +55,7 @@ module.exports.dog_Update = async (req, res) => {
   try {
     const dog = await Dog.findById(req.params.id);
     await cloudinary.uploader.destroy(dog.cloudinaryId);
-    const updated_img = await cloudinary.uploader.upload(req.file.path);
+    const updated_img = await cloudinary.uploader.upload(req.file.body);
     await Dog.findByIdAndUpdate(req.params.id, { $set: req.body, dogImage: updated_img.secure_url || dog.dogImage,
       cloudinaryId: updated_img.public_id || dog.cloudinaryId,}, { new: true })
   }

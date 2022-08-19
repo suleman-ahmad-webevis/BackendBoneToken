@@ -13,7 +13,7 @@ const DogSchema = new mongoose.Schema({
         lowercase: true,
     },
     dogBreeder: {
-        type: Boolean,
+        type: String,
         required: true
     },
     kennelName: {
@@ -41,8 +41,18 @@ const DogSchema = new mongoose.Schema({
         required: true
     },
     dob: {
-        type: String,
-        required: true
+        dobDay: {
+            type: Number,
+            required: true
+        },
+        dobMonth: {
+            type: Number,
+            required: true
+        },
+        dobYear: {
+            type: Number,
+            required: true
+        }
     },
     showName: {
         type: String,
@@ -70,9 +80,18 @@ const DogSchema = new mongoose.Schema({
         required: [true, 'Please enter class in the show.']
     },
     showDate: {
-        type: String,
-        lowercase: true,
-        required: true
+        showDay: {
+            type: Number,
+            required: true
+        },
+        showMonth: {
+            type: Number,
+            required: true
+        },
+        showYear: {
+            type: Number,
+            required: true
+        }
     },
     insurancePolicy: {
         type: String,
@@ -84,12 +103,32 @@ const DogSchema = new mongoose.Schema({
         required: [true, 'Please enter contact number of insurance agency.']
     },
     insuranceStart: {
-        type: String,
-        required: true
+        insurasDay: {
+            type: Number,
+            required: true
+        },
+        insurasMonth: {
+            type: Number,
+            required: true
+        },
+        insurasYear: {
+            type: Number,
+            required: true
+        },
     },
-    insuranceExpire: { 
-        type: String,
-        required: true
+    insuranceExpire: {
+        insuraxDay: {
+            type: Number,
+            required: true
+        },
+        insuraxMonth: {
+            type: Number,
+            required: true
+        },
+        insuraxYear: {
+            type: Number,
+            required: true
+        },
     },
     vaccination: {
         type: String,
@@ -102,9 +141,19 @@ const DogSchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
-    vaccinationExpiry: {
-        type: String,
-        required: true
+    vaccinationExpire: {
+        vaxpireDay: {
+            type: Number,
+            required: true
+        },
+        vaxpireMonth: {
+            type: Number,
+            required: true
+        },
+        vaxpireYear: {
+            type: Number,
+            required: true
+        },
     }
 })
 
