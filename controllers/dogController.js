@@ -55,13 +55,12 @@ module.exports.dog_Update = async (req, res) => {
   try {
     const dog = await Dog.findById(req.params.id);
     await cloudinary.uploader.destroy(dog.cloudinaryId);
-    const updated_img = await cloudinary.uploader.upload(req.file.body);
+    const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
     await Dog.findByIdAndUpdate(req.params.id, { $set: req.body, dogImage: updated_img.secure_url || dog.dogImage,
       cloudinaryId: updated_img.public_id || dog.cloudinaryId,}, { new: true })
   }
   catch (err) {
-    const error = handleErrors(err)
-    res.send(error)
+    res.send(err)
   }
 }
 
