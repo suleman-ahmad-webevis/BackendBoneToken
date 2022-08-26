@@ -62,13 +62,22 @@ module.exports.dog_Get = async (req, res) => {
 module.exports.dog_Update = async (req, res) => {
   try {
     const dog = await Dog.findById(req.params.id);
-    await cloudinary.uploader.destroy(dog.cloudinaryId);
-    const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
-    await Dog.findByIdAndUpdate(req.params.id, {
-      ...req.body,
-      dogImage: updated_img.secure_url || dog.dogImage,
-      cloudinaryId: updated_img.public_id || dog.cloudinaryId,
-    }, { new: true })
+    if (dog.dogImage !== req.body.dogImage) {
+      await cloudinary.uploader.destroy(dog.cloudinaryId);
+      const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
+      await Dog.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+        dogImage: updated_img.secure_url || dog.dogImage,
+        cloudinaryId: updated_img.public_id || dog.cloudinaryId,
+      }, { new: true })
+    }
+    else {
+      await Dog.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+        dogImage: dog.dogImage,
+        cloudinaryId: dog.cloudinaryId,
+      }, { new: true })
+    }
   }
   catch (err) {
     res.json(err)
