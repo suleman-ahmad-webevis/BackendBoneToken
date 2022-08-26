@@ -2,7 +2,6 @@ const Dog = require("../models/Dog");
 const cloudinary = require('../utils/cloudinary')
 
 const handleErrors = async (err) => {
-  console.log(err);
   let error = { microchipNumber: "", vaccinationSerial: "" };
 
   if (err.message.includes("dog validation failed")) {
@@ -12,10 +11,10 @@ const handleErrors = async (err) => {
   }
 
   const dogMicrochip = await Dog.findOne({ email: req.body.microchipNumber })
-    if (dogMicrochip) { error.microchipNumber = 'Microchip number already exists' } else { error.microchipNumber = '' }
+  if (dogMicrochip) { error.microchipNumber = 'Microchip number already exists' } else { error.microchipNumber = '' }
 
-    const dogSerial = await Dog.findOne({ phone: req.body.vaccinationSerial })
-    if (dogSerial) { error.vaccinationSerial = 'Vaccination serial number already exists' } else { error.vaccinationSerial = '' }
+  const dogSerial = await Dog.findOne({ phone: req.body.vaccinationSerial })
+  if (dogSerial) { error.vaccinationSerial = 'Vaccination serial number already exists' } else { error.vaccinationSerial = '' }
 
   return error;
 };
@@ -23,7 +22,6 @@ const handleErrors = async (err) => {
 module.exports.dog_Post = async (req, res, next) => {
   try {
     const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage)
-    console.log(uploaded_img)
     const dog = new Dog({
       ...req.body,
       dogImage: uploaded_img.secure_url,
@@ -37,6 +35,16 @@ module.exports.dog_Post = async (req, res, next) => {
     console.log(err)
     res.send(err);
     next();
+  }
+}
+
+module.exports.dogbyId = async (req, res) => {
+  try {
+    const data = await Dog.findById(req.params.id)
+    res.json(data)
+  }
+  catch (err) {
+    res.send(err)
   }
 }
 
@@ -56,23 +64,26 @@ module.exports.dog_Update = async (req, res) => {
     const dog = await Dog.findById(req.params.id);
     await cloudinary.uploader.destroy(dog.cloudinaryId);
     const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
-    await Dog.findByIdAndUpdate(req.params.id, { $set: req.body, dogImage: updated_img.secure_url || dog.dogImage,
-      cloudinaryId: updated_img.public_id || dog.cloudinaryId,}, { new: true })
+    await Dog.findByIdAndUpdate(req.params.id, {
+      ...req.body,
+      dogImage: updated_img.secure_url || dog.dogImage,
+      cloudinaryId: updated_img.public_id || dog.cloudinaryId,
+    }, { new: true })
   }
   catch (err) {
-    res.send(err)
+    res.json(err)
   }
 }
 
 module.exports.dog_Delete = async (req, res) => {
   try {
-      const dog = await Dog.findById(req.params.id);
-      await cloudinary.uploader.destroy(dog.cloudinaryId);
-      await dog.remove()
-      res.json(product)
+    const dog = await Dog.findById(req.params.id);
+    await cloudinary.uploader.destroy(dog.cloudinaryId);
+    await dog.remove()
+    res.json(product)
   }
   catch (err) {
-      const error = handleErrors(err)
-      res.send(error)
+    const error = handleErrors(err)
+    res.send(error)
   }
 }

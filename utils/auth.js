@@ -8,7 +8,7 @@ const requireAuth = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
       if (err) {
-        res.status(400).json('Your cookie has expired, kindly login again.')
+        res.status(400).json("Your cookie has expired, kindly login again.");
       } else {
         next();
       }
