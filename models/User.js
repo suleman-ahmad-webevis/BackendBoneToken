@@ -1,97 +1,87 @@
-const mongoose = require('mongoose')
-const { isEmail } = require('validator')
-const bcrypt = require('bcrypt')
-
-
+const mongoose = require('mongoose');
+const bycrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const UserSchema = new mongoose.Schema({
-    firstName: {
+        firstName: {
         type: String,
-        required: [true, 'Please enter a first name.'],
-        lowercase: true,
-    },
-    lastName: {
+        required: [true, 'Please Enter First Name'],
+        },
+        lastName: {
         type: String,
-        required: [true, 'Please enter a last name.'],
-        lowercase: true,
-    },
-    email: {
+        required: [true, 'Please Enter Last Name'],
+        },
+        email: {
         type: String,
-        required: [true, 'Please enter an email.'],
+        required: [true, 'Please Enter Email'],
         unique: true,
-        lowercase: true,
-        validate: [isEmail, 'Please enter a valid email.']
-    },
-    phone: {
-        type: Number,
-        required: [true, 'Please enter your phone number.'],
+        },
+        phone: {
+        type: String,
+        required: [true, 'Please Enter Phone Number'],
         unique: true,
-    },
-    password: {
+        },
+        password: {
         type: String,
-        required: [true, 'Please enter a password.'],
-        minlength: [6, 'Password must be of min 6 letters.']
-    },
-    confirmPassword: {
+        required: [true, 'Please Enter Password'],
+        },
+        confirmPassword: {
         type: String,
-        required: [true, 'Please confirm your passwowrd.'],
-        minlength: [6, 'Password must be of min 6 letters.']
-    },
-    street: {
-        type: String,
-        required: [true, 'Please enter your street address.'],
-        lowercase: true,
-    },
-    streetNumber: {
-        type: Number,
-        required: [true, 'Please enter your street number.']
-    },
-    addition: {
-        type: String
-    },
-    city: {
-        type: String,
-        required: [true, 'Please enter your city.'],
-        lowercase: true,
-    },
-    state: {
-        type: String,
-        required: [true, 'Please enter your state.'],
-        lowercase: true,
-    },
-    postCode: {
-        type: Number,
-        required: [true, 'Please enter your postal code.']
-    },
-    country: {
-        type: String,
-        required: [true, 'Please enter your country.']
-    }
-})
+        required: [true, 'Please Enter Confirm Password'],
+        },
+        street:{
 
+        type:String,
+        required:[true, 'Please Enter Street'],
+        },
+        streetNumber:{
+
+        type:String,
+        required:[true, 'Please Enter Street Number'],
+        },
+        addition:{
+
+        type:String,
+        required:[true, 'Please Enter Additional Street Number'],
+        },
+        city:{
+
+        type:String,
+        required:[true, 'Please Enter City'],
+        },
+        state:{
+
+        type:String,
+        required:[true, 'Please Enter State'], 
+        },
+        postCode:{
+
+        type:String,
+        required:[true, 'Please Enter PostCode'],  
+        },
+        country:{
+
+        type:String,
+        required:[true, 'Please Enter Country'],
+        },
+        },{
+        timestamps:true
+        });
 UserSchema.pre('save', async function (next) {
-    try{
-        const salt = await bcrypt.genSalt();
-        this.password = bcrypt.hashSync(this.password, salt)
-        this.confirmPassword = bcrypt.hashSync(this.confirmPassword, salt)
-        next()
-    }
-    catch(err){
-        res.send(err.message)
-    }
-})
+    const salt = await bycrypt.genSalt(10);
+    this.password = await bycrypt.hash(this.password, salt);
+    next();
+  });
+  UserSchema.methods.checkPassword = async function (password) {
+    const isMatch = await bycrypt.compare(password, this.password);
+    return isMatch;
+  };
+  UserSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign(
+      { _id: this._id, name: this.firstName + this.lastName },
+      process.env.JWT_KEY,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
+    return token;
+  };
+module.exports = mongoose.model('User', UserSchema);
 
-UserSchema.statics.login = async function (email, password) {
-    const user = await this.findOne({ email })
-    if (user){
-        const auth = await bcrypt.compare(password, user.password)
-        if (auth){
-            return user;
-        }
-        throw Error('incorrect password.')
-    }
-    throw Error('incorrect email.')
-}
-
-const User = mongoose.model('user', UserSchema)
-
-module.exports = User;
