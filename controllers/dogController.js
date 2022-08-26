@@ -2,7 +2,6 @@ const Dog = require("../models/Dog");
 const cloudinary = require('../utils/cloudinary')
 
 const handleErrors = async (err) => {
-  console.log(err);
   let error = { microchipNumber: "", vaccinationSerial: "" };
 
   if (err.message.includes("dog validation failed")) {
@@ -23,7 +22,6 @@ const handleErrors = async (err) => {
 module.exports.dog_Post = async (req, res, next) => {
   try {
     const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage)
-    console.log(uploaded_img)
     const dog = new Dog({
       ...req.body,
       dogImage: uploaded_img.secure_url,
@@ -67,12 +65,13 @@ module.exports.dog_Update = async (req, res) => {
     await cloudinary.uploader.destroy(dog.cloudinaryId);
     const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
     await Dog.findByIdAndUpdate(req.params.id, {
-      $set: req.body, dogImage: updated_img.secure_url || dog.dogImage,
+      ...req.body,
+      dogImage: updated_img.secure_url || dog.dogImage,
       cloudinaryId: updated_img.public_id || dog.cloudinaryId,
     }, { new: true })
   }
   catch (err) {
-    res.send(err)
+    res.json(err)
   }
 }
 
