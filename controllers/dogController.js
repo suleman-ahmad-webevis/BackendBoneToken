@@ -73,9 +73,7 @@ module.exports.dog_Update = async (req, res) => {
     }
     else {
       await Dog.findByIdAndUpdate(req.params.id, {
-        ...req.body,
-        dogImage: dog.dogImage,
-        cloudinaryId: dog.cloudinaryId,
+        ...req.body
       }, { new: true })
     }
   }
