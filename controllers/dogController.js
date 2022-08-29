@@ -10,7 +10,7 @@ const handleErrors = async (err) => {
     });
   }
 
-  const dogMicrochip = await Dog.findOne({ email: req.body.microchipNumber })
+  const dogMicrochip = await Dog.findOne({ microchipNumber: req.body.microchipNumber })
   if (dogMicrochip) { error.microchipNumber = 'Microchip number already exists' } else { error.microchipNumber = '' }
 
   const dogSerial = await Dog.findOne({ phone: req.body.vaccinationSerial })
@@ -73,9 +73,7 @@ const dogUpdate = async (req, res) => {
     }
     else {
       await Dog.findByIdAndUpdate(req.params.id, {
-        ...req.body,
-        dogImage: dog.dogImage,
-        cloudinaryId: dog.cloudinaryId,
+        ...req.body
       }, { new: true })
     }
   }
