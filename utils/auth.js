@@ -1,10 +1,9 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user");
 require("dotenv").config();
 
 const requireAuth = (req, res, next) => {
   const token = req.cookie.jwt;
-
   if (token) {
     jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
       if (err) {

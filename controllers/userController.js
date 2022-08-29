@@ -1,9 +1,9 @@
-const User = require("../models/User");
+const User = require("../models/user");
 const { StatusCodes } = require("http-status-codes");
 const { token } = require("morgan");
 const catchAsync = require("../utils/catchAsync");
 
-const Login = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res
@@ -29,21 +29,20 @@ const Login = async (req, res) => {
   }
 };
 
-const Register = catchAsync(async (req, res, next) => {
+const register = catchAsync(async (req, res, next) => {
   const user = await User.create(req.body);
   return res.status(StatusCodes.CREATED).json({ user });
 
   // try{
   //   const user = await User.create(req.body);
   //   return res.status(StatusCodes.CREATED).json({ user });
-
   // }catch(err){
-
   // return res.status(400).json({error:err.message});
   // }
 });
+
 const getUsers = async (req, res) => {
   const users = await User.find({});
   return res.status(StatusCodes.OK).json({ users });
 };
-module.exports = { Login, Register, getUsers };
+module.exports = { login, register, getUsers };

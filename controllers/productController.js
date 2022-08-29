@@ -1,4 +1,4 @@
-const Product = require("../models/Products");
+const Product = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const path = require("path");
 
@@ -13,7 +13,7 @@ const handleErrors = (err) => {
   return error;
 };
 
-module.exports.product_Post = async (req, res, next) => {
+const productPost = async (req, res, next) => {
   try {
     const uploaded_img = await cloudinary.uploader.upload(req.file.path);
     const product = new Product({
@@ -30,7 +30,7 @@ module.exports.product_Post = async (req, res, next) => {
   }
 };
 
-module.exports.product_Get = async (req, res) => {
+const productGet = async (req, res) => {
   console.log("The req.query", req.query);
   let query = { $and: [{}] };
   if (req.query.searchText) {
@@ -98,7 +98,7 @@ module.exports.product_Get = async (req, res) => {
   }
 };
 
-module.exports.product_Update = async (req, res) => {
+const productUpdate = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     await cloudinary.uploader.destroy(product.cloudinaryId);
@@ -128,7 +128,7 @@ module.exports.product_Update = async (req, res) => {
   }
 };
 
-module.exports.product_Delete = async (req, res) => {
+const productDelete = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     await cloudinary.uploader.destroy(product.cloudinaryId);
@@ -140,7 +140,7 @@ module.exports.product_Delete = async (req, res) => {
   }
 };
 
-module.exports.product_Category = async (req, res) => {
+const productCategory = async (req, res) => {
   try {
     const product = await Product.find({ category: req.body.category });
     res.send(product);
@@ -148,4 +148,12 @@ module.exports.product_Category = async (req, res) => {
     const error = handleErrors(err);
     res.send(error);
   }
+};
+
+module.exports = {
+  productPost,
+  productGet,
+  productUpdate,
+  productDelete,
+  productCategory,
 };
