@@ -132,8 +132,7 @@ const DogSchema = new mongoose.Schema({
     },
     vaccination: {
         type: String,
-        required: true,
-        lowercase: true
+        required: true
     },
     vaccinationSerial: {
         type: String,
