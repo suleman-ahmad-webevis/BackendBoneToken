@@ -1,4 +1,4 @@
-const Cart = require("../models/Cart");
+const Cart = require("../models/cart");
 
 const handleErrors = (err) => {
   const error = {};
@@ -11,7 +11,7 @@ const handleErrors = (err) => {
   return error;
 };
 
-module.exports.AddtoCart = async function (req, res) {
+const addtoCart = async function (req, res) {
   const { quantity, name, price } = req.body;
   const productId = req.params.id;
 
@@ -49,4 +49,8 @@ module.exports.AddtoCart = async function (req, res) {
     const error = handleErrors(err);
     res.send(error);
   }
+};
+
+module.exports = {
+  addtoCart,
 };

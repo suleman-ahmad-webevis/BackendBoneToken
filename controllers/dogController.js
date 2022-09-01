@@ -1,4 +1,4 @@
-const Dog = require("../models/Dog");
+const Dog = require("../models/dog");
 const cloudinary = require('../utils/cloudinary')
 
 const handleErrors = async (err) => {
@@ -19,7 +19,7 @@ const handleErrors = async (err) => {
   return error;
 };
 
-module.exports.dog_Post = async (req, res, next) => {
+const dogPost = async (req, res, next) => {
   try {
     const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage)
     const dog = new Dog({
@@ -38,7 +38,7 @@ module.exports.dog_Post = async (req, res, next) => {
   }
 }
 
-module.exports.dogbyId = async (req, res) => {
+const dogById = async (req, res) => {
   try {
     const data = await Dog.findById(req.params.id)
     res.json(data)
@@ -48,7 +48,7 @@ module.exports.dogbyId = async (req, res) => {
   }
 }
 
-module.exports.dog_Get = async (req, res) => {
+const dogGet = async (req, res) => {
   try {
     const data = await Dog.find()
     res.json(data)
@@ -59,7 +59,7 @@ module.exports.dog_Get = async (req, res) => {
   }
 };
 
-module.exports.dog_Update = async (req, res) => {
+const dogUpdate = async (req, res) => {
   try {
     const dog = await Dog.findById(req.params.id);
     if (dog.dogImage !== req.body.dogImage) {
@@ -82,7 +82,7 @@ module.exports.dog_Update = async (req, res) => {
   }
 }
 
-module.exports.dog_Delete = async (req, res) => {
+const dogDelete = async (req, res) => {
   try {
     const dog = await Dog.findById(req.params.id);
     await cloudinary.uploader.destroy(dog.cloudinaryId);
@@ -93,4 +93,14 @@ module.exports.dog_Delete = async (req, res) => {
     const error = handleErrors(err)
     res.send(error)
   }
+}
+
+
+module.exports = 
+{
+  dogPost,
+  dogById,
+  dogGet,
+  dogUpdate,
+  dogDelete
 }
