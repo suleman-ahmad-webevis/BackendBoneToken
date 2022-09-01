@@ -57,6 +57,10 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     // enum: ["Summer", "Winter", "Spring", "Autumn"],
   },
+  amount: {
+    type: Number,
+    // required:true,
+  },
 });
 
 const Product = mongoose.model("product", ProductSchema);
