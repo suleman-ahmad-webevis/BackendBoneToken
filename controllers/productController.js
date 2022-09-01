@@ -88,8 +88,8 @@ const productGet = async (req, res) => {
       $and: [{ season: { $regex: ".*" + req.query.searchSeason + ".*" } }],
     });
   }
-  try {
 
+  try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 5;
     const skip = (page - 1) * pageSize;
