@@ -1,4 +1,4 @@
-const Dog = require("../models/dog");
+const Dog = require("../models/Dog");
 const cloudinary = require('../utils/cloudinary')
 
 const handleErrors = async (err) => {
