@@ -31,7 +31,6 @@ const productPost = async (req, res, next) => {
 };
 
 const productGet = async (req, res) => {
-  console.log("The req.query", req.query);
   let query = { $and: [{}] };
   if (req.query.searchText) {
     query.$and.push({
