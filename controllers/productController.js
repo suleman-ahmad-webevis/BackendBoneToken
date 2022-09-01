@@ -31,7 +31,6 @@ const productPost = async (req, res, next) => {
 };
 
 const productGet = async (req, res) => {
-  console.log("The req.query", req.query);
   let query = { $and: [{}] };
   if (req.query.searchText) {
     query.$and.push({
@@ -90,11 +89,37 @@ const productGet = async (req, res) => {
     });
   }
   try {
-    const data = await Product.find(query).sort({ _id: -1 });
-    res.json(data);
-  } catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
+
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * pageSize;
+    const total = await Product.countDocuments();
+
+    const pages = Math.ceil(total / pageSize);
+
+    if (page > pages) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No page found",
+      });
+    }
+
+    const result = await Product.find(query).sort({ _id: -1 }).skip(skip).limit(pageSize);
+
+    res.status(200).json({
+      status: "success",
+      count: result.length,
+      page,
+      pages,
+      data: result,
+    });
+  }
+  catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Server Error",
+    });
   }
 };
 
