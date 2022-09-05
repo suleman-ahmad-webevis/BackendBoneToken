@@ -1,48 +1,40 @@
 const User = require("../models/user");
 const { StatusCodes } = require("http-status-codes");
-const { token } = require("morgan");
 const catchAsync = require("../utils/catchAsync");
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "Please enter email and password" });
-  }
-  const user = await User.findOne({ email: email });
-  //console.log(user)
-  if (!user) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "User not found" });
-  }
-  const isCorrect = await user.checkPassword(password);
+//RegisterUser
+const register = catchAsync(async (req, res) => {
+  const user = await User.create(req.body);
+  return res.status(StatusCodes.CREATED).json({ user });
+});
 
+//LoginUser
+const login = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password)
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: "Please enter valid email and password" });
+
+  const user = await User.findOne({ email: email });
+  if (!user)
+    return res.status(StatusCodes.NOT_FOUND).json({ error: "User not found" });
+
+  const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
     return res.status(StatusCodes.OK).json({ token, user });
-  } else {
+  } else
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ error: "Incorrect password" });
-  }
-};
-
-const register = catchAsync(async (req, res, next) => {
-  const user = await User.create(req.body);
-  return res.status(StatusCodes.CREATED).json({ user });
-
-  // try{
-  //   const user = await User.create(req.body);
-  //   return res.status(StatusCodes.CREATED).json({ user });
-  // }catch(err){
-  // return res.status(400).json({error:err.message});
-  // }
 });
 
-const getUsers = async (req, res) => {
+//GetAllUsers
+const getUsers = catchAsync(async (req, res) => {
   const users = await User.find({});
-  return res.status(StatusCodes.OK).json({ users });
-};
+  if (users.length > 0) return res.status(StatusCodes.OK).json({ users });
+  else
+    return res.status(StatusCodes.NOT_FOUND).json({ error: "No user found" });
+});
 module.exports = { login, register, getUsers };
