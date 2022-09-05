@@ -91,7 +91,7 @@ const productGet = async (req, res) => {
 
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 5;
+    const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Product.countDocuments();
 
