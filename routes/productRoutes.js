@@ -12,12 +12,7 @@ const router = Router();
 
 router.get("/products", productGet);
 router.post("/products", upload.single("productImage"), productPost);
-router.put(
-  "/products/:id",
-  requireAuth,
-  upload.single("productImage"),
-  productUpdate
-);
+router.put("/products/:id", requireAuth, upload.single("productImage"), productUpdate);
 router.delete("/products/:id", requireAuth, productDelete);
 router.get("/products/category", requireAuth, productCategory);
 
