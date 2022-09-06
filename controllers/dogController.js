@@ -21,7 +21,9 @@ const dogGet = catchAsync(async (res) => {
   if (dog) {
     res.json(dog)
   }
-  else res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+  else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+  }
 });
 
 //GetDogById
