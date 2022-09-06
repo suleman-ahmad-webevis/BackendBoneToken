@@ -16,7 +16,7 @@ const dogPost = catchAsync(async (req, res) => {
 });
 
 //GetDog
-const dogGet = catchAsync(async (res) => {
+const dogGet = catchAsync(async (req, res) => {
   const dog = await Dog.find();
   if (dog) res.json(dog);
   else res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
