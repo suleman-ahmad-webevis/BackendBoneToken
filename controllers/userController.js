@@ -15,11 +15,9 @@ const login = catchAsync(async (req, res) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: "Please enter valid email and password" });
-
   const user = await User.findOne({ email: email });
   if (!user)
     return res.status(StatusCodes.NOT_FOUND).json({ error: "User not found" });
-
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
@@ -31,10 +29,11 @@ const login = catchAsync(async (req, res) => {
 });
 
 //GetAllUsers
-const getUsers = catchAsync(async (req, res) => {
+const getUsers = catchAsync(async (res) => {
   const users = await User.find({});
   if (users.length > 0) return res.status(StatusCodes.OK).json({ users });
   else
     return res.status(StatusCodes.NOT_FOUND).json({ error: "No user found" });
 });
+
 module.exports = { login, register, getUsers };

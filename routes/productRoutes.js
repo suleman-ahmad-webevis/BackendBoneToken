@@ -13,7 +13,7 @@ const { requireAuth } = require("../utils/auth");
 //Routes
 router.post("/products", upload.single("productImage"), productPost);
 router.get("/products", productGet);
-router.get("/products/category", requireAuth, productCategory);
+router.get("/products/category", productCategory);
 router.put(
   "/products/:id",
   requireAuth,
