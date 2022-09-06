@@ -1,35 +1,21 @@
 const Product = require("../models/product");
+const { StatusCodes } = require("http-status-codes");
+const catchAsync = require("../utils/catchAsync");
 const cloudinary = require("../utils/cloudinary");
-const path = require("path");
 
-const handleErrors = (err) => {
-  const error = {};
+//AddProduct
+const productPost = catchAsync(async (req, res) => {
+  const uploaded_img = await cloudinary.uploader.upload(req.file.path);
+  const product = new Product({
+    productImage: uploaded_img.secure_url,
+    cloudinaryId: uploaded_img.public_id,
+    ...req.body,
+  });
+  await product.save();
+  res.status(StatusCodes.CREATED).json(product);
+});
 
-  if (err.message.includes("product validation failed")) {
-    Object.values(err.errors).forEach(({ properties }) => {
-      error[properties.path] = properties.message;
-    });
-  }
-  return error;
-};
-
-const productPost = async (req, res, next) => {
-  try {
-    const uploaded_img = await cloudinary.uploader.upload(req.file.path);
-    const product = new Product({
-      productImage: uploaded_img.secure_url,
-      cloudinaryId: uploaded_img.public_id,
-      ...req.body,
-    });
-    await product.save();
-    res.json(product);
-  } catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
-    next();
-  }
-};
-
+//GetProduct
 const productGet = async (req, res) => {
   let query = { $and: [{}] };
   if (req.query.searchText) {
@@ -94,18 +80,17 @@ const productGet = async (req, res) => {
     const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Product.countDocuments();
-
     const pages = Math.ceil(total / pageSize);
-
     if (page > pages) {
       return res.status(404).json({
         status: "fail",
         message: "No page found",
       });
     }
-
-    const result = await Product.find(query).sort({ _id: -1 }).skip(skip).limit(pageSize);
-
+    const result = await Product.find(query)
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(pageSize);
     res.status(200).json({
       status: "success",
       count: result.length,
@@ -113,9 +98,7 @@ const productGet = async (req, res) => {
       pages,
       data: result,
     });
-  }
-  catch (error) {
-    console.log(error);
+  } catch (error) {
     res.status(500).json({
       status: "error",
       message: "Server Error",
@@ -123,9 +106,10 @@ const productGet = async (req, res) => {
   }
 };
 
-const productUpdate = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
+//UpdateProduct
+const productUpdate = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
     await cloudinary.uploader.destroy(product.cloudinaryId);
     const updated_img = await cloudinary.uploader.upload(req.file.path);
     const data = {
@@ -146,34 +130,29 @@ const productUpdate = async (req, res) => {
     product = await Product.findByIdAndUpdate(req.params.id, data, {
       new: true,
     });
-    res.json(product);
-  } catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
-  }
-};
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Product Update Successfully", product });
+  } else
+    res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+});
 
-const productDelete = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
+//DeleteProduct
+const productDelete = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
     await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
-    res.json(product);
-  } catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
-  }
-};
+    res.json({ message: "Product Deleted Successfully", product });
+  } else
+    res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+});
 
-const productCategory = async (req, res) => {
-  try {
-    const product = await Product.find({ category: req.body.category });
-    res.send(product);
-  } catch (err) {
-    const error = handleErrors(err);
-    res.send(error);
-  }
-};
+//GetProductByCategory
+const productCategory = catchAsync(async (req, res) => {
+  const product = await Product.find({ category: req.body.category });
+  res.json(product);
+});
 
 module.exports = {
   productPost,
