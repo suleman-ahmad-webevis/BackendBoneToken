@@ -14,7 +14,6 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 
-
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -33,3 +32,7 @@ const productRoutes = require("./routes/productRoutes");
 // app.get("*", checkUser);
 app.use(globalErrorHandler);
 app.use(userRoutes, dogRoutes, productRoutes);
+
+app.use("/", (req, res) => {
+  res.send("Hello");
+});
