@@ -106,6 +106,17 @@ const productGet = async (req, res) => {
   }
 };
 
+//GetProductById
+const productById = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.json(product)
+  }
+  else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" })
+  };
+});
+
 //UpdateProduct
 const productUpdate = catchAsync(async (req, res) => {
   const product = await Product.findById(req.params.id);
@@ -157,6 +168,7 @@ const productCategory = catchAsync(async (req, res) => {
 module.exports = {
   productPost,
   productGet,
+  productById,
   productUpdate,
   productDelete,
   productCategory,
