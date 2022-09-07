@@ -4,7 +4,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const globalErrorHandler = require("./utils/errorHandler");
-const { checkUser } = require("./utils/auth");
+const { checkUser } = require("./utils/auth/auth");
 const connectDB = require("./config/database");
 const mongoose = require("mongoose");
 
