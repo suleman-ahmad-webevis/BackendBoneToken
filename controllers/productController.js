@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const ProductAdmin = require('../models/productAdmin')
 const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
 const cloudinary = require("../utils/cloudinary");
@@ -13,6 +14,16 @@ const productPost = catchAsync(async (req, res) => {
   });
   await product.save();
   res.status(StatusCodes.CREATED).json(product);
+});
+
+const productPostAdmin = catchAsync(async (req, res) => {
+  let product;
+  const csvArray = req.body;
+  csvArray.forEach(async (element) => {
+    product = await new ProductAdmin({ ...element });
+    await product.save();
+  });
+  res.status(StatusCodes.CREATED).json('Sucess!');
 });
 
 //GetProduct
@@ -172,4 +183,5 @@ module.exports = {
   productUpdate,
   productDelete,
   productCategory,
+  productPostAdmin
 };
