@@ -1,5 +1,4 @@
 const Product = require("../models/product");
-const ProductAdmin = require('../models/productAdmin')
 const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
 const cloudinary = require("../utils/cloudinary");
@@ -14,16 +13,6 @@ const productPost = catchAsync(async (req, res) => {
   });
   await product.save();
   res.status(StatusCodes.CREATED).json(product);
-});
-
-const productPostAdmin = catchAsync(async (req, res) => {
-  let product;
-  const csvArray = req.body;
-  csvArray.forEach(async (element) => {
-    product = await new ProductAdmin({ ...element });
-    await product.save();
-  });
-  res.status(StatusCodes.CREATED).json('Sucess!');
 });
 
 //GetProduct
@@ -85,31 +74,11 @@ const productGet = async (req, res) => {
       $and: [{ season: { $regex: ".*" + req.query.searchSeason + ".*" } }],
     });
   }
-
   try {
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * pageSize;
-    const total = await Product.countDocuments();
-    const pages = Math.ceil(total / pageSize);
-    if (page > pages) {
-      return res.status(404).json({
-        status: "fail",
-        message: "No page found",
-      });
-    }
-    const result = await Product.find(query)
-      .sort({ _id: -1 })
-      .skip(skip)
-      .limit(pageSize);
-    res.status(200).json({
-      status: "success",
-      count: result.length,
-      page,
-      pages,
-      data: result,
-    });
+    const result = await Product.find(query).sort({ _id: -1 })
+    res.status(200).json({ status: "success", data: result });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       status: "error",
       message: "Server Error",
@@ -130,26 +99,9 @@ const productById = catchAsync(async (req, res) => {
 
 //UpdateProduct
 const productUpdate = catchAsync(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  let product = await Product.findById(req.params.id)
   if (product) {
-    await cloudinary.uploader.destroy(product.cloudinaryId);
-    const updated_img = await cloudinary.uploader.upload(req.file.path);
-    const data = {
-      name: req.body.name || product.name,
-      price: req.body.price || product.price,
-      productImage: updated_img.secure_url || product.productImage,
-      cloudinaryId: updated_img.public_id || product.cloudinaryId,
-      description: req.body.description || product.description,
-      rating: req.body.rating || product.rating,
-      category: req.body.category || product.category,
-      usedorNew: req.body.usedorNew || product.usedorNew,
-      gender: req.body.gender || product.gender,
-      height: req.body.height || product.height,
-      weight: req.body.weight || product.weight,
-      color: req.body.color || product.color,
-      season: req.body.season || product.season,
-    };
-    product = await Product.findByIdAndUpdate(req.params.id, data, {
+    product = await Product.findByIdAndUpdate(req.params.id, { ...req.body }, {
       new: true,
     });
     res
@@ -163,9 +115,9 @@ const productUpdate = catchAsync(async (req, res) => {
 const productDelete = catchAsync(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
-    await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
-    res.json({ message: "Product Deleted Successfully", product });
+    const products = await Product.find
+    res.json({ message: "Product Deleted Successfully", products });
   } else
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
 });
@@ -182,6 +134,5 @@ module.exports = {
   productById,
   productUpdate,
   productDelete,
-  productCategory,
-  productPostAdmin
+  productCategory
 };
