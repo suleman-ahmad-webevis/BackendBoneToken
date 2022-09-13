@@ -15,7 +15,7 @@ const { requireAuth } = require("../utils/auth");
 //Routes
 router.get("/products", productGet);
 router.get("/products/:id", productById)
-router.post("/products", upload.single("productImage"), productPost);
+// router.post("/products", upload.single("productImage"), productPost);
 router.post("/products", productsPostAdmin);
 router.put("/products/:id", productUpdate);
 router.delete("/products/:id", productDelete);
