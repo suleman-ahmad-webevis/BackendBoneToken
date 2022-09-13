@@ -79,7 +79,6 @@ const productGet = async (req, res) => {
     const products = await ProductAdmin.find(query).sort({ _id: -1 })
     res.status(200).json({ status: "success", data: products });
   } catch (error) {
-    console.log(error)
     res.status(500).json({
       status: "error",
       message: "Server Error",
