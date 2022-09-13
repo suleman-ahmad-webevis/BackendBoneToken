@@ -76,8 +76,8 @@ const productGet = async (req, res) => {
     });
   }
   try {
-    const result = await ProductAdmin.find(query).sort({ _id: -1 })
-    res.status(200).json({ status: "success", data: result });
+    const products = await ProductAdmin.find(query).sort({ _id: -1 })
+    res.status(200).json({ status: "success", data: products });
   } catch (error) {
     console.log(error)
     res.status(500).json({
@@ -117,8 +117,8 @@ const productDelete = catchAsync(async (req, res) => {
   const product = await ProductAdmin.findById(req.params.id);
   if (product) {
     await product.remove();
-    const products = await ProductAdmin.find
-    res.json({ message: "Product Deleted Successfully", products });
+    const products = await ProductAdmin.find().sort({ _id: -1 })
+    res.json({ message: "Product Deleted Successfully", data: products });
   } else
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
 });
