@@ -1,20 +1,24 @@
-const Product = require("../models/product");
 const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
-const cloudinary = require("../utils/cloudinary");
-const ProductAdmin = require("../models/productAdmin");
+const Products = require('../models/product')
 
-//AddSingleProduct
-// const productPost = catchAsync(async (req, res) => {
-//   const uploaded_img = await cloudinary.uploader.upload(req.file.path);
-//   const product = new Product({
-//     productImage: uploaded_img.secure_url,
-//     cloudinaryId: uploaded_img.public_id,
-//     ...req.body,
-//   });
-//   await product.save();
-//   res.status(StatusCodes.CREATED).json(product);
-// });
+//PostProducts
+const productPost = async (req, res) => {
+  let product;
+  const csvArray = req.body;
+  if (csvArray.length > 0) {
+    csvArray.forEach(async (element) => {
+      product = await new Products({ ...element });
+      await product.save();
+    });
+    const products = await Products.find().sort({ _id: -1 })
+    res.status(StatusCodes.CREATED).json({ status: "success", data: products });
+  } else {
+    res.status(StatusCodes.BAD_REQUEST).json({ error: "Products not added" })
+  }
+}
+
+//GetProduct
 
 //GetProduct
 const productGet = async (req, res) => {
@@ -75,9 +79,30 @@ const productGet = async (req, res) => {
       $and: [{ season: { $regex: ".*" + req.query.searchSeason + ".*" } }],
     });
   }
+
   try {
-    const products = await ProductAdmin.find(query).sort({ _id: -1 })
-    res.status(200).json({ status: "success", data: products });
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * pageSize;
+    const total = await Products.countDocuments();
+    const pages = Math.ceil(total / pageSize);
+    if (page > pages) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No page found",
+      });
+    }
+    const products = await Products.find(query)
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(pageSize);
+    res.status(200).json({
+      status: "success",
+      count: products.length,
+      page,
+      pages,
+      data: products,
+    });
   } catch (error) {
     res.status(500).json({
       status: "error",
@@ -86,9 +111,22 @@ const productGet = async (req, res) => {
   }
 };
 
+//GetProductsPortal
+const productGetPortal = catchAsync(async (req, res) => {
+  const products = await Products.find().sort({ _id: -1 })
+  if (products) {
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Product Update Successfully", data: products });
+  }
+  else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" })
+  };
+});
+
 //GetProductById
 const productById = catchAsync(async (req, res) => {
-  const product = await ProductAdmin.findById(req.params.id);
+  const product = await Products.findById(req.params.id);
   if (product) {
     res.json(product)
   }
@@ -104,7 +142,7 @@ const productUpdate = catchAsync(async (req, res) => {
     product = await ProductAdmin.findByIdAndUpdate(req.params.id, { ...req.body }, {
       new: true,
     });
-    const products = await ProductAdmin.find().sort({ _id: -1 })
+    const products = await Products.find().sort({ _id: -1 })
     res
       .status(StatusCodes.OK)
       .json({ message: "Product Update Successfully", data: products });
@@ -125,7 +163,7 @@ const productDelete = catchAsync(async (req, res) => {
 
 //GetProductByCategory
 const productCategory = catchAsync(async (req, res) => {
-  const product = await ProductAdmin.find({ category: req.body.category });
+  const product = await Products.find({ category: req.body.category });
   res.json(product);
 });
 
@@ -133,7 +171,9 @@ module.exports = {
   // productPost,
   productGet,
   productById,
+  productPost,
   productUpdate,
   productDelete,
-  productCategory
+  productCategory,
+  productGetPortal
 };
