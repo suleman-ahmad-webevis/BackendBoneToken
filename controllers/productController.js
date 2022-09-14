@@ -137,9 +137,9 @@ const productById = catchAsync(async (req, res) => {
 
 //UpdateProduct
 const productUpdate = catchAsync(async (req, res) => {
-  let product = await ProductAdmin.findById(req.params.id)
+  let product = await Products.findById(req.params.id)
   if (product) {
-    product = await ProductAdmin.findByIdAndUpdate(req.params.id, { ...req.body }, {
+    product = await Products.findByIdAndUpdate(req.params.id, { ...req.body }, {
       new: true,
     });
     const products = await Products.find().sort({ _id: -1 })
@@ -152,10 +152,10 @@ const productUpdate = catchAsync(async (req, res) => {
 
 //DeleteProduct
 const productDelete = catchAsync(async (req, res) => {
-  const product = await ProductAdmin.findById(req.params.id);
+  const product = await Products.findById(req.params.id);
   if (product) {
     await product.remove();
-    const products = await ProductAdmin.find().sort({ _id: -1 })
+    const products = await Products.find().sort({ _id: -1 })
     res.json({ message: "Product Deleted Successfully", data: products });
   } else
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
