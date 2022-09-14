@@ -104,9 +104,10 @@ const productUpdate = catchAsync(async (req, res) => {
     product = await ProductAdmin.findByIdAndUpdate(req.params.id, { ...req.body }, {
       new: true,
     });
+    const products = await ProductAdmin.find().sort({ _id: -1 })
     res
       .status(StatusCodes.OK)
-      .json({ message: "Product Update Successfully", product });
+      .json({ message: "Product Update Successfully", data: products });
   } else
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
 });
