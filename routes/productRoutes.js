@@ -14,12 +14,12 @@ const { requireAuth } = require("../utils/auth");
 
 //Routes
 router.get("/products", productGet);
-router.get("/productsPortal", productGetPortal)
-router.get("/products/:id", productById)
-router.post("/products", productPost);
-router.put("/products/:id", productUpdate);
-router.delete("/products/:id", productDelete);
-router.get("/products/category", productCategory);
+router.get("/productsPortal", requireAuth, productGetPortal)
+router.get("/products/:id", requireAuth, productById)
+router.post("/products", requireAuth, productPost);
+router.put("/products/:id", requireAuth, productUpdate);
+router.delete("/products/:id", requireAuth,productDelete);
+router.get("/products/category", requireAuth, productCategory);
 
 
 module.exports = router;

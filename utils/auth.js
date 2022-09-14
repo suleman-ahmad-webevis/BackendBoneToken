@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const catchAsync = require("../utils/catchAsync");
 require("dotenv").config();
 
-const requireAuth = (req, res, next) => {
-    const token = req.cookie.jwt;
+const requireAuth = catchAsync(async (req, res, next) => {
+    const token = req.headers.jwt;
     if (token) {
         jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
             if (err) {
@@ -14,10 +15,10 @@ const requireAuth = (req, res, next) => {
         });
     } else {
         setTimeout(() => {
-            res.redirect("/login");
+            res.redirect("/loginAdmin");
         }, 1000);
     }
-};
+})
 
 const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;

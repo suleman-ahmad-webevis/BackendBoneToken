@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const UserSchema = new mongoose.Schema(
+const AdminSchema = new mongoose.Schema(
     {
         email: {
             type: String,
@@ -18,16 +18,16 @@ const UserSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
-UserSchema.pre("save", async function (next) {
+AdminSchema.pre("save", async function (next) {
     const salt = await bycrypt.genSalt(10);
     this.password = await bycrypt.hash(this.password, salt);
     next();
 });
-UserSchema.methods.checkPassword = async function (password) {
+AdminSchema.methods.checkPassword = async function (password) {
     const isMatch = await bycrypt.compare(password, this.password);
     return isMatch;
 };
-UserSchema.methods.generateAuthToken = function () {
+AdminSchema.methods.generateAuthToken = function () {
     const token = jwt.sign(
         { _id: this._id, name: this.firstName + this.lastName },
         process.env.JWT_KEY,
@@ -35,4 +35,5 @@ UserSchema.methods.generateAuthToken = function () {
     );
     return token;
 };
-module.exports = mongoose.model("User", UserSchema);
+
+module.exports = mongoose.model("Admin", AdminSchema);

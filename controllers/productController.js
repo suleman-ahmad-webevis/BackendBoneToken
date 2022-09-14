@@ -19,8 +19,6 @@ const productPost = async (req, res) => {
 }
 
 //GetProduct
-
-//GetProduct
 const productGet = async (req, res) => {
   let query = { $and: [{}] };
   if (req.query.searchText) {
