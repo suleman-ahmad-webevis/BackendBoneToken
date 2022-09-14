@@ -25,12 +25,12 @@ const ProductAdminSchema = new mongoose.Schema({
   },
   //SmartSearch
   gender: {
-    type: String
-    // enum: ["Male", "Female"],
+    type: String,
+    enum: ["Male", "Female"],
   },
   condition: {
-    type: String
-    // enum: ["Used", "New"],
+    type: String,
+    enum: ["Used", "New"],
   },
   height: {
     type: String
@@ -39,17 +39,19 @@ const ProductAdminSchema = new mongoose.Schema({
     type: String
   },
   color: {
-    type: String
-    // enum: ["Blue", "Red", "Black"],
+    type: String,
+    enum: ["Blue", "Red", "Black"],
   },
   season: {
-    type: String
-    // enum: ["Summer", "Winter", "Spring", "Autumn"],
+    type: String,
+    enum: ["Summer", "Winter", "Spring", "Autumn"],
   },
   amount: {
-    type: Number,
-    // required:true,
+    type: Number
   },
+  tags: {
+    type: String
+  }
 });
 
 const ProductAdmin = mongoose.model("ProductAdmin", ProductAdminSchema);
