@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const router = Router();
-const upload = require("../utils/multer");
 const {
   productPost,
   productById,

@@ -5,17 +5,18 @@ require("dotenv").config();
 
 const requireAuth = catchAsync(async (req, res, next) => {
     const token = req.headers.jwt;
+    
     if (token) {
         jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
             if (err) {
-                res.status(400).json("Your cookie has expired, kindly login again.");
+                res.status(400).json("Your token has expired, kindly login again.");
             } else {
                 next();
             }
         });
     } else {
         setTimeout(() => {
-            res.redirect("/loginAdmin");
+            res.redirect("/login");
         }, 1000);
     }
 })
