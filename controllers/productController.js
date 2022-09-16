@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
 const Products = require('../models/product')
+const cloudinary = require('../utils/cloudinary')
 
 //PostProducts
 const productPost = async (req, res) => {
@@ -137,21 +138,39 @@ const productById = catchAsync(async (req, res) => {
 const productUpdate = catchAsync(async (req, res) => {
   let product = await Products.findById(req.params.id)
   if (product) {
-    product = await Products.findByIdAndUpdate(req.params.id, { ...req.body }, {
-      new: true,
-    });
+    if (product.productImage !== req.body.productImage) {
+      // await cloudinary.uploader.destroy(product.cloudinaryId);
+      const updated_img = await cloudinary.uploader.upload(req.body.productImage);
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+          productImage: updated_img.secure_url,
+          cloudinaryId: updated_img.public_id,
+        }, { new: true }
+      );
+    } else {
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+        }, { new: true }
+      );
+    }
     const products = await Products.find().sort({ _id: -1 })
     res
       .status(StatusCodes.OK)
       .json({ message: "Product Update Successfully", data: products });
-  } else
+  } else {
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+  }
 });
 
 //DeleteProduct
 const productDelete = catchAsync(async (req, res) => {
   const product = await Products.findById(req.params.id);
   if (product) {
+    // await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
     const products = await Products.find().sort({ _id: -1 })
     res.json({ message: "Product Deleted Successfully", data: products });

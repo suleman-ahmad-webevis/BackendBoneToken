@@ -38,7 +38,6 @@ const dogUpdate = catchAsync(async (req, res) => {
   const dog = await Dog.findById(req.params.id);
   if (dog) {
     if (dog.dogImage !== req.body.dogImage) {
-      console.log("In if");
       await cloudinary.uploader.destroy(dog.cloudinaryId);
       const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
       await Dog.findByIdAndUpdate(
