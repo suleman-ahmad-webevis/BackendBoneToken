@@ -4,8 +4,6 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const globalErrorHandler = require("./utils/errorHandler");
-const { checkUser } = require("./utils/auth");
-const connectDB = require("./config/database");
 const mongoose = require("mongoose");
 
 //Middleware
@@ -30,6 +28,7 @@ mongoose
 const userRoutes = require("./routes/userRoutes");
 const dogRoutes = require("./routes/dogRoutes");
 const productRoutes = require("./routes/productRoutes");
+const adminRoutes = require('./routes/adminRoutes')
 // app.get("*", checkUser);
 app.use(globalErrorHandler);
-app.use(userRoutes, dogRoutes, productRoutes);
+app.use(userRoutes, dogRoutes, productRoutes, adminRoutes);
