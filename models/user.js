@@ -66,6 +66,7 @@ const UserSchema = new mongoose.Schema(
 UserSchema.pre("save", async function (next) {
   const salt = await bycrypt.genSalt(10);
   this.password = await bycrypt.hash(this.password, salt);
+  this.confirmPassword = await bycrypt.hash(this.confirmPassword, salt);
   next();
 });
 UserSchema.methods.checkPassword = async function (password) {
