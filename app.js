@@ -28,8 +28,8 @@ app.listen(process.env.PORT || 5000, () => {
 app.use(globalErrorHandler);
 app.use(userRoutes, dogRoutes, productRoutes);
 
-app.use("/", (req, res) => {
-  res.send("Hello");
-});
+// app.use("/", (req, res) => {
+//   res.send("Hello");
+// });
 
 module.exports = app;
