@@ -1,22 +1,26 @@
-const Product = require("../models/product");
 const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
+const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 
-//AddProduct
+//PostProducts
 const productPost = catchAsync(async (req, res) => {
-  const uploaded_img = await cloudinary.uploader.upload(req.file.path);
-  const product = new Product({
-    productImage: uploaded_img.secure_url,
-    cloudinaryId: uploaded_img.public_id,
-    ...req.body,
-  });
-  await product.save();
-  res.status(StatusCodes.CREATED).json(product);
+  const csvArray = req.body;
+  if (csvArray.length > 0) {
+    let product;
+    csvArray.forEach(async (element) => {
+      product = await Products.create({ ...element });
+    });
+    const products = await Products.find({}).sort({ _id: -1 });
+    res.status(StatusCodes.CREATED).json({ status: "success", data: products });
+  } else {
+    res.status(StatusCodes.BAD_REQUEST).json({ error: "Products not added" });
+  }
 });
 
 //GetProduct
 const productGet = async (req, res) => {
+  console.log("The req.query.searchText", req.query.searchText);
   let query = { $and: [{}] };
   if (req.query.searchText) {
     query.$and.push({
@@ -79,24 +83,25 @@ const productGet = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
-    const total = await Product.countDocuments();
+    const total = await Products.countDocuments();
     const pages = Math.ceil(total / pageSize);
+
     if (page > pages) {
       return res.status(404).json({
         status: "fail",
         message: "No page found",
       });
     }
-    const result = await Product.find(query)
+    const products = await Products.find(query)
       .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize);
     res.status(200).json({
       status: "success",
-      count: result.length,
+      count: products.length,
       page,
       pages,
-      data: result,
+      data: products,
     });
   } catch (error) {
     res.status(500).json({
@@ -106,70 +111,107 @@ const productGet = async (req, res) => {
   }
 };
 
+//GetProductsPortal
+const productGetPortal = catchAsync(async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.limit) || 20;
+  const skip = (page - 1) * pageSize;
+  const total = await Products.countDocuments();
+  const pages = Math.ceil(total / pageSize);
+  if (page > pages) {
+    return res.status(404).json({
+      status: "fail",
+      message: "No page found",
+    });
+  }
+  const products = await Products.find()
+    .sort({ _id: -1 })
+    .skip(skip)
+    .limit(pageSize);
+  if (products) {
+    res.status(StatusCodes.OK).json({
+      message: "Products",
+      count: total,
+      page,
+      pages,
+      data: products,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+  }
+});
+
 //GetProductById
 const productById = catchAsync(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Products.findById(req.params.id);
   if (product) {
-    res.json(product)
+    res.json(product);
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
   }
-  else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" })
-  };
 });
 
 //UpdateProduct
 const productUpdate = catchAsync(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  let product = await Products.findById(req.params.id);
   if (product) {
-    await cloudinary.uploader.destroy(product.cloudinaryId);
-    const updated_img = await cloudinary.uploader.upload(req.file.path);
-    const data = {
-      name: req.body.name || product.name,
-      price: req.body.price || product.price,
-      productImage: updated_img.secure_url || product.productImage,
-      cloudinaryId: updated_img.public_id || product.cloudinaryId,
-      description: req.body.description || product.description,
-      rating: req.body.rating || product.rating,
-      category: req.body.category || product.category,
-      usedorNew: req.body.usedorNew || product.usedorNew,
-      gender: req.body.gender || product.gender,
-      height: req.body.height || product.height,
-      weight: req.body.weight || product.weight,
-      color: req.body.color || product.color,
-      season: req.body.season || product.season,
-    };
-    product = await Product.findByIdAndUpdate(req.params.id, data, {
-      new: true,
-    });
+    if (product.productImage !== req.body.productImage) {
+      // await cloudinary.uploader.destroy(product.cloudinaryId);
+      const updated_img = await cloudinary.uploader.upload(
+        req.body.productImage
+      );
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+          productImage: updated_img.secure_url,
+          cloudinaryId: updated_img.public_id,
+        },
+        { new: true }
+      );
+    } else {
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+        },
+        { new: true }
+      );
+    }
+    const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.OK)
-      .json({ message: "Product Update Successfully", product });
-  } else
+      .json({ message: "Product Update Successfully", data: products });
+  } else {
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+  }
 });
 
 //DeleteProduct
 const productDelete = catchAsync(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Products.findById(req.params.id);
   if (product) {
-    await cloudinary.uploader.destroy(product.cloudinaryId);
+    // await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
-    res.json({ message: "Product Deleted Successfully", product });
+    const products = await Products.find().sort({ _id: -1 });
+    res.json({ message: "Product Deleted Successfully", data: products });
   } else
     res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
 });
 
 //GetProductByCategory
 const productCategory = catchAsync(async (req, res) => {
-  const product = await Product.find({ category: req.body.category });
+  const product = await Products.find({ category: req.body.category });
   res.json(product);
 });
 
 module.exports = {
-  productPost,
+  // productPost,
   productGet,
   productById,
+  productPost,
   productUpdate,
   productDelete,
   productCategory,
+  productGetPortal,
 };
