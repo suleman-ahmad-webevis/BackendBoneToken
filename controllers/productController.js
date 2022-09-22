@@ -20,7 +20,6 @@ const productPost = catchAsync(async (req, res) => {
 
 //GetProduct
 const productGet = async (req, res) => {
-  console.log("The req.query.searchText", req.query.searchText);
   let query = { $and: [{}] };
   if (req.query.searchText) {
     query.$and.push({
