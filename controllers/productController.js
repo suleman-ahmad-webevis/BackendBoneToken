@@ -4,23 +4,23 @@ const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 
 //PostProducts
-const productPost = async (req, res) => {
-  let product;
+const productPost = catchAsync(async (req, res) => {
   const csvArray = req.body;
   if (csvArray.length > 0) {
+    let product;
     csvArray.forEach(async (element) => {
-      product = await new Products({ ...element });
-      await product.save();
+      product = await Products.create({ ...element });
     });
-    const products = await Products.find().sort({ _id: -1 });
+    const products = await Products.find({}).sort({ _id: -1 });
     res.status(StatusCodes.CREATED).json({ status: "success", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ error: "Products not added" });
   }
-};
+});
 
 //GetProduct
 const productGet = async (req, res) => {
+  console.log("The req.query.searchText", req.query.searchText);
   let query = { $and: [{}] };
   if (req.query.searchText) {
     query.$and.push({
@@ -113,14 +113,11 @@ const productGet = async (req, res) => {
 
 //GetProductsPortal
 const productGetPortal = catchAsync(async (req, res) => {
-  console.log("the page", req.query.page);
-  console.log("the limit", req.query.limit);
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 20;
   const skip = (page - 1) * pageSize;
   const total = await Products.countDocuments();
   const pages = Math.ceil(total / pageSize);
-  console.log("The pages", total);
   if (page > pages) {
     return res.status(404).json({
       status: "fail",
