@@ -112,6 +112,19 @@ const productGet = async (req, res) => {
 
 //GetProductsPortal
 const productGetPortal = catchAsync(async (req, res) => {
+  let query = { $and: [{}] };
+  if (req.query.searchText) {
+    query.$and.push({
+      $or: [
+        {
+          name: {
+            $regex: ".*" + req.query.searchText + ".*",
+            $options: "i",
+          },
+        },
+      ],
+    });
+  }
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 20;
   const skip = (page - 1) * pageSize;
@@ -123,7 +136,7 @@ const productGetPortal = catchAsync(async (req, res) => {
       message: "No page found",
     });
   }
-  const products = await Products.find()
+  const products = await Products.find(query)
     .sort({ _id: -1 })
     .skip(skip)
     .limit(pageSize);
@@ -135,14 +148,8 @@ const productGetPortal = catchAsync(async (req, res) => {
       pages,
       data: products,
     });
-    const products = await Products.find().sort({ _id: -1 });
-    if (products) {
-      res
-        .status(StatusCodes.OK)
-        .json({ message: "Product Update Successfully", data: products });
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
-    }
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
   }
 });
 
