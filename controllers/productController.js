@@ -11,7 +11,7 @@ const productPost = catchAsync(async (req, res) => {
     csvArray.forEach(async (element) => {
       product = await Products.create({ ...element });
     });
-    const products = await Products.find({}).sort({ _id: -1 });
+    const products = await Products.find().sort({ _id: -1 });
     res.status(StatusCodes.CREATED).json({ status: "success", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ error: "Products not added" });
@@ -135,8 +135,14 @@ const productGetPortal = catchAsync(async (req, res) => {
       pages,
       data: products,
     });
-  } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    const products = await Products.find().sort({ _id: -1 });
+    if (products) {
+      res
+        .status(StatusCodes.OK)
+        .json({ message: "Product Update Successfully", data: products });
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    }
   }
 });
 
