@@ -6,37 +6,28 @@ require("dotenv").config();
 
 const requireAuth = catchAsync(async (req, res, next) => {
   const token = req.headers.jwt;
+
   if (token) {
-    jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
-      if (err) {
-        res.status(400).json("Your token has expired, kindly log in again.");
-      } else {
-        next();
-      }
-    });
+    const isVerified = jwt.verify(token, process.env.JWT_KEY);
+    console.log(isVerified)
+    if (isVerified) {
+      req.userId = isVerified._id;
+      req.name = isVerified.name;
+      req.email = isVerified.email;
+      req.userPic = isVerified.userPic;
+      next();
+    } else {
+      return res.json({
+        success: 404,
+        message: "Your token has expired, please log in again.",
+      });
+    }
   } else {
-    res
-      .status(StatusCodes.BAD_REQUEST)
-      .json("Kindly log in to view this page, Thank you.");
+    return res.json({
+      success: 404,
+      message: "Please log in to access this page.",
+    });
   }
 });
 
-const checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.JWT_KEY, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        next();
-      } else {
-        let user = await User.findById(decodedToken.id);
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    next();
-  }
-};
-
-module.exports = { requireAuth, checkUser };
+module.exports = { requireAuth };

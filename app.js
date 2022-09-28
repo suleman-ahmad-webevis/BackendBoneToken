@@ -4,7 +4,6 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const globalErrorHandler = require("./utils/errorHandler");
-const { checkUser } = require("./utils/auth");
 const connectDB = require("./config/database");
 
 //Routes
