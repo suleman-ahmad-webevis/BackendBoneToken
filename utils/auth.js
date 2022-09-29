@@ -1,15 +1,13 @@
 const jwt = require("jsonwebtoken");
-const { StatusCodes } = require("http-status-codes");
-const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 require("dotenv").config();
 
 const requireAuth = catchAsync(async (req, res, next) => {
-  const token = req.headers.jwt;
+  const authHeader = req.headers.authorization;
+  const token = authHeader.substring(7, authHeader.length);
 
   if (token) {
     const isVerified = jwt.verify(token, process.env.JWT_KEY);
-    console.log(isVerified)
     if (isVerified) {
       req.userId = isVerified._id;
       req.name = isVerified.name;

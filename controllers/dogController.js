@@ -17,7 +17,6 @@ const dogPost = catchAsync(async (req, res) => {
 
 //GetDog
 const dogGet = catchAsync(async (req, res) => {
-  console.log(req.userId);
   const dog = await Dog.find({ userId: req.userId });
   if (dog) {
     res.json(dog);
