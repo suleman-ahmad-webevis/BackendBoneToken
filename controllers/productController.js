@@ -113,7 +113,11 @@ const productGet = async (req, res) => {
 //GetProductsPortal
 const productGetPortal = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
+  let searchedProduct = false;
+  let isSuccess = true;
   if (req.query.searchText) {
+    searchedProduct = true;
+    isSuccess = false;
     query.$and.push({
       $or: [
         {
@@ -147,6 +151,8 @@ const productGetPortal = catchAsync(async (req, res) => {
       page,
       pages,
       data: products,
+      searchedProduct,
+      isSuccess,
     });
   } else {
     res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
