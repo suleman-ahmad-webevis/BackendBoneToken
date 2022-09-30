@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 require("dotenv").config();
 
 const requireAuth = catchAsync(async (req, res, next) => {
-  const token = req.headers.jwt;
+  const authHeader = req.headers.authorization;
+  const token = authHeader.substring(7, authHeader.length);
 
   if (token) {
     const isVerified = jwt.verify(token, process.env.JWT_KEY);
@@ -27,23 +27,5 @@ const requireAuth = catchAsync(async (req, res, next) => {
     });
   }
 });
-
-// const checkUser = (req, res, next) => {
-//   const token = req.cookies.jwt;
-//   if (token) {
-//     jwt.verify(token, process.env.JWT_KEY, async (err, decodedToken) => {
-//       if (err) {
-//         res.locals.user = null;
-//         next();
-//       } else {
-//         let user = await User.findById(decodedToken.id);
-//         next();
-//       }
-//     });
-//   } else {
-//     res.locals.user = null;
-//     next();
-//   }
-// };
 
 module.exports = { requireAuth };

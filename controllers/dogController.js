@@ -17,11 +17,10 @@ const dogPost = catchAsync(async (req, res) => {
 
 //GetDog
 const dogGet = catchAsync(async (req, res) => {
-  const dog = await Dog.find();
+  const dog = await Dog.find({ userId: req.userId });
   if (dog) {
-    res.json(dog)
-  }
-  else {
+    res.json(dog);
+  } else {
     res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
   }
 });
@@ -35,22 +34,22 @@ const dogById = catchAsync(async (req, res) => {
 
 //UpdateDog
 const dogUpdate = catchAsync(async (req, res) => {
-  const dog = await Dog.findById(req.params.id);
+  let dog = await Dog.findById(req.params.id);
   if (dog) {
     if (dog.dogImage !== req.body.dogImage) {
       await cloudinary.uploader.destroy(dog.cloudinaryId);
       const updated_img = await cloudinary.uploader.upload(req.body.dogImage);
-      await Dog.findByIdAndUpdate(
+      dog = await Dog.findByIdAndUpdate(
         req.params.id,
         {
           ...req.body,
-          dogImage: updated_img.secure_url || dog.dogImage,
-          cloudinaryId: updated_img.public_id || dog.cloudinaryId,
+          dogImage: updated_img.secure_url,
+          cloudinaryId: updated_img.public_id,
         },
         { new: true }
       );
     } else {
-      await Dog.findByIdAndUpdate(
+      dog = await Dog.findByIdAndUpdate(
         req.params.id,
         {
           ...req.body,
