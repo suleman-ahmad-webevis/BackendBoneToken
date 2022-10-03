@@ -17,13 +17,13 @@ const requireAuth = catchAsync(async (req, res, next) => {
     } else {
       return res.json({
         success: 404,
-        message: "Your token has expired, please log in again.",
+        message: "Token is not valid, Please enter a valid token",
       });
     }
   } else {
     return res.json({
       success: 404,
-      message: "Please log in to access this page.",
+      message: "Token is not provided, Please provide token",
     });
   }
 });
