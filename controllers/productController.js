@@ -92,6 +92,7 @@ const productGet = async (req, res) => {
       });
     }
     const products = await Products.find(query)
+
       .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize);
@@ -141,6 +142,7 @@ const productGetPortal = catchAsync(async (req, res) => {
     });
   }
   const products = await Products.find(query)
+
     .sort({ _id: -1 })
     .skip(skip)
     .limit(pageSize);
@@ -162,6 +164,7 @@ const productGetPortal = catchAsync(async (req, res) => {
 //GetProductById
 const productById = catchAsync(async (req, res) => {
   const product = await Products.findById(req.params.id);
+
   if (product) {
     res.json(product);
   } else {

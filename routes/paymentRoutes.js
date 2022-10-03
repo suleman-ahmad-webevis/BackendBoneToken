@@ -8,6 +8,6 @@ const {
 
 //Routes
 router.post("/paymentProcess", processPayment);
-
 router.get("/stripeApiKey", sendStripeApiKey);
+
 module.exports = router;

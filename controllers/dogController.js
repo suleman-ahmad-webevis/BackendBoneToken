@@ -6,13 +6,21 @@ const cloudinary = require("../utils/cloudinary");
 //AddDog
 const dogPost = catchAsync(async (req, res) => {
   const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage);
+
   const dog = new Dog({
     ...req.body,
     dogImage: uploaded_img.secure_url,
     cloudinaryId: uploaded_img.public_id,
   });
+
   await dog.save();
-  res.status(StatusCodes.CREATED).json(dog);
+  if(dog)
+  {
+    return res.status(StatusCodes.CREATED).json(dog);
+
+  }
+  else 
+  return res.status(StatusCodes.BAD_REQUEST).json({error:'Error while uploading'})
 });
 
 //GetDog

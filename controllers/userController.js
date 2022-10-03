@@ -4,8 +4,21 @@ const catchAsync = require("../utils/catchAsync");
 
 //RegisterUser
 const register = catchAsync(async (req, res) => {
-  const user = await User.create(req.body);
-  return res.status(StatusCodes.CREATED).json({ user });
+  const { email } = req.body;
+  if (req.body.password !== req.body.confirmPassword) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json("Password and confirm password dnt match");
+  }
+  const result = await User.findOne({ email });
+  if (result) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: "User already exists." });
+  } else {
+    const user = await User.create(req.body);
+    return res.status(StatusCodes.CREATED).json({ user });
+  }
 });
 
 //LoginUser

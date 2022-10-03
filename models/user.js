@@ -1,79 +1,88 @@
 const mongoose = require("mongoose");
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
-const UserSchema = new mongoose.Schema(
-  {
-    firstName: {
-      type: String,
-      required: [true, "Please Enter First Name"],
-    },
-    lastName: {
-      type: String,
-      required: [true, "Please Enter Last Name"],
-    },
-    email: {
-      type: String,
-      required: [true, "Please Enter Email"],
-      unique: true,
-    },
-    phone: {
-      type: String,
-      required: [true, "Please Enter Phone Number"],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Please Enter Password"],
-    },
-    confirmPassword: {
-      type: String,
-      required: [true, "Please Enter Confirm Password"],
-    },
-    street: {
-      type: String,
-      required: [true, "Please Enter Street"],
-    },
-    streetNumber: {
-      type: String,
-      required: [true, "Please Enter Street Number"],
-    },
-    addition: {
-      type: String,
-      required: [true, "Please Enter Additional Street Number"],
-    },
-    city: {
-      type: String,
-      required: [true, "Please Enter City"],
-    },
-    state: {
-      type: String,
-      required: [true, "Please Enter State"],
-    },
-    postCode: {
-      type: String,
-      required: [true, "Please Enter PostCode"],
-    },
-    country: {
-      type: String,
-      required: [true, "Please Enter Country"],
-    },
+const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: [true, "Please Enter First Name"],
+    maxLength: [10, "First Name cannot exceed 10 characters"],
+    minLength: [4, "First Name should have more than 4 characters"],
   },
-  {
-    timestamps: true,
-  }
-);
-UserSchema.pre("save", async function (next) {
+  lastName: {
+    type: String,
+    required: [true, "Please Enter Last Name"],
+    maxLength: [10, "Last Name cannot exceed 10 characters"],
+    minLength: [4, "Last Name should have more than 4 characters"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please Enter Email"],
+    unique: true,
+    validate: [validator.isEmail, "Please Enter a valid Email"],
+  },
+  phone: {
+    type: String,
+    required: [true, "Please Enter Phone Number"],
+    unique: true,
+    maxLength: [15, "Name cannot exceed 15 characters"],
+  },
+  password: {
+    type: String,
+    required: [true, "Please Enter Password"],
+    minLength: [8, "Password cannot be less than 8 characters"],
+    maxLength: [14, "Password cannot exceed 14 characters"],
+  },
+  street: {
+    type: String,
+    required: [true, "Please Enter Street"],
+    maxLength: [40, "Street cannot exceed 40 characters"],
+  },
+  streetNumber: {
+    type: String,
+    required: [true, "Please Enter Street Number"],
+    maxLength: [40, "Street Number cannot exceed 40 characters"],
+  },
+  addition: {
+    type: String,
+    required: [true, "Please Enter Additional Street Number"],
+    maxLength: [30, "Additional cannot exceed 30 characters"],
+  },
+  city: {
+    type: String,
+    required: [true, "Please Enter City"],
+    maxLength: [40, "City name cannot exceed 40 characters"],
+  },
+  state: {
+    type: String,
+    required: [true, "Please Enter State"],
+    maxLength: [20, "Name cannot exceed 20 characters"],
+  },
+  country: {
+    type: String,
+    required: [true, "Please Enter Country"],
+    maxLength: [20, "Name cannot exceed 20 characters"],
+  },
+  postCode: {
+    type: String,
+    required: [true, "Please Enter PostCode"],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+userSchema.pre("save", async function (next) {
   const salt = await bycrypt.genSalt(10);
   this.password = await bycrypt.hash(this.password, salt);
-  this.confirmPassword = await bycrypt.hash(this.confirmPassword, salt);
   next();
 });
-UserSchema.methods.checkPassword = async function (password) {
+userSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;
 };
-UserSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
     process.env.JWT_KEY,
@@ -81,4 +90,4 @@ UserSchema.methods.generateAuthToken = function () {
   );
   return token;
 };
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", userSchema);
