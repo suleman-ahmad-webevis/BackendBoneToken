@@ -3,46 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
-
-//ProductRating
-const productRating = catchAsync(async (req, res) => {
-  const { rating, productId } = req.body;
-
-  const review = {
-    userId: req.userId,
-    userName: req.name,
-    rating: Number(rating),
-  };
-
-  const product = await Product.findById(productId);
-
-  const isReviewed = product.reviews.find(
-    (rev) => rev.userId.toString() === req.userId.toString()
-  );
-
-  if (isReviewed) {
-    product.reviews.forEach((rev) => {
-      if (rev.userId.toString() === req.userId.toString()) {
-        rev.rating = rating;
-      }
-    });
-  } else {
-    product.reviews.push(review);
-  }
-  let avg = 0;
-  product.reviews.forEach((rev) => {
-    avg += rev.rating;
-  });
-
-  product.rating = avg / product.reviews.length;
-  product.numberOfReviews = product.reviews.length;
-
-  await product.save({ validateBeforeSave: false });
-
-  res.status(StatusCodes.CREATED).json({
-    success: true,
-  });
-});
+const { response } = require("express");
 
 //PostProducts
 const productPost = catchAsync(async (req, res) => {
@@ -264,6 +225,109 @@ const productCategory = catchAsync(async (req, res) => {
   res.json(product);
 });
 
+//Post/Put Product Reviews
+const postProductReview = catchAsync(async (req, res) => {
+  const { rating, productId } = req.body;
+
+  const review = {
+    userId: req.userId,
+    userName: req.name,
+    rating: Number(rating),
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(
+    (rev) => rev.userId.toString() === req.userId.toString()
+  );
+
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.userId.toString() === req.userId.toString()) {
+        rev.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+  }
+  let avg = 0;
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  product.rating = avg / product.reviews.length;
+  product.numberOfReviews = product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(StatusCodes.CREATED).json({
+    success: true,
+  });
+});
+
+//GetProductReviews
+const getProductReviews = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  if (!product) {
+    res.status(StatusCodes.NOT_FOUND).json("Product not found");
+  }
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
+  });
+});
+
+// Delete Review
+const deleteProductReview = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.query.productId);
+
+  if (!product) {
+    res.status(StatusCodes.NOT_FOUND).json("Product not found");
+  }
+
+  const reviews = product.reviews.filter(
+    (rev) => rev._id.toString() !== req.query.id.toString()
+  );
+
+  console.log(reviews);
+
+  let avg = 0;
+
+  reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  let rating = 0;
+
+  if (reviews.length === 0) {
+    rating = 0;
+  } else {
+    rating = avg / reviews.length;
+  }
+
+  const numberOfReviews = reviews.length;
+
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      rating,
+      numberOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 module.exports = {
   // productPost,
   productGet,
@@ -273,5 +337,7 @@ module.exports = {
   productDelete,
   productCategory,
   productGetPortal,
-  productRating,
+  postProductReview,
+  getProductReviews,
+  deleteProductReview,
 };

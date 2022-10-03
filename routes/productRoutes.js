@@ -8,7 +8,9 @@ const {
   productUpdate,
   productDelete,
   productCategory,
-  productRating,
+  postProductReview,
+  getProductReviews,
+  deleteProductReview,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -26,6 +28,8 @@ router.put(
 );
 router.delete("/products/:id", requireAuth, productDelete);
 router.get("/products/category", requireAuth, productCategory);
-router.put("/productreview", requireAuth, productRating);
+router.put("/productreview", requireAuth, postProductReview);
+router.get("/productreviews/:id", requireAuth, getProductReviews);
+router.delete("/productreview", requireAuth, deleteProductReview);
 
 module.exports = router;
