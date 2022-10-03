@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user");
 
 const ProductSchema = new mongoose.Schema({
   name: {
@@ -18,11 +19,6 @@ const ProductSchema = new mongoose.Schema({
   },
   cloudinaryId: {
     type: String,
-  },
-  rating: {
-    type: Number,
-    required: true,
-    maxLength: 5,
   },
   category: {
     type: String,
@@ -61,9 +57,36 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     // required:true,
   },
+  rating: {
+    type: Number,
+    required: true,
+    maxLength: 5,
+  },
+  numberOfReviews: {
+    type: Number,
+    required: true,
+  },
   tag: {
-    type: String
-  }
+    type: String,
+  },
+  reviews: [
+    {
+      userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: User,
+        required: true,
+      },
+      userName: {
+        type: String,
+        required: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+        maxLength: 5,
+      },
+    },
+  ],
 });
 
 const Product = mongoose.model("Product", ProductSchema);

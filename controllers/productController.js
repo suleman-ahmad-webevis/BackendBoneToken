@@ -2,6 +2,47 @@ const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
+const Product = require("../models/product");
+
+//ProductRating
+const productRating = catchAsync(async (req, res) => {
+  const { rating, productId } = req.body;
+
+  const review = {
+    userId: req.userId,
+    userName: req.name,
+    rating: Number(rating),
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(
+    (rev) => rev.userId.toString() === req.userId.toString()
+  );
+
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.userId.toString() === req.userId.toString()) {
+        rev.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+  }
+  let avg = 0;
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  product.rating = avg / product.reviews.length;
+  product.numberOfReviews = product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(StatusCodes.CREATED).json({
+    success: true,
+  });
+});
 
 //PostProducts
 const productPost = catchAsync(async (req, res) => {
@@ -113,7 +154,11 @@ const productGet = async (req, res) => {
 //GetProductsPortal
 const productGetPortal = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
+  let searchedProduct = false;
+  let isSuccess = true;
   if (req.query.searchText) {
+    searchedProduct = true;
+    isSuccess = false;
     query.$and.push({
       $or: [
         {
@@ -147,6 +192,8 @@ const productGetPortal = catchAsync(async (req, res) => {
       page,
       pages,
       data: products,
+      searchedProduct,
+      isSuccess,
     });
   } else {
     res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
@@ -226,4 +273,5 @@ module.exports = {
   productDelete,
   productCategory,
   productGetPortal,
+  productRating,
 };
