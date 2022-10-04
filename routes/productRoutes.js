@@ -15,7 +15,7 @@ const upload = require("../utils/multer");
 //Routes
 router.get("/products", productGet);
 router.get("/productsByCategory", productCategory);
-router.get("/productById/:id",productById);
+router.get("/productById/:id", productById);
 
 //AdminPortalRoutes
 router.get("/productsPortal", requireAuth, productGetPortal);
@@ -27,5 +27,8 @@ router.put(
   productUpdate
 );
 router.delete("/deleteProduct/:id", requireAuth, productDelete);
+router.put("/productReview", requireAuth, postProductReview);
+router.get("/productReviews/:id", requireAuth, getProductReviews);
+router.delete("/productReviews", requireAuth, deleteProductReview);
 
 module.exports = router;
