@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./user");
 
-const DogSchema = new mongoose.Schema({
+const dogSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
     ref: "User",
@@ -162,6 +162,6 @@ const DogSchema = new mongoose.Schema({
   },
 });
 
-const Dog = mongoose.model("Dog", DogSchema);
+const Dog = mongoose.model("Dog", dogSchema);
 
 module.exports = Dog;

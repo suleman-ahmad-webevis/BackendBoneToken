@@ -11,10 +11,11 @@ const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
 
 //Routes
-router.post("/dog", requireAuth, dogPost);
-router.get("/dog", requireAuth, dogGet);
-router.get("/dog/:id", requireAuth, dogById);
-router.put("/dog/:id", requireAuth, dogUpdate);
-router.delete("/dog/:id", requireAuth, dogDelete);
+
+router.get("/dogs", requireAuth, dogGet);
+router.post("/addDog", requireAuth,dogPost);
+router.get("/dogById/:id", requireAuth, dogById);
+router.put("/updateDog/:id", requireAuth, dogUpdate);
+router.delete("/deleteDog/:id", requireAuth, dogDelete);
 
 module.exports = router;

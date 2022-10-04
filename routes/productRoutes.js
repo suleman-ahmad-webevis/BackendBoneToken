@@ -8,28 +8,24 @@ const {
   productUpdate,
   productDelete,
   productCategory,
-  postProductReview,
-  getProductReviews,
-  deleteProductReview,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
 
 //Routes
 router.get("/products", productGet);
+router.get("/productsByCategory", productCategory);
+router.get("/productById/:id",productById);
+
+//AdminPortalRoutes
 router.get("/productsPortal", requireAuth, productGetPortal);
-router.get("/products/:id", requireAuth, productById);
-router.post("/products", requireAuth, productPost);
+router.post("/addProducts", requireAuth, productPost);
 router.put(
-  "/products/:id",
+  "/updateProduct/:id",
   requireAuth,
   upload.single("productImage"),
   productUpdate
 );
-router.delete("/products/:id", requireAuth, productDelete);
-router.get("/products/category", requireAuth, productCategory);
-router.put("/productreview", requireAuth, postProductReview);
-router.get("/productreviews/:id", requireAuth, getProductReviews);
-router.delete("/productreview", requireAuth, deleteProductReview);
+router.delete("/deleteProduct/:id", requireAuth, productDelete);
 
 module.exports = router;

@@ -1,18 +1,22 @@
 const mongoose = require("mongoose");
 const User = require("./user");
 
-const ProductSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please enter the name of product."],
+    trim: true,
+    maxLength: [30, "Name cannot exceed 30 characters"],
   },
   description: {
     type: String,
     required: [true, "Please enter description of product."],
+    maxLength: [400, "Description cannot exceed 400 characters"],
   },
   price: {
     type: Number,
-    required: [true, "Please enter a price for the product."],
+    required: [true, "Please Enter product Price"],
+    maxLength: [8, "Price cannot exceed 8 characters"],
   },
   productImage: {
     type: String,
@@ -20,9 +24,14 @@ const ProductSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
   },
+  rating: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   category: {
     type: String,
-    required: [true, "Show correct product category"],
+    required: [true, "Add correct product category"],
   },
   //SmartSearch
   gender: {
@@ -85,6 +94,6 @@ const ProductSchema = new mongoose.Schema({
   ],
 });
 
-const Product = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

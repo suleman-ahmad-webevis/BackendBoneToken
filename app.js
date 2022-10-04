@@ -25,11 +25,9 @@ app.listen(process.env.PORT || 5000, () => {
 });
 
 app.use(globalErrorHandler);
-app.use(
-  userRoutes,
-  dogRoutes,
-  productRoutes,
-  adminRoutes,
-  orderRoutes,
-  paymentRoutes
-);
+app.use("/user", userRoutes);
+app.use("/dog", dogRoutes);
+app.use("/product", productRoutes);
+app.use("/admin", adminRoutes);
+app.use("/order", orderRoutes);
+app.use("/payment", paymentRoutes);
