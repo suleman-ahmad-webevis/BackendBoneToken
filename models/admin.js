@@ -27,7 +27,6 @@ const adminSchema = new mongoose.Schema({
     required: [true, "Please enter a Password"],
     minLength: [8, "Password should be greater than 8 characters"],
     maxLength: [14, "Password should not be greater than 14 characters"],
-    select: false,
   },
   role: {
     type: String,

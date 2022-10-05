@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please enter the name of product."],
+    // required: [true, "Please enter the name of product."],
     trim: true,
-    maxLength: [30, "Name cannot exceed 30 characters"],
+    // maxLength: [30, "Name cannot exceed 30 characters"],
   },
   description: {
     type: String,
-    required: [true, "Please enter description of product."],
-    maxLength: [400, "Description cannot exceed 400 characters"],
+    // required: [true, "Please enter description of product."],
+    // maxLength: [400, "Description cannot exceed 400 characters"],
   },
   price: {
     type: Number,
-    required: [true, "Please Enter product Price"],
-    maxLength: [8, "Price cannot exceed 8 characters"],
+    // required: [true, "Please Enter product Price"],
+    // maxLength: [8, "Price cannot exceed 8 characters"],
   },
   productImage: {
     type: String,
@@ -30,35 +30,35 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: [true, "Add correct product category"],
+    // required: [true, "Add correct product category"],
   },
   //SmartSearch
   gender: {
     type: String,
-    required: true,
+    // required: true,
     // enum: ["Male", "Female"],
   },
   condition: {
     type: String,
-    required: true,
+    // required: true,
     // enum: ["Used", "New"],
   },
   height: {
     type: String,
-    required: true,
+    // required: true,
   },
   weight: {
     type: String,
-    required: true,
+    // required: true,
   },
   color: {
     type: String,
-    required: true,
+    // required: true,
     // enum: ["Blue", "Red", "Black"],
   },
   season: {
     type: String,
-    required: true,
+    // required: true,
     // enum: ["Summer", "Winter", "Spring", "Autumn"],
   },
   amount: {
