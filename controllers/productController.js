@@ -140,7 +140,7 @@ const productGetPortal = catchAsync(async (req, res) => {
   if (page > pages) {
     return res.status(404).json({
       status: "fail",
-      message: "No page found",
+      message: "No Products found",
     });
   }
   const products = await Products.find(query)
@@ -231,7 +231,6 @@ const productCategory = catchAsync(async (req, res) => {
 //Post/Put Product Reviews
 const postProductReview = catchAsync(async (req, res) => {
   const { rating, productId } = req.body;
-  console.log(req.body);
 
   const review = {
     userId: req.userId,

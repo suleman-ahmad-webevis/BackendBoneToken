@@ -6,7 +6,6 @@ const cloudinary = require("../utils/cloudinary");
 //AddDog
 const dogPost = catchAsync(async (req, res) => {
   const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage);
-
   const dog = new Dog({
     ...req.body,
     dogImage: uploaded_img.secure_url,

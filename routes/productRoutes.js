@@ -10,7 +10,7 @@ const {
   productCategory,
   postProductReview,
   deleteProductReview,
-  getProductReviews
+  getProductReviews,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -22,7 +22,12 @@ router.get("/productById/:id", productById);
 
 //AdminPortalRoutes
 router.get("/productsPortal", requireAuth, productGetPortal);
-router.post("/addProducts", requireAuth, productPost);
+router.post(
+  "/addProducts",
+  upload.single("productImage"),
+  requireAuth,
+  productPost
+);
 router.put(
   "/updateProduct/:id",
   requireAuth,
