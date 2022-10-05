@@ -8,12 +8,11 @@ const {
   dogDelete,
 } = require("../controllers/dogController");
 const { requireAuth } = require("../utils/auth");
-const upload = require("../utils/multer");
 
 //Routes
 
 router.get("/dogs", requireAuth, dogGet);
-router.post("/addDog", requireAuth,dogPost);
+router.post("/addDog", requireAuth, dogPost);
 router.get("/dogById/:id", requireAuth, dogById);
 router.put("/updateDog/:id", requireAuth, dogUpdate);
 router.delete("/deleteDog/:id", requireAuth, dogDelete);

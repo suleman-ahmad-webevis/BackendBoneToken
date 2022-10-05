@@ -14,13 +14,12 @@ const dogPost = catchAsync(async (req, res) => {
   });
 
   await dog.save();
-  if(dog)
-  {
+  if (dog) {
     return res.status(StatusCodes.CREATED).json(dog);
-
-  }
-  else 
-  return res.status(StatusCodes.BAD_REQUEST).json({error:'Error while uploading'})
+  } else
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: "Error while uploading" });
 });
 
 //GetDog

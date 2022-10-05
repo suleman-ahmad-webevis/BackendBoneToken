@@ -231,6 +231,7 @@ const productCategory = catchAsync(async (req, res) => {
 //Post/Put Product Reviews
 const postProductReview = catchAsync(async (req, res) => {
   const { rating, productId } = req.body;
+  console.log(req.body);
 
   const review = {
     userId: req.userId,
@@ -270,7 +271,7 @@ const postProductReview = catchAsync(async (req, res) => {
 
 //GetProductReviews
 const getProductReviews = catchAsync(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.params.id);
 
   if (!product) {
     res.status(StatusCodes.NOT_FOUND).json("Product not found");
