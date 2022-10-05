@@ -6,7 +6,6 @@ const cloudinary = require("../utils/cloudinary");
 //AddDog
 const dogPost = catchAsync(async (req, res) => {
   const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage);
-
   const dog = new Dog({
     ...req.body,
     dogImage: uploaded_img.secure_url,
@@ -14,13 +13,12 @@ const dogPost = catchAsync(async (req, res) => {
   });
 
   await dog.save();
-  if(dog)
-  {
+  if (dog) {
     return res.status(StatusCodes.CREATED).json(dog);
-
-  }
-  else 
-  return res.status(StatusCodes.BAD_REQUEST).json({error:'Error while uploading'})
+  } else
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Dog not created" });
 });
 
 //GetDog
@@ -29,7 +27,7 @@ const dogGet = catchAsync(async (req, res) => {
   if (dog) {
     res.json(dog);
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
   }
 });
 
@@ -37,7 +35,7 @@ const dogGet = catchAsync(async (req, res) => {
 const dogById = catchAsync(async (req, res) => {
   const dog = await Dog.findById(req.params.id);
   if (dog) res.json(dog);
-  else res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+  else res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
 });
 
 //UpdateDog
@@ -65,9 +63,9 @@ const dogUpdate = catchAsync(async (req, res) => {
         { new: true }
       );
     }
-    res.status(StatusCodes.ACCEPTED).json(dog);
+    res.status(StatusCodes.ACCEPTED).json(dog, { message: "Dog updated" });
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
   }
 });
 
@@ -78,7 +76,7 @@ const dogDelete = catchAsync(async (req, res) => {
     await cloudinary.uploader.destroy(dog.cloudinaryId);
     await dog.remove();
     res.json(dog);
-  } else res.status(StatusCodes.NOT_FOUND).json({ error: "Dog not found" });
+  } else res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
 });
 
 module.exports = {

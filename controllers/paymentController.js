@@ -12,7 +12,7 @@ const processPayment = catchAsync(async (req, res) => {
     },
   });
   res.status(StatusCodes.CREATED).json({
-    status: "success",
+    message: "Payment Created",
     client_secret: myPayment.client_secret,
   });
 });

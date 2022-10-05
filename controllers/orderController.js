@@ -16,11 +16,11 @@ const newOrder = catchAsync(async (req, res) => {
   });
   if (order) {
     res.status(StatusCodes.CREATED).json({
-      status: "success",
+      message: "Order Placed",
       data: order,
     });
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json({ error: "Order not added" });
+    res.status(StatusCodes.BAD_REQUEST).json({ message: "Order not placed" });
   }
 });
 
@@ -31,10 +31,9 @@ const getSingleOrder = catchAsync(async (req, res) => {
     "name email"
   );
   if (!order) {
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "Order not found" });
+    return res.status(StatusCodes.NOT_FOUND).json({ message: "Order not found" });
   }
   res.status(StatusCodes.OK).json({
-    status: "success",
     data: order,
   });
 });
@@ -44,11 +43,10 @@ const myOrders = catchAsync(async (req, res) => {
   const orders = await Order.find({ user: req.userId });
   if (orders) {
     res.status(StatusCodes.OK).json({
-      status: "success",
       data: orders,
     });
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Order not found" });
   }
 });
 
@@ -56,7 +54,9 @@ const myOrders = catchAsync(async (req, res) => {
 const deleteOrder = catchAsync(async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (!order) {
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Product not found" });
   } else {
     await order.remove();
     res.status(StatusCodes.OK).json({

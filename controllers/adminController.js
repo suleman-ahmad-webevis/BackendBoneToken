@@ -8,7 +8,9 @@ const registerAdmin = catchAsync(async (req, res) => {
   const { email } = req.body;
   const result = await Admin.findOne({ email });
   if (result) {
-    return res.status(StatusCodes.BAD_REQUEST).json("Admin already exists.");
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Admin already exists" });
   } else {
     const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage);
     const admin = new Admin({
@@ -17,7 +19,9 @@ const registerAdmin = catchAsync(async (req, res) => {
       cloudinaryId: uploaded_img.public_id,
     });
     await admin.save();
-    return res.status(StatusCodes.CREATED).json(admin);
+    return res
+      .status(StatusCodes.CREATED)
+      .json(admin, { message: "Admin registered" });
   }
 });
 
@@ -27,10 +31,10 @@ const loginAdmin = catchAsync(async (req, res) => {
   if (!email || !password)
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "Please enter valid email and password" });
+      .json({ message: "Enter valid email and password" });
   const admin = await Admin.findOne({ email: email });
   if (!admin)
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "Admin not found" });
+    return res.status(StatusCodes.NOT_FOUND).json({ message: "Admin not found" });
   const isCorrect = await admin.checkPassword(password);
   if (isCorrect) {
     const token = admin.generateAuthToken();
@@ -38,7 +42,7 @@ const loginAdmin = catchAsync(async (req, res) => {
   } else
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ error: "Incorrect password" });
+      .json({ message: "Incorrect password" });
 });
 
 //EditAdminProfile
@@ -69,7 +73,7 @@ const editAdmin = catchAsync(async (req, res) => {
       return res.status(StatusCodes.OK).json({ admin: result });
     }
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Admin not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Admin not found" });
   }
 });
 

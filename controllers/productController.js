@@ -2,6 +2,8 @@ const { StatusCodes } = require("http-status-codes");
 const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
+const Product = require("../models/product");
+const { response } = require("express");
 
 //PostProducts
 const productPost = catchAsync(async (req, res) => {
@@ -12,9 +14,11 @@ const productPost = catchAsync(async (req, res) => {
       product = await Products.create({ ...element });
     });
     const products = await Products.find().sort({ _id: -1 });
-    res.status(StatusCodes.CREATED).json({ status: "success", data: products });
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Product created", data: products });
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json({ error: "Products not added" });
+    res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
 });
 
@@ -77,36 +81,31 @@ const productGet = async (req, res) => {
       $and: [{ season: { $regex: ".*" + req.query.searchSeason + ".*" } }],
     });
   }
-
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Products.countDocuments();
     const pages = Math.ceil(total / pageSize);
-
     if (page > pages) {
-      return res.status(404).json({
-        status: "fail",
-        message: "No page found",
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: "No product found",
       });
     }
     const products = await Products.find(query)
-
       .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize);
-    res.status(200).json({
-      status: "success",
+    res.status(StatusCodes.OK).json({
+      message: "Product found",
       count: products.length,
       page,
       pages,
       data: products,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: "Server Error",
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: "Server error",
     });
   }
 };
@@ -136,19 +135,17 @@ const productGetPortal = catchAsync(async (req, res) => {
   const total = await Products.countDocuments();
   const pages = Math.ceil(total / pageSize);
   if (page > pages) {
-    return res.status(404).json({
-      status: "fail",
-      message: "No page found",
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: "No product found",
     });
   }
   const products = await Products.find(query)
-
     .sort({ _id: -1 })
     .skip(skip)
     .limit(pageSize);
   if (products) {
     res.status(StatusCodes.OK).json({
-      message: "Products",
+      message: "Products found",
       count: total,
       page,
       pages,
@@ -157,7 +154,7 @@ const productGetPortal = catchAsync(async (req, res) => {
       isSuccess,
     });
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
   }
 });
 
@@ -168,7 +165,7 @@ const productById = catchAsync(async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ error: "Product not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
   }
 });
 
@@ -202,9 +199,9 @@ const productUpdate = catchAsync(async (req, res) => {
     const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.OK)
-      .json({ message: "Product Update Successfully", data: products });
+      .json({ message: "Product updated", data: products });
   } else {
-    res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
   }
 });
 
@@ -215,15 +212,112 @@ const productDelete = catchAsync(async (req, res) => {
     // await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
     const products = await Products.find().sort({ _id: -1 });
-    res.json({ message: "Product Deleted Successfully", data: products });
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Product deleted", data: products });
   } else
-    res.status(StatusCodes.NOT_FOUND).res.json({ error: "Product Not Found" });
+    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
 });
 
 //GetProductByCategory
 const productCategory = catchAsync(async (req, res) => {
   const product = await Products.find({ category: req.body.category });
-  res.json(product);
+  res.status(StatusCodes.OK).json({ data: product });
+});
+
+//Post/Put Product Reviews
+const postProductReview = catchAsync(async (req, res) => {
+  const { rating, productId } = req.body;
+
+  const review = {
+    userId: req.userId,
+    userName: req.name,
+    rating: Number(rating),
+  };
+
+  const product = await Product.findById(productId);
+  const isReviewed = product.reviews.find(
+    (rev) => rev.userId.toString() === req.userId.toString()
+  );
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.userId.toString() === req.userId.toString()) {
+        rev.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+  }
+  let avg = 0;
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+  product.rating = avg / product.reviews.length;
+  product.numberOfReviews = product.reviews.length;
+  await product.save({ validateBeforeSave: false });
+  res.status(StatusCodes.CREATED).json({
+    message: "Review Created",
+  });
+});
+
+//GetProductReviews
+const getProductReviews = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+  }
+  res.status(StatusCodes.OK).json({
+    message: "Product reviews",
+    reviews: product.reviews,
+  });
+});
+
+// Delete Review
+const deleteProductReview = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.query.productId);
+  if (!product) {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+  }
+
+  const reviews = product.reviews.filter(
+    (rev) => rev._id.toString() !== req.query.id.toString()
+  );
+
+  console.log(reviews);
+
+  let avg = 0;
+
+  reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  let rating = 0;
+
+  if (reviews.length === 0) {
+    rating = 0;
+  } else {
+    rating = avg / reviews.length;
+  }
+
+  const numberOfReviews = reviews.length;
+
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      rating,
+      numberOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(StatusCodes.OK).json({
+    message: "Review deleted",
+  });
 });
 
 module.exports = {
@@ -235,4 +329,7 @@ module.exports = {
   productDelete,
   productCategory,
   productGetPortal,
+  postProductReview,
+  getProductReviews,
+  deleteProductReview,
 };

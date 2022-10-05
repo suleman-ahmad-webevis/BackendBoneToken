@@ -8,16 +8,18 @@ const register = catchAsync(async (req, res) => {
   if (req.body.password !== req.body.confirmPassword) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json("Password and confirm password dnt match");
+      .json({ message: "Password and confirm password dnt match" });
   }
   const result = await User.findOne({ email });
   if (result) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "User already exists." });
+      .json({ message: "User already exists." });
   } else {
     const user = await User.create(req.body);
-    return res.status(StatusCodes.CREATED).json({ user });
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ user, message: "User created" });
   }
 });
 
@@ -27,10 +29,10 @@ const login = catchAsync(async (req, res) => {
   if (!email || !password)
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "Please enter valid email and password" });
+      .json({ message: "Please enter valid email and password" });
   const user = await User.findOne({ email: email });
   if (!user)
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "User not found" });
+    return res.status(StatusCodes.NOT_FOUND).json({ message: "User not found" });
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
@@ -38,7 +40,7 @@ const login = catchAsync(async (req, res) => {
   } else
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ error: "Incorrect password" });
+      .json({ message: "Incorrect password" });
 });
 
 //GetAllUsers
@@ -46,7 +48,7 @@ const getUsers = catchAsync(async (res) => {
   const users = await User.find({});
   if (users.length > 0) return res.status(StatusCodes.OK).json({ users });
   else
-    return res.status(StatusCodes.NOT_FOUND).json({ error: "No user found" });
+    return res.status(StatusCodes.NOT_FOUND).json({ message: "No user found" });
 });
 
 module.exports = { login, register, getUsers };
