@@ -8,6 +8,9 @@ const {
   productUpdate,
   productDelete,
   productCategory,
+  postProductReview,
+  getProductReviews,
+  deleteProductReview,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
