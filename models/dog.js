@@ -160,6 +160,10 @@ const dogSchema = new mongoose.Schema({
       required: true,
     },
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Dog = mongoose.model("Dog", dogSchema);

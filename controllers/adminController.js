@@ -6,11 +6,16 @@ const cloudinary = require("../utils/cloudinary");
 //RegisterAdmin
 const registerAdmin = catchAsync(async (req, res) => {
   const { email } = req.body;
+  if (!req.body.adminImage) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Profile pic is required" });
+  }
   const result = await Admin.findOne({ email });
   if (result) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Admin already exists" });
+      .json({ message: "User already exists" });
   } else {
     const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage);
     const admin = new Admin({
@@ -21,7 +26,7 @@ const registerAdmin = catchAsync(async (req, res) => {
     await admin.save();
     return res
       .status(StatusCodes.CREATED)
-      .json(admin, { message: "Admin registered" });
+      .json({ admin, message: "User registered" });
   }
 });
 
@@ -34,7 +39,9 @@ const loginAdmin = catchAsync(async (req, res) => {
       .json({ message: "Enter valid email and password" });
   const admin = await Admin.findOne({ email: email });
   if (!admin)
-    return res.status(StatusCodes.NOT_FOUND).json({ message: "Admin not found" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "User not found" });
   const isCorrect = await admin.checkPassword(password);
   if (isCorrect) {
     const token = admin.generateAuthToken();
@@ -61,7 +68,7 @@ const editAdmin = catchAsync(async (req, res) => {
         },
         { new: true }
       );
-      return res.status(StatusCodes.OK).json({ admin: result });
+      return res.status(StatusCodes.OK).json({ admin: result, message:"Admin updated " });
     } else {
       const result = await Admin.findByIdAndUpdate(
         req.params.id,
@@ -70,10 +77,12 @@ const editAdmin = catchAsync(async (req, res) => {
         },
         { new: true }
       );
-      return res.status(StatusCodes.OK).json({ admin: result });
+      return res
+        .status(StatusCodes.OK)
+        .json({ admin: result, message: "User updated" });
     }
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "Admin not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "User not found" });
   }
 });
 

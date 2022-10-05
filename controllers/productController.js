@@ -13,10 +13,10 @@ const productPost = catchAsync(async (req, res) => {
     csvArray.forEach(async (element) => {
       product = await Products.create({ ...element });
     });
-    const products = await Products.find().sort({ _id: -1 });
+    const products = await Products.find().sort({ createdAt: -1 });
     res
       .status(StatusCodes.CREATED)
-      .json({ message: "Product created", data: products });
+      .json({ message: "Products added", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
@@ -93,11 +93,10 @@ const productGet = async (req, res) => {
       });
     }
     const products = await Products.find(query)
-      .sort({ _id: -1 })
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(pageSize);
-    res.status(StatusCodes.OK).json({
-      message: "Product found",
+    return res.status(StatusCodes.OK).json({
       count: products.length,
       page,
       pages,
@@ -140,12 +139,11 @@ const productGetPortal = catchAsync(async (req, res) => {
     });
   }
   const products = await Products.find(query)
-    .sort({ _id: -1 })
+    .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
   if (products) {
     res.status(StatusCodes.OK).json({
-      message: "Products found",
       count: total,
       page,
       pages,
@@ -174,7 +172,7 @@ const productUpdate = catchAsync(async (req, res) => {
   let product = await Products.findById(req.params.id);
   if (product) {
     if (product.productImage !== req.body.productImage) {
-      // await cloudinary.uploader.destroy(product.cloudinaryId);
+      await cloudinary.uploader.destroy(product.cloudinaryId);
       const updated_img = await cloudinary.uploader.upload(
         req.body.productImage
       );
@@ -196,12 +194,14 @@ const productUpdate = catchAsync(async (req, res) => {
         { new: true }
       );
     }
-    const products = await Products.find().sort({ _id: -1 });
+    const products = await Products.find().sort({ createdAt: -1 });
     res
       .status(StatusCodes.OK)
       .json({ message: "Product updated", data: products });
   } else {
-    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .res.json({ message: "Product not found" });
   }
 });
 
@@ -209,14 +209,16 @@ const productUpdate = catchAsync(async (req, res) => {
 const productDelete = catchAsync(async (req, res) => {
   const product = await Products.findById(req.params.id);
   if (product) {
-    // await cloudinary.uploader.destroy(product.cloudinaryId);
+    await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
-    const products = await Products.find().sort({ _id: -1 });
+    const products = await Products.find().sort({ createdAt: -1 });
     res
       .status(StatusCodes.OK)
       .json({ message: "Product deleted", data: products });
   } else
-    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .res.json({ message: "Product not found" });
 });
 
 //GetProductByCategory
