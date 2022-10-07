@@ -73,7 +73,7 @@ const productSchema = new mongoose.Schema({
   },
   numberOfReviews: {
     type: Number,
-    required: true,
+    // required: true,
   },
   tag: {
     type: String,
@@ -83,12 +83,12 @@ const productSchema = new mongoose.Schema({
       userId: {
         type: mongoose.Schema.ObjectId,
         ref: User,
-        required: true,
+        // required: true,
       },
       rating: {
         type: Number,
         required: true,
-        maxLength: 5,
+        // maxLength: 5,
       },
     },
   ],

@@ -8,10 +8,9 @@ const Product = require("../models/product");
 const productPost = catchAsync(async (req, res) => {
   const csvArray = req.body;
   if (csvArray.length > 0) {
-    let product;
-    csvArray.forEach(async (element) => {
-      product = await Products.create({ ...element });
-    });
+    for (const element of csvArray) {
+      await Products.create({ ...element });
+    }
     const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.CREATED)
@@ -200,7 +199,9 @@ const productUpdate = catchAsync(async (req, res) => {
       .status(StatusCodes.OK)
       .json({ message: "Product updated", data: products });
   } else {
-    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .res.json({ message: "Product not found" });
   }
 });
 
