@@ -3,7 +3,6 @@ const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
-const { response } = require("express");
 
 //PostProducts
 const productPost = catchAsync(async (req, res) => {
@@ -216,7 +215,7 @@ const productDelete = catchAsync(async (req, res) => {
       .status(StatusCodes.OK)
       .json({ message: "Product deleted", data: products });
   } else
-    res.status(StatusCodes.NOT_FOUND).res.json({ message: "Product not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
 //GetProductByCategory

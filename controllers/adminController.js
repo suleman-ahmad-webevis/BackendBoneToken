@@ -49,7 +49,7 @@ const loginAdmin = catchAsync(async (req, res) => {
 const editAdmin = catchAsync(async (req, res) => {
   let admin = await Admin.findById(req.params.id);
   if (admin) {
-    if (admin?.adminImage !== req.body?.adminImage) {
+    if (admin.adminImage !== req.body.adminImage) {
       await cloudinary.uploader.destroy(admin.cloudinaryId);
       const updated_img = await cloudinary.uploader.upload(req.body.adminImage);
       const result = await Admin.findByIdAndUpdate(
