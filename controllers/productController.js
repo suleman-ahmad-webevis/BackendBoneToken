@@ -209,18 +209,18 @@ const productDelete = catchAsync(async (req, res) => {
   const product = await Products.findById(req.params.id);
   if (product) {
     await cloudinary.uploader.destroy(product.cloudinaryId);
-    await product.remove();
+    const delPro = await product.deleteOne();
     const products = await Products.find().sort({ createdAt: -1 });
     res
       .status(StatusCodes.OK)
-      .json({ message: "Product deleted", data: products });
+      .json({ message: `${delPro.name} deleted`, data: products });
   } else
     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
 //GetProductByCategory
 const productCategory = catchAsync(async (req, res) => {
-  const product = await Products.find({ category: req.body.category });
+  const product = await Products.find({ category: req.query.category });
   res.status(StatusCodes.OK).json({ data: product });
 });
 
