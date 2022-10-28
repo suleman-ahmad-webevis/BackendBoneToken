@@ -81,7 +81,7 @@ const productGet = async (req, res) => {
   }
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
+    const pageSize = parseInt(req.query.limit) || 5;
     const skip = (page - 1) * pageSize;
     const total = await Products.countDocuments();
     const pages = Math.ceil(total / pageSize);
@@ -107,54 +107,6 @@ const productGet = async (req, res) => {
     });
   }
 };
-
-//GetProductsPortal
-const productGetPortal = catchAsync(async (req, res) => {
-  let query = { $and: [{}] };
-  let searchedProduct = false;
-  let isSuccess = true;
-  if (req.query.searchText) {
-    searchedProduct = true;
-    isSuccess = false;
-    query.$and.push({
-      $or: [
-        {
-          name: {
-            $regex: ".*" + req.query.searchText + ".*",
-            $options: "i",
-          },
-        },
-      ],
-    });
-  }
-  const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.limit) || 20;
-  const skip = (page - 1) * pageSize;
-  const total = await Products.countDocuments();
-  const pages = Math.ceil(total / pageSize);
-  if (page > pages) {
-    return res.status(StatusCodes.NOT_FOUND).json({
-      message: "No product found",
-    });
-  }
-  const products = await Products.find(query)
-    .sort({ _id: -1 })
-    .skip(skip)
-    .limit(pageSize);
-  if (products) {
-    res.status(StatusCodes.OK).json({
-      message: "Products found",
-      count: total,
-      page,
-      pages,
-      data: products,
-      searchedProduct,
-      isSuccess,
-    });
-  } else {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
-  }
-});
 
 //GetProductById
 const productById = catchAsync(async (req, res) => {
@@ -219,13 +171,92 @@ const productDelete = catchAsync(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
-//GetProductByCategory
+//ProductsBar
+//Features Products
+const featuredProducts = catchAsync(async (req, res) => {
+  const products = await Products.find({ featured: true });
+  if (products.length) {
+    res.status(StatusCodes.OK).json({
+      message: "Products found",
+      data: products,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Products not found" });
+  }
+});
+
+//Popular Products
+const popularProducts = catchAsync(async (req, res) => {
+  let products = await Products.find({ rating: { $gte: 4 } });
+  if (products) {
+    res.status(StatusCodes.OK).json({
+      message: "Products found",
+      data: products,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Products not found" });
+  }
+});
+
+//Admin Portal Products
+
+const productGetPortal = catchAsync(async (req, res) => {
+  let query = { $and: [{}] };
+  let searchedProduct = false;
+  let isSuccess = true;
+  if (req.query.searchText) {
+    searchedProduct = true;
+    isSuccess = false;
+    query.$and.push({
+      $or: [
+        {
+          name: {
+            $regex: ".*" + req.query.searchText + ".*",
+            $options: "i",
+          },
+        },
+      ],
+    });
+  }
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.limit) || 20;
+  const skip = (page - 1) * pageSize;
+  const total = await Products.countDocuments();
+  const pages = Math.ceil(total / pageSize);
+  if (page > pages) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: "No product found",
+    });
+  }
+  const products = await Products.find(query)
+    .sort({ _id: -1 })
+    .skip(skip)
+    .limit(pageSize);
+  if (products) {
+    res.status(StatusCodes.OK).json({
+      message: "Products found",
+      count: total,
+      page,
+      pages,
+      data: products,
+      searchedProduct,
+      isSuccess,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+  }
+});
+
+//Category
+
 const productCategory = catchAsync(async (req, res) => {
   const product = await Products.find({ category: req.body.category });
   res.status(StatusCodes.OK).json({ data: product });
 });
 
-//Post/Put Product Reviews
+//Reviews
+
+//Post/Put Product Review
 const postProductReview = catchAsync(async (req, res) => {
   const { rating, productId } = req.body;
 
@@ -283,8 +314,6 @@ const deleteProductReview = catchAsync(async (req, res) => {
     (rev) => rev._id.toString() !== req.query.id.toString()
   );
 
-  console.log(reviews);
-
   let avg = 0;
 
   reviews.forEach((rev) => {
@@ -320,6 +349,28 @@ const deleteProductReview = catchAsync(async (req, res) => {
   });
 });
 
+//Post Product Tags
+const productTagsPost = catchAsync(async (req, res) => {
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No product with corresponding id was found" });
+  } else {
+    const tagged = await Products.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...req.body,
+      },
+      { new: true, runValidators: true }
+    );
+    console.log(tagged);
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Product tagged successfully" });
+  }
+});
+
 module.exports = {
   // productPost,
   productGet,
@@ -332,4 +383,7 @@ module.exports = {
   postProductReview,
   getProductReviews,
   deleteProductReview,
+  popularProducts,
+  featuredProducts,
+  productTagsPost,
 };
