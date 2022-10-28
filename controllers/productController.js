@@ -364,7 +364,6 @@ const productTagsPost = catchAsync(async (req, res) => {
       },
       { new: true, runValidators: true }
     );
-    console.log(tagged);
     res
       .status(StatusCodes.CREATED)
       .json({ message: "Product tagged successfully" });
