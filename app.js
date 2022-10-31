@@ -25,6 +25,17 @@ app.listen(process.env.PORT || 5000, () => {
 });
 
 app.use(globalErrorHandler);
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      name: "name of your app",
+      version: "0.1.0",
+    },
+  });
+});
+
 app.use("/user", userRoutes);
 app.use("/dog", dogRoutes);
 app.use("/product", productRoutes);
