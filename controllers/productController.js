@@ -8,11 +8,10 @@ const Product = require("../models/product");
 const productPost = catchAsync(async (req, res) => {
   const csvArray = req.body;
   if (csvArray.length > 0) {
-    let product;
-    csvArray.forEach(async (element) => {
-      product = await Products.create({ ...element });
-    });
-    const products = await Products.find().sort({ createdAt: -1 });
+    for (const element of csvArray) {
+      await Products.create({ ...element });
+    }
+    const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.CREATED)
       .json({ message: "Products added", data: products });
@@ -82,7 +81,7 @@ const productGet = async (req, res) => {
   }
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
+    const pageSize = parseInt(req.query.limit) || 5;
     const skip = (page - 1) * pageSize;
     const total = await Products.countDocuments();
     const pages = Math.ceil(total / pageSize);
@@ -108,7 +107,98 @@ const productGet = async (req, res) => {
   }
 };
 
-//GetProductsPortal
+//GetProductById
+const productById = catchAsync(async (req, res) => {
+  const product = await Products.findById(req.params.id);
+
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+  }
+});
+
+//UpdateProduct
+const productUpdate = catchAsync(async (req, res) => {
+  let product = await Products.findById(req.params.id);
+  if (product) {
+    if (product.productImage !== req.body.productImage) {
+      // await cloudinary.uploader.destroy(product.cloudinaryId);
+      const updated_img = await cloudinary.uploader.upload(
+        req.body.productImage
+      );
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+          productImage: updated_img.secure_url,
+          cloudinaryId: updated_img.public_id,
+        },
+        { new: true }
+      );
+    } else {
+      await Products.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+        },
+        { new: true }
+      );
+    }
+    const products = await Products.find().sort({ _id: -1 });
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Product updated", data: products });
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .res.json({ message: "Product not found" });
+  }
+});
+
+//DeleteProduct
+const productDelete = catchAsync(async (req, res) => {
+  const product = await Products.findById(req.params.id);
+  if (product) {
+    // await cloudinary.uploader.destroy(product.cloudinaryId);
+    await product.remove();
+    const products = await Products.find().sort({ _id: -1 });
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Product deleted", data: products });
+  } else
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+});
+
+//ProductsBar
+//Features Products
+const featuredProducts = catchAsync(async (req, res) => {
+  const products = await Products.find({ featured: true });
+  if (products.length) {
+    res.status(StatusCodes.OK).json({
+      message: "Products found",
+      data: products,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Products not found" });
+  }
+});
+
+//Popular Products
+const popularProducts = catchAsync(async (req, res) => {
+  let products = await Products.find({ rating: { $gte: 4 } });
+  if (products) {
+    res.status(StatusCodes.OK).json({
+      message: "Products found",
+      data: products,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Products not found" });
+  }
+});
+
+//Admin Portal Products
+
 const productGetPortal = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
   let searchedProduct = false;
@@ -155,76 +245,16 @@ const productGetPortal = catchAsync(async (req, res) => {
   }
 });
 
-//GetProductById
-const productById = catchAsync(async (req, res) => {
-  const product = await Products.findById(req.params.id);
+//Category
 
-  if (product) {
-    res.json(product);
-  } else {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
-  }
-});
-
-//UpdateProduct
-const productUpdate = catchAsync(async (req, res) => {
-  let product = await Products.findById(req.params.id);
-  if (product) {
-    if (product.productImage !== req.body.productImage) {
-      await cloudinary.uploader.destroy(product.cloudinaryId);
-      const updated_img = await cloudinary.uploader.upload(
-        req.body.productImage
-      );
-      await Products.findByIdAndUpdate(
-        req.params.id,
-        {
-          ...req.body,
-          productImage: updated_img.secure_url,
-          cloudinaryId: updated_img.public_id,
-        },
-        { new: true }
-      );
-    } else {
-      await Products.findByIdAndUpdate(
-        req.params.id,
-        {
-          ...req.body,
-        },
-        { new: true }
-      );
-    }
-    const products = await Products.find().sort({ createdAt: -1 });
-    res
-      .status(StatusCodes.OK)
-      .json({ message: "Product updated", data: products });
-  } else {
-    res
-      .status(StatusCodes.NOT_FOUND)
-      .res.json({ message: "Product not found" });
-  }
-});
-
-//DeleteProduct
-const productDelete = catchAsync(async (req, res) => {
-  const product = await Products.findById(req.params.id);
-  if (product) {
-    await cloudinary.uploader.destroy(product.cloudinaryId);
-    const delPro = await product.deleteOne();
-    const products = await Products.find().sort({ createdAt: -1 });
-    res
-      .status(StatusCodes.OK)
-      .json({ message: `${delPro.name} deleted`, data: products });
-  } else
-    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
-});
-
-//GetProductByCategory
 const productCategory = catchAsync(async (req, res) => {
   const product = await Products.find({ category: req.query.category });
   res.status(StatusCodes.OK).json({ data: product });
 });
 
-//Post/Put Product Reviews
+//Reviews
+
+//Post/Put Product Review
 const postProductReview = catchAsync(async (req, res) => {
   const { rating, productId } = req.body;
 
@@ -282,8 +312,6 @@ const deleteProductReview = catchAsync(async (req, res) => {
     (rev) => rev._id.toString() !== req.query.id.toString()
   );
 
-  console.log(reviews);
-
   let avg = 0;
 
   reviews.forEach((rev) => {
@@ -319,6 +347,27 @@ const deleteProductReview = catchAsync(async (req, res) => {
   });
 });
 
+//Post Product Tags
+const productTagsPost = catchAsync(async (req, res) => {
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No product with corresponding id was found" });
+  } else {
+    const tagged = await Products.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...req.body,
+      },
+      { new: true, runValidators: true }
+    );
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Product tagged successfully" });
+  }
+});
+
 module.exports = {
   // productPost,
   productGet,
@@ -331,4 +380,7 @@ module.exports = {
   postProductReview,
   getProductReviews,
   deleteProductReview,
+  popularProducts,
+  featuredProducts,
+  productTagsPost,
 };

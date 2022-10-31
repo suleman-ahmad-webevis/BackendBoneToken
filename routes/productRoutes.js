@@ -11,6 +11,9 @@ const {
   postProductReview,
   deleteProductReview,
   getProductReviews,
+  featuredProducts,
+  popularProducts,
+  productTagsPost,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -22,6 +25,8 @@ router.get("/productById/:id", productById);
 router.put("/productReview", requireAuth, postProductReview);
 router.get("/productReviews/:id", requireAuth, getProductReviews);
 router.delete("/productReviews", requireAuth, deleteProductReview);
+router.get("/featuredProducts", featuredProducts);
+router.get("/popularProducts", popularProducts);
 
 //CRMRoutes
 router.get("/productsPortal", requireAuth, productGetPortal);
@@ -38,5 +43,6 @@ router.put(
   productUpdate
 );
 router.delete("/deleteProduct/:id", requireAuth, productDelete);
+router.put("/tagProduct/:id", productTagsPost);
 
 module.exports = router;
