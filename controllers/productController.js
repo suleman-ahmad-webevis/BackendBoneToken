@@ -14,7 +14,7 @@ const productPost = catchAsync(async (req, res) => {
     const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.CREATED)
-      .json({ message: "Product created", data: products });
+      .json({ message: "Products added", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
@@ -91,11 +91,10 @@ const productGet = async (req, res) => {
       });
     }
     const products = await Products.find(query)
-      .sort({ _id: -1 })
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(pageSize);
-    res.status(StatusCodes.OK).json({
-      message: "Product found",
+    return res.status(StatusCodes.OK).json({
       count: products.length,
       page,
       pages,
@@ -229,12 +228,11 @@ const productGetPortal = catchAsync(async (req, res) => {
     });
   }
   const products = await Products.find(query)
-    .sort({ _id: -1 })
+    .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
   if (products) {
     res.status(StatusCodes.OK).json({
-      message: "Products found",
       count: total,
       page,
       pages,
@@ -250,7 +248,7 @@ const productGetPortal = catchAsync(async (req, res) => {
 //Category
 
 const productCategory = catchAsync(async (req, res) => {
-  const product = await Products.find({ category: req.body.category });
+  const product = await Products.find({ category: req.query.category });
   res.status(StatusCodes.OK).json({ data: product });
 });
 
