@@ -198,7 +198,6 @@ const popularProducts = catchAsync(async (req, res) => {
 });
 
 //Admin Portal Products
-
 const productGetPortal = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
   let searchedProduct = false;

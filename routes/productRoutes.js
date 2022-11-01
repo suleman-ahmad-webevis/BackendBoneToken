@@ -19,7 +19,7 @@ const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
 
 //WebsiteRoutes
-router.get("/products", productGet);
+router.get("/products", productGetPortal);
 router.get("/productsByCategory", productCategory);
 router.get("/productById/:id", productById);
 router.put("/productReview", requireAuth, postProductReview);
