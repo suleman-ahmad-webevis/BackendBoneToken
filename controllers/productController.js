@@ -23,65 +23,61 @@ const productPost = catchAsync(async (req, res) => {
 //GetProduct
 const productGet = async (req, res) => {
   let query = { $and: [{}] };
-  if (req.query.searchText) {
+  if (req.query.search != "undefined") {
     query.$and.push({
       $or: [
         {
           name: {
-            $regex: ".*" + req.query.searchText + ".*",
+            $regex: ".*" + req.query.search + ".*",
             $options: "i",
           },
         },
       ],
     });
   }
-  if (req.query.searchCategory) {
+  if (req.query.category != "undefined" && req.query.category != "null") {
     query.$and.push({
-      $and: [{ category: { $regex: ".*" + req.query.searchCategory + ".*" } }],
+      $and: [{ category: req.query.category }],
+    });
+    const cProd = await Product.find({
+      category: req.query.category,
+    });
+    var totalCProd = cProd.length;
+  }
+
+  if (req.query.gender != "undefined") {
+    query.$and.push({
+      $and: [{ gender: { $regex: ".*" + req.query.gender + ".*" } }],
     });
   }
-  if (req.query.searchGender) {
+  if (req.query.condition != "undefined") {
     query.$and.push({
-      $and: [{ gender: { $regex: ".*" + req.query.searchGender + ".*" } }],
+      $and: [{ condition: { $regex: ".*" + req.query.condition + ".*" } }],
     });
   }
-  if (req.query.searchCondition) {
+  if (req.query.height != "undefined") {
     query.$and.push({
-      $and: [
-        { condition: { $regex: ".*" + req.query.searchCondition + ".*" } },
-      ],
+      $and: [{ height: { $regex: ".*" + req.query.height + ".*" } }],
     });
   }
-  if (req.query.searchHeight) {
+  if (req.query.weight != "undefined") {
     query.$and.push({
-      $and: [{ height: { $regex: ".*" + req.query.searchHeight + ".*" } }],
+      $and: [{ weight: { $regex: ".*" + req.query.weight + ".*" } }],
     });
   }
-  if (req.query.searchWeight) {
+  if (req.query.color != "undefined") {
     query.$and.push({
-      $and: [{ weight: { $regex: ".*" + req.query.searchWeight + ".*" } }],
+      $and: [{ color: { $regex: ".*" + req.query.color + ".*" } }],
     });
   }
-  if (req.query.searchColor) {
+  if (req.query.season != "undefined") {
     query.$and.push({
-      $and: [{ color: { $regex: ".*" + req.query.searchColor + ".*" } }],
-    });
-  }
-  if (req.query.searchSmartCategory) {
-    query.$and.push({
-      $and: [
-        { category: { $regex: ".*" + req.query.searchSmartCategory + ".*" } },
-      ],
-    });
-  }
-  if (req.query.searchSeason) {
-    query.$and.push({
-      $and: [{ season: { $regex: ".*" + req.query.searchSeason + ".*" } }],
+      $and: [{ season: { $regex: ".*" + req.query.season + ".*" } }],
     });
   }
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 5;
+    const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Products.countDocuments();
     const pages = Math.ceil(total / pageSize);
@@ -94,12 +90,14 @@ const productGet = async (req, res) => {
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(pageSize);
-    return res.status(StatusCodes.OK).json({
-      count: products.length,
-      page,
-      pages,
-      data: products,
-    });
+    if (products) {
+      return res.status(StatusCodes.OK).json({
+        count: totalCProd !== undefined ? totalCProd : total,
+        page,
+        pages,
+        data: products,
+      });
+    }
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: "Server error",
@@ -110,7 +108,6 @@ const productGet = async (req, res) => {
 //GetProductById
 const productById = catchAsync(async (req, res) => {
   const product = await Products.findById(req.params.id);
-
   if (product) {
     res.json(product);
   } else {
@@ -197,27 +194,12 @@ const popularProducts = catchAsync(async (req, res) => {
   }
 });
 
-//Admin Portal Products
-const productGetPortal = catchAsync(async (req, res) => {
-  let query = { $and: [{}] };
-  let searchedProduct = false;
-  let isSuccess = true;
-  if (req.query.searchText) {
-    searchedProduct = true;
-    isSuccess = false;
-    query.$and.push({
-      $or: [
-        {
-          name: {
-            $regex: ".*" + req.query.searchText + ".*",
-            $options: "i",
-          },
-        },
-      ],
-    });
-  }
+//Category
+
+const productCategory = catchAsync(async (req, res) => {
+  let isCategory = false;
   const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.limit) || 20;
+  const pageSize = parseInt(req.query.limit) || 5;
   const skip = (page - 1) * pageSize;
   const total = await Products.countDocuments();
   const pages = Math.ceil(total / pageSize);
@@ -226,29 +208,27 @@ const productGetPortal = catchAsync(async (req, res) => {
       message: "No product found",
     });
   }
-  const products = await Products.find(query)
+  const categorizedProduct = await Products.find({
+    category: req.query.category,
+  })
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
-  if (products) {
-    res.status(StatusCodes.OK).json({
-      count: total,
+
+  if (categorizedProduct.length) {
+    isCategory = true;
+    return res.status(StatusCodes.OK).json({
+      count: categorizedProduct.length,
       page,
       pages,
-      data: products,
-      searchedProduct,
-      isSuccess,
+      data: categorizedProduct,
+      isCategory,
     });
   } else {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Product not found" });
   }
-});
-
-//Category
-
-const productCategory = catchAsync(async (req, res) => {
-  const product = await Products.find({ category: req.query.category });
-  res.status(StatusCodes.OK).json({ data: product });
 });
 
 //Reviews
@@ -367,6 +347,53 @@ const productTagsPost = catchAsync(async (req, res) => {
   }
 });
 
+//Admin Portal Products
+// const productGetPortal = catchAsync(async (req, res) => {
+//   let query = { $and: [{}] };
+//   let searchedProduct = false;
+//   let isSuccess = true;
+//   if (req.query.searchText) {
+//     searchedProduct = true;
+//     isSuccess = false;
+//     query.$and.push({
+//       $or: [
+//         {
+//           name: {
+//             $regex: ".*" + req.query.searchText + ".*",
+//             $options: "i",
+//           },
+//         },
+//       ],
+//     });
+//   }
+//   const page = parseInt(req.query.page) || 1;
+//   const pageSize = parseInt(req.query.limit) || 10;
+//   const skip = (page - 1) * pageSize;
+//   const total = await Products.countDocuments();
+//   const pages = Math.ceil(total / pageSize);
+//   if (page > pages) {
+//     return res.status(StatusCodes.NOT_FOUND).json({
+//       message: "No product found",
+//     });
+//   }
+//   const products = await Products.find(query)
+//     .sort({ createdAt: -1 })
+//     .skip(skip)
+//     .limit(pageSize);
+//   if (products) {
+//     res.status(StatusCodes.OK).json({
+//       count: total,
+//       page,
+//       pages,
+//       data: products,
+//       searchedProduct,
+//       isSuccess,
+//     });
+//   } else {
+//     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
+//   }
+// });
+
 module.exports = {
   // productPost,
   productGet,
@@ -375,7 +402,6 @@ module.exports = {
   productUpdate,
   productDelete,
   productCategory,
-  productGetPortal,
   postProductReview,
   getProductReviews,
   deleteProductReview,

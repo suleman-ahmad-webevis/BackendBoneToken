@@ -3,7 +3,6 @@ const router = Router();
 const {
   productPost,
   productById,
-  productGetPortal,
   productGet,
   productUpdate,
   productDelete,
@@ -19,7 +18,7 @@ const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
 
 //WebsiteRoutes
-router.get("/products", productGetPortal);
+router.get("/products", productGet);
 router.get("/productsByCategory", productCategory);
 router.get("/productById/:id", productById);
 router.put("/productReview", requireAuth, postProductReview);
@@ -29,7 +28,7 @@ router.get("/featuredProducts", featuredProducts);
 router.get("/popularProducts", popularProducts);
 
 //CRMRoutes
-router.get("/productsPortal", requireAuth, productGetPortal);
+router.get("/productsPortal", requireAuth, productGet);
 router.post(
   "/addProducts",
   upload.single("productImage"),
