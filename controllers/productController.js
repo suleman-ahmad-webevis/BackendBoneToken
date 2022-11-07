@@ -85,7 +85,7 @@ const productGet = catchAsync(async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
-  if (products.length) {
+  if (products) {
     return res.status(StatusCodes.OK).json({
       count: totalCategorized !== undefined ? totalCategorized : total,
       page,
