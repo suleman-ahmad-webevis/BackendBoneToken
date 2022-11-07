@@ -6,7 +6,6 @@ const {
   productGet,
   productUpdate,
   productDelete,
-  productCategory,
   postProductReview,
   deleteProductReview,
   getProductReviews,
@@ -19,7 +18,6 @@ const upload = require("../utils/multer");
 
 //WebsiteRoutes
 router.get("/products", productGet);
-router.get("/productsByCategory", productCategory);
 router.get("/productById/:id", productById);
 router.put("/productReview", requireAuth, postProductReview);
 router.get("/productReviews/:id", requireAuth, getProductReviews);
@@ -45,3 +43,4 @@ router.delete("/deleteProduct/:id", requireAuth, productDelete);
 router.put("/tagProduct/:id", productTagsPost);
 
 module.exports = router;
+
