@@ -3,15 +3,13 @@ const User = require("./user");
 
 const dogSchema = new mongoose.Schema(
   {
-    userId: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     dogImage: {
       type: String,
     },
     cloudinaryId: {
+      type: String,
+    },
+    breederShow: {
       type: String,
     },
     ownerName: {
