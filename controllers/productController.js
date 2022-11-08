@@ -53,22 +53,16 @@ const productGet = catchAsync(async (req, res) => {
     req.query.season != "undefined"
   ) {
     query.$and.push({
-      $and: [{ gender: req.query.gender }],
-    });
-    query.$and.push({
-      $and: [{ coatColor: req.query.coatColor }],
-    });
-    query.$and.push({
-      $and: [{ age: req.query.age }],
-    });
-    query.$and.push({
-      $and: [{ breed: req.query.breed }],
-    });
-    query.$and.push({
-      $and: [{ dogGroupFCI: req.query.dogGroupFCI }],
-    });
-    query.$and.push({
-      $and: [{ season: req.query.season }],
+      $and: [
+        {
+          gender: req.query.gender,
+          coatColor: req.query.coatColor,
+          age: req.query.age,
+          breed: req.query.breed,
+          dogGroupFCI: req.query.dogGroupFCI,
+          season: req.query.season,
+        },
+      ],
     });
   }
   const page = parseInt(req.query.page) || 1;
