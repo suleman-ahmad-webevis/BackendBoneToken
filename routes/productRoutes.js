@@ -26,7 +26,7 @@ router.get("/featuredProducts", featuredProducts);
 router.get("/popularProducts", popularProducts);
 
 //CRMRoutes
-router.get("/productsPortal", requireAuth, productGet);
+router.get("/products", requireAuth, productGet);
 router.post(
   "/addProducts",
   upload.single("productImage"),

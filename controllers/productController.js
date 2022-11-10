@@ -35,7 +35,12 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-  if (req.query.category != "undefined" && req.query.category != "null") {
+
+  if (
+    req.query.category != "undefined" &&
+    req.query.category != "null" &&
+    req.query.category != undefined
+  ) {
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
@@ -50,7 +55,13 @@ const productGet = catchAsync(async (req, res) => {
     req.query.age != "undefined" &&
     req.query.breed != "undefined" &&
     req.query.dogGroupFCI != "undefined" &&
-    req.query.season != "undefined"
+    req.query.season != "undefined" &&
+    req.query.gender != undefined &&
+    req.query.coatColor != undefined &&
+    req.query.age != undefined &&
+    req.query.breed != undefined &&
+    req.query.dogGroupFCI != undefined &&
+    req.query.season != undefined
   ) {
     query.$and.push({
       $and: [
