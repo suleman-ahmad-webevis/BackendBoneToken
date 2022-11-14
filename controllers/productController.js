@@ -22,6 +22,7 @@ const productPost = catchAsync(async (req, res) => {
 
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
+  console.log('0');
   let query = { $and: [{}] };
   if (req.query.search !== undefined) {
     query.$and.push({
