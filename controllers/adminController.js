@@ -41,7 +41,7 @@ const loginAdmin = catchAsync(async (req, res) => {
   if (!admin)
     return res
       .status(StatusCodes.NOT_FOUND)
-      .json({ message: "User not found" });
+      .json({ message: "Invalid credentials" });
   const isCorrect = await admin.checkPassword(password);
   if (isCorrect) {
     const token = admin.generateAuthToken();
@@ -49,7 +49,7 @@ const loginAdmin = catchAsync(async (req, res) => {
   } else
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Incorrect password" });
+      .json({ message: "Invalid credentials" });
 });
 
 //EditAdminProfile
@@ -68,7 +68,7 @@ const editAdmin = catchAsync(async (req, res) => {
         },
         { new: true }
       );
-      return res.status(StatusCodes.OK).json({ admin: result, message:"Admin updated " });
+      return res.status(StatusCodes.OK).json({ admin: result, message:"Admin updated"});
     } else {
       const result = await Admin.findByIdAndUpdate(
         req.params.id,

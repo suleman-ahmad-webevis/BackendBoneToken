@@ -27,7 +27,7 @@ const productGet = catchAsync(async (req, res) => {
     query.$and.push({
       $or: [
         {
-          name: {
+          description: {
             $regex: ".*" + req.query.search + ".*",
             $options: "i",
           },
@@ -35,7 +35,6 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-
   if (
     req.query.category != "undefined" &&
     req.query.category != "null" &&
