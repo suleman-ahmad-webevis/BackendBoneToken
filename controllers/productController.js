@@ -27,7 +27,7 @@ const productGet = catchAsync(async (req, res) => {
     query.$and.push({
       $or: [
         {
-          name: {
+          description: {
             $regex: ".*" + req.query.search + ".*",
             $options: "i",
           },
@@ -35,14 +35,14 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-  if (req.query.category != "undefined" && req.query.category != "null") {
+  if (
+    req.query.category != "undefined" &&
+    req.query.category != "null" &&
+    req.query.category != undefined
+  ) {
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
-    const categorizedProd = await Product.find({
-      category: req.query.category,
-    });
-    var totalCategorized = categorizedProd.length;
   }
   if (
     req.query.gender != "undefined" &&
@@ -50,34 +50,35 @@ const productGet = catchAsync(async (req, res) => {
     req.query.age != "undefined" &&
     req.query.breed != "undefined" &&
     req.query.dogGroupFCI != "undefined" &&
-    req.query.season != "undefined"
+    req.query.season != "undefined" &&
+    req.query.gender != undefined &&
+    req.query.coatColor != undefined &&
+    req.query.age != undefined &&
+    req.query.breed != undefined &&
+    req.query.dogGroupFCI != undefined &&
+    req.query.season != undefined
   ) {
     query.$and.push({
-      $and: [{ gender: req.query.gender }],
-    });
-    query.$and.push({
-      $and: [{ coatColor: req.query.coatColor }],
-    });
-    query.$and.push({
-      $and: [{ age: req.query.age }],
-    });
-    query.$and.push({
-      $and: [{ breed: req.query.breed }],
-    });
-    query.$and.push({
-      $and: [{ dogGroupFCI: req.query.dogGroupFCI }],
-    });
-    query.$and.push({
-      $and: [{ season: req.query.season }],
+      $and: [
+        {
+          gender: req.query.gender,
+          coatColor: req.query.coatColor,
+          age: req.query.age,
+          breed: req.query.breed,
+          dogGroupFCI: req.query.dogGroupFCI,
+          season: req.query.season,
+        },
+      ],
     });
   }
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
-  const total = await Products.countDocuments();
+  const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
+  // const total = await Products.countDocuments(); //Old way of finding the total
   const pages = Math.ceil(total / pageSize);
   if (page > pages) {
-    return res.status(StatusCodes.NOT_FOUND).json({
+    return res.status(StatusCodes.OK).json({
       message: "No product found",
     });
   }
@@ -87,7 +88,7 @@ const productGet = catchAsync(async (req, res) => {
     .limit(pageSize);
   if (products) {
     return res.status(StatusCodes.OK).json({
-      count: totalCategorized !== undefined ? totalCategorized : total,
+      count: total,
       page,
       pages,
       data: products,
