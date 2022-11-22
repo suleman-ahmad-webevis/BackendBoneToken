@@ -13,17 +13,18 @@ const requireAuth = catchAsync(async (req, res, next) => {
       req.name = isVerified.name;
       req.email = isVerified.email;
       req.userPic = isVerified.userPic;
+      const newToken = User.generateAuthToken();
       next();
     } else {
       return res.json({
         success: 404,
-        message: "Token is not valid, Please enter a valid token",
+        message: "Your token has expired, please log in again!",
       });
     }
   } else {
     return res.json({
       success: 404,
-      message: "Token is not provided, Please provide token",
+      message: "You don't have access to this page, please log in!",
     });
   }
 });

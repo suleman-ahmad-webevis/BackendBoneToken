@@ -53,13 +53,23 @@ adminSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;
 };
+
 adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
     process.env.JWT_KEY,
-    { expiresIn: "30d" }
+    { expiresIn: "10m" }
   );
   return token;
+};
+
+adminSchema.methods.refreshAuthToken = function () {
+  const refreshedToken = jwt.sign(
+    { _id: this._id, name: this.firstName + this.lastName },
+    process.env.REFRESH_JWT_KEY,
+    { expiresIn: "1y" }
+  );
+  return refreshedToken;
 };
 
 module.exports = mongoose.model("Admin", adminSchema);
