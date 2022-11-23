@@ -12,6 +12,7 @@ const {
   featuredProducts,
   popularProducts,
   productTagsPost,
+  addProduct,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -28,6 +29,12 @@ router.get("/popularProducts", popularProducts);
 //CRMRoutes
 router.get("/productsPortal", requireAuth, productGet);
 router.post(
+  "/addProduct",
+  upload.single("productImage"),
+  requireAuth,
+  addProduct
+);
+router.post(
   "/addProducts",
   upload.single("productImage"),
   requireAuth,
@@ -43,4 +50,3 @@ router.delete("/deleteProduct/:id", requireAuth, productDelete);
 router.put("/tagProduct/:id", productTagsPost);
 
 module.exports = router;
-
