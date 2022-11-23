@@ -4,7 +4,31 @@ const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
 
-//PostProducts
+//AddProduct
+const addProduct = catchAsync(async (req, res) => {
+  const { name } = req.body;
+  const product = await Product.findOne({ name });
+  if (product) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Product already exists" });
+  } else {
+    const uploaded_img = await cloudinary.uploader.upload(
+      req.body.productImage
+    );
+    const newProduct = new Product({
+      ...req.body,
+      productImage: uploaded_img.secure_url,
+      cloudinaryId: uploaded_img.public_id,
+    });
+    await newProduct.save();
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ message: "New product added" });
+  }
+});
+
+//PostProductsWithCSV
 const productPost = catchAsync(async (req, res) => {
   const csvArray = req.body;
   if (csvArray.length > 0) {
@@ -359,4 +383,5 @@ module.exports = {
   popularProducts,
   featuredProducts,
   productTagsPost,
+  addProduct,
 };
