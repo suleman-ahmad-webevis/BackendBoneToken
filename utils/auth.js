@@ -13,7 +13,6 @@ const requireAuth = catchAsync(async (req, res, next) => {
       req.name = isVerified.name;
       req.email = isVerified.email;
       req.userPic = isVerified.userPic;
-      const newToken = User.generateAuthToken();
       next();
     } else {
       return res.json({

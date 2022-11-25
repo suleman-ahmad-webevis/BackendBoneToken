@@ -38,8 +38,7 @@ const login = catchAsync(async (req, res) => {
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
-    const refreshToken = user.refreshAuthToken();
-    return res.status(StatusCodes.OK).json({ token, refreshToken, user });
+    return res.status(StatusCodes.OK).json({ token, user });
   } else
     return res
       .status(StatusCodes.UNAUTHORIZED)

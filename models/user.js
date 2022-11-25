@@ -86,18 +86,9 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
     process.env.JWT_KEY,
-    { expiresIn: "10m" }
+    { expiresIn: "3d" }
   );
   return token;
-};
-
-userSchema.methods.refreshAuthToken = function () {
-  const refreshedToken = jwt.sign(
-    { _id: this._id, name: this.firstName + this.lastName },
-    process.env.REFRESH_JWT_KEY,
-    { expiresIn: "1y" }
-  );
-  return refreshedToken;
 };
 
 module.exports = mongoose.model("User", userSchema);

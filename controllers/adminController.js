@@ -45,8 +45,7 @@ const loginAdmin = catchAsync(async (req, res) => {
   const isCorrect = await admin.checkPassword(password);
   if (isCorrect) {
     const token = admin.generateAuthToken();
-    const refreshToken = admin.refreshTokenAuthToken();
-    return res.status(StatusCodes.OK).json({ token, refreshToken, admin });
+    return res.status(StatusCodes.OK).json({ token, admin });
   } else
     return res
       .status(StatusCodes.UNAUTHORIZED)
