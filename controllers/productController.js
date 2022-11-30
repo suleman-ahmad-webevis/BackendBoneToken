@@ -49,12 +49,13 @@ const productGet = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
   if (req.query.search !== undefined) {
     query.$and.push({
-      $or: [
+      $and: [
         {
-          description: {
+          name: {
             $regex: ".*" + req.query.search + ".*",
             $options: "i",
           },
+          category: req.query.category,
         },
       ],
     });
@@ -62,7 +63,8 @@ const productGet = catchAsync(async (req, res) => {
   if (
     req.query.category != "undefined" &&
     req.query.category != "null" &&
-    req.query.category != undefined
+    req.query.category != undefined &&
+    req.query.search === undefined
   ) {
     query.$and.push({
       $and: [{ category: req.query.category }],
