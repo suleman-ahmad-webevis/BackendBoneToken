@@ -47,7 +47,7 @@ const productPost = catchAsync(async (req, res) => {
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
-  if (req.query.search !== undefined) {
+  if (req.query.search != "undefined") {
     query.$and.push({
       $and: [
         {
@@ -60,12 +60,7 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-  if (
-    req.query.category != "undefined" &&
-    req.query.category != "null" &&
-    req.query.category != undefined &&
-    req.query.search === undefined
-  ) {
+  if (req.query.category != "undefined" && req.query.category != "null") {
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
@@ -76,13 +71,7 @@ const productGet = catchAsync(async (req, res) => {
     req.query.age != "undefined" &&
     req.query.breed != "undefined" &&
     req.query.dogGroupFCI != "undefined" &&
-    req.query.season != "undefined" &&
-    req.query.gender != undefined &&
-    req.query.coatColor != undefined &&
-    req.query.age != undefined &&
-    req.query.breed != undefined &&
-    req.query.dogGroupFCI != undefined &&
-    req.query.season != undefined
+    req.query.season != "undefined"
   ) {
     query.$and.push({
       $and: [
