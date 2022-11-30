@@ -15,7 +15,7 @@ const registerAdmin = catchAsync(async (req, res) => {
   if (result) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "User already exists" });
+      .json({ message: "Admin already exists" });
   } else {
     const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage);
     const admin = new Admin({
@@ -26,7 +26,7 @@ const registerAdmin = catchAsync(async (req, res) => {
     await admin.save();
     return res
       .status(StatusCodes.CREATED)
-      .json({ admin, message: "User registered" });
+      .json({ admin, message: "Admin registered" });
   }
 });
 
@@ -68,7 +68,9 @@ const editAdmin = catchAsync(async (req, res) => {
         },
         { new: true }
       );
-      return res.status(StatusCodes.OK).json({ admin: result, message:"Admin updated"});
+      return res
+        .status(StatusCodes.OK)
+        .json({ admin: result, message: "Admin updated" });
     } else {
       const result = await Admin.findByIdAndUpdate(
         req.params.id,

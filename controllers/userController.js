@@ -32,7 +32,9 @@ const login = catchAsync(async (req, res) => {
       .json({ message: "Please enter valid email and password" });
   const user = await User.findOne({ email: email });
   if (!user)
-    return res.status(StatusCodes.NOT_FOUND).json({ message: "User not found" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "User not found" });
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();

@@ -53,11 +53,12 @@ adminSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;
 };
+
 adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
     process.env.JWT_KEY,
-    { expiresIn: "30d" }
+    { expiresIn: "3d" }
   );
   return token;
 };

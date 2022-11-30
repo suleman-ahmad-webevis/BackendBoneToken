@@ -77,6 +77,7 @@ userSchema.pre("save", async function (next) {
   this.password = await bycrypt.hash(this.password, salt);
   next();
 });
+
 userSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;
@@ -85,8 +86,9 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
     process.env.JWT_KEY,
-    { expiresIn: "30d" }
+    { expiresIn: "3d" }
   );
   return token;
 };
+
 module.exports = mongoose.model("User", userSchema);

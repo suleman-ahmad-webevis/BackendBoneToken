@@ -14,7 +14,9 @@ const dogPost = catchAsync(async (req, res) => {
 
   await dog.save();
   if (dog) {
-    return res.status(StatusCodes.CREATED).json(dog);
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ dog, message: "Dog added successfully." });
   } else
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -75,7 +77,7 @@ const dogDelete = catchAsync(async (req, res) => {
   if (dog) {
     await cloudinary.uploader.destroy(dog.cloudinaryId);
     await dog.remove();
-    res.json(dog, {message: 'Dog deleted'});
+    res.json(dog, { message: "Dog deleted" });
   } else res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
 });
 
