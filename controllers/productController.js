@@ -49,12 +49,13 @@ const productGet = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
   if (req.query.search !== undefined) {
     query.$and.push({
-      $or: [
+      $and: [
         {
-          description: {
+          name: {
             $regex: ".*" + req.query.search + ".*",
             $options: "i",
           },
+          category: req.query.category,
         },
       ],
     });
@@ -62,15 +63,12 @@ const productGet = catchAsync(async (req, res) => {
   if (
     req.query.category != "undefined" &&
     req.query.category != "null" &&
-    req.query.category != undefined
+    req.query.category != undefined &&
+    req.query.search === undefined
   ) {
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
-    const categorizedProd = await Product.find({
-      category: req.query.category,
-    });
-    var totalCategorized = categorizedProd.length;
   }
   if (
     req.query.gender != "undefined" &&
@@ -102,10 +100,11 @@ const productGet = catchAsync(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
-  const total = await Products.countDocuments();
+  const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
+  // const total = await Products.countDocuments(); //Old way of finding the total
   const pages = Math.ceil(total / pageSize);
   if (page > pages) {
-    return res.status(StatusCodes.NOT_FOUND).json({
+    return res.status(StatusCodes.OK).json({
       message: "No product found",
     });
   }
@@ -115,7 +114,7 @@ const productGet = catchAsync(async (req, res) => {
     .limit(pageSize);
   if (products) {
     return res.status(StatusCodes.OK).json({
-      count: totalCategorized !== undefined ? totalCategorized : total,
+      count: total,
       page,
       pages,
       data: products,
