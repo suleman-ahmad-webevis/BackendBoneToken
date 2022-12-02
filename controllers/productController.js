@@ -117,6 +117,7 @@ const productGet = catchAsync(async (req, res) => {
       message: "No product found",
     });
   }
+  console.log(query)
   const products = await Products.find(query)
     .sort({ createdAt: -1 })
     .skip(skip)
