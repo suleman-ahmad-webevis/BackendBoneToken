@@ -193,7 +193,7 @@ const productDelete = catchAsync(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
-//ProductsBar
+//Products Navigation Bar
 //Features Products
 const featuredProducts = catchAsync(async (req, res) => {
   const products = await Products.find({ featured: true });
