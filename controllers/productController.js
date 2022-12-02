@@ -47,22 +47,10 @@ const productPost = catchAsync(async (req, res) => {
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
   let query = { $and: [{}] };
-  if (req.query.search != "undefined" && req.query.category != "undefined") {
-    console.log("1st block");
-    query.$and.push({
-      $and: [
-        {
-          name: {
-            $regex: ".*" + req.query.search + ".*",
-            $options: "i",
-          },
-        },
-      ],
-    });
-  }
-
-  if (req.query.search != "undefined" || req.query.category != "undefined") {
-    console.log("2nd block");
+  if (
+    req.query.search != "undefined" &&
+    (req.query.category == "null" || req.query.category == "undefined")
+  ) {
     query.$and.push({
       $or: [
         {
@@ -74,8 +62,25 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
+  if (
+    req.query.search != "undefined" &&
+    req.query.search != "" &&
+    req.query.category != "undefined" &&
+    req.query.category != "null"
+  ) {
+    query.$and.push({
+      $and: [
+        {
+          name: {
+            $regex: ".*" + req.query.search + ".*",
+            $options: "i",
+          },
+          category: req.query.category,
+        },
+      ],
+    });
+  }
   if (req.query.category != "undefined" && req.query.category != "null") {
-    console.log("3rd ");
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
@@ -88,7 +93,6 @@ const productGet = catchAsync(async (req, res) => {
     req.query.dogGroupFCI != "undefined" &&
     req.query.season != "undefined"
   ) {
-    console.log("4th ");
     query.$and.push({
       $and: [
         {
@@ -102,7 +106,6 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-  console.log("The query", query);
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
