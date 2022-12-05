@@ -9,8 +9,6 @@ const {
   postProductReview,
   deleteProductReview,
   getProductReviews,
-  featuredProducts,
-  popularProducts,
   productTagsPost,
   addProduct,
 } = require("../controllers/productController");
@@ -23,8 +21,6 @@ router.get("/productById/:id", productById);
 router.put("/productReview", requireAuth, postProductReview);
 router.get("/productReviews/:id", requireAuth, getProductReviews);
 router.delete("/productReviews", requireAuth, deleteProductReview);
-router.get("/featuredProducts", featuredProducts);
-router.get("/popularProducts", popularProducts);
 
 //CRMRoutes
 router.get("/productsPortal", requireAuth, productGet);
