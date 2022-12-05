@@ -113,7 +113,10 @@ const productGet = catchAsync(async (req, res) => {
     });
   }
 
-  if (req.query.new == 'new') {
+  console.log(typeof req.query.new)
+
+  if (req.query.new == true) {
+    console.log(req.query)
     const conditionalProducts = await Products.find(req.query)
       .sort({ createdAt: -1 })
       .limit(10);
