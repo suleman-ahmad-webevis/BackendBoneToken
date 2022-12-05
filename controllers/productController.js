@@ -91,11 +91,6 @@ const productGet = catchAsync(async (req, res) => {
       featured: req.query.featured,
     });
   }
-  if (req.query.new != "undefined" && req.query.new != "null") {
-    query.$and.push({
-      new: req.query.new,
-    });
-  }
   if (
     req.query.gender != "undefined" &&
     req.query.coatColor != "undefined" &&
@@ -118,8 +113,8 @@ const productGet = catchAsync(async (req, res) => {
     });
   }
 
-  if (req.query.featured === 'true' || req.query.new == 'new') {
-    const conditionalProducts = await Products.find(query)
+  if (req.query.new == 'new') {
+    const conditionalProducts = await Products.find(req.query)
       .sort({ createdAt: -1 })
       .limit(10);
     if (conditionalProducts) {
