@@ -405,7 +405,7 @@ var breedEnum = [
   "Yorkshire Terrier",
 ];
 
-module.export = {
+module.exports = {
   categoryEnum,
   genderEnum,
   coatColorEnum,

@@ -22,7 +22,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       // required: [true, "Please enter description of product."],
       // maxLength: [400, "Description cannot exceed 400 characters"],
-      // index: true,
     },
     productCode: {
       type: String,
@@ -70,7 +69,6 @@ const productSchema = new mongoose.Schema(
     },
     featured: {
       type: Boolean,
-      index: true,
     },
     gender: {
       type: String,
@@ -107,7 +105,6 @@ const productSchema = new mongoose.Schema(
     //   type: Number,
     //   default: 0,
     //   maxLength: 5,
-    //   index: true,
     // },
     // numberOfReviews: {
     //   type: Number,

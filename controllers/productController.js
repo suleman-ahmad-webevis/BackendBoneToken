@@ -22,9 +22,7 @@ const addProduct = catchAsync(async (req, res) => {
       cloudinaryId: uploaded_img.public_id,
     });
     await newProduct.save();
-    return res
-      .status(StatusCodes.CREATED)
-      .json({ message: "New product added" });
+    return res.status(StatusCodes.CREATED).json({ message: "Products added" });
   }
 });
 
@@ -38,7 +36,7 @@ const productPost = catchAsync(async (req, res) => {
     const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.CREATED)
-      .json({ message: "Products added", data: products });
+      .json({ message: "Products posted", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
@@ -46,7 +44,6 @@ const productPost = catchAsync(async (req, res) => {
 
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
-
   let query = { $and: [{}] };
   if (
     req.query.search != "undefined" &&
@@ -88,7 +85,7 @@ const productGet = catchAsync(async (req, res) => {
   }
   if (req.query.featured != "undefined" && req.query.featured != "null") {
     query.$and.push({
-      featured: req.query.featured,
+      $and: [{ featured: true }],
     });
   }
   if (
@@ -112,41 +109,28 @@ const productGet = catchAsync(async (req, res) => {
       ],
     });
   }
-
-  if (req.query.new == true) {
-    console.log(req.query)
-    const conditionalProducts = await Products.find(req.query)
-      .sort({ createdAt: -1 })
-      .limit(10);
-    if (conditionalProducts) {
-      return res.status(StatusCodes.OK).json({
-        data: conditionalProducts,
-      });
-    }
-  } else {
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * pageSize;
-    const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
-    // const total = await Products.countDocuments(); //Old way of finding the total
-    const pages = Math.ceil(total / pageSize);
-    if (page > pages) {
-      return res.status(StatusCodes.OK).json({
-        message: "No product found",
-      });
-    }
-    const products = await Products.find(query)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(pageSize);
-    if (products) {
-      return res.status(StatusCodes.OK).json({
-        count: total,
-        page,
-        pages,
-        data: products,
-      });
-    }
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * pageSize;
+  const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
+  // const total = await Products.countDocuments(); //Old way of finding the total
+  const pages = Math.ceil(total / pageSize);
+  if (page > pages) {
+    return res.status(StatusCodes.OK).json({
+      message: "No product found",
+    });
+  }
+  const products = await Products.find(query)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(pageSize);
+  if (products) {
+    return res.status(StatusCodes.OK).json({
+      count: total,
+      page,
+      pages,
+      data: products,
+    });
   }
 });
 
