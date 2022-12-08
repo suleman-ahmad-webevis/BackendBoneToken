@@ -22,9 +22,7 @@ const addProduct = catchAsync(async (req, res) => {
       cloudinaryId: uploaded_img.public_id,
     });
     await newProduct.save();
-    return res
-      .status(StatusCodes.CREATED)
-      .json({ message: "New product added" });
+    return res.status(StatusCodes.CREATED).json({ message: "Products added" });
   }
 });
 
@@ -38,7 +36,7 @@ const productPost = catchAsync(async (req, res) => {
     const products = await Products.find().sort({ _id: -1 });
     res
       .status(StatusCodes.CREATED)
-      .json({ message: "Products added", data: products });
+      .json({ message: "Products posted", data: products });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
@@ -46,7 +44,6 @@ const productPost = catchAsync(async (req, res) => {
 
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
-
   let query = { $and: [{}] };
   if (
     req.query.search != "undefined" &&
