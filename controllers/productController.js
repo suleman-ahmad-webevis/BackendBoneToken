@@ -113,8 +113,6 @@ const productGet = catchAsync(async (req, res) => {
     });
   }
 
-  console.log(typeof req.query.new)
-
   if (req.query.new == true) {
     console.log(req.query)
     const conditionalProducts = await Products.find(req.query)
