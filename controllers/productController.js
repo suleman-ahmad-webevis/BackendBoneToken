@@ -33,10 +33,7 @@ const productPost = catchAsync(async (req, res) => {
     for (const element of csvArray) {
       await Products.create({ ...element });
     }
-    const products = await Products.find().sort({ _id: -1 });
-    res
-      .status(StatusCodes.CREATED)
-      .json({ message: "Products posted", data: products });
+    res.status(StatusCodes.CREATED).json({ message: "Products posted" });
   } else {
     res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
   }
