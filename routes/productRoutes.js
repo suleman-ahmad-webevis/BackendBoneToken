@@ -23,7 +23,7 @@ router.get("/productReviews/:id", requireAuth, getProductReviews);
 router.delete("/productReviews", requireAuth, deleteProductReview);
 
 //CRMRoutes
-router.get("/productsPortal", requireAuth, productGet);
+router.get("/productsPortal", productGet);
 router.post(
   "/addProduct",
   upload.single("productImage"),

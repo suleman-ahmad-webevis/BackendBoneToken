@@ -3,6 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
+const { findQuery } = require("../utils/findQuery");
 
 //AddProduct
 const addProduct = catchAsync(async (req, res) => {
@@ -44,77 +45,15 @@ const productPost = catchAsync(async (req, res) => {
 
 //GetProduct
 const productGet = catchAsync(async (req, res) => {
-  let query = { $and: [{}] };
-  if (
-    req.query.search != "undefined" &&
-    (req.query.category == "null" || req.query.category == "undefined")
-  ) {
-    query.$and.push({
-      $or: [
-        {
-          name: {
-            $regex: ".*" + req.query.search + ".*",
-            $options: "i",
-          },
-        },
-      ],
-    });
-  }
-  if (
-    req.query.search != "undefined" &&
-    req.query.search != "" &&
-    req.query.category != "undefined" &&
-    req.query.category != "null"
-  ) {
-    query.$and.push({
-      $and: [
-        {
-          name: {
-            $regex: ".*" + req.query.search + ".*",
-            $options: "i",
-          },
-          category: req.query.category,
-        },
-      ],
-    });
-  }
-  if (req.query.category != "undefined" && req.query.category != "null") {
-    query.$and.push({
-      $and: [{ category: req.query.category }],
-    });
-  }
-  if (req.query.featured != "undefined" && req.query.featured != "null") {
-    query.$and.push({
-      $and: [{ featured: true }],
-    });
-  }
-  if (
-    req.query.gender != "undefined" &&
-    req.query.coatColor != "undefined" &&
-    req.query.age != "undefined" &&
-    req.query.breed != "undefined" &&
-    req.query.dogGroupFCI != "undefined" &&
-    req.query.season != "undefined"
-  ) {
-    query.$and.push({
-      $and: [
-        {
-          gender: req.query.gender,
-          coatColor: req.query.coatColor,
-          age: req.query.age,
-          breed: req.query.breed,
-          dogGroupFCI: req.query.dogGroupFCI,
-          season: req.query.season,
-        },
-      ],
-    });
-  }
+  const query = await findQuery(req)
+
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
   const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
   // const total = await Products.countDocuments(); //Old way of finding the total
   const pages = Math.ceil(total / pageSize);
+
   if (page > pages) {
     return res.status(StatusCodes.OK).json({
       message: "No product found",
@@ -124,6 +63,7 @@ const productGet = catchAsync(async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
+
   if (products) {
     return res.status(StatusCodes.OK).json({
       count: total,
