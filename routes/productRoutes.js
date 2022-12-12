@@ -35,7 +35,7 @@ router.post(
   addProduct
 );
 router.post(
-  "/addProducts",
+  "/postProduct",
   upload.single("productImage"),
   requireAuth,
   productPost
