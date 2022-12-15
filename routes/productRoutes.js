@@ -11,6 +11,7 @@ const {
   getProductReviews,
   productTagsPost,
   addProduct,
+  productFeaturedPost,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -43,6 +44,7 @@ router.put(
   productUpdate
 );
 router.delete("/deleteProduct/:id", requireAuth, productDelete);
-router.put("/tagProduct/:id", productTagsPost);
+router.put("/tagProduct/:id", requireAuth, productTagsPost);
+router.post('/featureProduct/:id', requireAuth, productFeaturedPost)
 
 module.exports = router;

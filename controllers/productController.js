@@ -234,7 +234,7 @@ const productTagsPost = catchAsync(async (req, res) => {
       .status(StatusCodes.NOT_FOUND)
       .json({ message: "No product with corresponding id was found" });
   } else {
-    const tagged = await Products.findByIdAndUpdate(
+    await Products.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
@@ -244,6 +244,27 @@ const productTagsPost = catchAsync(async (req, res) => {
     res
       .status(StatusCodes.CREATED)
       .json({ message: "Product tagged successfully" });
+  }
+});
+
+//Post Product Featured
+const productFeaturedPost = catchAsync(async (req, res) => {
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No product with corresponding id was found" });
+  } else {
+    const featured = await Products.findByIdAndUpdate(
+      req.params.id,
+      {
+        featured: req.body.featured,
+      },
+      { new: true, runValidators: true }
+    );
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Product featured successfully" });
   }
 });
 
@@ -257,5 +278,6 @@ module.exports = {
   getProductReviews,
   deleteProductReview,
   productTagsPost,
+  productFeaturedPost,
   addProduct,
 };
