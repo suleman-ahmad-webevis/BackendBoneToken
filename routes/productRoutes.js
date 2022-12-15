@@ -9,6 +9,7 @@ const {
   productTagsPost,
   addProduct,
   rateTheProduct,
+  productFeaturedPost,
   // postProductReview,
   // deleteProductReview,
   // getProductReviews,
