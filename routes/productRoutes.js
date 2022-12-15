@@ -6,11 +6,12 @@ const {
   productGet,
   productUpdate,
   productDelete,
-  postProductReview,
-  deleteProductReview,
-  getProductReviews,
   productTagsPost,
   addProduct,
+  rateTheProduct,
+  // postProductReview,
+  // deleteProductReview,
+  // getProductReviews,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
@@ -18,10 +19,10 @@ const upload = require("../utils/multer");
 //WebsiteRoutes
 router.get("/products", productGet);
 router.get("/productById/:id", productById);
-router.put("/productReview", requireAuth, postProductReview);
-router.get("/productReviews/:id", requireAuth, getProductReviews);
-router.delete("/productReviews", requireAuth, deleteProductReview);
-
+router.put("/rateTheProduct", rateTheProduct);
+// router.put("/productReview", requireAuth, postProductReview);
+// router.get("/productReviews/:id", requireAuth, getProductReviews);
+// router.delete("/productReviews", requireAuth, deleteProductReview);
 //CRMRoutes
 router.get("/productsPortal", requireAuth, productGet);
 router.post(
