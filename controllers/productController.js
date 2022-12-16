@@ -3,7 +3,6 @@ const catchAsync = require("../utils/catchAsync");
 const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
-const { findQuery } = require("../utils/findQuery");
 
 //AddProduct
 const addProduct = catchAsync(async (req, res) => {
@@ -201,7 +200,7 @@ const productDelete = catchAsync(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
-//RateProduct
+//RateTheProduct
 const rateTheProduct = catchAsync(async (req, res) => {
   const { productId, ratingTotal } = req.body;
   const product = await Product.findById(productId);
@@ -221,7 +220,7 @@ const rateTheProduct = catchAsync(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
 });
 
-//Post Product Tags
+//TagProduct
 const productTagsPost = catchAsync(async (req, res) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
@@ -242,7 +241,7 @@ const productTagsPost = catchAsync(async (req, res) => {
   }
 });
 
-//Post Product Featured
+//FeatureTheProduct
 const productFeaturedPost = catchAsync(async (req, res) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
