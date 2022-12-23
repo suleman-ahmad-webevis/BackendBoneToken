@@ -1,15 +1,17 @@
 const Admin = require("../models/admin");
 const { StatusCodes } = require("http-status-codes");
-const catchAsync = require("../utils/catchAsync");
 const cloudinary = require("../utils/cloudinary");
+//ErrorHandlers
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //RegisterAdmin
-const registerAdmin = catchAsync(async (req, res) => {
+const registerAdmin = catchAsyncErrors(async (req, res, next) => {
   const { email } = req.body;
   if (!req.body.adminImage) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Profile pic is required" });
+    return next(
+      new ErrorHandler(StatusCodes.BAD_REQUEST, "Profile pic is required")
+    );
   }
   const result = await Admin.findOne({ email });
   if (result) {
@@ -31,17 +33,18 @@ const registerAdmin = catchAsync(async (req, res) => {
 });
 
 //LoginAdmin
-const loginAdmin = catchAsync(async (req, res) => {
+const loginAdmin = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password)
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Enter valid email and password" });
+    return next(
+      new ErrorHandler(
+        StatusCodes.BAD_REQUEST,
+        "Enter valid email and password"
+      )
+    );
   const admin = await Admin.findOne({ email: email });
   if (!admin)
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: "Invalid credentials" });
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid credentials"));
   const isCorrect = await admin.checkPassword(password);
   if (isCorrect) {
     const token = admin.generateAuthToken();
@@ -53,7 +56,7 @@ const loginAdmin = catchAsync(async (req, res) => {
 });
 
 //EditAdminProfile
-const editAdmin = catchAsync(async (req, res) => {
+const editAdmin = catchAsyncErrors(async (req, res, next) => {
   let admin = await Admin.findById(req.params.id);
   if (admin) {
     if (admin.adminImage !== req.body.adminImage) {
@@ -68,7 +71,9 @@ const editAdmin = catchAsync(async (req, res) => {
         },
         { new: true }
       );
-      return res.status(StatusCodes.OK).json({ admin: result, message:"Admin updated"});
+      return res
+        .status(StatusCodes.OK)
+        .json({ admin: result, message: "User updated" });
     } else {
       const result = await Admin.findByIdAndUpdate(
         req.params.id,

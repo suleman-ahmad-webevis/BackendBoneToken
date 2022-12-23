@@ -1,11 +1,12 @@
 const { StatusCodes } = require("http-status-codes");
-const catchAsync = require("../utils/catchAsync");
-const Products = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 const Product = require("../models/product");
+//ErrorHandlers
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //AddProduct
-const addProduct = catchAsync(async (req, res) => {
+const addProduct = catchAsyncErrors(async (req, res, next) => {
   const { name } = req.body;
   const product = await Product.findOne({ name });
   if (product) {
@@ -27,11 +28,11 @@ const addProduct = catchAsync(async (req, res) => {
 });
 
 //PostProductsWithCSV
-const productPost = catchAsync(async (req, res) => {
+const productPost = catchAsyncErrors(async (req, res, next) => {
   const csvArray = req.body;
   if (csvArray.length > 0) {
     for (const element of csvArray) {
-      await Products.create({ ...element });
+      await Product.create({ ...element });
     }
     res.status(StatusCodes.CREATED).json({ message: "Products posted" });
   } else {
@@ -40,7 +41,7 @@ const productPost = catchAsync(async (req, res) => {
 });
 
 //GetProducts
-const productGet = catchAsync(async (req, res) => {
+const productGet = catchAsyncErrors(async (req, res, next) => {
   let query = { $and: [{}] };
   if (
     req.query.search != "undefined" &&
@@ -114,7 +115,7 @@ const productGet = catchAsync(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
-  const total = await Products.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
+  const total = await Product.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
   // const total = await Products.countDocuments(); //Old way of finding the total
   const pages = Math.ceil(total / pageSize);
 
@@ -123,7 +124,7 @@ const productGet = catchAsync(async (req, res) => {
       message: "No product found",
     });
   }
-  const products = await Products.find(query, { reviews: 0 })
+  const products = await Product.find(query, { reviews: 0 })
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
@@ -139,8 +140,8 @@ const productGet = catchAsync(async (req, res) => {
 });
 
 //GetProductById
-const productById = catchAsync(async (req, res) => {
-  const product = await Products.findById(req.params.id, { reviews: 0 });
+const productById = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.params.id, { reviews: 0 });
   if (product) {
     res.json(product);
   } else {
@@ -149,15 +150,15 @@ const productById = catchAsync(async (req, res) => {
 });
 
 //UpdateProduct
-const productUpdate = catchAsync(async (req, res) => {
-  let product = await Products.findById(req.params.id);
+const productUpdate = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
   if (product) {
     if (product.productImage !== req.body.productImage) {
       // await cloudinary.uploader.destroy(product.cloudinaryId);
       const updated_img = await cloudinary.uploader.upload(
         req.body.productImage
       );
-      await Products.findByIdAndUpdate(
+      await Product.findByIdAndUpdate(
         req.params.id,
         {
           ...req.body,
@@ -167,7 +168,7 @@ const productUpdate = catchAsync(async (req, res) => {
         { new: true }
       );
     } else {
-      await Products.findByIdAndUpdate(
+      await Product.findByIdAndUpdate(
         req.params.id,
         {
           ...req.body,
@@ -175,7 +176,7 @@ const productUpdate = catchAsync(async (req, res) => {
         { new: true }
       );
     }
-    const products = await Products.find({}, { reviews: 0 }).sort({ _id: -1 });
+    const products = await Product.find({}, { reviews: 0 }).sort({ _id: -1 });
     res
       .status(StatusCodes.OK)
       .json({ message: "Product updated", data: products });
@@ -187,12 +188,12 @@ const productUpdate = catchAsync(async (req, res) => {
 });
 
 //DeleteProduct
-const productDelete = catchAsync(async (req, res) => {
-  const product = await Products.findById(req.params.id);
+const productDelete = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
   if (product) {
     // await cloudinary.uploader.destroy(product.cloudinaryId);
     await product.remove();
-    const products = await Products.find({}, { reviews: 0 }).sort({ _id: -1 });
+    const products = await Product.find({}, { reviews: 0 }).sort({ _id: -1 });
     res
       .status(StatusCodes.OK)
       .json({ message: "Product deleted", data: products });
@@ -201,7 +202,7 @@ const productDelete = catchAsync(async (req, res) => {
 });
 
 //RateTheProduct
-const rateTheProduct = catchAsync(async (req, res) => {
+const rateTheProduct = catchAsyncErrors(async (req, res, next) => {
   const { productId, ratingTotal } = req.body;
   const product = await Product.findById(productId);
   if (product) {
@@ -221,14 +222,17 @@ const rateTheProduct = catchAsync(async (req, res) => {
 });
 
 //TagProduct
-const productTagsPost = catchAsync(async (req, res) => {
+const productTagsPost = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
-    res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: "No product with corresponding id was found" });
+    return next(
+      new ErrorHandler(
+        StatusCodes.NOT_FOUND,
+        "No product with corresponding id was found"
+      )
+    );
   } else {
-    await Products.findByIdAndUpdate(
+    await Product.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
@@ -242,12 +246,12 @@ const productTagsPost = catchAsync(async (req, res) => {
 });
 
 //FeatureTheProduct
-const productFeaturedPost = catchAsync(async (req, res) => {
+const productFeaturedPost = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "No product found" });
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "No product found"));
   } else {
-    await Products.findByIdAndUpdate(
+    await Product.findByIdAndUpdate(
       req.params.id,
       {
         featured: req.body.featured,
@@ -261,7 +265,7 @@ const productFeaturedPost = catchAsync(async (req, res) => {
 });
 
 //Post/Put Product Review
-// const postProductReview = catchAsync(async (req, res) => {
+// const postProductReview = catchAsyncErrors(async (req, res,next) => {
 //   const { rating, productId } = req.body;
 //   const review = {
 //     userId: req.userId,
@@ -294,7 +298,7 @@ const productFeaturedPost = catchAsync(async (req, res) => {
 // });
 
 //GetProductReviews
-// const getProductReviews = catchAsync(async (req, res) => {
+// const getProductReviews = catchAsyncErrors(async (req, res,next) => {
 //   const product = await Product.findById(req.params.id);
 //   if (!product) {
 //     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });
@@ -306,7 +310,7 @@ const productFeaturedPost = catchAsync(async (req, res) => {
 // });
 
 // Delete Review
-// const deleteProductReview = catchAsync(async (req, res) => {
+// const deleteProductReview = catchAsyncErrors(async (req, res,next) => {
 //   const product = await Product.findById(req.query.productId);
 //   if (!product) {
 //     res.status(StatusCodes.NOT_FOUND).json({ message: "Product not found" });

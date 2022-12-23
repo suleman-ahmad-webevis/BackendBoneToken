@@ -1,10 +1,11 @@
 const Order = require("../models/order");
-const Product = require("../models/product");
 const { StatusCodes } = require("http-status-codes");
-const catchAsync = require("../utils/catchAsync");
+//ErrorHandlers
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //CreateOrder
-const newOrder = catchAsync(async (req, res) => {
+const newOrder = catchAsyncErrors(async (req, res, next) => {
   const { totalPrice, shippingInfo, orderItems, paymentInfo } = req.body;
   const order = await Order.create({
     totalPrice,
@@ -25,13 +26,15 @@ const newOrder = catchAsync(async (req, res) => {
 });
 
 //GetSingleOrder
-const getSingleOrder = catchAsync(async (req, res) => {
+const getSingleOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
     "name email"
   );
   if (!order) {
-    return res.status(StatusCodes.NOT_FOUND).json({ message: "Order not found" });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Order not found" });
   }
   res.status(StatusCodes.OK).json({
     data: order,
@@ -39,7 +42,7 @@ const getSingleOrder = catchAsync(async (req, res) => {
 });
 
 //LoggedInUserOrder
-const myOrders = catchAsync(async (req, res) => {
+const myOrders = catchAsyncErrors(async (req, res, next) => {
   const orders = await Order.find({ user: req.userId });
   if (orders) {
     res.status(StatusCodes.OK).json({
@@ -51,7 +54,7 @@ const myOrders = catchAsync(async (req, res) => {
 });
 
 //DeleteOrder
-const deleteOrder = catchAsync(async (req, res) => {
+const deleteOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
   if (!order) {
     return res
