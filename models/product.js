@@ -22,7 +22,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       // required: [true, "Please enter description of product."],
       // maxLength: [400, "Description cannot exceed 400 characters"],
-      // index: true,
     },
     productCode: {
       type: String,
@@ -70,7 +69,6 @@ const productSchema = new mongoose.Schema(
     },
     featured: {
       type: Boolean,
-      index: true,
     },
     gender: {
       type: String,
@@ -102,35 +100,38 @@ const productSchema = new mongoose.Schema(
       // required: true,
       // enum: seasonEnum,
     },
-    //Rating
+    ratingAvg: {
+      type: Number,
+      default: 0,
+      maxLength: 5,
+    },
     // rating: {
     //   type: Number,
     //   default: 0,
     //   maxLength: 5,
-    //   index: true,
     // },
-    // numberOfReviews: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // reviews: [
-    //   {
-    //     userId: {
-    //       type: mongoose.Schema.ObjectId,
-    //       ref: User,
-    //     },
-    //     rating: {
-    //       type: Number,
-    //       maxLength: 5,
-    //     },
-    //   },
-    // ],
+    noOfReviews: {
+      type: Number,
+      default: 0,
+    },
+    reviews: [
+      {
+        // userId: {
+        //       type: mongoose.Schema.ObjectId,
+        //       ref: User,
+        //     },
+        rating: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
 
-productSchema.index({ createdAt: 1 });
-productSchema.index({ updatedAt: 1 });
+// productSchema.index({ createdAt: 1 });
+// productSchema.index({ updatedAt: 1 });
 
 const Product = mongoose.model("Product", productSchema);
 

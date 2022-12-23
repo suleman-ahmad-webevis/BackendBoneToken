@@ -20,13 +20,13 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Please Enter Email"],
-      unique: true,
+      unique: [true, "Email already exist"],
       validate: [validator.isEmail, "Please Enter a valid Email"],
     },
     phone: {
       type: String,
       required: [true, "Please Enter Phone Number"],
-      unique: true,
+      unique: [true, "PhoneNo already Registered"],
       maxLength: [15, "Name cannot exceed 15 characters"],
     },
     password: {

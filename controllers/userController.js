@@ -1,52 +1,63 @@
 const User = require("../models/user");
 const { StatusCodes } = require("http-status-codes");
-const catchAsync = require("../utils/catchAsync");
+//ErrorHandlers
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //RegisterUser
-const register = catchAsync(async (req, res) => {
-  const { email } = req.body;
+const register = catchAsyncErrors(async (req, res, next) => {
+  const { email, phone } = req.body;
   if (req.body.password !== req.body.confirmPassword) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Password and confirm password dnt match" });
+    return next(
+      new ErrorHandler(
+        StatusCodes.BAD_REQUEST,
+        "Password and confirm password dnt match"
+      )
+    );
   }
-  const result = await User.findOne({ email });
-  if (result) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "User already exists." });
-  } else {
-    const user = await User.create(req.body);
-    return res
-      .status(StatusCodes.CREATED)
-      .json({ user, message: "User created" });
+  const userExist = await User.findOne({ email });
+  if (userExist) {
+    return next(
+      new ErrorHandler(StatusCodes.BAD_REQUEST, "Email already registered")
+    );
   }
+  const phoneNoExist = await User.findOne({ phone });
+  if (phoneNoExist) {
+    return next(
+      new ErrorHandler(StatusCodes.BAD_REQUEST, "Phone no already registered")
+    );
+  }
+  const user = await User.create(req.body);
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ user, message: "User created" });
 });
 
 //LoginUser
-const login = catchAsync(async (req, res) => {
+const login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password)
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please enter valid email and password" });
-  const user = await User.findOne({ email: email });
+    return next(
+      new ErrorHandler(
+        StatusCodes.BAD_REQUEST,
+        "Please enter email and password"
+      )
+    );
+  const user = await User.findOne({ email });
   if (!user)
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: "User not found" });
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid credentials"));
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
     return res.status(StatusCodes.OK).json({ token, user });
   } else
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Incorrect password" });
+    return next(
+      new ErrorHandler(StatusCodes.UNAUTHORIZED, "Invalid credentials")
+    );
 });
 
 //GetAllUsers
-const getUsers = catchAsync(async (res) => {
+const getUsers = catchAsyncErrors(async (req, res, next) => {
   const users = await User.find({});
   if (users.length > 0) return res.status(StatusCodes.OK).json({ users });
   else

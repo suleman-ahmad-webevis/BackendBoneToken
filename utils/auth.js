@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const catchAsync = require("../utils/catchAsync");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 require("dotenv").config();
 
-const requireAuth = catchAsync(async (req, res, next) => {
+const requireAuth = catchAsyncErrors(async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader.substring(7, authHeader.length);
 

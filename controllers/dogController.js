@@ -1,17 +1,18 @@
 const Dog = require("../models/dog");
 const { StatusCodes } = require("http-status-codes");
-const catchAsync = require("../utils/catchAsync");
 const cloudinary = require("../utils/cloudinary");
+//ErrorHandlers
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //AddDog
-const dogPost = catchAsync(async (req, res) => {
+const dogPost = catchAsyncErrors(async (req, res, next) => {
   const uploaded_img = await cloudinary.uploader.upload(req.body.dogImage);
   const dog = new Dog({
     ...req.body,
     dogImage: uploaded_img.secure_url,
     cloudinaryId: uploaded_img.public_id,
   });
-
   await dog.save();
   if (dog) {
     return res
@@ -24,7 +25,7 @@ const dogPost = catchAsync(async (req, res) => {
 });
 
 //GetDog
-const dogGet = catchAsync(async (req, res) => {
+const dogGet = catchAsyncErrors(async (req, res, next) => {
   const dog = await Dog.find({ userId: req.userId });
   if (dog) {
     res.json(dog);
@@ -34,14 +35,14 @@ const dogGet = catchAsync(async (req, res) => {
 });
 
 //GetDogById
-const dogById = catchAsync(async (req, res) => {
+const dogById = catchAsyncErrors(async (req, res, next) => {
   const dog = await Dog.findById(req.params.id);
   if (dog) res.json(dog);
   else res.status(StatusCodes.NOT_FOUND).json({ message: "Dog not found" });
 });
 
 //UpdateDog
-const dogUpdate = catchAsync(async (req, res) => {
+const dogUpdate = catchAsyncErrors(async (req, res, next) => {
   let dog = await Dog.findById(req.params.id);
   if (dog) {
     if (dog.dogImage !== req.body.dogImage) {
@@ -72,7 +73,7 @@ const dogUpdate = catchAsync(async (req, res) => {
 });
 
 //DeleteDog
-const dogDelete = catchAsync(async (req, res) => {
+const dogDelete = catchAsyncErrors(async (req, res, next) => {
   const dog = await Dog.findById(req.params.id);
   if (dog) {
     await cloudinary.uploader.destroy(dog.cloudinaryId);
