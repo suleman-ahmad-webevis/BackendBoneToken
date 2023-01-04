@@ -7,7 +7,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //AddProduct
 const addProduct = catchAsyncErrors(async (req, res, next) => {
-  const { name } = req.body;
+  const { name } = req.body.data;
   const product = await Product.findOne({ name });
   if (product) {
     return res
@@ -15,13 +15,20 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
       .json({ message: "Product already exists" });
   } else {
     const uploaded_img = await cloudinary.uploader.upload(
-      req.body.productImage
+      req.body.data.productImage,
+      { folder: "bonetoken" }
     );
     const newProduct = new Product({
-      ...req.body,
+      ...req.body.data,
       productImage: uploaded_img.secure_url,
       cloudinaryId: uploaded_img.public_id,
     });
+    for (let i = 0; i < req.body.colour.length; i++) {
+      newProduct.colour.push(req.body.colour[i]);
+    }
+    for (let i = 0; i < req.body.size.length; i++) {
+      newProduct.size.push(req.body.size[i]);
+    }
     await newProduct.save();
     return res.status(StatusCodes.CREATED).json({ message: "Products added" });
   }
