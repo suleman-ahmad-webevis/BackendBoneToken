@@ -12,7 +12,6 @@ const {
 
 const productSchema = new mongoose.Schema(
   {
-    //NewFields
     name: {
       type: String,
       trim: true,
@@ -32,7 +31,11 @@ const productSchema = new mongoose.Schema(
     size: {
       type: String,
     },
+    //Image
     productImage: {
+      type: String,
+    },
+    cloudinaryId: {
       type: String,
     },
     colour: {

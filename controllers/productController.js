@@ -8,8 +8,8 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 //AddProduct
 const addProduct = catchAsyncErrors(async (req, res, next) => {
   const { name } = req.body.data;
-  const product = await Product.findOne({ name });
-  if (product) {
+  const alreadyExist = await Product.findOne({ name });
+  if (alreadyExist) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Product already exists" });
@@ -18,6 +18,10 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
       req.body.data.productImage,
       { folder: "bonetoken" }
     );
+    const uploaded_video = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "video",
+      folder: "bonetoken",
+    });
     const newProduct = new Product({
       ...req.body.data,
       productImage: uploaded_img.secure_url,

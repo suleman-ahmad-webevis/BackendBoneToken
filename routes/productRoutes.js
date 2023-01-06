@@ -15,7 +15,7 @@ const {
   // getProductReviews,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
-// const upload = require("../utils/multer");
+const upload = require("../utils/multer");
 
 //WebsiteRoutes
 router.get("/products", productGet);
@@ -28,8 +28,8 @@ router.put("/rateTheProduct", rateTheProduct);
 router.get("/productsPortal", productGet);
 router.post(
   "/addProduct",
-  // upload.single("productImage"),
-  requireAuth,
+  // requireAuth,
+  upload.single("productFile"),
   addProduct
 );
 router.post(

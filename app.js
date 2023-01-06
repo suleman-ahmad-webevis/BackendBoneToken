@@ -12,6 +12,7 @@ const dogRoutes = require("./routes/dogRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const blogRoutes = require("./routes/blogRoute");
 const { StatusCodes } = require("http-status-codes");
 
 //Middleware
@@ -31,6 +32,7 @@ app.use("/dog", dogRoutes);
 app.use("/order", orderRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/admin", adminRoutes);
+app.use("/blog", blogRoutes);
 app.route("*", () => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: "No such route found",

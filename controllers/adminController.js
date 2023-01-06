@@ -13,8 +13,8 @@ const registerAdmin = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler(StatusCodes.BAD_REQUEST, "Profile pic is required")
     );
   }
-  const result = await Admin.findOne({ email });
-  if (result) {
+  const alreadyExist = await Admin.findOne({ email });
+  if (alreadyExist) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Admin already exists" });
