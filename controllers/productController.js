@@ -47,7 +47,9 @@ const productPost = catchAsyncErrors(async (req, res, next) => {
     }
     res.status(StatusCodes.CREATED).json({ message: "Products posted" });
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json({ message: "Products not added" });
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Error occured while posting products" });
   }
 });
 
@@ -236,12 +238,7 @@ const rateTheProduct = catchAsyncErrors(async (req, res, next) => {
 const productTagsPost = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
-    return next(
-      new ErrorHandler(
-        StatusCodes.NOT_FOUND,
-        "No product with corresponding id was found"
-      )
-    );
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "No product found"));
   } else {
     await Product.findByIdAndUpdate(
       req.params.id,
@@ -250,9 +247,7 @@ const productTagsPost = catchAsyncErrors(async (req, res, next) => {
       },
       { new: true, runValidators: true }
     );
-    res
-      .status(StatusCodes.CREATED)
-      .json({ message: "Product tagged successfully" });
+    res.status(StatusCodes.CREATED).json({ message: "Product tagged " });
   }
 });
 
