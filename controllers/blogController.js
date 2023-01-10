@@ -23,6 +23,16 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
+  const allBlogs = await Blog.find({});
+  if (allBlogs.length) {
+    return res.status(StatusCodes.OK).json({ message: "All blogs", allBlogs });
+  } else {
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "No blog found"));
+  }
+});
+
 module.exports = {
   addBlog,
+  getAllBlogs,
 };
