@@ -25,10 +25,10 @@ router.put("/rateTheProduct", rateTheProduct);
 // router.get("/productReviews/:id", requireAuth, getProductReviews);
 // router.delete("/productReviews", requireAuth, deleteProductReview);
 //CRMRoutes
-router.get("/productsPortal", productGet);
+router.get("/productsPortal", requireAuth, productGet);
 router.post(
   "/addProduct",
-  // requireAuth,
+  requireAuth,
   upload.single("productFile"),
   addProduct
 );

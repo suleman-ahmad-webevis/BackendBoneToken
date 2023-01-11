@@ -5,9 +5,10 @@ const {
   getAllBlogs,
   getBlogById,
 } = require("../controllers/blogController");
+const { requireAuth } = require("../utils/auth");
 
 //Routes
-router.post("/postTheBlog", addBlog);
+router.post("/postTheBlog", requireAuth, addBlog);
 router.get("/allBlogs", getAllBlogs);
 router.get("/blogById/:id", getBlogById);
 

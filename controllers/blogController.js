@@ -17,9 +17,10 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
     let newBlog = new Blog({
       ...req.body.data,
       blogDesc,
+      blogCreator: req.userId,
     });
     await newBlog.save();
-    return res.status(StatusCodes.CREATED).json({ message: "Blog added" });
+    return res.status(StatusCodes.CREATED).json({ message: "Blog posted" });
   }
 });
 

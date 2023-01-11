@@ -20,6 +20,11 @@ const blogSchema = new mongoose.Schema(
     blogDesc: {
       type: String,
     },
+    blogCreator: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
