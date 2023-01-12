@@ -18,10 +18,10 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
       req.body.data.productImage,
       { folder: "bonetoken" }
     );
-    const uploaded_video = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "video",
-      folder: "bonetoken",
-    });
+    // const uploaded_video = await cloudinary.uploader.upload(req.file.path, {
+    //   resource_type: "video",
+    //   folder: "bonetoken",
+    // });
     const newProduct = new Product({
       ...req.body.data,
       productImage: uploaded_img.secure_url,

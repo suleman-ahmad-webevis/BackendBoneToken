@@ -28,16 +28,6 @@ const productSchema = new mongoose.Schema(
     weight: {
       type: String,
     },
-    size: {
-      type: String,
-    },
-    //Image
-    productImage: {
-      type: String,
-    },
-    cloudinaryId: {
-      type: String,
-    },
     colour: {
       type: [String],
       required: true,
@@ -54,30 +44,25 @@ const productSchema = new mongoose.Schema(
     memberPrice: {
       type: Number,
     },
-    //-----------------------CSV-----------------------
-    articleNumber: {
-      type: Number,
-      // required: [true, "Please enter the article number of product."],
-      trim: true,
-      // maxLength: [30, "Article Number cannot exceed 30 characters"],
+    videoLink: {
+      type: String,
     },
-    EAN: {
-      type: Number,
-      // required: [true, "Please enter the European Article Number"],
+    //Image
+    productImage: {
+      type: String,
+    },
+    cloudinaryId: {
+      type: String,
     },
     category: {
       type: String,
       // required: [true, "Please add a Category for product"],
       // enum: categoryEnum,
     },
-    purchasePrice: {
-      type: Number,
-      // required: [true, "Please Enter Product Purchase Price"],
-      // maxLength: [8, "Purchase Price cannot exceed 8 Characters"],
-    },
     featured: {
       type: Boolean,
     },
+    //TagProduct
     gender: {
       type: String,
       // required: [true, "Please add Gender for Product"],
@@ -134,6 +119,22 @@ const productSchema = new mongoose.Schema(
         },
       },
     ],
+    //-----------------------CSV-----------------------
+    articleNumber: {
+      type: Number,
+      // required: [true, "Please enter the article number of product."],
+      trim: true,
+      // maxLength: [30, "Article Number cannot exceed 30 characters"],
+    },
+    EAN: {
+      type: Number,
+      // required: [true, "Please enter the European Article Number"],
+    },
+    purchasePrice: {
+      type: Number,
+      // required: [true, "Please Enter Product Purchase Price"],
+      // maxLength: [8, "Purchase Price cannot exceed 8 Characters"],
+    },
   },
   { timestamps: true }
 );
