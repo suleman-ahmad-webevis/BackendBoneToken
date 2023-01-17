@@ -25,11 +25,68 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
 });
 
 const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
-  const allBlogs = await Blog.find({});
-  if (allBlogs.length) {
-    return res.status(StatusCodes.OK).json({ message: "All blogs", allBlogs });
-  } else {
-    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "No blog found"));
+  let query = { $and: [{}] };
+  if (
+    req.query.search != "undefined" &&
+    (req.query.category == "null" || req.query.category == "undefined")
+  ) {
+    query.$and.push({
+      $or: [
+        {
+          name: {
+            $regex: ".*" + req.query.search + ".*",
+            $option: "i",
+          },
+        },
+      ],
+    });
+  }
+  if (
+    req.query.search != "undefined" &&
+    req.query.category != "" &&
+    req.query.category != "undefined" &&
+    req.query.category != "null"
+  ) {
+    query.$and.push({
+      $and: [
+        {
+          name: {
+            $regex: ".*" + req.query.search + ".*",
+            $options: "i",
+          },
+          category: req.query.category,
+        },
+      ],
+    });
+  }
+  if (req.query.category != "undefined" && req.query.category != "null") {
+    query.$and.push({
+      $and: [{ category: req.query.category }],
+    });
+  }
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * pageSize;
+  const total = await Blog.find(query).count();
+  //New total because we have to find total for blogs for specific category, search
+  //const total = await Blogs.countDocuments(); //Old way of finding the total
+  const pages = Math.ceil(total / pageSize);
+  if (page > pages) {
+    return res.status(StatusCodes.OK).json({
+      message: "No blog found",
+    });
+  }
+  const blogs = await Blog.find(query)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(pageSize);
+  if (blogs) {
+    return res.status(StatusCodes.OK).json({
+      count: total,
+      page,
+      pages,
+      data: blogs,
+    });
   }
 });
 

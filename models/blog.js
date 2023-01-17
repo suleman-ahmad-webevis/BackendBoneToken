@@ -25,6 +25,13 @@ const blogSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    mayLike: {
+      type: Boolean,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );
