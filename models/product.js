@@ -23,10 +23,12 @@ const productSchema = new mongoose.Schema(
       // maxLength: [400, "Description cannot exceed 400 characters"],
     },
     productCode: {
-      type: String,
+      type: [String],
+      required: true,
     },
     weight: {
-      type: String,
+      type: [String],
+      required: true,
     },
     colour: {
       type: [String],
@@ -37,7 +39,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     retailPrice: {
-      type: Number,
+      type: [String],
+      required: true,
       // required: [true, "Please enter Required Retail Price"],
       // maxLength: [8, "Required Retail Price cannot exceed 8 Characters"],
     },
@@ -47,16 +50,23 @@ const productSchema = new mongoose.Schema(
     videoLink: {
       type: String,
     },
-    //Image
-    productImage: {
-      type: String,
-    },
-    cloudinaryId: {
-      type: String,
-    },
+    //Images
+    productImages: [
+      {
+        publicId: {
+          type: String,
+          required: true,
+        },
+        secureUrl: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    //category
     category: {
       type: String,
-      // required: [true, "Please add a Category for product"],
+      required: [true, "Please add a Category for product"],
       // enum: categoryEnum,
     },
     featured: {

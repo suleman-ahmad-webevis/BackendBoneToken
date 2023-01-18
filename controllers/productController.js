@@ -14,24 +14,37 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Product already exists" });
   } else {
-    const uploaded_img = await cloudinary.uploader.upload(
-      req.body.data.productImage,
-      { folder: "bonetoken" }
-    );
-    // const uploaded_video = await cloudinary.uploader.upload(req.file.path, {
-    //   resource_type: "video",
-    //   folder: "bonetoken",
-    // });
+    let images = [...req.body.productImages];
+    let imagesBuffer = [];
+    for (let i = 0; i < images.length; i++) {
+      const uploadedImg = await cloudinary.uploader.upload(images[i], {
+        folder: "bonetoken",
+      });
+      imagesBuffer.push({
+        publicId: uploadedImg.public_id,
+        secureUrl: uploadedImg.secure_url,
+      });
+    }
+    req.body.productImages = imagesBuffer;
     const newProduct = new Product({
       ...req.body.data,
-      productImage: uploaded_img.secure_url,
-      cloudinaryId: uploaded_img.public_id,
+      productImages: req.body.productImages,
+      category: req.body.category,
     });
     for (let i = 0; i < req.body.colour.length; i++) {
       newProduct.colour.push(req.body.colour[i]);
     }
     for (let i = 0; i < req.body.size.length; i++) {
       newProduct.size.push(req.body.size[i]);
+    }
+    for (let i = 0; i < req.body.productCode.length; i++) {
+      newProduct.productCode.push(req.body.productCode[i]);
+    }
+    for (let i = 0; i < req.body.retailPrice.length; i++) {
+      newProduct.retailPrice.push(req.body.retailPrice[i]);
+    }
+    for (let i = 0; i < req.body.weight.length; i++) {
+      newProduct.weight.push(req.body.weight[i]);
     }
     await newProduct.save();
     return res.status(StatusCodes.CREATED).json({ message: "Products added" });
