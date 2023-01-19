@@ -62,7 +62,7 @@ const productPost = catchAsyncErrors(async (req, res, next) => {
   } else {
     res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Error occured while posting products" });
+      .json({ message: "Error occurred while posting products" });
   }
 });
 
