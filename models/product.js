@@ -71,8 +71,13 @@ const productSchema = new mongoose.Schema(
     },
     featured: {
       type: Boolean,
+      default: false,
     },
     //TagProduct
+    tagged: {
+      type: Boolean,
+      default: false,
+    },
     gender: {
       type: String,
       // required: [true, "Please add Gender for Product"],
