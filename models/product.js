@@ -134,6 +134,11 @@ const productSchema = new mongoose.Schema(
         },
       },
     ],
+    productCreatedBy: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
     //-----------------------CSV-----------------------
     articleNumber: {
       type: Number,
@@ -150,6 +155,7 @@ const productSchema = new mongoose.Schema(
       // required: [true, "Please Enter Product Purchase Price"],
       // maxLength: [8, "Purchase Price cannot exceed 8 Characters"],
     },
+
   },
   { timestamps: true }
 );

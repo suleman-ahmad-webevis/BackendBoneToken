@@ -30,6 +30,7 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
       ...req.body.data,
       productImages: req.body.productImages,
       category: req.body.category,
+      productCreatedBy: req.userId,
     });
     for (let i = 0; i < req.body.colour.length; i++) {
       newProduct.colour.push(req.body.colour[i]);
@@ -144,7 +145,6 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
   const total = await Product.find(query).count(); //New total because we have to find total for products of specific category , smart search etc
   // const total = await Products.countDocuments(); //Old way of finding the total
   const pages = Math.ceil(total / pageSize);
-
   if (page > pages) {
     return res.status(StatusCodes.OK).json({
       message: "No product found",
@@ -154,7 +154,6 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
-
   if (products) {
     return res.status(StatusCodes.OK).json({
       count: total,
