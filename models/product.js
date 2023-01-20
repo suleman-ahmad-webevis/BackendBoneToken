@@ -50,6 +50,9 @@ const productSchema = new mongoose.Schema(
     videoLink: {
       type: String,
     },
+    blogLink: {
+      type: String,
+    },
     //Images
     productImages: [
       {
@@ -155,7 +158,6 @@ const productSchema = new mongoose.Schema(
       // required: [true, "Please Enter Product Purchase Price"],
       // maxLength: [8, "Purchase Price cannot exceed 8 Characters"],
     },
-
   },
   { timestamps: true }
 );
