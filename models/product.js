@@ -24,19 +24,19 @@ const productSchema = new mongoose.Schema(
     },
     productCode: {
       type: [String],
-      required: true,
+      // required: true,
     },
     weight: {
       type: [String],
-      required: true,
+      // required: true,
     },
     colour: {
       type: [String],
-      required: true,
+      // required: true,
     },
     size: {
       type: [String],
-      required: true,
+      // required: true,
     },
     retailPrice: {
       type: [String],
