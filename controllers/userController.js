@@ -27,7 +27,10 @@ const register = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler(StatusCodes.BAD_REQUEST, "Phone no already registered")
     );
   }
-  const user = await User.create(req.body);
+  const user = new User({
+    ...req.body,
+  });
+  await user.save();
   return res
     .status(StatusCodes.CREATED)
     .json({ user, message: "User created" });

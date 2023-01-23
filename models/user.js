@@ -7,67 +7,59 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "Please Enter First Name"],
-      maxLength: [10, "First Name cannot exceed 10 characters"],
-      minLength: [4, "First Name should have more than 4 characters"],
+      required: [true, "Please enter first name"],
     },
     lastName: {
       type: String,
-      required: [true, "Please Enter Last Name"],
-      maxLength: [10, "Last Name cannot exceed 10 characters"],
-      minLength: [4, "Last Name should have more than 4 characters"],
+      required: [true, "Please enter last name"],
     },
     email: {
       type: String,
-      required: [true, "Please Enter Email"],
+      required: [true, "Please enter email"],
       unique: [true, "Email already exist"],
-      validate: [validator.isEmail, "Please Enter a valid Email"],
-    },
-    phone: {
-      type: String,
-      required: [true, "Please Enter Phone Number"],
-      unique: [true, "PhoneNo already Registered"],
-      maxLength: [15, "Name cannot exceed 15 characters"],
+      validate: [validator.isEmail, "Please enter a valid email"],
     },
     password: {
       type: String,
-      required: [true, "Please Enter Password"],
-      minLength: [8, "Password cannot be less than 8 characters"],
-      maxLength: [14, "Password cannot exceed 14 characters"],
+      required: [true, "Please enter password"],
     },
-    street: {
+    confirmPassword: {
       type: String,
-      required: [true, "Please Enter Street"],
+      required: [true, "Please enter confirm password"],
+    },
+    dateOfBirth: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    countryOfBirth: {
+      type: String,
+    },
+    streetAddress: {
+      type: String,
+      required: [true, "Please enter street address"],
       maxLength: [40, "Street cannot exceed 40 characters"],
     },
-    streetNumber: {
+    streetAddressLineTwo: {
       type: String,
-      required: [true, "Please Enter Street Number"],
-      maxLength: [40, "Street Number cannot exceed 40 characters"],
-    },
-    addition: {
-      type: String,
-      required: [true, "Please Enter Additional Street Number"],
-      maxLength: [30, "Additional cannot exceed 30 characters"],
+      required: [true, "Please enter street number"],
+      maxLength: [40, "Street number cannot exceed 40 characters"],
     },
     city: {
       type: String,
-      required: [true, "Please Enter City"],
-      maxLength: [40, "City name cannot exceed 40 characters"],
     },
-    state: {
+    region: {
       type: String,
-      required: [true, "Please Enter State"],
-      maxLength: [20, "Name cannot exceed 20 characters"],
     },
     country: {
       type: String,
-      required: [true, "Please Enter Country"],
-      maxLength: [20, "Name cannot exceed 20 characters"],
     },
-    postCode: {
+    postalZipCode: {
       type: String,
-      required: [true, "Please Enter PostCode"],
+    },
+    phone: {
+      type: String,
     },
   },
   { timestamps: true }
