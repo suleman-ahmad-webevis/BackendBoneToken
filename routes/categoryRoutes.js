@@ -8,6 +8,6 @@ const { requireAuth } = require("../utils/auth");
 
 //Routes
 router.post("/addNewCategory", requireAuth, addCategory);
-router.get("/getAllCategory", requireAuth, getAllCategory);
+router.get("/getAllCategories", requireAuth, getAllCategory);
 
 module.exports = router;
