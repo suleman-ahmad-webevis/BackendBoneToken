@@ -28,25 +28,13 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
     req.body.productImages = imagesBuffer;
     const newProduct = new Product({
       ...req.body.data,
+      ...req.body,
       productImages: req.body.productImages,
-      category: req.body.category,
       productCreatedBy: req.userId,
     });
-    for (let i = 0; i < req.body.colour.length; i++) {
-      newProduct.colour.push(req.body.colour[i]);
-    }
-    for (let i = 0; i < req.body.size.length; i++) {
-      newProduct.size.push(req.body.size[i]);
-    }
-    for (let i = 0; i < req.body.productCode.length; i++) {
-      newProduct.productCode.push(req.body.productCode[i]);
-    }
-    for (let i = 0; i < req.body.retailPrice.length; i++) {
-      newProduct.retailPrice.push(req.body.retailPrice[i]);
-    }
-    for (let i = 0; i < req.body.weight.length; i++) {
-      newProduct.weight.push(req.body.weight[i]);
-    }
+    // for (let i = 0; i < req.body.colour.length; i++) {
+    //   newProduct.colour.push(req.body.colour[i]);
+    // }
     await newProduct.save();
     return res.status(StatusCodes.CREATED).json({ message: "Products added" });
   }
@@ -178,33 +166,32 @@ const productById = catchAsyncErrors(async (req, res, next) => {
 const productUpdate = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (product) {
-    if (product.productImage !== req.body.productImage) {
-      // await cloudinary.uploader.destroy(product.cloudinaryId);
-      const updated_img = await cloudinary.uploader.upload(
-        req.body.productImage
-      );
-      await Product.findByIdAndUpdate(
-        req.params.id,
-        {
-          ...req.body,
-          productImage: updated_img.secure_url,
-          cloudinaryId: updated_img.public_id,
-        },
-        { new: true }
-      );
-    } else {
-      await Product.findByIdAndUpdate(
-        req.params.id,
-        {
-          ...req.body,
-        },
-        { new: true }
-      );
-    }
-    const products = await Product.find({}, { reviews: 0 }).sort({ _id: -1 });
-    res
-      .status(StatusCodes.OK)
-      .json({ message: "Product updated", data: products });
+    // if (product.productImage !== req.body.productImage) {
+    //   // await cloudinary.uploader.destroy(product.cloudinaryId);
+    //   const updated_img = await cloudinary.uploader.upload(
+    //     req.body.productImage
+    //   );
+    //   await Product.findByIdAndUpdate(
+    //     req.params.id,
+    //     {
+    //       ...req.body.data,
+    //       ...req.body,
+    //       productImage: updated_img.secure_url,
+    //       cloudinaryId: updated_img.public_id,
+    //     },
+    //     { new: true }
+    //   );
+    // } else {
+    await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...req.body,
+        ...req.body.data,
+      },
+      { new: true }
+    );
+    // }
+    res.status(StatusCodes.OK).json({ message: "Product updated" });
   } else {
     res
       .status(StatusCodes.NOT_FOUND)
