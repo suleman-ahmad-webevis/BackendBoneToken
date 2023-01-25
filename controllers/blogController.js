@@ -30,7 +30,6 @@ const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
     req.query.search != "undefined" &&
     (req.query.category == "null" || req.query.category == "undefined")
   ) {
-    console.log("First");
     query.$and.push({
       $or: [
         {
@@ -48,7 +47,6 @@ const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
     req.query.category != "undefined" &&
     req.query.category != "null"
   ) {
-    console.log("Second");
     query.$and.push({
       $and: [
         {
@@ -62,7 +60,6 @@ const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
     });
   }
   if (req.query.category != "undefined" && req.query.category != "null") {
-    console.log("Third");
     query.$and.push({
       $and: [{ category: req.query.category }],
     });
