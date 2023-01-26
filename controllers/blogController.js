@@ -3,8 +3,16 @@ const { StatusCodes } = require("http-status-codes");
 //ErrorHandlers
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const axios = require("axios");
 
 const addBlog = catchAsyncErrors(async (req, res, next) => {
+  let postPublished;
+  let API_URL_ME = `https://api.medium.com/v1/me`;
+  let API_URL_POST = `https://api.medium.com/v1/users`;
+  const headers = {
+    Authorization: `Bearer 22c7bd4c960fbf57516b6742d298f85706cefbf618fef85564d4c1e9865143331`,
+  };
+
   const { data, blogDesc } = req.body;
   const alreadyExist = await Blog.findOne({
     titleOfBlog: data.titleOfBlog,
@@ -19,8 +27,41 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
       blogDesc,
       blogCreator: req.userId,
     });
-    await newBlog.save();
-    return res.status(StatusCodes.CREATED).json({ message: "Blog posted" });
+    let newBlogSaved = await newBlog.save();
+    try {
+      const mediumUserInfo = await axios.get(API_URL_ME, { headers: headers });
+      const { data } = mediumUserInfo.data;
+      const { id } = data;
+      if (id) {
+        const authorId = id;
+        postPublished = await axios.post(
+          `${API_URL_POST}/${authorId}/posts`,
+          {
+            title: newBlog.titleOfBlog,
+            contentFormat: "html",
+            content: newBlog.blogDesc,
+            canonicalUrl: "https://bonetoken.com/blogs",
+            tags: ["dogs", "pets", "dog"],
+            publishStatus: "public",
+          },
+          {
+            headers: headers,
+          }
+        );
+      }
+      if (postPublished.status === 201 && Object.keys(newBlogSaved).length) {
+        return res
+          .status(StatusCodes.CREATED)
+          .json({ message: "Blog posted and shared to medium" });
+      }
+    } catch (err) {
+      return next(
+        new ErrorHandler(
+          StatusCodes.BAD_REQUEST,
+          "Failed to share blog to medium"
+        )
+      );
+    }
   }
 });
 
