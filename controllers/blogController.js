@@ -67,39 +67,6 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
 
 const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
   let query = { $and: [{}] };
-  if (
-    req.query.search != "undefined" &&
-    (req.query.category == "null" || req.query.category == "undefined")
-  ) {
-    query.$and.push({
-      $or: [
-        {
-          name: {
-            $regex: ".*" + req.query.search + ".*",
-            $option: "i",
-          },
-        },
-      ],
-    });
-  }
-  if (
-    req.query.search != "undefined" &&
-    req.query.category != "" &&
-    req.query.category != "undefined" &&
-    req.query.category != "null"
-  ) {
-    query.$and.push({
-      $and: [
-        {
-          name: {
-            $regex: ".*" + req.query.search + ".*",
-            $options: "i",
-          },
-          category: req.query.category,
-        },
-      ],
-    });
-  }
   if (req.query.category != "undefined" && req.query.category != "null") {
     query.$and.push({
       $and: [{ category: req.query.category }],
@@ -140,8 +107,13 @@ const getBlogById = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+const updateBlog = catchAsyncErrors(async (req, res, next) => {
+  console.log("The update");
+});
+
 module.exports = {
   addBlog,
   getAllBlogs,
   getBlogById,
+  updateBlog
 };
