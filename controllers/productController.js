@@ -166,31 +166,31 @@ const productById = catchAsyncErrors(async (req, res, next) => {
 const productUpdate = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (product) {
-    // if (product.productImage !== req.body.productImage) {
-    //   // await cloudinary.uploader.destroy(product.cloudinaryId);
-    //   const updated_img = await cloudinary.uploader.upload(
-    //     req.body.productImage
-    //   );
-    //   await Product.findByIdAndUpdate(
-    //     req.params.id,
-    //     {
-    //       ...req.body.data,
-    //       ...req.body,
-    //       productImage: updated_img.secure_url,
-    //       cloudinaryId: updated_img.public_id,
-    //     },
-    //     { new: true }
-    //   );
-    // } else {
+    for (let i = 0; i < product.productImages.length; i++) {
+      await cloudinary.uploader.destroy(product.productImages[i].publicId);
+    }
+    let images = [...req.body.productImages];
+    let imagesBuffer = [];
+    for (let i = 0; i < images.length; i++) {
+      const uploadedImg = await cloudinary.uploader.upload(images[i], {
+        folder: "bonetoken",
+      });
+      imagesBuffer.push({
+        publicId: uploadedImg.public_id,
+        secureUrl: uploadedImg.secure_url,
+      });
+    }
+    req.body.productImages = imagesBuffer;
     await Product.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
         ...req.body.data,
+        productImages: req.body.productImages,
+        productCreatedBy: req.userId,
       },
       { new: true }
     );
-    // }
     res.status(StatusCodes.OK).json({ message: "Product updated" });
   } else {
     res
@@ -203,7 +203,9 @@ const productUpdate = catchAsyncErrors(async (req, res, next) => {
 const productDelete = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
   if (product) {
-    // await cloudinary.uploader.destroy(product.cloudinaryId);
+    for (let i = 0; i < product.productImages.length; i++) {
+      await cloudinary.uploader.destroy(product.productImages[i].publicId);
+    }
     await product.remove();
     const products = await Product.find({}, { reviews: 0 }).sort({ _id: -1 });
     res
