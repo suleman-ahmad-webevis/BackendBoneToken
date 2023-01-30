@@ -6,8 +6,8 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //AddNewCategory
 const addCategory = catchAsyncErrors(async (req, res, next) => {
-  const { name } = req.body;
-  const alreadyExist = await Category.findOne({ name });
+  const { title } = req.body;
+  const alreadyExist = await Category.findOne({ title });
   if (alreadyExist) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -23,8 +23,8 @@ const addCategory = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-//AddNewCategory
-const getAllCategory = catchAsyncErrors(async (req, res, next) => {
+//GetAllCategoriesPaginated
+const getAllCategories = catchAsyncErrors(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
@@ -36,10 +36,9 @@ const getAllCategory = catchAsyncErrors(async (req, res, next) => {
     });
   }
   const categories = await Category.find({})
-    .sort({ createdAt: -1 })
+    .sort({ title: 1 })
     .skip(skip)
     .limit(pageSize);
-  console.log("The categories", categories);
   if (categories) {
     return res.status(StatusCodes.OK).json({
       count: total,
@@ -50,7 +49,22 @@ const getAllCategory = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+//GetAllCategory
+const getAllCategory = catchAsyncErrors(async (req, res, next) => {
+  const categories = await Category.find({}).sort({ title: 1 });
+  if (categories) {
+    return res.status(StatusCodes.OK).json({
+      data: categories,
+    });
+  } else {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No Category Found" });
+  }
+});
+
 module.exports = {
   addCategory,
+  getAllCategories,
   getAllCategory,
 };

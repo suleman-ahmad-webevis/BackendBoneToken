@@ -3,11 +3,13 @@ const router = Router();
 const {
   addCategory,
   getAllCategory,
+  getAllCategories,
 } = require("../controllers/categoryController");
 const { requireAuth } = require("../utils/auth");
 
 //Routes
 router.post("/addNewCategory", requireAuth, addCategory);
-router.get("/getAllCategories", requireAuth, getAllCategory);
+router.get("/getAllCategories", requireAuth, getAllCategories);
+router.get("/getAllCategory", requireAuth, getAllCategory);
 
 module.exports = router;
