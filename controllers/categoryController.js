@@ -25,11 +25,28 @@ const addCategory = catchAsyncErrors(async (req, res, next) => {
 
 //AddNewCategory
 const getAllCategory = catchAsyncErrors(async (req, res, next) => {
-  const categories = await Category.find({});
-  if (categories.length) {
-    return res.status(StatusCodes.OK).json({ data: categories });
-  } else {
-    res.status(StatusCodes.NOT_FOUND).json({ message: "No category found" });
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * pageSize;
+  const total = await Category.find({}).count();
+  const pages = Math.ceil(total / pageSize);
+  if (page > pages) {
+    return res.status(StatusCodes.OK).json({
+      message: "No category found",
+    });
+  }
+  const categories = await Category.find({})
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(pageSize);
+  console.log("The categories", categories);
+  if (categories) {
+    return res.status(StatusCodes.OK).json({
+      count: total,
+      page,
+      pages,
+      data: categories,
+    });
   }
 });
 
