@@ -6,7 +6,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //RegisterUser
 const register = catchAsyncErrors(async (req, res, next) => {
-  const { email, phone } = req.body;
+  const { email } = req.body;
   if (req.body.password !== req.body.confirmPassword) {
     return next(
       new ErrorHandler(
@@ -21,19 +21,13 @@ const register = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler(StatusCodes.BAD_REQUEST, "Email already registered")
     );
   }
-  const phoneNoExist = await User.findOne({ phone });
-  if (phoneNoExist) {
-    return next(
-      new ErrorHandler(StatusCodes.BAD_REQUEST, "Phone no already registered")
-    );
-  }
   const user = new User({
     ...req.body,
   });
   await user.save();
   return res
     .status(StatusCodes.CREATED)
-    .json({ user, message: "User created" });
+    .json({ user, message: "User registered" });
 });
 
 //LoginUser
