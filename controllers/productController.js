@@ -139,10 +139,11 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
     });
   }
   const products = await Product.find(query, { reviews: 0 })
-    .sort({ createdAt: -1 })
+    .sort({ createdAt: 1 })
     .skip(skip)
     .limit(pageSize);
   if (products) {
+    console.log("The products", products);
     return res.status(StatusCodes.OK).json({
       count: total,
       page,

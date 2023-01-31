@@ -32,9 +32,11 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      required: [true, "Please select the gender"],
     },
     countryOfBirth: {
       type: String,
+      required: [true, "Please select the country of birth"],
     },
     streetAddress: {
       type: String,
@@ -43,27 +45,33 @@ const userSchema = new mongoose.Schema(
     },
     streetAddressLineTwo: {
       type: String,
-      required: [true, "Please enter street number"],
+      required: [true, "Please enter street address line two"],
       maxLength: [40, "Street number cannot exceed 40 characters"],
     },
     city: {
       type: String,
+      required: [true, "Please add the city"],
     },
     region: {
       type: String,
+      required: [true, "Please enter the region"],
     },
     country: {
       type: String,
+      required: [true, "Please select the country"],
     },
     postalZipCode: {
       type: String,
+      required: [true, "Please add the postal zip code"],
     },
     phone: {
-      type: String,
+      type: Number,
+      required: [true, "Please add the phone of birth"],
     },
   },
   { timestamps: true }
 );
+
 userSchema.pre("save", async function (next) {
   const salt = await bycrypt.genSalt(10);
   this.password = await bycrypt.hash(this.password, salt);
@@ -75,6 +83,7 @@ userSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;
 };
+
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },

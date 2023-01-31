@@ -6,7 +6,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //RegisterUser
 const register = catchAsyncErrors(async (req, res, next) => {
-  const { email } = req.body;
+  const { email } = req.body.data;
   if (req.body.password !== req.body.confirmPassword) {
     return next(
       new ErrorHandler(
@@ -22,7 +22,8 @@ const register = catchAsyncErrors(async (req, res, next) => {
     );
   }
   const user = new User({
-    ...req.body,
+    ...req.body.data,
+    dateOfBirth: req.body.dateOfBirth,
   });
   await user.save();
   return res
