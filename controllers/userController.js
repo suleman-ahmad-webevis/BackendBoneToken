@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 //ErrorHandlers
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const mailSender = require("../utils/mailSender");
 
 //RegisterUser
 const register = catchAsyncErrors(async (req, res, next) => {
@@ -26,6 +27,7 @@ const register = catchAsyncErrors(async (req, res, next) => {
     dateOfBirth: req.body.dateOfBirth,
   });
   await user.save();
+  // mailSender();
   return res
     .status(StatusCodes.CREATED)
     .json({ user, message: "User registered" });
