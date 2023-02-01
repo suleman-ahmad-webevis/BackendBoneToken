@@ -9,35 +9,35 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const addProduct = catchAsyncErrors(async (req, res, next) => {
   const { name } = req.body.data;
   const alreadyExist = await Product.findOne({ name });
-  if (alreadyExist) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Product already exists" });
-  } else {
-    let images = [...req.body.productImages];
-    let imagesBuffer = [];
-    for (let i = 0; i < images.length; i++) {
-      const uploadedImg = await cloudinary.uploader.upload(images[i], {
-        folder: "bonetoken",
-      });
-      imagesBuffer.push({
-        publicId: uploadedImg.public_id,
-        secureUrl: uploadedImg.secure_url,
-      });
-    }
-    req.body.productImages = imagesBuffer;
-    const newProduct = new Product({
-      ...req.body.data,
-      ...req.body,
-      productImages: req.body.productImages,
-      productCreatedBy: req.userId,
+  // if (alreadyExist) {
+  //   return res
+  //     .status(StatusCodes.BAD_REQUEST)
+  //     .json({ message: "Product already exists" });
+  // } else {
+  let images = [...req.body.productImages];
+  let imagesBuffer = [];
+  for (let i = 0; i < images.length; i++) {
+    const uploadedImg = await cloudinary.uploader.upload(images[i], {
+      folder: "bonetoken",
     });
-    // for (let i = 0; i < req.body.colour.length; i++) {
-    //   newProduct.colour.push(req.body.colour[i]);
-    // }
-    await newProduct.save();
-    return res.status(StatusCodes.CREATED).json({ message: "Products added" });
+    imagesBuffer.push({
+      publicId: uploadedImg.public_id,
+      secureUrl: uploadedImg.secure_url,
+    });
   }
+  req.body.productImages = imagesBuffer;
+  const newProduct = new Product({
+    ...req.body.data,
+    ...req.body,
+    productImages: req.body.productImages,
+    productCreatedBy: req.userId,
+  });
+  // for (let i = 0; i < req.body.colour.length; i++) {
+  //   newProduct.colour.push(req.body.colour[i]);
+  // }
+  await newProduct.save();
+  return res.status(StatusCodes.CREATED).json({ message: "Products added" });
+  // }
 });
 
 //PostProductsWithCSV
