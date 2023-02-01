@@ -7,7 +7,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //AddProduct
 const addProduct = catchAsyncErrors(async (req, res, next) => {
-  const { name } = req.body.data;
+  // const { name } = req.body.data;
   // const alreadyExist = await Product.findOne({ name });
   // if (alreadyExist) {
   //   return res
