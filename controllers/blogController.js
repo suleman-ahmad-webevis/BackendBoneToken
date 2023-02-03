@@ -10,7 +10,7 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
   let API_URL_ME = `https://api.medium.com/v1/me`;
   let API_URL_POST = `https://api.medium.com/v1/users`;
   const headers = {
-    Authorization: `Bearer 22c7bd4c960fbf57516b6742d298f85706cefbf618fef85564d4c1e9865143331`,
+    Authorization: `Bearer 2a7e975f881a3e8cbb5f962321e3a4e825162ae37cb0f001fb5daceaf3cd0b2e8`,
   };
 
   const { data, blogDesc } = req.body;

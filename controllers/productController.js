@@ -128,7 +128,6 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
     });
   }
   const page = parseInt(req.query.page) || 1;
-  console.log("The page", page);
   const pageSize = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * pageSize;
   const total = await Product.find(query).count(); //New total because we have to find total for products of specific category , smart search etc

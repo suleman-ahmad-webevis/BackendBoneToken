@@ -63,8 +63,39 @@ const getAllCategory = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+//UpdateCategory
+const updateCategory = catchAsyncErrors(async (req, res, next) => {
+  let category = await Category.findById(req.params.categoryId);
+  if (category) {
+    await Category.findByIdAndUpdate(
+      req.params.categoryId,
+      {
+        ...req.body.editCategory,
+      },
+      { new: true }
+    );
+    res.status(StatusCodes.OK).json({ message: "Category updated" });
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .res.json({ message: "Category not found" });
+  }
+});
+
+//DeleteCategory
+const deleteCategory = catchAsyncErrors(async (req, res, next) => {
+  const category = await Category.findById(req.params.categoryId);
+  if (category) {
+    await category.remove();
+    res.status(StatusCodes.OK).json({ message: "Category deleted" });
+  } else
+    res.status(StatusCodes.NOT_FOUND).json({ message: "Category not found" });
+});
+
 module.exports = {
   addCategory,
   getAllCategories,
   getAllCategory,
+  updateCategory,
+  deleteCategory,
 };

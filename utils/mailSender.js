@@ -16,7 +16,6 @@ async function mailSender() {
     subject: "Welcome to bonetoken", // Subject line
     text: "You have been successfully registered with bone token", // plain text body
   });
-  console.log("the info", info);
 }
 
 mailSender().catch(console.error);
