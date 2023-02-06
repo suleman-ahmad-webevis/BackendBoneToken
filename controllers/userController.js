@@ -32,8 +32,13 @@ const register = catchAsyncErrors(async (req, res, next) => {
   client.messages
     .create({ from: "+923134766646", to: "+923134766646", body: randomNo })
     .then(saveOtp())
-    .catch((e) => {
-      return next(new ErrorHandler(StatusCodes.BAD_REQUEST, "Error in twilio"));
+    .catch(() => {
+      return next(
+        new ErrorHandler(
+          StatusCodes.BAD_REQUEST,
+          "Error while sending otp on phone number"
+        )
+      );
     });
 
   function saveOtp() {
@@ -42,7 +47,9 @@ const register = catchAsyncErrors(async (req, res, next) => {
     });
     newOtp.save(function (err) {
       if (err) {
-        console.log("The error while generating number");
+        return next(
+          new ErrorHandler(StatusCodes.BAD_REQUEST, "Error while saving otp")
+        );
       } else {
         return res
           .status(StatusCodes.CREATED)
