@@ -92,6 +92,7 @@ const deleteCategory = catchAsyncErrors(async (req, res, next) => {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Category not found" });
 });
 
+
 module.exports = {
   addCategory,
   getAllCategories,
