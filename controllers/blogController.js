@@ -106,7 +106,10 @@ const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
 });
 
 const getBlogById = catchAsyncErrors(async (req, res, next) => {
-  const blog = await Blog.findById(req.params.id);
+  const blog = await Blog.findById(req.params.id).populate({
+    path: "blogCreator",
+    select: "adminImage",
+  });
   if (blog) {
     res.json(blog);
   } else {

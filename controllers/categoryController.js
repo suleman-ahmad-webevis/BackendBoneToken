@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const Category = require("../models/category");
+const SubCategory = require("../models/subCategory");
 //ErrorHandlers
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");

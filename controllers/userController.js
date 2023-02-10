@@ -100,7 +100,6 @@ const getUsers = catchAsyncErrors(async (req, res, next) => {
 });
 
 const verifyOtp = catchAsyncErrors(async (req, res, next) => {
-  console.log("The req.body", req.body);
   const code = req.body.code;
   smsOtp.findOne({ opt }, function (err, found) {
     if (err) {

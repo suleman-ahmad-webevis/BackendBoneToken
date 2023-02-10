@@ -22,7 +22,7 @@ const blogSchema = new mongoose.Schema(
     },
     blogCreator: {
       type: mongoose.Schema.ObjectId,
-      ref: "User",
+      ref: "Admin",
       required: true,
     },
     mayLike: {

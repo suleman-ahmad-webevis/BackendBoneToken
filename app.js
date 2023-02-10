@@ -14,6 +14,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const subCategoryRoutes = require("./routes/subCategoryRoutes");
 
 const { StatusCodes } = require("http-status-codes");
 
@@ -36,6 +37,7 @@ app.use("/payment", paymentRoutes);
 app.use("/admin", adminRoutes);
 app.use("/blog", blogRoutes);
 app.use("/category", categoryRoutes);
+app.use("/subCategory", subCategoryRoutes);
 app.route("*", () => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: "No such route found",
