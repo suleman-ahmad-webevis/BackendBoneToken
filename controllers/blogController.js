@@ -121,9 +121,24 @@ const updateBlog = catchAsyncErrors(async (req, res, next) => {
   console.log("The update");
 });
 
+const mayLike = catchAsyncErrors(async (req, res, next) => {
+  const { category, id } = req.params;
+  const mayLikeBlogs = await Blog.find({
+    category,
+    _id: { $ne: id },
+  }).limit(3);
+  if (mayLikeBlogs.length) {
+    res.json(mayLikeBlogs);
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No blog for this category" });
+  }
+});
 module.exports = {
   addBlog,
   getAllBlogs,
   getBlogById,
   updateBlog,
+  mayLike,
 };
