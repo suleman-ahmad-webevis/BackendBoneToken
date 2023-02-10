@@ -10,6 +10,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    blogShortDesc: {
+      type: String,
+      required: true,
+    },
     featuredImg: {
       type: String,
     },
