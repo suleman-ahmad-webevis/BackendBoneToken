@@ -28,8 +28,6 @@ const getAllSubCategory = catchAsyncErrors(async (req, res, next) => {
   const { subCategory } = req.query;
   const subCategories = await SubCategory.find({
     category: subCategory,
-  }).sort({
-    title: 1,
   });
   if (subCategories.length) {
     return res.status(StatusCodes.OK).json({

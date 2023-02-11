@@ -7,17 +7,17 @@ const subCategorySchema = new mongoose.Schema({
   },
   path: {
     type: String,
-    // required: true,
+    required: true,
   },
   subCategoryDesc: {
     type: String,
   },
   rating: {
-    type: String,
+    type: Number,
   },
   category: {
     type: String,
-    // required: false,
+    required: true,
   },
   subCategoryImg: {
     type: String,
