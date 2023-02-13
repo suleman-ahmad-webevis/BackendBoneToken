@@ -172,5 +172,5 @@ module.exports = {
   getBlogById,
   updateBlog,
   mayLike,
-  deleteBlogById
+  deleteBlogById,
 };
