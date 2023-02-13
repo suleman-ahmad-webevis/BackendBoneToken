@@ -118,7 +118,38 @@ const getBlogById = catchAsyncErrors(async (req, res, next) => {
 });
 
 const updateBlog = catchAsyncErrors(async (req, res, next) => {
-  console.log("The update");
+  const { id } = req.params;
+  let blogExist = await Blog.findById(id);
+  if (blogExist) {
+    const result = await Blog.findByIdAndUpdate(
+      id,
+      {
+        ...req.body.data,
+      },
+      { new: true }
+    );
+    return res
+      .status(StatusCodes.OK)
+      .json({ blog: result, message: "Blog updated" });
+  } else {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Blog not found" });
+  }
+});
+
+const deleteBlogById = catchAsyncErrors(async (req, res) => {
+  let blog = await Blog.findOneAndDelete({
+    _id: req.params.id,
+  });
+  if (!blog) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: "Blog not found",
+    });
+  }
+  return res.status(StatusCodes.OK).json({
+    message: "Blog deleted successfully",
+  });
 });
 
 const mayLike = catchAsyncErrors(async (req, res, next) => {
@@ -141,4 +172,5 @@ module.exports = {
   getBlogById,
   updateBlog,
   mayLike,
+  deleteBlogById
 };
