@@ -9,6 +9,16 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  subCategories: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "SubCategory",
+      required: false,
+      // type: [mongoose.Schema.Types.ObjectId],
+      // ref: "SubCategory",
+      // required: false,
+    },
+  ],
 });
 
 const Category = mongoose.model("Category", categorySchema);

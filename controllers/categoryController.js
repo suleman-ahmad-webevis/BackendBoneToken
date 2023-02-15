@@ -52,7 +52,9 @@ const getAllCategories = catchAsyncErrors(async (req, res, next) => {
 
 //GetAllCategory
 const getAllCategory = catchAsyncErrors(async (req, res, next) => {
-  const categories = await Category.find({}).sort({ title: 1 });
+  const categories = await Category.find({})
+    .sort({ title: 1 })
+    .populate("subCategories", "title path");
   if (categories) {
     return res.status(StatusCodes.OK).json({
       data: categories,
@@ -92,7 +94,6 @@ const deleteCategory = catchAsyncErrors(async (req, res, next) => {
   } else
     res.status(StatusCodes.NOT_FOUND).json({ message: "Category not found" });
 });
-
 
 module.exports = {
   addCategory,
