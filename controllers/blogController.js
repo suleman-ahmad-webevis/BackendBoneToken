@@ -12,7 +12,7 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
   const headers = {
     Authorization: `Bearer 2a7e975f881a3e8cbb5f962321e3a4e825162ae37cb0f001fb5daceaf3cd0b2e8`,
   };
-  const { data, blogDesc } = req.body;
+  const { data, blogDesc, blogTags } = req.body;
   const alreadyExist = await Blog.findOne({
     titleOfBlog: data.titleOfBlog,
   });
@@ -25,6 +25,7 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
       ...req.body.data,
       blogDesc,
       blogCreator: req.userId,
+      blogTags,
     });
     let newBlogSaved = await newBlog.save();
     try {
@@ -40,15 +41,7 @@ const addBlog = catchAsyncErrors(async (req, res, next) => {
             contentFormat: "html",
             content: newBlog.blogDesc,
             canonicalUrl: "https://bonetoken.com/blogs",
-            tags: [
-              "PuppyBreeding ",
-              "HealthyPuppies ",
-              "HappyPuppies ",
-              "BreedingGuide ",
-              "RaisingPuppies ",
-              "PuppyCare ",
-              "BreederTips",
-            ],
+            tags: blogTags,
             publishStatus: "public",
           },
           {
