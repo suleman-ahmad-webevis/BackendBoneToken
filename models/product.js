@@ -72,6 +72,12 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please add a Category for product"],
       // enum: categoryEnum,
     },
+    //subCategory
+    subCategory: {
+      type: mongoose.Schema.ObjectId,
+      ref: "SubCategory",
+      required: false,
+    },
     featured: {
       type: Boolean,
       default: false,
