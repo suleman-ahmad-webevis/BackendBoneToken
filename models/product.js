@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema(
       // required: true,
     },
     retailPrice: {
-      type: [Double],
+      type: [Number],
       required: true,
       // required: [true, "Please enter Required Retail Price"],
       // maxLength: [8, "Required Retail Price cannot exceed 8 Characters"],
