@@ -142,9 +142,10 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
-  if (products) {
+  if (products.length) {
     return res.status(StatusCodes.OK).json({
       count: total,
+      noProMsg: total ? "" : "No Product Found",
       page,
       pages,
       data: products,
