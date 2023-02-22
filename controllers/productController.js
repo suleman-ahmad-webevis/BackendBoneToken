@@ -135,7 +135,7 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
   const pages = Math.ceil(total / pageSize);
   if (page > pages) {
     return res.status(StatusCodes.OK).json({
-      message: "No product found",
+      message: "No Product Found",
     });
   }
   const products = await Product.find(query, { reviews: 0 })
@@ -145,7 +145,6 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
   if (products.length) {
     return res.status(StatusCodes.OK).json({
       count: total,
-      noProMsg: total ? "" : "No Product Found",
       page,
       pages,
       data: products,
