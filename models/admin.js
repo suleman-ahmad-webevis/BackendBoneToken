@@ -21,16 +21,17 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter an Email"],
       unique: true,
-      validate: [validator.isEmail, "Please enter a valid Email"],
+      // validate: [validator.isEmail, "Please enter a valid Email"],
     },
     password: {
       type: String,
-      required: [true, "Please enter a Password"],
+      // required: [true, "Please enter a Password"],
       minLength: [8, "Password should be greater than 8 characters"],
       maxLength: [14, "Password should not be greater than 14 characters"],
     },
     role: {
       type: String,
+      default: "Admin",
       required: [true, "Please add a role"],
       enum: ["Admin", "Super Admin"],
     },
@@ -44,11 +45,17 @@ const adminSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-adminSchema.pre("save", async function (next) {
+// adminSchema.pre("save", async function (next) {
+//   const salt = await bycrypt.genSalt(10);
+//   this.password = await bycrypt.hash(this.password, salt);
+//   next();
+// });
+adminSchema.methods.hashPassword = async function (password) {
   const salt = await bycrypt.genSalt(10);
-  this.password = await bycrypt.hash(this.password, salt);
-  next();
-});
+  const hashedPassword = await bycrypt.hash(this.password, salt);
+  return hashedPassword;
+};
+
 adminSchema.methods.checkPassword = async function (password) {
   const isMatch = await bycrypt.compare(password, this.password);
   return isMatch;

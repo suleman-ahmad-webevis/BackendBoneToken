@@ -4,10 +4,11 @@ const cloudinary = require("../utils/cloudinary");
 //ErrorHandlers
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const { tokenDecoder } = require("../utils/tokenDecoder");
 
 //RegisterAdmin
 const registerAdmin = catchAsyncErrors(async (req, res, next) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
   if (!req.body.adminImage) {
     return next(
       new ErrorHandler(StatusCodes.BAD_REQUEST, "Profile pic is required")
@@ -20,8 +21,10 @@ const registerAdmin = catchAsyncErrors(async (req, res, next) => {
       .json({ message: "Admin already exists" });
   } else {
     const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage);
+    const hashedPassword = await admin.hashPassword(password);
     const admin = new Admin({
       ...req.body,
+      password: hashedPassword,
       adminImage: uploaded_img.secure_url,
       cloudinaryId: uploaded_img.public_id,
     });
@@ -29,6 +32,40 @@ const registerAdmin = catchAsyncErrors(async (req, res, next) => {
     return res
       .status(StatusCodes.CREATED)
       .json({ admin, message: "Admin registered" });
+  }
+});
+
+//GoogleRegister
+const registerGoogleAdmin = catchAsyncErrors(async (req, res, next) => {
+  const { credential } = req.body;
+  if (credential) {
+    const { given_name, family_name, email, picture } = await tokenDecoder(
+      credential
+    );
+    if (!picture) {
+      return next(
+        new ErrorHandler(StatusCodes.BAD_REQUEST, "Profile pic is required")
+      );
+    }
+    const admin = await Admin.findOne({ email });
+    // const token = admin.generateAuthToken();
+    if (admin) {
+      const token = admin.generateAuthToken();
+      return res.status(StatusCodes.OK).json({ token, admin });
+    } else {
+      const admin = new Admin({
+        firstName: String(given_name),
+        lastName: String(family_name),
+        email: String(email),
+        adminImage: String(picture),
+        role: "Admin",
+      });
+      await admin.save();
+      const token = admin.generateAuthToken();
+      return res.status(StatusCodes.OK).json({ token, admin });
+    }
+  } else {
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid token"));
   }
 });
 
@@ -91,4 +128,4 @@ const editAdmin = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-module.exports = { loginAdmin, registerAdmin, editAdmin };
+module.exports = { loginAdmin, registerAdmin, editAdmin, registerGoogleAdmin };
