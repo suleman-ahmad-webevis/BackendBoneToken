@@ -48,7 +48,6 @@ const registerGoogleAdmin = catchAsyncErrors(async (req, res, next) => {
       );
     }
     const admin = await Admin.findOne({ email });
-    // const token = admin.generateAuthToken();
     if (admin) {
       const token = admin.generateAuthToken();
       return res.status(StatusCodes.OK).json({ token, admin });
@@ -79,7 +78,6 @@ const registerFacebookAdmin = catchAsyncErrors(async (req, res, next) => {
       );
     }
     const admin = await Admin.findOne({ email });
-    // const token = admin.generateAuthToken();
     if (admin) {
       const token = admin.generateAuthToken();
       return res.status(StatusCodes.OK).json({ token, admin });
