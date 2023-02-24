@@ -73,7 +73,7 @@ const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
     });
   }
   const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.limit) || 10;
+  const pageSize = parseInt(req.query.limit) || 6;
   const skip = (page - 1) * pageSize;
   const total = await Blog.find(query).count();
   //New total because we have to find total for blogs for specific category, search
