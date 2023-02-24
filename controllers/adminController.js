@@ -64,7 +64,7 @@ const registerGoogleAdmin = catchAsyncErrors(async (req, res, next) => {
       return res.status(StatusCodes.OK).json({ token, admin });
     }
   } else {
-    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid token"));
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Sign-in rejected"));
   }
 });
 
@@ -95,7 +95,7 @@ const registerFacebookAdmin = catchAsyncErrors(async (req, res, next) => {
       return res.status(StatusCodes.OK).json({ token, admin });
     }
   } else {
-    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid token"));
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Sign-in rejected"));
   }
 });
 
