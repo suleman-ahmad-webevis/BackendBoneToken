@@ -69,6 +69,38 @@ const registerGoogleAdmin = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+//FacebookRegister
+const registerFacebookAdmin = catchAsyncErrors(async (req, res, next) => {
+  const { name, email, picture, accessToken } = req.body;
+  if (accessToken) {
+    if (!picture) {
+      return next(
+        new ErrorHandler(StatusCodes.BAD_REQUEST, "Profile pic is required")
+      );
+    }
+    const admin = await Admin.findOne({ email });
+    // const token = admin.generateAuthToken();
+    if (admin) {
+      const token = admin.generateAuthToken();
+      return res.status(StatusCodes.OK).json({ token, admin });
+    } else {
+      let fullName = name.split(" ");
+      const admin = new Admin({
+        firstName: fullName[0],
+        lastName: fullName[fullName.length - 1],
+        email: email,
+        adminImage: picture.data.url,
+        role: "Admin",
+      });
+      await admin.save();
+      const token = admin.generateAuthToken();
+      return res.status(StatusCodes.OK).json({ token, admin });
+    }
+  } else {
+    return next(new ErrorHandler(StatusCodes.NOT_FOUND, "Invalid token"));
+  }
+});
+
 //LoginAdmin
 const loginAdmin = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
@@ -128,4 +160,10 @@ const editAdmin = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-module.exports = { loginAdmin, registerAdmin, editAdmin, registerGoogleAdmin };
+module.exports = {
+  loginAdmin,
+  registerAdmin,
+  editAdmin,
+  registerGoogleAdmin,
+  registerFacebookAdmin,
+};

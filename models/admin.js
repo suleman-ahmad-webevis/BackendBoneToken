@@ -41,6 +41,7 @@ const adminSchema = new mongoose.Schema(
     },
     cloudinaryId: {
       type: String,
+      default: "",
     },
   },
   { timestamps: true }
