@@ -12,9 +12,6 @@ const subCategorySchema = new mongoose.Schema({
   subCategoryDesc: {
     type: String,
   },
-  rating: {
-    type: Number,
-  },
   category: {
     type: String,
     required: true,
