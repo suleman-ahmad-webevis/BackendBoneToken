@@ -3,6 +3,7 @@ const SubCategory = require("../models/subCategory");
 //ErrorHandlers
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const cloudinary = require("../utils/cloudinary");
 
 //AddNewSubCategory
 const addSubCategory = catchAsyncErrors(async (req, res, next) => {
@@ -13,8 +14,16 @@ const addSubCategory = catchAsyncErrors(async (req, res, next) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "SubCategory already exist" });
   } else {
+    const uploaded_img = await cloudinary.uploader.upload(
+      req.body.subCategoryImg,
+      {
+        folder: "subCategories",
+      }
+    );
     const newSubCategory = new SubCategory({
       ...req.body,
+      subCategoryImg: uploaded_img.secure_url,
+      cloudinaryId: uploaded_img.public_id,
     });
     await newSubCategory.save();
     return res

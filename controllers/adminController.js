@@ -20,7 +20,9 @@ const registerAdmin = catchAsyncErrors(async (req, res, next) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Admin already exists" });
   } else {
-    const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage);
+    const uploaded_img = await cloudinary.uploader.upload(req.body.adminImage, {
+      folder: "Profile",
+    });
     const hashedPassword = await admin.hashPassword(password);
     const admin = new Admin({
       ...req.body,
