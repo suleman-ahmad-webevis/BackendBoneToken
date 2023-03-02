@@ -4,7 +4,7 @@ const dogNftSchema = new mongoose.Schema(
   {
     dog: {
       type: mongoose.Schema.ObjectId,
-      ref: "Dog",
+      ref: "DogReg",
       required: false,
     },
     owner: {

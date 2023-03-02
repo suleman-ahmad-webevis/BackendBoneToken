@@ -15,7 +15,7 @@ const veterinarySchema = new mongoose.Schema(
       required: false,
     },
     areYouBreeder: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     breederName: {
