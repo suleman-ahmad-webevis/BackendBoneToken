@@ -14,7 +14,27 @@ const dogShowSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    descriptionOfEvent: {
+    country: {
+      type: String,
+      required: false,
+    },
+    location: {
+      type: String,
+      required: false,
+    },
+    date: {
+      type: String,
+      required: false,
+    },
+    class: {
+      type: String,
+      required: false,
+    },
+    judge: {
+      type: String,
+      required: false,
+    },
+    result: {
       type: String,
       required: false,
     },

@@ -5,69 +5,83 @@ const dogSchema = new mongoose.Schema(
     dogName: {
       type: String,
       trim: true,
+      required: true,
     },
     breed: {
       type: String,
+      required: true,
     },
     dogPic: {
       type: String,
-      // required: true,
+      required: false,
     },
     dogVideo: {
       type: String,
-      // required: true,
+      required: false,
     },
     dob: {
       type: String,
-      // required: true,
+      required: false,
     },
     gender: {
       type: String,
-      // required: true,
+      required: false,
     },
     countryOfBirth: {
       type: String,
-      // required: true,
+      required: false,
     },
     location: {
       type: String,
-      // required: true,
-    },
-    dogMotherName: {
-      type: String,
-    },
-    dogMotherPic: {
-      type: String,
-    },
-    dogMotherNFTNo: {
-      type: String,
-    },
-    dogFatherName: {
-      type: String,
-    },
-    dogFatherNFTNo: {
-      type: String,
-    },
-    dogFatherPic: {
-      type: String,
+      required: false,
     },
     weight: {
       type: String,
+      required: false,
     },
     height: {
       type: String,
+      required: false,
     },
     length: {
       type: String,
+      required: false,
+    },
+    dogMotherName: {
+      type: String,
+      required: false,
+    },
+    dogMotherNFTNo: {
+      type: String,
+      required: false,
+    },
+    dogMotherPic: {
+      type: String,
+      required: false,
+    },
+    dogFatherName: {
+      type: String,
+      required: false,
+    },
+    dogFatherNFTNo: {
+      type: String,
+      required: false,
+    },
+    dogFatherPic: {
+      type: String,
+      required: false,
     },
     coatType: {
       type: String,
+      required: false,
     },
     price: {
       type: String,
+      required: false,
     },
     currency: {
       type: String,
+      required: false,
     },
   },
   { timestamps: true }

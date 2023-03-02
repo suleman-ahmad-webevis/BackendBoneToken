@@ -1,6 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const DogNFT = require("../models/dogNFT/dogNft");
-const DogReg = require("../models/dogNFT/dog");
+const DogReg = require("../models/dogNFT/dogReg");
 const Owner = require("../models/dogNFT/owner");
 const Veterinary = require("../models/dogNFT/veterinary");
 const Insurance = require("../models/dogNFT/insurance");

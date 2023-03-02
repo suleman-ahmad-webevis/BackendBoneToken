@@ -4,9 +4,9 @@ const ownerSchema = new mongoose.Schema(
   {
     ownerName: {
       type: String,
-      required: false,
+      required: true,
     },
-    ownerPhoto: {
+    ownerPic: {
       type: String,
       required: false,
     },
@@ -18,7 +18,7 @@ const ownerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    breederName: {
+    breederKennelName: {
       type: String,
       required: false,
     },

@@ -6,7 +6,7 @@ const insuranceSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    emergencyContactNo: {
+    insuranceContactNo: {
       type: String,
       required: false,
     },
