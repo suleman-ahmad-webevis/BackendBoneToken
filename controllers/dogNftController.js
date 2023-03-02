@@ -21,6 +21,7 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
   //   registerInsurance,
   //   registerDogShow,
   // ]);
+  console.log("The res.body", req.body);
   const dogReg = new DogReg({
     ...JSON.parse(req.body.registerDog),
   });
