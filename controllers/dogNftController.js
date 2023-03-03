@@ -6,43 +6,83 @@ const Veterinary = require("../models/dogNFT/veterinary");
 const Insurance = require("../models/dogNFT/insurance");
 const DogShow = require("../models/dogNFT/dogShow");
 const { StatusCodes } = require("http-status-codes");
+const cloudinary = require("../utils/cloudinary");
 
 //CreateDogNFT
 const createDogNft = catchAsyncErrors(async (req, res, next) => {
-  // registerDog
-  // registerOwner
-  // registerVeterinary
-  // registerInsurance
-  // registerDogShow
-  // Promise.all([
-  //   registerDog,
-  //   registerOwner,
-  //   registerVeterinary,
-  //   registerInsurance,
-  //   registerDogShow,
-  // ]);
-  console.log("The res.body", req.body);
+  //ParsedAllReqBody
+  const parsedRegisterDog = JSON.parse(req.body.registerDog);
+  const parsedRegisterOwner = JSON.parse(req.body.registerOwner);
+  const parsedRegisterVeterinary = JSON.parse(req.body.registerVeterinary);
+  const parsedRegisterInsurance = JSON.parse(req.body.registerInsurance);
+  const parsedRegisterDogShow = JSON.parse(req.body.registerDogShow);
+  //CloudinaryUpload
+  let uploadedDogPic;
+  let uploadedDogMother;
+  let uploadedDogFatherPic;
+  let uploadedOwnerPic;
+  if (parsedRegisterDog.dogPic) {
+    uploadedDogPic = await cloudinary.uploader.upload(
+      parsedRegisterDog.dogPic,
+      {
+        folder: "DogNFT",
+      }
+    );
+  }
+  if (parsedRegisterDog.dogMotherPic) {
+    uploadedDogMother = await cloudinary.uploader.upload(
+      parsedRegisterDog.dogMotherPic,
+      {
+        folder: "DogNFT",
+      }
+    );
+  }
+  if (parsedRegisterDog.dogFatherPic) {
+    uploadedDogFatherPic = await cloudinary.uploader.upload(
+      parsedRegisterDog.dogFatherPic,
+      {
+        folder: "DogNFT",
+      }
+    );
+  }
+  if (parsedRegisterOwner.ownerPic) {
+    uploadedOwnerPic = await cloudinary.uploader.upload(
+      parsedRegisterOwner.ownerPic,
+      {
+        folder: "DogNFT",
+      }
+    );
+  }
+  //StoringToDatabase
   const dogReg = new DogReg({
-    ...JSON.parse(req.body.registerDog),
+    ...parsedRegisterDog,
+    dogPic: uploadedDogPic?.secure_url ?? "",
+    dogPicCloudinaryId: uploadedDogPic?.public_id ?? "",
+    dogMotherPic: uploadedDogMother?.secure_url ?? "",
+    dogMotherPicCloudinaryId: uploadedDogMother?.public_id ?? "",
+    dogFatherPic: uploadedDogFatherPic?.secure_url ?? "",
+    dogFatherPicCloudinaryId: uploadedDogFatherPic?.public_id ?? "",
   });
   dogReg.save();
   const owner = new Owner({
-    ...JSON.parse(req.body.registerOwner),
+    ...parsedRegisterOwner,
+    ownerPic: uploadedOwnerPic?.secure_url ?? "",
+    ownerPicCloudinaryId: uploadedOwnerPic?.public_id ?? "",
   });
   owner.save();
   const veterinary = new Veterinary({
-    ...JSON.parse(req.body.registerVeterinary),
+    ...parsedRegisterVeterinary,
   });
   veterinary.save();
   const insurance = new Insurance({
-    ...JSON.parse(req.body.registerInsurance),
+    ...parsedRegisterInsurance,
   });
   insurance.save();
   const dogShow = new DogShow({
-    ...JSON.parse(req.body.registerDogShow),
+    ...parsedRegisterDogShow,
   });
   dogShow.save();
-  return res.status(StatusCodes.CREATED).json({ message: "NFt created" });
+  return res.status(StatusCodes.CREATED).json({ message: "NFT created" });
 });
 
 module.exports = { createDogNft };

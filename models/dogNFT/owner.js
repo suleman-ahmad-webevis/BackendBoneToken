@@ -10,6 +10,10 @@ const ownerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    ownerPicCloudinaryId: {
+      type: String,
+      required: false,
+    },
     ownerVideo: {
       type: String,
       required: false,

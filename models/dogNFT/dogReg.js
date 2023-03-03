@@ -15,6 +15,10 @@ const dogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    dogPicCloudinaryId: {
+      type: String,
+      required: false,
+    },
     dogVideo: {
       type: String,
       required: false,
@@ -59,6 +63,10 @@ const dogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    dogMotherPicCloudinaryId: {
+      type: String,
+      required: false,
+    },
     dogFatherName: {
       type: String,
       required: false,
@@ -68,6 +76,10 @@ const dogSchema = new mongoose.Schema(
       required: false,
     },
     dogFatherPic: {
+      type: String,
+      required: false,
+    },
+    dogFatherPicCloudinaryId: {
       type: String,
       required: false,
     },
