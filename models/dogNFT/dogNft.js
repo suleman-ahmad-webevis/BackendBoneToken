@@ -36,4 +36,4 @@ const dogNftSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("DogNFT", dogNftSchema);
+module.exports = mongoose.model("DogNft", dogNftSchema);
