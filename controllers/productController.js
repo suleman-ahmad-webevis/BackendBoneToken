@@ -57,6 +57,7 @@ const productPost = catchAsyncErrors(async (req, res, next) => {
 
 //GetProducts
 const productGet = catchAsyncErrors(async (req, res, next) => {
+  console.log("Test");
   let query = { $and: [{}] };
   if (
     req.query.search != "undefined" &&
