@@ -10,6 +10,17 @@ const cloudinary = require("../utils/cloudinary");
 
 //CreateDogNft
 const createDogNft = catchAsyncErrors(async (req, res, next) => {
+  let uploadedDogVideo;
+  if (req.files) {
+    uploadedDogVideo = await cloudinary.uploader.upload(
+      JSON.parse(JSON.stringify(req.files?.dogVideo[0]?.path)),
+      {
+        resource_type: "video",
+        folder: "DogNFT",
+      }
+    );
+    console.log("The ", uploadedDogVideo);
+  }
   //ParsedAllReqBody
   const parsedRegisterDog = JSON.parse(req.body.registerDog);
   const parsedRegisterOwner = JSON.parse(req.body.registerOwner);
@@ -64,6 +75,8 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
     dogMotherPicCloudinaryId: uploadedDogMother?.public_id ?? "",
     dogFatherPic: uploadedDogFatherPic?.secure_url ?? "",
     dogFatherPicCloudinaryId: uploadedDogFatherPic?.public_id ?? "",
+    dogVideo: uploadedDogVideo?.secure_url ?? "",
+    dogVideoCloudinaryId: uploadedDogVideo?.public_id ?? "",
   });
   dogReg.save();
   const owner = new Owner({

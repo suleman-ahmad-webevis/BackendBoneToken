@@ -23,6 +23,10 @@ const dogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+     dogVideoCloudinaryId: {
+      type: String,
+      required: false,
+    },
     dob: {
       type: String,
       required: false,
