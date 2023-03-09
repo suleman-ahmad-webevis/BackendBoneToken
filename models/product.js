@@ -57,6 +57,30 @@ const productSchema = new mongoose.Schema(
     blogLink: {
       type: String,
     },
+    productInventory: [
+      {
+        productCode: {
+          type: String,
+        },
+        weight: {
+          type: String,
+        },
+        colour: {
+          type: String,
+        },
+        size: {
+          type: String,
+        },
+        costPrice: {
+          type: Number,
+          default: 0,
+        },
+        retailPrice: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
     //Images
     productImages: [
       {

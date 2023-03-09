@@ -27,10 +27,10 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
   }
   req.body.productImages = imagesBuffer;
   const newProduct = new Product({
-    ...req.body.data,
     ...req.body,
     productImages: req.body.productImages,
     productCreatedBy: req.userId,
+    productInventory: req.body.productInventory,
   });
   // for (let i = 0; i < req.body.colour.length; i++) {
   //   newProduct.colour.push(req.body.colour[i]);
@@ -57,7 +57,6 @@ const productPost = catchAsyncErrors(async (req, res, next) => {
 
 //GetProducts
 const productGet = catchAsyncErrors(async (req, res, next) => {
-  console.log("Test");
   let query = { $and: [{}] };
   if (
     req.query.search != "undefined" &&
@@ -355,6 +354,34 @@ const productFeaturedPost = catchAsyncErrors(async (req, res, next) => {
 //   });
 // });
 
+const updateAllProduct = catchAsyncErrors(async (req, res, next) => {
+  await Product.updateMany(
+    {},
+    {
+      $set: {
+        productInventory: [
+          {
+            productCode: "small",
+            weight: 10,
+            colour: "red",
+            size: "12x12",
+            costPrice: 2332,
+            retailPrice: 2332,
+          },
+          {
+            productCode: "small",
+            weight: 10,
+            colour: "red",
+            size: "12x12",
+            costPrice: 2332,
+            retailPrice: 2332,
+          },
+        ],
+      },
+    }
+  );
+});
+
 module.exports = {
   productGet,
   productById,
@@ -365,6 +392,7 @@ module.exports = {
   productFeaturedPost,
   addProduct,
   rateTheProduct,
+  updateAllProduct,
   // postProductReview,
   // getProductReviews,
   // deleteProductReview,

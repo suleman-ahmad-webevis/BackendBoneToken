@@ -10,13 +10,14 @@ const {
   addProduct,
   rateTheProduct,
   productFeaturedPost,
+  updateAllProduct,
   // postProductReview,
   // deleteProductReview,
   // getProductReviews,
 } = require("../controllers/productController");
 const { requireAuth } = require("../utils/auth");
 const upload = require("../utils/multer");
-const uploadController = require('../controllers/upload');
+const uploadController = require("../controllers/upload");
 
 //WebsiteRoutes
 router.get("/products", productGet);
@@ -48,7 +49,11 @@ router.put(
 router.delete("/deleteProduct/:id", requireAuth, productDelete);
 router.put("/tagProduct/:id", requireAuth, productTagsPost);
 router.post("/featureProduct/:id", requireAuth, productFeaturedPost);
+router.post(
+  "/uploadVideo",
+  upload.single("file"),
+  uploadController.uploadVideo
+);
 
-
-router.post('/uploadVideo',upload.single('file'), uploadController.uploadVideo)
+router.put("/updateAllProduct", updateAllProduct);
 module.exports = router;

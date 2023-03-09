@@ -91,8 +91,9 @@ const deleteCategory = catchAsyncErrors(async (req, res, next) => {
   if (category) {
     await category.remove();
     res.status(StatusCodes.OK).json({ message: "Category deleted" });
-  } else
+  } else {
     res.status(StatusCodes.NOT_FOUND).json({ message: "Category not found" });
+  }
 });
 
 module.exports = {
