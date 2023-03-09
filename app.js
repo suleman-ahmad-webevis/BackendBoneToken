@@ -15,6 +15,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const subCategoryRoutes = require("./routes/subCategoryRoutes");
+// const dogNftRoutes = require("./routes/dogNftRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const { StatusCodes } = require("http-status-codes");
 
@@ -38,6 +39,7 @@ app.use("/admin", adminRoutes);
 app.use("/blog", blogRoutes);
 app.use("/category", categoryRoutes);
 app.use("/subCategory", subCategoryRoutes);
+// app.use("/dogNft", dogNftRoutes);
 app.use("/supplier", supplierRoutes);
 
 app.route("*", () => {
