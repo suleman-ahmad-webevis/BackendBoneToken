@@ -64,6 +64,7 @@ const productSchema = new mongoose.Schema(
         },
         weight: {
           type: String,
+          default: "0 kg",
         },
         colour: {
           type: String,
@@ -76,6 +77,10 @@ const productSchema = new mongoose.Schema(
           default: 0,
         },
         retailPrice: {
+          type: Number,
+          default: 0,
+        },
+        quantity: {
           type: Number,
           default: 0,
         },
@@ -109,6 +114,11 @@ const productSchema = new mongoose.Schema(
     featured: {
       type: Boolean,
       default: false,
+    },
+    supplierId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Supplier",
+      required: false,
     },
     //TagProduct
     tagged: {

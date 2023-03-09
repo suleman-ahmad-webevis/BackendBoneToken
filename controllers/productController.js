@@ -355,31 +355,43 @@ const productFeaturedPost = catchAsyncErrors(async (req, res, next) => {
 // });
 
 const updateAllProduct = catchAsyncErrors(async (req, res, next) => {
-  await Product.updateMany(
-    {},
-    {
-      $set: {
-        productInventory: [
-          {
-            productCode: "small",
-            weight: 10,
-            colour: "red",
-            size: "12x12",
-            costPrice: 2332,
-            retailPrice: 2332,
-          },
-          {
-            productCode: "small",
-            weight: 10,
-            colour: "red",
-            size: "12x12",
-            costPrice: 2332,
-            retailPrice: 2332,
-          },
-        ],
-      },
+  let arr = await Product.find({});
+  arr = JSON.parse(JSON.stringify(arr));
+  for (let i = 0; i < arr.length; i++) {
+    let productInventory = [];
+    for (let j = 0; j < arr[i]?.productCode?.length; j++) {
+      let obj = {};
+      obj.productCode = arr[i].productCode[j];
+      obj.retailPrice = arr[i].retailPrice[j];
+      obj.size = arr[i].size[j];
+      obj.colour = arr[i].colour[j] ? arr[i].colour[j] : arr[i].colour[0];
+      obj.costPrice = arr[i].costPrice[j]
+        ? arr[i].costPrice[j]
+        : arr[i]?.costPrice[0]
+        ? arr[i]?.costPrice[0]
+        : 0;
+      obj.weight = arr[i].weight[j]
+        ? arr[i].weight[j]
+        : arr[i]?.weight[0]
+        ? arr[i]?.weight[0]
+        : "0 kg";
+      productInventory.push(obj);
     }
-  );
+    arr[i].productInventory = productInventory;
+  }
+  let bulkOption = arr.map((el) => {
+    return {
+      updateOne: {
+        filter: { _id: el?._id },
+        update: { $set: { productInventory: el?.productInventory } },
+      },
+    };
+  });
+  await Product.bulkWrite(bulkOption, {});
+  console.log(arr);
+  res.json({
+    arr,
+  });
 });
 
 module.exports = {

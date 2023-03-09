@@ -55,5 +55,5 @@ router.post(
   uploadController.uploadVideo
 );
 
-router.put("/updateAllProduct", updateAllProduct);
+// router.get("/allProducts", updateAllProduct);
 module.exports = router;
