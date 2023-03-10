@@ -40,7 +40,7 @@ const supplierSchema = mongoose.Schema({
   city: {
     type: String,
   },
-  zip: {
+  zipCode: {
     type: String,
   },
   country: {
