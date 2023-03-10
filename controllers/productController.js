@@ -185,9 +185,9 @@ const productUpdate = catchAsyncErrors(async (req, res, next) => {
       req.params.id,
       {
         ...req.body,
-        ...req.body.data,
         // productImages: req.body.productImages,
-        productCreatedBy: req.userId,
+        // productCreatedBy: req.userId,
+        productInventory: req.body.productInventory,
       },
       { new: true }
     );
