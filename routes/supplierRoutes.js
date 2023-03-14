@@ -10,7 +10,7 @@ const upload = require("../utils/multer");
 
 //Routes
 router.post("/addSupplier", requireAuth, addSupplier);
-router.post("/getAllSuppliers", requireAuth, getAllSupplier);
+router.get("/getAllSuppliers", requireAuth, getAllSupplier);
 router.delete("/deleteSupplier/:supplierId", requireAuth, deleteSupplier);
 
 module.exports = router;
