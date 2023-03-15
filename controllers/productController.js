@@ -96,6 +96,11 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
       $and: [{ category: req.query.category }],
     });
   }
+  if (req.query.subCategory != "undefined" && req.query.subCategory != "null") {
+    query.$and.push({
+      $and: [{ subCategory: req.query.subCategory }],
+    });
+  }
   if (req.query.featured != "undefined" && req.query.featured != "null") {
     query.$and.push({
       $and: [{ featured: true }],
@@ -397,12 +402,6 @@ const updateAllProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-const getProductOfSubCategory = catchAsyncErrors(async (req, res, next) => {
-  const products = await Product.find({ category: "vetBed" }).populate(
-    "subCategory"
-  );
-  console.log("The products", products);
-});
 
 module.exports = {
   productGet,
@@ -415,7 +414,6 @@ module.exports = {
   addProduct,
   rateTheProduct,
   updateAllProduct,
-  getProductOfSubCategory,
   // postProductReview,
   // getProductReviews,
   // deleteProductReview,

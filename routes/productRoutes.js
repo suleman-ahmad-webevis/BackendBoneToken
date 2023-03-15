@@ -11,7 +11,6 @@ const {
   rateTheProduct,
   productFeaturedPost,
   updateAllProduct,
-  getProductOfSubCategory,
   // postProductReview,
   // deleteProductReview,
   // getProductReviews,
@@ -55,6 +54,5 @@ router.post(
   upload.single("file"),
   uploadController.uploadVideo
 );
-router.get("/getProductsOfSub", getProductOfSubCategory);
 // router.get("/allProducts", updateAllProduct);
 module.exports = router;
