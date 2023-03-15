@@ -139,6 +139,7 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
     });
   }
   const products = await Product.find(query, { reviews: 0 })
+    .select("-productCode -weight -colour -size -costPrice -retailPrice")
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageSize);
