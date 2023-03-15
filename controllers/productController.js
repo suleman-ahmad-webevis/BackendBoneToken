@@ -155,7 +155,9 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
 
 //GetProductById
 const productById = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params.id, { reviews: 0 }).select("-productCode -weight -colour -size -costPrice -retailPrice");
+  const product = await Product.findById(req.params.id, { reviews: 0 }).select(
+    "-productCode -weight -colour -size -costPrice -retailPrice"
+  );
   if (product) {
     res.json(product);
   } else {
@@ -395,6 +397,13 @@ const updateAllProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+const getProductOfSubCategory = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find({ category: "vetBed" }).populate(
+    "subCategory"
+  );
+  console.log("The products", products);
+});
+
 module.exports = {
   productGet,
   productById,
@@ -406,6 +415,7 @@ module.exports = {
   addProduct,
   rateTheProduct,
   updateAllProduct,
+  getProductOfSubCategory,
   // postProductReview,
   // getProductReviews,
   // deleteProductReview,
