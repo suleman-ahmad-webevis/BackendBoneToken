@@ -155,7 +155,7 @@ const productGet = catchAsyncErrors(async (req, res, next) => {
 
 //GetProductById
 const productById = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params.id, { reviews: 0 });
+  const product = await Product.findById(req.params.id, { reviews: 0 }).select("-productCode -weight -colour -size -costPrice -retailPrice");
   if (product) {
     res.json(product);
   } else {
