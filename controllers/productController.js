@@ -31,6 +31,7 @@ const addProduct = catchAsyncErrors(async (req, res, next) => {
     productImages: req.body.productImages,
     productCreatedBy: req.userId,
     productInventory: req.body.productInventory,
+    subCategory: req.body.subCategoryId,
   });
   // for (let i = 0; i < req.body.colour.length; i++) {
   //   newProduct.colour.push(req.body.colour[i]);
@@ -401,7 +402,6 @@ const updateAllProduct = catchAsyncErrors(async (req, res, next) => {
     arr,
   });
 });
-
 
 module.exports = {
   productGet,
