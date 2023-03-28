@@ -44,4 +44,4 @@ const dogShowSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("dogShow", dogShowSchema);
+module.exports = mongoose.model("DogShow", dogShowSchema);

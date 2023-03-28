@@ -1,18 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const { createDogNft } = require("../controllers/dogNftController");
-const upload = require("../utils/multer");
+const {
+  createDogNft,
+  getAllDogNfts,
+} = require("../controllers/dogNftController");
 
 //Routes
-router.post(
-  "/createDogNft",
-  upload.fields([
-    {
-      name: "dogVideo",
-      maxCount: 5,
-    },
-  ]),
-  createDogNft
-);
+router.post("/createDogNft", createDogNft);
+router.get("/getAllNfts", getAllDogNfts);
 
 module.exports = router;

@@ -14,7 +14,7 @@ const ownerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    ownerVideo: {
+    ownerVideoLink: {
       type: String,
       required: false,
     },
