@@ -8,7 +8,6 @@ const errorMiddleware = require("./middleware/error");
 //Routes
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
-// const dogRoutes = require("./routes/dogRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -32,7 +31,6 @@ app.listen(process.env.PORT || 5000, () => {
 
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
-// app.use("/dog", dogRoutes);
 app.use("/order", orderRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/admin", adminRoutes);
