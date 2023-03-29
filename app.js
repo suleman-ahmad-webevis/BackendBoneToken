@@ -14,7 +14,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const subCategoryRoutes = require("./routes/subCategoryRoutes");
-const dogNftRoutes = require("./routes/dogNftRoutes");
+// const dogNftRoutes = require("./routes/dogNftRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const { StatusCodes } = require("http-status-codes");
 
