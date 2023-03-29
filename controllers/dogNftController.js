@@ -104,4 +104,15 @@ const getAllDogNfts = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-module.exports = { createDogNft, getAllDogNfts };
+const getDogNft = catchAsyncErrors(async (req, res, next) => {
+  const dogNft = await DogNft.findById(req.params.id).populate(
+    "dog owner veterinary insurance dogShow"
+  );
+  if (dogNft) {
+    res.json(dogNft);
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "DogNFT not found" });
+  }
+});
+
+module.exports = { createDogNft, getAllDogNfts, getDogNft };
