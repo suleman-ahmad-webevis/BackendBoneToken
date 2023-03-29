@@ -6,7 +6,7 @@ const {
 } = require("../controllers/dogNftController");
 
 //Routes
-router.post("/createDogNft", createDogNft);
-router.get("/getAllNfts", getAllDogNfts);
+// router.post("/createDogNft", createDogNft);
+// router.get("/getAllNfts", getAllDogNfts);
 
 module.exports = router;
