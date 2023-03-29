@@ -37,7 +37,7 @@ app.use("/admin", adminRoutes);
 app.use("/blog", blogRoutes);
 app.use("/category", categoryRoutes);
 app.use("/subCategory", subCategoryRoutes);
-app.use("/dogNft", dogNftRoutes);
+// app.use("/dogNft", dogNftRoutes);
 app.use("/supplier", supplierRoutes);
 
 app.route("*", () => {
