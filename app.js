@@ -18,7 +18,7 @@ const errorMiddleware = require("./middleware/error");
 const nftRoutes = require("./routes/nftRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const { StatusCodes } = require("http-status-codes");
-
+console.log("Yo");
 //Middleware
 app.use(cors());
 app.use(express.json({ limit: "500mb" }));
