@@ -1,14 +1,15 @@
 const { Router } = require("express");
 const router = Router();
-const {
-  createDogNft,
-  getAllDogNfts,
-  getDogNft,
-} = require("../controllers/dogNftController");
+// const {
+//   createDogNft,
+//   getAllDogNfts,
+//   getDogNft,
+// } = require("../controllers/dogNftController");
 
 //Routes
-router.post("/createDogNft", createDogNft);
-router.get("/getAllNfts", getAllDogNfts);
-router.get("/getDogNft/:id", getDogNft);
+// router.post("/createDogNft", createDogNft);
+// router.get("/getAllNfts", getAllDogNfts);
+// router.get("/getDogNft/:id", getDogNft);
 
+console.log("Yo");
 module.exports = router;
