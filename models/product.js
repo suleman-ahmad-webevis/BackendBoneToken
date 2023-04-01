@@ -22,35 +22,6 @@ const productSchema = new mongoose.Schema(
       // required: [true, "Please enter description of product."],
       // maxLength: [400, "Description cannot exceed 400 characters"],
     },
-    productCode: {
-      type: [String],
-      // required: true,
-    },
-    weight: {
-      type: [String],
-      // required: true,
-    },
-    colour: {
-      type: [String],
-      // required: true,
-    },
-    size: {
-      type: [String],
-      // required: true,
-    },
-    costPrice: {
-      type: [Number],
-      required: true,
-    },
-    retailPrice: {
-      type: [Number],
-      required: true,
-      // required: [true, "Please enter Required Retail Price"],
-      // maxLength: [8, "Required Retail Price cannot exceed 8 Characters"],
-    },
-    memberPrice: {
-      type: Number,
-    },
     videoLink: {
       type: String,
     },
@@ -185,27 +156,6 @@ const productSchema = new mongoose.Schema(
         },
       },
     ],
-    productCreatedBy: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    //-----------------------CSV-----------------------
-    articleNumber: {
-      type: Number,
-      // required: [true, "Please enter the article number of product."],
-      trim: true,
-      // maxLength: [30, "Article Number cannot exceed 30 characters"],
-    },
-    EAN: {
-      type: Number,
-      // required: [true, "Please enter the European Article Number"],
-    },
-    purchasePrice: {
-      type: Number,
-      // required: [true, "Please Enter Product Purchase Price"],
-      // maxLength: [8, "Purchase Price cannot exceed 8 Characters"],
-    },
   },
   { timestamps: true }
 );
