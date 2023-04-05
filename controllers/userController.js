@@ -13,7 +13,6 @@ const client = require("twilio")(accountSid, authToken);
 
 const register = catchAsyncErrors(async (req, res, next) => {
   const { email, phone } = req.body.data;
-
   if (req.body.password !== req.body.confirmPassword) {
     return next(
       new ErrorHandler(
@@ -28,44 +27,43 @@ const register = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler(StatusCodes.BAD_REQUEST, "Email already registered")
     );
   }
-  let randomNo = Math.floor(Math.random() * 90000) + 10000;
-  client.messages
-    .create({ from: "+923134766646", to: "+923134766646", body: randomNo })
-    .then(saveOtp())
-    .catch(() => {
-      return next(
-        new ErrorHandler(
-          StatusCodes.BAD_REQUEST,
-          "Error while sending otp on phone number"
-        )
-      );
-    });
+  // let randomNo = Math.floor(Math.random() * 90000) + 10000;
+  // client.messages
+  //   .create({ from: "+923134766646", to: "+923134766646", body: randomNo })
+  //   .then(saveOtp())
+  //   .catch(() => {
+  //     return next(
+  //       new ErrorHandler(
+  //         StatusCodes.BAD_REQUEST,
+  //         "Error while sending otp on phone number"
+  //       )
+  //     );
+  //   });
 
-  function saveOtp() {
-    const newOtp = new smsOtp({
-      opt: randomNo,
-    });
-    newOtp.save(function (err) {
-      if (err) {
-        return next(
-          new ErrorHandler(StatusCodes.BAD_REQUEST, "Error while saving otp")
-        );
-      } else {
-        return res
-          .status(StatusCodes.CREATED)
-          .json({ message: "OTP sent to phone number" });
-      }
-    });
-  }
-  // const user = new User({
-  //   ...req.body.data,
-  //   dateOfBirth: req.body.dateOfBirth,
-  // });
-  // await user.save();
-  // // mailSender();
-  // return res
-  //   .status(StatusCodes.CREATED)
-  //   .json({ user, message: "User registered" });
+  // function saveOtp() {
+  //   const newOtp = new smsOtp({
+  //     opt: randomNo,
+  //   });
+  //   newOtp.save(function (err) {
+  //     if (err) {
+  //       return next(
+  //         new ErrorHandler(StatusCodes.BAD_REQUEST, "Error while saving otp")
+  //       );
+  //     } else {
+  //       return res
+  //         .status(StatusCodes.CREATED)
+  //         .json({ message: "OTP sent to phone number" });
+  //     }
+  //   });
+  // }
+  const user = new User({
+    ...req.body.data,
+  });
+  await user.save();
+  // mailSender();
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ user, message: "User registered" });
 });
 
 //LoginUser
