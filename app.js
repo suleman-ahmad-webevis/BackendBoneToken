@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config({ path: "config/config.env" });
 const cors = require("cors");
 const connectDB = require("./config/database");
 const errorMiddleware = require("./middleware/error");
@@ -26,7 +27,9 @@ app.use(express.urlencoded({ extended: true, limit: "500mb" }));
 connectDB();
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log("Server running at port", process.env.PORT);
+  console.log(
+    `Server running at port ${process.env.PORT} in ${process.env.NODE_ENV}`
+  );
 });
 
 app.use("/user", userRoutes);
@@ -42,7 +45,7 @@ app.use("/supplier", supplierRoutes);
 //newStripePayment
 app.use("/payment", stripePaymentRoutes);
 
-app.route("*", () => {
+app.use("*", () => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: "No such route found",
   });
