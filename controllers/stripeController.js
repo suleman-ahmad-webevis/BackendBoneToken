@@ -1,8 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Stripe = require("stripe");
-const stripe = Stripe(
-  "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"
-);
+const stripe = Stripe(process.env.STRIPE_SECRET);
 
 //MakeIntent
 const makeIntent = catchAsyncErrors(async (req, res, next) => {
