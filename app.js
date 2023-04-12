@@ -57,7 +57,6 @@ app.use("/category", categoryRoutes);
 app.use("/subCategory", subCategoryRoutes);
 app.use("/dogNft", nftRoutes);
 app.use("/supplier", supplierRoutes);
-//newStripePayment
 app.use("/payment", stripePaymentRoutes);
 
 app.use("*", () => {
