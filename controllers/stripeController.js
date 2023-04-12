@@ -1,7 +1,7 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Stripe = require("stripe");
 const stripe = Stripe(
-  "sk_test_51LnHAjFMsaagdwc4TYOSed343sHktvF0Tgd0eoo5qkkL2kC8LWPzjluHD3pALDE2aIFA3NVA7xjqlNXJFwhxN6bN00pwTYPpjF"
+  "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"
 );
 
 //MakeIntent
