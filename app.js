@@ -10,7 +10,6 @@ const errorMiddleware = require("./middleware/error");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
@@ -52,7 +51,6 @@ process.on("unhandledRejection", (err) => {
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 app.use("/order", orderRoutes);
-app.use("/payment", paymentRoutes);
 app.use("/admin", adminRoutes);
 app.use("/blog", blogRoutes);
 app.use("/category", categoryRoutes);
