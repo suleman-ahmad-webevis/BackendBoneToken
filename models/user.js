@@ -87,7 +87,7 @@ userSchema.methods.checkPassword = async function (password) {
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
-    process.env.JWT_KEY,
+    process.env.JWT_SECRET_KEY,
     { expiresIn: "3d" }
   );
   return token;

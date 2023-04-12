@@ -16,6 +16,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
       index: true,
+      required: [true, "Please enter name of product."],
     },
     description: {
       type: String,

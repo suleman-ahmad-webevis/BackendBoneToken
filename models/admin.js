@@ -8,24 +8,24 @@ const adminSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: [true, "Please enter Your first Name"],
-      maxLength: [10, "First name cannot exceed 10 characters"],
-      minLength: [4, "Last name should have more than 4 characters"],
+      maxLength: [15, "First name cannot exceed 15 characters"],
+      minLength: [3, "Last name should have more than 3 characters"],
     },
     lastName: {
       type: String,
       required: [true, "Please enter Your last Name."],
-      maxLength: [10, "Last name cannot exceed 10 characters"],
-      minLength: [4, "Last name should have more than 4 characters"],
+      maxLength: [15, "Last name cannot exceed 15 characters"],
+      minLength: [3, "Last name should have more than 3 characters"],
     },
     email: {
       type: String,
       required: [true, "Please enter an Email"],
       unique: true,
-      // validate: [validator.isEmail, "Please enter a valid Email"],
+      validate: [validator.isEmail, "Please enter valid email address"],
     },
     password: {
       type: String,
-      // required: [true, "Please enter a Password"],
+      required: [true, "Please enter a Password"],
       minLength: [8, "Password should be greater than 8 characters"],
       maxLength: [14, "Password should not be greater than 14 characters"],
     },
@@ -51,24 +51,28 @@ const adminSchema = new mongoose.Schema(
 //   this.password = await bycrypt.hash(this.password, salt);
 //   next();
 // });
+
+//Encrypting password before saving admin:
 adminSchema.methods.hashPassword = async function (password) {
   const salt = await bycrypt.genSalt(10);
   const hashedPassword = await bycrypt.hash(this.password, salt);
   return hashedPassword;
 };
 
-adminSchema.methods.checkPassword = async function (password) {
-  const isMatch = await bycrypt.compare(password, this.password);
-  return isMatch;
-};
-
+//Returning JWT Token:
 adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, name: this.firstName + this.lastName },
-    process.env.JWT_KEY,
+    process.env.JWT_SECRET_KEY,
     { expiresIn: "3d" }
   );
   return token;
+};
+
+//Checking the password:
+adminSchema.methods.checkPassword = async function (enteredPassword) {
+  const isMatch = await bycrypt.compare(enteredPassword, this.password);
+  return isMatch;
 };
 
 module.exports = mongoose.model("Admin", adminSchema);

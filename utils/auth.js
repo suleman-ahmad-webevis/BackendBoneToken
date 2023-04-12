@@ -7,7 +7,7 @@ const requireAuth = catchAsyncErrors(async (req, res, next) => {
   const token = authHeader.substring(7, authHeader.length);
 
   if (token) {
-    const isVerified = jwt.verify(token, process.env.JWT_KEY);
+    const isVerified = jwt.verify(token, process.env.JWT_SECRET_KEY);
     if (isVerified) {
       req.userId = isVerified._id;
       req.name = isVerified.name;

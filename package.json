@@ -1,10 +1,9 @@
 {
-  "name": "dogdata",
+  "name": "bonetoken",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bonetoken admin and website backend",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",
     "nodemon": "nodemon app"
   },
