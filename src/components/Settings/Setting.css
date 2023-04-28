@@ -1,0 +1,22 @@
+/* For Settings page (Switch of material UI)*/
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+  color: #fff !important;
+}
+
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked
+  + .MuiSwitch-track {
+  background-color: #79999d !important;
+}
+
+.klbZZF .MuiSwitch-thumb {
+  box-shadow: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 3.5px 0px 0px 4.5px !important;
+}
+
+.css-julti5-MuiSwitch-root {
+  width: 68px !important;
+  height: 45px !important;
+  margin: 7px !important;
+}

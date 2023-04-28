@@ -1,0 +1,83 @@
+@font-face {
+  font-family: Ruddy-Light;
+  src: url("./assets/font/Ruddy\ Light.otf");
+}
+@font-face {
+  font-family: Ruddy-Bold;
+  src: url("./assets/font/Ruddy-Bold.otf");
+}
+@font-face {
+  font-family: Inter-Regular;
+  src: url("./assets/interfont/Inter-Regular.ttf");
+}
+@font-face {
+  font-family: Urbanist-Regular;
+  src: url("./assets/font/Urbanist/Urbanist-Regular.ttf");
+}
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("./assets/font/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: Adamina-Regular;
+  src: url("./assets/font/Adamina/Adamina-Regular.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter-Regular;
+  /* overflow: hidden; */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #314552;
+  border-right: none;
+  border-left: none;
+  border-radius: 10px;
+}
+
+.react-tel-input .country-list {
+  width: 220px;
+}
+.react-tel-input .country-list .country {
+  padding: 7px 38px !important;
+}
+
+.ljFXUF .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  color: #b7b7b7 !important;
+}
+
+.css-1x5jdmq {
+  font: inherit;
+  letter-spacing: inherit;
+  color: #b7b7b7 !important;
+  border: 0px;
+  box-sizing: content-box;
+  background: none;
+  height: 1.4375em;
+  margin: 0px;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0px;
+  width: 100%;
+  animation-name: mui-auto-fill-cancel;
+  animation-duration: 10ms;
+  padding: 16.5px 14px;
+}
+

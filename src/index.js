@@ -1,0 +1,197 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import initFacebookSDK from "./utils/InitFacebookSDK";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+//MainRouteFile
+import DASHBOARD from "./routes/Dashboard";
+//PagesAndComponents
+//ProductRoutes
+import LANDINGPAGE from "./Pages/Product/LandingPage";
+import PRODUCTS from "./Pages/Product/Products";
+import PRODUCTDETAIL from "./Pages/Product/ProductsDetail";
+import FAVOURITESLIST from "./Pages/Favourites/FavouritesList";
+import CHECKOUT from "./components/Checkout/Checkout";
+import ORDERHISTORY from "./components/Checkout/OrderHistory";
+import RECENTLYVIEWEDPRODUCTS from "./components/ProductsComponent/RecentlyViewed";
+import SUBCATEGORY from "./Pages/Product/SubCategory";
+import INSTAGRAMHANDLER from "./components/ProductDetail/InstagramHandler";
+//RegisterationRoutes
+import REGISTERUSER from "./Pages/Register/Register";
+import USERLOGIN from "./Pages/Login/Login";
+import OTP from "./Pages/Registeration/Otp";
+//BlogsRoutes
+import BLOGS from "./Pages/Blogs/Blogs";
+import BLOGDETAIL from "./Pages/Blogs/BlogsDetail";
+//NFTRoutes
+import CREATEDOGNFT from "./Pages/DogNFT/CreateDogNFT";
+import EDITDOGNFT from "./Pages/DogNFT/EditDogNFT";
+import DOGFORSALE from "./Pages/DogForSale/DogForSale";
+import PDFCERTIFICATE from "./Pages/PdfCertificate";
+import MYDOGS from "./Pages/MyDogs/MyDogs";
+//OthersRoutes
+import ROADMAP from "./Pages/Roadmap/Roadmap";
+import TOEARN from "./Pages/Earn/Earn";
+import FAQ from "./Pages/Faq/Faq";
+import CUSTOMERSERVICE from "./Pages/CustomerService/CustomerService";
+import DOGSHOWSPAGE from "./Pages/DogShowSPage/DogShowsPage";
+import TOKENOMICS from "./Pages/Tokenomics/Tokenomics";
+import SETTINGS from "./Pages/Settings/Settings";
+import WHITEPAPER from "./Pages/WhitePaper/WhitePaper";
+//NotFoundRoutes
+import NOTFOUND from "./Pages/404/NotFound";
+//Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+//Authorization
+// import PaymentMethod from "./components/Checkout/PaymentMethod";
+// import { PrivateRouteCheckout } from "./utils/PrivateRoutes";
+// import StripeModal from "./components/Checkout/StripeModal";
+
+let persistor = persistStore(store);
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DASHBOARD />,
+    children: [
+      {
+        path: "/",
+        element: <LANDINGPAGE />,
+      },
+      {
+        path: "/shop",
+        element: <PRODUCTS />,
+      },
+      {
+        path: "/shop/product-detail/:id",
+        element: <PRODUCTDETAIL />,
+      },
+      {
+        path: "/shop/recently-viewed",
+        element: <RECENTLYVIEWEDPRODUCTS />,
+      },
+      {
+        path: "shop/category",
+        element: <SUBCATEGORY />,
+      },
+      {
+        path: "/checkout",
+        element: <CHECKOUT />,
+      },
+      {
+        path: "/favourites",
+        element: <FAVOURITESLIST />,
+      },
+      {
+        path: "/order-history",
+        element: <ORDERHISTORY />,
+      },
+      {
+        path: "/blogs",
+        element: <BLOGS />,
+      },
+      {
+        path: "/blogs/blog-detail/:id",
+        element: <BLOGDETAIL />,
+      },
+      {
+        path: "/register",
+        element: <REGISTERUSER />,
+      },
+      {
+        path: "/login",
+        element: <USERLOGIN />,
+      },
+      {
+        path: "/create-dog-nft/:pageName",
+        element: <CREATEDOGNFT />,
+      },
+      {
+        path: "/edit-dog-nft/:pageName",
+        element: <EDITDOGNFT />,
+      },
+      {
+        path: "/to-earn",
+        element: <TOEARN />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/customer-service",
+        element: <CUSTOMERSERVICE />,
+      },
+      {
+        path: "/my-dogs",
+        element: <MYDOGS />,
+      },
+      {
+        path: "/dog-shows",
+        element: <DOGSHOWSPAGE />,
+      },
+      {
+        path: "/dog-for-sale",
+        element: <DOGFORSALE />,
+      },
+      {
+        path: "/road-map",
+        element: <ROADMAP />,
+      },
+      {
+        path: "/tokenomics",
+        element: <TOKENOMICS />,
+      },
+      {
+        path: "/settings",
+        element: <SETTINGS />,
+      },
+      {
+        path: "/white-paper",
+        element: <WHITEPAPER />,
+      },
+      {
+        path: "/certificate",
+        element: <PDFCERTIFICATE />,
+      },
+      {
+        path: "/checkout-success",
+        element: <PRODUCTS />,
+      },
+      {
+        path: "/otp",
+        element: <OTP />,
+      },
+      {
+        path: "/instagram-handler",
+        element: <INSTAGRAMHANDLER />,
+      },
+      {
+        path: "*",
+        element: <NOTFOUND />,
+      },
+    ],
+  },
+]);
+
+const renderApp = () => {
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>
+  );
+};
+
+initFacebookSDK().then(() => {
+  renderApp();
+});
