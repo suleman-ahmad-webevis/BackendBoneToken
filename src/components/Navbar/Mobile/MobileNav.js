@@ -10,7 +10,6 @@ import Close from "../../../assets/images/Navbar/Tab/Close.png";
 import { MenuData } from "../Tablet/MenuData";
 
 const Mobile = () => {
-  console.log("The mobile", MenuData);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (

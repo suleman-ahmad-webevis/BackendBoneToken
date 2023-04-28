@@ -10,7 +10,6 @@ const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
   const { id, name } = useParams();
 
   useEffect(() => {
-    console.log("pathname", id, name);
   }, [pathname]);
   return (
     <CategoriesSidebar toggle={toggle}>

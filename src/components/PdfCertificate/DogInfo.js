@@ -5,7 +5,6 @@ import FileIcon from "../../assets/images/Certificate/FileIcon.png";
 import { Img } from "../../GlobalStyles";
 
 const DogInfo = ({ regDog }) => {
-  console.log("The regDog", regDog);
 
   const LDogInfo = [
     {

@@ -16,9 +16,7 @@ const Register = () => {
   const initialValues = {
     name: "",
   };
-  const onSubmit = (values) => {
-    console.log("The values", values);
-  };
+  const onSubmit = (values) => {};
   const validate = (values) => {
     let errors = {};
     if (!values.name) {

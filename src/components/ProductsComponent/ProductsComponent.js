@@ -13,7 +13,6 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import Heading from "../Heading/Heading";
 
 const ProductsListComponent = () => {
-  console.log("The");
   const dispatch = useDispatch();
   const location = useLocation();
   const [searchParams] = useSearchParams();

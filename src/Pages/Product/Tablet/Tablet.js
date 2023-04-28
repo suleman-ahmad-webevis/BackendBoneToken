@@ -36,7 +36,6 @@ import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/Navbar/FlagsDropDown.png";
 
 const Tablet = () => {
-  console.log("Render");
   const { isSmallMobile, isMobile } = useBreakpoint();
 
   //StatesForSearching

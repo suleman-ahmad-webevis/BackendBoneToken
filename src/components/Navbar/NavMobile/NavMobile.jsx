@@ -25,7 +25,6 @@ const NavMobile = () => {
   ];
 
   useEffect(() => {
-    // console.log("my seleted", get);
   }, [get]);
 
   return (
