@@ -120,7 +120,7 @@ export const MyDogCard = styled.div`
   @media screen and (max-width: 1450px) {
     width: 45%;
   }
-  a {
+  p {
     font-weight: 900;
     font-size: 10px;
     line-height: 15px;

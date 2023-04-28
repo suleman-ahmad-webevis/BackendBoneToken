@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Heading from "../Heading/Heading";
 import { genderOptions } from "../Selectors/SSearchOptions";
 
 const Button = styled.button`

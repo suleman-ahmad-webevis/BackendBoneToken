@@ -39,10 +39,12 @@ const ProductsListComponent = () => {
         limit,
       })
     );
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     dispatch(setAllProducts());
+    // eslint-disable-next-line
   }, [products]);
 
   const fetchMore = () => {

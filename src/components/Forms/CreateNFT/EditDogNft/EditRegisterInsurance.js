@@ -5,11 +5,9 @@ import Phone from "../../../../assets/images/GrayPhone.png";
 import {
   FieldError,
   Form,
-  FormButton,
   FormField,
   FormHeading,
   FormTextField,
-  NextButton,
   PageChanged,
   PhoneIcon,
   RegisterDogContainer,
@@ -36,13 +34,11 @@ const EditRegisterInsurance = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValues,
     setFieldValue,
   } = useFormik({
     initialValues: {
       contactName: sessionData.contactName ?? "",
       certificateNo: sessionData.certificateNo ?? "",
-      insuranceContactNo: sessionData.insuranceContactNo ?? "",
       insuranceContactNo: sessionData.insuranceContactNo ?? "",
       startDate: sessionData.startDate ?? "",
       endDate: sessionData.endDate ?? "",

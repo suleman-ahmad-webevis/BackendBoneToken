@@ -2,15 +2,12 @@ import React, { Fragment } from "react";
 import {
   ModalBlock,
   ModalBody,
-  ModalClose,
   ModalContainer,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
-  ModalTitle,
 } from "./modal.styles";
 
-const SmartSearchModal = ({ title, footer, children, active, hideModal }) => {
+const SmartSearchModal = ({ footer, children, active, hideModal }) => {
   return (
     <Fragment>
       {active && (

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {Img} from '../../GlobalStyles'
 import One from '../../assets/images/RoadMap/RoadmapRight/One.png'
 import Two from '../../assets/images/RoadMap/RoadmapRight/Two.png'

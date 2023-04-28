@@ -20,6 +20,7 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     setIsFav(favouritesItems.find((item) => item._id === product._id));
+    // eslint-disable-next-line
   }, []);
 
   const handleFavClick = (item) => {

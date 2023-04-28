@@ -27,7 +27,7 @@ export const csBoxL = [
   },
   {
     title: "Payment",
-    text: <h5></h5>,
+    text: <h5>-</h5>,
     boxMinHeight: "160px",
   },
 ];

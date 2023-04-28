@@ -16,7 +16,6 @@ import {
   FormTextField,
   FieldError,
   FileAccept,
-  NextButton,
   PageChanged,
   SmallImage,
 } from "../../UserStyles";
@@ -28,7 +27,7 @@ import NFTFooter from "./NFTFooter";
 import Currencies from "../../CurrencySelect";
 import CountryBirth from "../../CountryBirth";
 import Location from "../../Location";
-import { SaveEditNftBtn, SaveText } from "../RegisterDogNft/CreateNFT.style";
+import { SaveEditNftBtn } from "../RegisterDogNft/CreateNFT.style";
 
 const EditRegisterDog = ({ dog }) => {
   const navigate = useNavigate();
@@ -96,7 +95,7 @@ const EditRegisterDog = ({ dog }) => {
         return "$";
       case "GBP":
         return "£";
-      case "":
+      default:
         return "$";
     }
   };

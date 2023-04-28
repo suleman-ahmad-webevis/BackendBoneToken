@@ -45,6 +45,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getTheProductById(id));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ const ProductDetail = () => {
     setImageUrl(
       singlePro?.productImages?.length && singlePro?.productImages[0]?.secureUrl
     );
+    // eslint-disable-next-line
   }, [singlePro]);
 
   useEffect(() => {
@@ -67,6 +69,7 @@ const ProductDetail = () => {
         rateTheProduct({ quantityR, fitPurposeR, serviceR, priceR, total, id })
       );
     }
+    // eslint-disable-next-line
   }, [total]);
 
   if (isLoading) {
@@ -110,7 +113,7 @@ const ProductDetail = () => {
     tempInventory[index].description = singlePro?.description;
     tempInventory[index].productImages = singlePro?.productImages;
     if (tempInventory[index].quantity) {
-      tempInventory[index].quantity = tempInventory[index].quantity;
+      // tempInventory[index].quantity = tempInventory[index].quantity;
     } else {
       tempInventory[index].quantity = 1;
     }
@@ -123,7 +126,7 @@ const ProductDetail = () => {
     setCheckIndex(selectedIndex);
     setNewProInventory(tempInventory);
     if (selectedIndex) {
-      setSelectedPro(newProInventory.filter((e) => e.quantity != 0));
+      setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
     }
   };
 
@@ -131,7 +134,7 @@ const ProductDetail = () => {
     const tempInventory = [...newProInventory];
     if (checkIndex) {
       tempInventory[checkIndex].quantity =
-        type == "inc"
+        type === "inc"
           ? tempInventory[checkIndex].quantity + 1
           : tempInventory[checkIndex].quantity - 1;
       tempInventory[checkIndex].itemTotalPrice =
@@ -139,7 +142,7 @@ const ProductDetail = () => {
         tempInventory[checkIndex].quantity;
       setNewProInventory(tempInventory);
     }
-    setSelectedPro(newProInventory.filter((e) => e.quantity != 0));
+    setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
   };
 
   return (
@@ -255,12 +258,12 @@ const ProductDetail = () => {
                     <ProductCode>{value?.productCode}</ProductCode>
                   </ProductSizeField>
                   <ProductWeight>
-                    {value?.weight == "0 kg" ? "" : value?.weight}
+                    {value?.weight === "0 kg" ? "" : value?.weight}
                   </ProductWeight>
                   <ProductWeight>{value?.minRetailPrice} &euro;</ProductWeight>
                   <CheckBox
                     type="checkbox"
-                    checked={value?.checked && index == checkIndex}
+                    checked={value?.checked && index === checkIndex}
                     onChange={(e) => ItemSelector(e.target.checked, index)}
                   />
                 </ProductMeasurement>

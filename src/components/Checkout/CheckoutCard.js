@@ -21,9 +21,8 @@ import { Img } from "../../GlobalStyles";
 import { useDispatch } from "react-redux";
 import Modal from "../modal/modal";
 
-const CheckoutCardCom = ({ cartItem, index, cartItem: { minRetailPrice } }) => {
+const CheckoutCardCom = ({ cartItem, cartItem: { minRetailPrice } }) => {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(0);
   const [infoActive, setInfoActive] = useState(false);
   return (
     <>
@@ -79,7 +78,9 @@ const CheckoutCardCom = ({ cartItem, index, cartItem: { minRetailPrice } }) => {
             {cartItem?.itemTotalPrice?.toFixed(2)} &euro;
           </Button>
           <Delete
-            onClick={() => dispatch(removeFromYourCart(cartItem?.minRetailPrice))}
+            onClick={() =>
+              dispatch(removeFromYourCart(cartItem?.minRetailPrice))
+            }
           >
             <FaTrashAlt color="white" />
           </Delete>

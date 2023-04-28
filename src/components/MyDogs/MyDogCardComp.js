@@ -166,9 +166,9 @@ const MyDogCardComp = ({ expand, setExpand, value }) => {
             </ExpandedBtnContainer>
           </>
         )}
-        <a onClick={() => setExpand(!expand)}>
+        <p onClick={() => setExpand(!expand)}>
           {!expand ? "Expand View" : "Minimize view"}
-        </a>
+        </p>
       </MyDogCard>
     </>
   );

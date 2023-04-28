@@ -18,7 +18,6 @@ import Countries from "../../Countries";
 import { PhoneIcon } from "../../UserStyles";
 import { useFormik } from "formik";
 import { registerDogShowSchema } from "../../../../schema/createDogNftSchema";
-import { useNavigate } from "react-router-dom";
 import NFTFooter from "./NFTFooter";
 import {
   SaveEditNftBtn,
@@ -28,7 +27,6 @@ import {
 import DogShows from "./DogShows";
 
 const EditRegisterDogShow = () => {
-  const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
@@ -39,7 +37,6 @@ const EditRegisterDogShow = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValues,
     setFieldValue,
   } = useFormik({
     initialValues: {

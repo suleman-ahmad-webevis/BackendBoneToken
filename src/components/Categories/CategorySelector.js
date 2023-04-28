@@ -14,6 +14,7 @@ const CategorySelector = () => {
 
   useEffect(() => {
     dispatch(getAllCategory());
+    // eslint-disable-next-line
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);

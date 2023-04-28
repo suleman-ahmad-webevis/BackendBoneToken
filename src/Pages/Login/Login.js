@@ -10,22 +10,15 @@ import { RegBtn } from "../../components/RegisterLogin/ThirdForm";
 import { Formik } from "formik";
 import useBreakpoint from "../../hooks/useBreakPoint";
 //ImagesImport
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 
 const Login = () => {
-  const navigate = useNavigate();
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  //StoreData
-  const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
-  const { cartQuantityIs } = useSelector((state) => state.cart);
 
   return (
     <RegContainer>

@@ -43,11 +43,12 @@ const BasicInfo = ({ regDog, regOwner }) => {
       <WebInfoSection>
         <WebInfo>
           <Img src={WebsiteIcon} />
-          <p>Breeder Website </p> : <a href=""> - </a>
+          <p>Breeder Website </p> : <a href="www.google.com"> - </a>
         </WebInfo>
         <WebInfo>
           <Img src={WebsiteIcon} />
-          <p>Owner Website </p> : <a href=""> {regOwner?.website}</a>
+          <p>Owner Website </p> :{" "}
+          <a href="www.google.com"> {regOwner?.website}</a>
         </WebInfo>
       </WebInfoSection>
     </BasicInfoContainer>

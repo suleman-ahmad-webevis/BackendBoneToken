@@ -15,7 +15,6 @@ import {
   CategoriesField,
   UploadText,
   FormTextField,
-  FormFooter,
   FieldError,
   FileAccept,
   NextButton,
@@ -113,7 +112,7 @@ const RegisterDog = () => {
         return "$";
       case "GBP":
         return "£";
-      case "":
+      default:
         return "$";
     }
   };

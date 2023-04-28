@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Img } from "../../GlobalStyles";
-import { FaTrashAlt } from "react-icons/fa";
+import React, { useEffect } from "react";
 import {
-  Button,
-  CardAside,
   CheckoutColor,
   CheckOutSection,
-  Delete,
-  OrderHistoryCard,
   CheckoutFooter,
   CheckoutLink,
   TotalBill,
   OrderHistoryContainer,
-  Text,
   Wrapper,
-  CardRightPart,
-  CardLeftPart,
+
   OrderHistoryWrapper,
 } from "./CheckoutStyle";
 

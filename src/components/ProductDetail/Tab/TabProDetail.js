@@ -35,7 +35,6 @@ import mobFav from "../../../assets/images/LandingPage/MobFav.png";
 import mobChat from "../../../assets/images/LandingPage/MobChat.png";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/RegisterLogin/FlagsDropDown.png";
-import Product from "../../../assets/images/ProductDetail/Tab/Product.png";
 import Min from "../../../assets/images/ProductDetail/Tab/Min.png";
 import Max from "../../../assets/images/ProductDetail/Tab/Max.png";
 import FB from "../../../assets/images/ProductDetail/Tab/FB.png";

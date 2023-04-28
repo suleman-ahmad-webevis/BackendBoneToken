@@ -5,13 +5,11 @@ import SecondForm from "../../components/RegisterLogin/SecondForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ThirdForm from "../../components/RegisterLogin/ThirdForm";
 import useBreakpoint from "../../hooks/useBreakPoint";
-import { useNavigate } from "react-router-dom";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 
 const Register = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
-  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const initialValues = {
     name: "",

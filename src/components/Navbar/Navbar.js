@@ -16,7 +16,6 @@ import Flags from "../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../assets/images/Navbar/FlagsDropDown.png";
 import searchIcon from "../../assets/images/Navbar/search.png";
 import SmartSearchContent from "../SmartSearchModal/SmartSearchContent";
-import SmartSearchModal from "../SmartSearchModal/modal";
 import {
   NavbarContainer,
   NavbarLeft,
@@ -25,33 +24,23 @@ import {
   NavbarButton,
   SearchFieldWithIcon,
   ProfileContainer,
-  Token,
   NavbarIcons,
   Items,
   Counter,
-  NavIcon,
-  ToggleOn,
-  ToggleOff,
   NavbarRightBlock,
   BrandLogo,
   LangSelect,
 } from "./NavbarStyles";
-import {
-  useNavigate,
-  useSearchParams,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotalsFavourites } from "../../redux/favourites/favouritesSlice";
 // import { debounce } from "lodash";
 import { getTheProducts, reset } from "../../redux/product/productSlice";
 import { metaMaskConnection } from "../../redux/walletConn/walletConnSlice";
 import { getCartTotal } from "../../redux/cart/cartSlice";
-import Modal from "../modal/modal";
 import SSModal from "../modal/SSModal/SSModal";
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,13 +56,14 @@ const Navbar = ({ theme, setTheme }) => {
   const [active, setActive] = useState(false);
   const [simpleNav, setSimpleNav] = useState(false);
   // const [isToggle, setIsToggle] = useState(false);
-
+  console.log(setSearchParams);
   useEffect(() => {
     if (locations.includes(location?.pathname)) {
       setSimpleNav(true);
     } else {
       setSimpleNav(false);
     }
+    // eslint-disable-next-line
   }, [location.pathname]);
 
   const locations = [
@@ -90,6 +80,7 @@ const Navbar = ({ theme, setTheme }) => {
   useEffect(() => {
     dispatch(getTotalsFavourites());
     dispatch(getCartTotal());
+    // eslint-disable-next-line
   }, [cartItems]);
 
   const searchHandler = () => {
@@ -159,11 +150,16 @@ const Navbar = ({ theme, setTheme }) => {
               <a
                 href="https://www.youtube.com/@streetdogbonedrop4651"
                 target="_blank"
+                rel="noreferrer"
               >
                 <Img src={youtube} alt="youtube" />
               </a>
               <Img src={twitter} alt="twitter" />
-              <a href="https://www.facebook.com/DogsData" target="_blank">
+              <a
+                href="https://www.facebook.com/DogsData"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Img src={facebook} alt="facebook" />
               </a>
               <Img src={instagram} alt="instagram" />

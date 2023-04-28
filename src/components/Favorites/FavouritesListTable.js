@@ -13,10 +13,9 @@ import {
   CheckoutProImg,
   Price,
 } from "./FavouriteTable.style";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const FavouritesListTable = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { favouritesItems } = useSelector((state) => state.favourites);
 

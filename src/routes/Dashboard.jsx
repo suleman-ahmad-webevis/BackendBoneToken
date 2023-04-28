@@ -6,8 +6,6 @@ import Navbar from "../components/Navbar/Navbar";
 import TabNav from "../components/Navbar/Tablet/TabletNav";
 import MobileNav from "../components/Navbar/Mobile/MobileNav";
 import LandingPageSidebar from "../components/Sidebar/LandingPageSidebar";
-import { CategoriesList } from "../Pages/Product/LandingPage";
-import { FaBars, FaTimes } from "react-icons/fa";
 import useBreakpoint from "../hooks/useBreakPoint";
 
 const ContainerWrapper = styled("div")`
@@ -134,7 +132,7 @@ const ContainerWrapper = styled("div")`
 
 const Dashboard = () => {
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
-  const [toggle, setToggle] = useState(false);
+  const [toggle] = useState(false);
   const { pathname } = useLocation();
   const isNotFoundPage = pathname === "/404";
   const screenSize = window?.screen?.availWidth;

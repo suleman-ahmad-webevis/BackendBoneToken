@@ -3,12 +3,10 @@ import {
   CategoriesField,
   FieldError,
   Form,
-  FormButton,
   FormField,
   FormHeading,
   FormTextField,
   PageChanged,
-  PhoneIcon,
   RegisterDogContainer,
 } from "../../UserStyles";
 import { useFormik } from "formik";
@@ -35,7 +33,6 @@ const EditRegisterVeterinary = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValues,
     setFieldValue,
   } = useFormik({
     initialValues: {

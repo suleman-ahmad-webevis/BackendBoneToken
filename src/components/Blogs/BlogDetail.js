@@ -14,6 +14,7 @@ const BlogDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(blogsById(id));
+    // eslint-disable-next-line
   }, []);
 
   if (isLoading) {

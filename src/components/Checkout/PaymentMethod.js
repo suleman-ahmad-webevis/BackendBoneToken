@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Img } from "../../GlobalStyles";
 import MethodOne from "../../assets/images/PayMethod/MethodOne.png";
@@ -21,7 +21,9 @@ const PaymentMethod = ({ cartItems }) => {
             <Img
               src={MethodOne}
               alt="MethodOne"
-              onClick={() => dispatch(createCheckoutSession({cartItems,userId:233232}))}
+              onClick={() =>
+                dispatch(createCheckoutSession({ cartItems, userId: 233232 }))
+              }
             />
             <Img src={MethodTwo} alt="MethodTwo" />
           </DefaultMethod>

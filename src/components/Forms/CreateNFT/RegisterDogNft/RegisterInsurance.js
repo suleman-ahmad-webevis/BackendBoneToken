@@ -5,7 +5,6 @@ import Phone from "../../../../assets/images/GrayPhone.png";
 import Next from "../../../../assets/images/Next.png";
 import Back from "../../../../assets/images/Back.png";
 import {
-  FieldError,
   Form,
   FormField,
   FormHeading,
@@ -25,7 +24,9 @@ const RegisterInsurance = () => {
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerInsurance")) ?? {}
   );
+  console.log("setSessionData", setSessionData);
   const [ins, setIns] = useState([]);
+  console.log("ins", ins);
   const [insurance, setInsurance] = useState({
     contactName: sessionData[0]?.contactName ?? "",
     certificateNo: sessionData[0]?.certificateNo ?? "",

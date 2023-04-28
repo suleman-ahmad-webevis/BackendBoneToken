@@ -24,6 +24,7 @@ const MayLikeBlogs = ({ category }) => {
 
   useEffect(() => {
     dispatch(blogMayLike({ category, id }));
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -67,7 +68,7 @@ const MayLikeBlogs = ({ category }) => {
             </BlogCardLike>
           ))
         ) : (
-          <h2></h2>
+          <h2>No related blogs</h2>
         )}
       </MayLikeCards>
     </MayLikeContainer>

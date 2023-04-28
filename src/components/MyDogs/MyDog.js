@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SidebarStatic from "../Sidebar/SidebarStatic";
 import {
   DogDetail,
   HeadButton,
@@ -26,9 +25,9 @@ const MyDog = () => {
   const navigate = useNavigate();
   const [expand, setExpand] = useState(false);
   const { allDogNfts, isLoading } = useSelector((state) => state.dogNft);
-  const [showSettings, setShowSettings] = useState(true);
   useEffect(() => {
     dispatch(getAllNfts());
+    // eslint-disable-next-line
   }, []);
 
   return (

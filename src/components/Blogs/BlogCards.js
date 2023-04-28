@@ -21,10 +21,12 @@ const BlogCards = () => {
   useEffect(() => {
     dispatch(reset());
     dispatch(getTheBlogs({ category, page: pageInc, limit }));
+    // eslint-disable-next-line
   }, [category]);
 
   useEffect(() => {
     dispatch(setAllBlogs());
+    // eslint-disable-next-line
   }, [blogs]);
 
   const fetchMore = () => {

@@ -20,6 +20,7 @@ const Slider = () => {
   const swiper = useSwiper();
 
   const [index, setIndex] = useState("");
+  console.log(index);
 
   const data = [dog1, dog2, dog1, dog2, dog1, dog2, dog1, dog2];
 

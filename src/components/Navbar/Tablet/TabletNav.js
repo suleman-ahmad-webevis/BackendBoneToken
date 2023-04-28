@@ -53,12 +53,18 @@ const Tablet = () => {
           </LangSelect>
         </IconsSection>
         <MenuSection>
-          <Img src={Hamburger} alt="" onClick={() => setShowMenu(true)} />
+          <Img
+            src={Hamburger}
+            alt="Hamburger"
+            onClick={() => setShowMenu(true)}
+          />
         </MenuSection>
       </TabNavLeft>
       {showMenu && (
         <MenuBar>
-          <Img src={Close} alt="close" onClick={() => setShowMenu(false)} />
+          <CloseIcon>
+            <Img src={Close} alt="Close" onClick={() => setShowMenu(false)} />
+          </CloseIcon>
           <MenuItems>
             {MenuData.map((value) => (
               <Menu>
@@ -144,30 +150,36 @@ export const Counter = styled.div`
 
 //TabAndMob MenuBar
 export const MenuBar = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 250px;
   background: #0e626d;
   height: 100vh;
-  transition: 0.15s;
+  transition: all 1s ease-in-out;
 `;
 
 export const MenuItems = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
-  grid-gap: 15px;
+  padding: 60px 20px;
+  grid-gap: 25px;
 `;
 
 export const Menu = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 10px;
+  cursor: pointer;
   h5 {
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
     color: #ffffff;
   }
+`;
+
+export const CloseIcon = styled.div`
+  transform: translate(200px, 30px);
+  cursor: pointer;
 `;

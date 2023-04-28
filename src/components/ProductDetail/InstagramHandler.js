@@ -14,7 +14,7 @@ const InstagramHandler = () => {
     window.FB.getLoginStatus((res) => {
       console.log("the res in getLoginStatus", res);
       try {
-        if (res.status == "connected") {
+        if (res.status === "connected") {
           toast.success("Connected Successfully");
           setFbUserAccessToken(res.authResponse?.accessToken);
         }
@@ -46,6 +46,7 @@ const InstagramHandler = () => {
       }
     };
     getFacebook();
+    // eslint-disable-next-line
   }, [fbUserAccessToken]);
 
   useEffect(() => {

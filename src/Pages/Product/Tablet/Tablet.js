@@ -71,10 +71,12 @@ const Tablet = () => {
         limit,
       })
     );
+    // eslint-disable-next-line
   }, [location]);
 
   useEffect(() => {
     dispatch(setAllProducts());
+    // eslint-disable-next-line
   }, [products]);
 
   const fetchMore = () => {
@@ -175,7 +177,7 @@ const Tablet = () => {
       {allProducts?.length ? (
         <PTabProductList id="ProductListContainer">
           {allProducts.map((product) => (
-            <TabProductCard product={product} key={product._id} />
+            <TabProductCard product={product} />
           ))}
           <InfiniteScroll
             dataLength={allProducts?.length}

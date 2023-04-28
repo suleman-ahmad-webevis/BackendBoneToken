@@ -20,8 +20,6 @@ import Back from "../../../../../assets/images/Back.png";
 
 const ROTab = () => {
   const dogPicUploaded = useRef(null);
-  const dogMotherPicUploaded = useRef(null);
-  const dogMotherPicUploader = useRef(null);
 
   return (
     <RDTabContainer>

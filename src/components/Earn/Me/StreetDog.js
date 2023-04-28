@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { CombinedText, PurchasesText } from "./Purchases";
 import DonateIcons from "../../../assets/images/Earn/DonateIcons.png";
 import DownArrow from "../../../assets/images/Earn/DownArrow.png";
-import SlideImg from "../../../assets/images/Earn/SlideImg.png";
 import { Img } from "../../../GlobalStyles";
 import Slider from "../Sliders/Slider";
 

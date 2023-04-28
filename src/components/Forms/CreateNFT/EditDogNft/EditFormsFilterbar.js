@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 // import Puppy from "../../assets/images/Forms/Puppy.png";
-import { Img } from "../../../../GlobalStyles";
 import { NavLink } from "react-router-dom";
 
 const types = [

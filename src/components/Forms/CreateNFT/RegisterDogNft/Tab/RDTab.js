@@ -32,9 +32,6 @@ import {
   WHL,
   WHLWrapper,
 } from "./RTab.style";
-import useBreakpoint from "../../../../../hooks/useBreakPoint";
-import CommonMobNav from "../../../../CommonMTNav/CommonMobNav";
-import CommonTabNav from "../../../../CommonMTNav/CommonTabNav";
 
 const RDTab = () => {
   const dogPicUploaded = useRef(null);
@@ -43,7 +40,6 @@ const RDTab = () => {
 
   return (
     <RDTabContainer>
-     
       <RDForm>
         <RDInput
           id="outlined-basic"

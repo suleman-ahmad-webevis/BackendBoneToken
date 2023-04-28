@@ -15,7 +15,7 @@ const SubCategoryListComponent = () => {
 
   useEffect(() => {
     dispatch(getTheProdSubCategory(subCategory));
-  }, [subCategory]);
+  }, [subCategory, dispatch]);
 
   return (
     <>

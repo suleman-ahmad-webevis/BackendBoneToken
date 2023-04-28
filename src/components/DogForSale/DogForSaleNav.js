@@ -38,7 +38,7 @@ const DogForSaleNav = () => {
       {dogSaleNavData.map((value) => (
         <NavItem key={value._id}>
           <h1>{value.title}</h1>
-          <img src={value.icon} />
+          <img src={value.icon} alt="dog-for-sale" />
         </NavItem>
       ))}
     </DogSaleNavWrapper>

@@ -9,14 +9,12 @@ import {
   FormField,
   FormHeading,
   FormTextField,
-  NextButton,
   PageChanged,
   PhoneIcon,
   RegisterDogContainer,
   Upload,
   UploadText,
   FileAccept,
-  FormButton,
 } from "../../UserStyles";
 import { Img } from "../../../../GlobalStyles";
 import uploadImage from "../../../../assets/images/upload.png";

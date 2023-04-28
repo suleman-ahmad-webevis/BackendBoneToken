@@ -7,7 +7,7 @@ const NotFound = () => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/404");
-  }, []);
+  }, [navigate]);
 
   return (
     <NotFoundPageContainer>

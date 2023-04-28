@@ -22,7 +22,8 @@ const EditDogNFT = () => {
 
   useEffect(() => {
     dispatch(getDogNft({ id }));
-  }, []);
+    // eslint-disable-next-line
+  }, []); 
 
   const getPage = () => {
     switch (pageName) {

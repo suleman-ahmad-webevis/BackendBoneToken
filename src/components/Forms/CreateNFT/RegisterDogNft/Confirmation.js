@@ -56,7 +56,7 @@ const Confirmation = () => {
       {isDesktop ? (
         <ConfirmationButton>
           <Img src={URL} alt="URL" />{" "}
-          <a>https://bscscan.com/token/0x438fc473ba340d0734e2d05acdf.....</a>
+          <a href='google.com'>https://bscscan.com/token/0x438fc473ba340d0734e2d05acdf.....</a>
           <Img src={Copy} alt="Copy" />
         </ConfirmationButton>
       ) : (

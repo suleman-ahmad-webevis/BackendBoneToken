@@ -20,7 +20,6 @@ import c16 from "../../assets/images/Categories/C16.png";
 import c17 from "../../assets/images/Categories/C17.png";
 import c18 from "../../assets/images/Categories/C18.png";
 import c19 from "../../assets/images/Categories/C19.png";
-import c20 from "../../assets/images/Categories/C20.png";
 import c21 from "../../assets/images/Categories/C21.png";
 import c22 from "../../assets/images/Categories/C22.png";
 import Cosmetics from "../../assets/images/Categories/Cosmetics.png";
@@ -28,7 +27,6 @@ import Drayer from "../../assets/images/Categories/Drayer.png";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { reset } from "../../redux/product/productSlice";
-import CategorySelector from "./CategorySelector";
 import { animateScroll as scroll } from "react-scroll";
 import DynamicSidebar from "../Sidebar/DynamicSidebar";
 import H1 from "../../assets/images/Categories/H1.png";
@@ -62,24 +60,22 @@ const ShopCategoriesWithSidebar = ({
   pageTop,
   categoriesMarginTop,
   showSidebar,
-  setShowSidebar,
   iconTop,
   extraGap,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const [toggle, setToggle] = useState(false);
 
   const handleScroll = () => {
     scroll.scrollToTop();
   };
 
-  const pathChecker = (path) => {
-    if (path == "/shop" || path == "/shop/category") {
-      return true;
-    }
-  };
+  // const pathChecker = (path) => {
+  //   if (path == "/shop" || path == "/shop/category") {
+  //     return true;
+  //   }
+  // };
 
   return (
     <>
@@ -537,13 +533,13 @@ const CategoriesSidebar = styled.div`
     background: ${(props) => props.theme.body};
   }
 `;
-const SelectCategories = styled.div`
-  position: absolute;
-  left: 10px;
-  top: 35px;
-  width: 325px;
-  z-index: 999;
-`;
+// const SelectCategories = styled.div`
+//   position: absolute;
+//   left: 10px;
+//   top: 35px;
+//   width: 325px;
+//   z-index: 999;
+// `;
 const HoverButton = styled.button`
   background: none;
   border: none;

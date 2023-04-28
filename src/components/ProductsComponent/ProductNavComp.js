@@ -23,7 +23,6 @@ const ProductNavComp = () => {
     {
       title: "Rated",
     },
-    ,
     {
       title: "Price",
       icon: priceDropDown,

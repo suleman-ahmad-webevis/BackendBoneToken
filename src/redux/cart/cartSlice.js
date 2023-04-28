@@ -16,17 +16,17 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      // const itemIndex = state.cartItems.findIndex(
-      //   (item) => item._id === action.payload._id
-      // );
-      // if (itemIndex >= 0) {
-      //   state.cartItems[itemIndex].cartQuantity += 1;
-      //   toast.success("Product quantity increased", { theme: "colored" });
-      // } else {
-      //   const tempProduct = { ...action.payload, cartQuantity: 1 };
-      //   state.cartItems.push(tempProduct);
-      //   toast.success("Product added to cart ", { theme: "colored" });
-      // }
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      if (itemIndex >= 0) {
+        state.cartItems[itemIndex].cartQuantity += 1;
+        toast.success("Product quantity increased", { theme: "colored" });
+      } else {
+        const tempProduct = { ...action.payload, cartQuantity: 1 };
+        state.cartItems.push(tempProduct);
+        toast.success("Product added to cart ", { theme: "colored" });
+      }
     },
     removeFromCart(state, action) {
       // const filteredCartItems = state.cartItems.filter(
@@ -83,12 +83,13 @@ const cartSlice = createSlice({
     },
     incQuantity(state, action) {
       //This function is for product detail
-      const { singlePro, selectedPro, quantity, navigate } = action.payload;
+      const { singlePro, selectedPro, navigate } = action.payload;
       const newSinglePro = { ...singlePro };
       newSinglePro.selectedProDetail = selectedPro;
       const itemIndex = state.cartItems.findIndex(
         (item) => item._id === newSinglePro._id
       );
+      console.log(itemIndex);
       // if (itemIndex >= 0) {
       //   state.cartItems[itemIndex].cartQuantity += quantity > 0 ? quantity : 1;
       //   toast.success("Product added to cart ", { theme: "colored" });
@@ -101,7 +102,6 @@ const cartSlice = createSlice({
       state.cartItems.push(newSinglePro);
       toast.success("Product added to cart ", { theme: "colored" });
       navigate("/checkout");
-      
     },
     addToYourCart(state, action) {
       const { selectedPro } = action.payload;
@@ -120,7 +120,7 @@ const cartSlice = createSlice({
     },
     removeFromYourCart(state, action) {
       const removedFromCart = state.cartItems.filter(
-        (cartItem) => cartItem?.minRetailPrice != action.payload
+        (cartItem) => cartItem?.minRetailPrice !== action.payload
       );
       state.cartItems = removedFromCart;
       toast.info("Product removed from card", { theme: "colored" });
@@ -150,7 +150,7 @@ const cartSlice = createSlice({
       itemIndex = state.cartItems.findIndex(
         (item) => item.minRetailPrice === action.payload.minRetailPrice
       );
-      if (action.payload.type == "inc") {
+      if (action.payload.type === "inc") {
         if (itemIndex >= 0) {
           state.cartItems[itemIndex].quantity += 1;
           state.cartItems[itemIndex].itemTotalPrice =

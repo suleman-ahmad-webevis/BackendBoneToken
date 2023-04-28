@@ -7,7 +7,7 @@ import BinancePay from "../../assets/images/Tokenomics/BinancePay.png";
 import Buy from "../../assets/images/Tokenomics/buy.png";
 import CBig from "../../assets/images/Tokenomics/CBig.png";
 import SBig from "../../assets/images/Tokenomics/SBig.png";
-import HeaderBoneTwo from "../../assets/images/Tokenomics/HeaderBoneTwo.png";
+// import HeaderBoneTwo from "../../assets/images/Tokenomics/HeaderBoneTwo.png";
 // import Paw from "../../assets/images/Tokenomics/Paw.png";
 // import Paws from "../../assets/images/Tokenomics/Paws.png";
 // import Swap from "../../assets/images/Tokenomics/swap.png";
@@ -25,7 +25,7 @@ import {
   BuyTokenText,
   CheckToken,
   Coin,
-  Coins,
+  // Coins,
   Coinswap,
   Cointext,
   Deck,
@@ -37,7 +37,7 @@ import {
   TextWrap,
   TNCardsSec,
   TNPage,
-  TNSidebar,
+  // TNSidebar,
   Token,
   TokenData,
   TokenHeading,
@@ -57,7 +57,7 @@ const Tokenomics = () => {
           {/* FirstCard */}
           <Token>
             <TokenHeading>
-              <Img src={DogToken} />
+              <Img src={DogToken} alt='Dog-token' />
               <GlobalHeading FontSize="22px" Color="#fff">
                 $DOG token
               </GlobalHeading>
@@ -149,7 +149,7 @@ const Tokenomics = () => {
               <h2>Check token on</h2>
               <hr />
             </BuyTokenText>
-            <img src={M} style={{ width: "53px", marginBottom: "10px" }} />
+            <img src={M} style={{ width: "53px", marginBottom: "10px" }} alt='M' />
           </BuyToken>
         </Section>
       </TNCardsSec>

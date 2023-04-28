@@ -5,7 +5,6 @@ import FileIcon from "../../assets/images/Certificate/FileIcon.png";
 import { Img } from "../../GlobalStyles";
 
 const DogInfo = ({ regDog }) => {
-
   const LDogInfo = [
     {
       title: "Breed",
@@ -91,7 +90,10 @@ const DogInfo = ({ regDog }) => {
         <DogSale>
           <Img src={FileIcon} />
           <p>Dog sale contract link:</p>
-          <a> https://MyDogData.com/DogSaleContract14273</a>
+          <a href="www.google.com">
+            {" "}
+            https://MyDogData.com/DogSaleContract14273
+          </a>
         </DogSale>
         <DogSale>
           <p>Asset value:</p>

@@ -7,7 +7,7 @@ const TabProductCard = ({ product }) => {
   const navigate = useNavigate();
   return (
     <>
-      <TProCard>
+      <TProCard key={product._id}>
         <Img
           src={product?.productImages[0]?.secureUrl}
           onClick={() => {

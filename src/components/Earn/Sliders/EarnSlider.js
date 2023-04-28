@@ -2,11 +2,9 @@ import React, { useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import styled from "styled-components";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/grid";
-
 // import required modules
 import { Grid, Navigation } from "swiper";
 import dog from "../../../assets/images/Earn/dog.png";
@@ -16,8 +14,7 @@ import prevButton from "../../../assets/images/Earn/up.png";
 const EarnSlider = () => {
   const swiper = useSwiper();
 
-  const [index, setIndex] = useState("");
-
+  // const [index, setIndex] = useState("");
   const data = [
     {
       image: dog,
@@ -62,13 +59,13 @@ const EarnSlider = () => {
     },
   ];
 
-  const handleMouseOver = (i) => {
-    setIndex(i);
-  };
+  // const handleMouseOver = (i) => {
+  //   setIndex(i);
+  // };
 
-  const handleMouseOut = () => {
-    setIndex("");
-  };
+  // const handleMouseOut = () => {
+  //   setIndex("");
+  // };
 
   return (
     <SliderContainer>

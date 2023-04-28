@@ -13,41 +13,51 @@ export const MenuData = [
   {
     img: Shop,
     text: "Shop",
+    link: "/shop",
   },
   {
     img: MyDogs,
     text: "My Dogs",
+    link: "/my-dogs",
   },
   {
     img: Token,
     text: "Token",
+    link: "/tokenomics",
   },
   {
     img: DogForSale,
     text: "Dog For Sale",
+    link: "/dog-for-sale",
   },
   {
     img: CustomerService,
     text: "Service",
+    link: "/customer-service",
   },
   {
     img: Blog,
     text: "Blog",
+    link: "/blogs",
   },
   {
     img: Faq,
     text: "FAQ",
+    link: "/faq",
   },
   {
     img: Earn,
     text: "Earn",
+    link: "/to-earn",
   },
   {
     img: DogShow,
     text: "Dog Shows",
+    link: "/dog-shows",
   },
   {
     img: History,
     text: "History",
+    link: "/order-history",
   },
 ];

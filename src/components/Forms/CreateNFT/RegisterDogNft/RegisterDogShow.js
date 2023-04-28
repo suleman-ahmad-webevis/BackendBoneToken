@@ -4,9 +4,7 @@ import trophy from "../../../../assets/images/Trophy.png";
 import person from "../../../../assets/images/Person.png";
 import segments from "../../../../assets/images/Segments.png";
 import {
-  FieldError,
   Form,
-  FormButton,
   FormField,
   FormHeading,
   FormTextField,
@@ -14,11 +12,10 @@ import {
   PageChanged,
   RegisterDogContainer,
 } from "../../UserStyles";
-import { Button, Img } from "../../../../GlobalStyles";
+import { Img } from "../../../../GlobalStyles";
 import Countries from "../../Countries";
 import { PhoneIcon } from "../../UserStyles";
 import { useDispatch } from "react-redux";
-import { registerDogShowSchema } from "../../../../schema/createDogNftSchema";
 import { useNavigate } from "react-router-dom";
 import NFTFooter from "./NFTFooter";
 import { createDogNft } from "../../../../redux/createDogNft/createDogNftSlice";
@@ -32,6 +29,8 @@ const RegisterDogShow = () => {
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
   const [dogS, setDogS] = useState([]);
+  console.log(dogS);
+  console.log(setSessionData);
   const [dogShow, setDogShow] = useState({
     showName: sessionData[0]?.showName ?? "",
     officialShowName: sessionData[0]?.officialShowName ?? "",

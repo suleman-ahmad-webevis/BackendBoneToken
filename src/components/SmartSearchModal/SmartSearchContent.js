@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Img } from "../../GlobalStyles";
+import { Img } from "../../GlobalStyles";
 import Heading from "../Heading/Heading";
 import GenderButton from "./GenderButtons";
 import SeasonsButton from "./SeasonsButton";
