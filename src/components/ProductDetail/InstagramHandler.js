@@ -23,6 +23,7 @@ const InstagramHandler = () => {
         console.log("The error in getLoginStatus", err);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -70,6 +71,7 @@ const InstagramHandler = () => {
       }
     };
     getInstaAccount();
+    // eslint-disable-next-line
   }, [connectedFBPage]);
 
   const logInToFB = () => {

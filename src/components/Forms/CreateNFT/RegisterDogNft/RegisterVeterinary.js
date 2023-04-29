@@ -25,7 +25,9 @@ const RegisterVeterinay = () => {
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
   );
+  console.log(setSessionData);
   const [vac, setVac] = useState([]);
+  console.log(vac);
   const [vaccination, setVaccination] = useState({
     vacType: sessionData[0]?.vacType ?? "",
     vacSerialNo: sessionData[0]?.vacSerialNo ?? "",

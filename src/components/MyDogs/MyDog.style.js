@@ -1,30 +1,38 @@
 import styled from "styled-components";
 import { IoIosPeople } from "react-icons/io";
-import { BsMessenger } from "react-icons/bs";
 
 export const MyDogPage = styled.div`
-  display: flex;
-  gap: 1.6rem;
-  padding: 20px;
+ 
 `;
 
 export const MyDogContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 20px 10px;
   width: 100%;
+  padding: 20px;
 `;
 
 export const MyDogHeadBtns = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 1110px) {
+    flex-direction: column;
+    grid-gap: 10px;
+    div:nth-child(1) {
+      align-self: flex-start;
+    }
+    /* div:nth-child(2)
+    {
+      background: #79999D;
+    } */
+  }
 `;
 
 export const MyDogHeadBtn = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 5px;
 `;
 
 export const HeadButton = styled.button`
@@ -42,6 +50,15 @@ export const HeadButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 0px 20px;
+  @media screen and (max-width: 1400px) {
+    padding: 0px 12px;
+  }
+  @media screen and (max-width: 1300px) {
+    padding: 0px 8px;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+  }
 `;
 
 export const MessageBtn = styled.div`
@@ -50,7 +67,7 @@ export const MessageBtn = styled.div`
   align-items: center;
   background: #0e626d;
   padding: 0px 20px;
-  grid-gap: 10px;
+  grid-gap: 5px;
   border-radius: 10.0374px;
   font-weight: 300;
   font-size: 16px;
@@ -81,6 +98,9 @@ export const DogDetail = styled.div`
   flex: 1;
   grid-gap: 30px;
   flex-wrap: wrap;
+  @media screen and (max-width: 1110px) {
+    justify-content: center;
+  }
 `;
 
 export const DogDetails = styled.div`
@@ -124,9 +144,7 @@ export const MyDogCard = styled.div`
     font-weight: 900;
     font-size: 10px;
     line-height: 15px;
-    text-decoration-line: underline;
     color: #3980ea;
-    cursor: pointer;
   }
 `;
 
@@ -191,10 +209,6 @@ export const PersonalDetail = styled.div`
   }
 `;
 
-export const MyDogChat = styled.div`
-  align-self: flex-end;
-`;
-
 export const DetailText = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -253,10 +267,4 @@ export const DogVideo = styled.div`
   video {
     border-radius: 10px;
   }
-`;
-
-export const Icon = styled(BsMessenger)`
-  width: 40px;
-  height: 40px;
-  color: #a6ccea;
 `;

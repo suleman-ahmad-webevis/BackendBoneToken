@@ -25,7 +25,7 @@ import c22 from "../../assets/images/Categories/C22.png";
 import Cosmetics from "../../assets/images/Categories/Cosmetics.png";
 import Drayer from "../../assets/images/Categories/Drayer.png";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { reset } from "../../redux/product/productSlice";
 import { animateScroll as scroll } from "react-scroll";
 import DynamicSidebar from "../Sidebar/DynamicSidebar";

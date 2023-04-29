@@ -13,7 +13,6 @@ import {
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import {
   incDecQuantity,
-  removeFromCart,
   removeFromYourCart,
 } from "../../redux/cart/cartSlice";
 import ProductInfo from "./ProductInfoModal";

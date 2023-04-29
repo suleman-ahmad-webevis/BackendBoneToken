@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import {
   DogDetail,
   HeadButton,
-  Icon,
   MyDogContainer,
   MyDogPage,
   MyDogsWrapper,
   MyDogHeadBtns,
   MyDogHeadBtn,
-  MyDogChat,
   MessageBtn,
 } from "./MyDog.style";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +31,6 @@ const MyDog = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <MyDogPage>
         <MyDogContainer>
           <MyDogHeadBtns>
             <MyDogHeadBtn>
@@ -51,6 +48,12 @@ const MyDog = () => {
             </MyDogHeadBtn>
             <MyDogHeadBtn>
               <HeadButton bgColor="#0E626D">
+                <p>Dogs</p>
+              </HeadButton>
+              <HeadButton bgColor="#0E626D">
+                <p>Puppies</p>
+              </HeadButton>
+              <HeadButton bgColor="#0E626D">
                 <p>For sale</p>
               </HeadButton>
               <HeadButton bgColor="#0E626D">
@@ -62,14 +65,8 @@ const MyDog = () => {
               <HeadButton bgColor="#0E626D">
                 <p>Unpaid</p>
               </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>Unpaid</p>
-              </HeadButton>
               <HeadButton
                 bgColor="#0E626D"
-                // onClick={() => navigate("/settings", {
-                //   state:
-                // })}
               >
                 <Img src={MyDogSetting} alt="MyDogSetting" />
               </HeadButton>
@@ -91,11 +88,7 @@ const MyDog = () => {
               <h2>No Dog Nfts</h2>
             )}
           </MyDogsWrapper>
-          <MyDogChat>
-            <Icon />
-          </MyDogChat>
         </MyDogContainer>
-      </MyDogPage>
     </>
   );
 };

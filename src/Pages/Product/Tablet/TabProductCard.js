@@ -14,11 +14,15 @@ const TabProductCard = ({ product }) => {
             navigate(`/shop/product-detail/${product._id}`);
           }}
         />
-        <h5>{product.name}</h5>
-        <p>Soft paws</p>
+        <h5>{product?.name}</h5>
+        <p>
+          {product?.description.length > 50
+            ? `${product.description.slice(0, 50)}...read more`
+            : product.description}
+        </p>
         <h4>
           {" "}
-          € &nbsp;
+          €&nbsp;
           {product?.productInventory?.length &&
             product?.productInventory[0]?.minRetailPrice}
         </h4>

@@ -34,7 +34,7 @@ const Mobile = () => {
             {MenuData.map((value, index) => (
               <Menu key={index}>
                 <Img src={value.img} alt="Shop" />
-                <Link to={value.link}>
+                <Link to={value.link} style={{ textDecoration: "none" }}>
                   <h5>{value.text}</h5>
                 </Link>
               </Menu>

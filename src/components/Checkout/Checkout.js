@@ -44,6 +44,7 @@ const CheckOut = () => {
   }, []);
   useEffect(() => {
     dispatch(getCartTotalAmount());
+    // eslint-disable-next-line
   }, [cartQuantityIs]);
 
   return (

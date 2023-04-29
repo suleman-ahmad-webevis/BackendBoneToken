@@ -15,9 +15,31 @@ export const PTabHeader = styled.div`
 `;
 
 export const FilterDropDown = styled.div`
+  position: relative;
   h5 {
     font-size: 14px;
     font-weight: 500;
+    color: rgba(27, 21, 61, 0.55);
+  }
+`;
+
+export const Filters = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  background: #fff;
+`;
+
+export const FilterItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  h5 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.24px;
     color: rgba(27, 21, 61, 0.55);
   }
 `;
@@ -61,12 +83,12 @@ export const PTabTitle = styled.h5`
     font-size: 30px;
   }
   @media screen and (max-width: 840px) {
-    font-size: 26px;
+    font-size: 45px;
   }
 `;
 
 export const PTabProductList = styled.div`
-  height: 1020px;
+  height: 100vh;
   overflow-y: auto;
   display: flex;
   justify-content: space-between;

@@ -9,7 +9,6 @@ import {
   FormField,
   FormHeading,
   FormTextField,
-  NextButton,
   PageChanged,
   RegisterDogContainer,
 } from "../../UserStyles";
