@@ -100,7 +100,7 @@ const Tokenomics = () => {
               <h2>Check token on</h2>
               <hr />
             </BuyTokenText>
-            <img src={M} style={{ width: "53px", marginBottom: "10px" }} />
+            <img src={M} style={{ width: "53px", marginBottom: "10px" }} alt='M'/>
           </BuyToken>
         </Section>
       </TNCardsSec>
@@ -110,7 +110,7 @@ const Tokenomics = () => {
           {/* FirstCard */}
           <Token>
             <TokenHeading>
-              <Img src={KennelClubToken} />
+              <Img src={KennelClubToken} alt='KCT'/>
               <GlobalHeading FontSize="22px" Color="#fff">
                 Kennel Club token
               </GlobalHeading>
@@ -163,7 +163,7 @@ const Tokenomics = () => {
             <Coinswap>
               <Coin>
                 <Cointext width="20%" height="auto">
-                  <Img src={CBig} />
+                  <Img src={CBig} alt='Cbig'/>
                   <Text>
                     <TextWrap Color="#20388C" FontSize="15px" FontWeight="700">
                       <p>From:</p> &nbsp; <span> KC</span>
@@ -189,13 +189,13 @@ const Tokenomics = () => {
               </Coin>
               {/* SwapImages */}
               <SwapImages>
-                <Img src={Swap} />
-                <Img src={SwapBtn} />
+                <Img src={Swap} alt='Swap'/>
+                <Img src={SwapBtn} alt='SwapBtn'/>
               </SwapImages>
               {/* SwapImages */}
               <Coin>
                 <Cointext width="20%" height="auto">
-                  <Img src={SBig} />
+                  <Img src={SBig} alt='sBig'/>
                   <Text>
                     <TextWrap Color="#20388C" FontSize="15px" FontWeight="700">
                       <p>To:</p> <span> &nbsp; $DOG </span>
