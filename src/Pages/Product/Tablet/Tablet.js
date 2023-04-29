@@ -12,7 +12,6 @@ import {
 import Loader from "../../../components/Loader/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductsFilterBar from "./ProductsFilterBar";
-import useBreakpoint from "../../../hooks/useBreakPoint";
 
 const Tablet = () => {
   const dispatch = useDispatch();
