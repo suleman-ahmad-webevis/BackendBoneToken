@@ -71,7 +71,7 @@ const MyDog = () => {
           {/* <Icon /> */}
         </MyDogHeadBtns>
         <MyDogsWrapper>
-          {allDogNfts.length ? (
+          {/* {allDogNfts.length ? (
             <DogDetail>
               {allDogNfts.map((value) => (
                 <MyDogCardComp
@@ -83,7 +83,7 @@ const MyDog = () => {
             </DogDetail>
           ) : (
             <h2>No Dog Nfts</h2>
-          )}
+          )} */}
         </MyDogsWrapper>
       </MyDogContainer>
     </>
