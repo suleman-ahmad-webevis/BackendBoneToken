@@ -26,7 +26,6 @@ const Tablet = () => {
     (state) => state.product
   );
   const [pageInc, setPageInc] = useState(1);
-  const { isSmallMobile, isMobile, isTablet } = useBreakpoint();
   const [limit] = useState(10);
   useEffect(() => {
     dispatch(reset());

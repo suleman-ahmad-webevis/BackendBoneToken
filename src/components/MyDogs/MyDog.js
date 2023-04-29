@@ -3,7 +3,6 @@ import {
   DogDetail,
   HeadButton,
   MyDogContainer,
-  MyDogPage,
   MyDogsWrapper,
   MyDogHeadBtns,
   MyDogHeadBtn,
@@ -31,64 +30,62 @@ const MyDog = () => {
   return (
     <>
       {isLoading && <Loader />}
-        <MyDogContainer>
-          <MyDogHeadBtns>
-            <MyDogHeadBtn>
-              <HeadButton
-                bgColor="#0E626D"
-                color="#fff"
-                onClick={() => navigate("/create-dog-nft/dog-register")}
-              >
-                + Add Dog
-              </HeadButton>
-              <MessageBtn>
-                <Img src={MsgIcon} alt="MsgIcon" />
-                <p>Messages</p>
-              </MessageBtn>
-            </MyDogHeadBtn>
-            <MyDogHeadBtn>
-              <HeadButton bgColor="#0E626D">
-                <p>Dogs</p>
-              </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>Puppies</p>
-              </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>For sale</p>
-              </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>Sold</p>
-              </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>Paid</p>
-              </HeadButton>
-              <HeadButton bgColor="#0E626D">
-                <p>Unpaid</p>
-              </HeadButton>
-              <HeadButton
-                bgColor="#0E626D"
-              >
-                <Img src={MyDogSetting} alt="MyDogSetting" />
-              </HeadButton>
-            </MyDogHeadBtn>
-            {/* <Icon /> */}
-          </MyDogHeadBtns>
-          <MyDogsWrapper>
-            {allDogNfts.length ? (
-              <DogDetail>
-                {allDogNfts.map((value) => (
-                  <MyDogCardComp
-                    expand={expand}
-                    setExpand={setExpand}
-                    value={value}
-                  />
-                ))}
-              </DogDetail>
-            ) : (
-              <h2>No Dog Nfts</h2>
-            )}
-          </MyDogsWrapper>
-        </MyDogContainer>
+      <MyDogContainer>
+        <MyDogHeadBtns>
+          <MyDogHeadBtn>
+            <HeadButton
+              bgColor="#0E626D"
+              color="#fff"
+              onClick={() => navigate("/create-dog-nft/dog-register")}
+            >
+              + Add Dog
+            </HeadButton>
+            <MessageBtn>
+              <Img src={MsgIcon} alt="MsgIcon" />
+              <p>Messages</p>
+            </MessageBtn>
+          </MyDogHeadBtn>
+          <MyDogHeadBtn>
+            <HeadButton bgColor="#0E626D">
+              <p>Dogs</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <p>Puppies</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <p>For sale</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <p>Sold</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <p>Paid</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <p>Unpaid</p>
+            </HeadButton>
+            <HeadButton bgColor="#0E626D">
+              <Img src={MyDogSetting} alt="MyDogSetting" />
+            </HeadButton>
+          </MyDogHeadBtn>
+          {/* <Icon /> */}
+        </MyDogHeadBtns>
+        <MyDogsWrapper>
+          {allDogNfts.length ? (
+            <DogDetail>
+              {allDogNfts.map((value) => (
+                <MyDogCardComp
+                  expand={expand}
+                  setExpand={setExpand}
+                  value={value}
+                />
+              ))}
+            </DogDetail>
+          ) : (
+            <h2>No Dog Nfts</h2>
+          )}
+        </MyDogsWrapper>
+      </MyDogContainer>
     </>
   );
 };
