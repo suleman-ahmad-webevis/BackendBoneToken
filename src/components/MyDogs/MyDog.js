@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import MyDogCardComp from "./MyDogCardComp";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNfts } from "../../redux/createDogNft/createDogNftSlice";
-import Loader from "../Loader/Loader";
+// import Loader from "../Loader/Loader";
 import { Img } from "../../GlobalStyles";
 import MsgIcon from "../../assets/images/MyDog/MsgIcon.png";
 import MyDogSetting from "../../assets/images/MyDog/MyDogSetting.png";
@@ -25,7 +25,7 @@ const MyDog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [expand, setExpand] = useState(false);
-  const { allDogNfts, isLoading } = useSelector((state) => state.dogNft);
+  const { allDogNfts } = useSelector((state) => state.dogNft);
   useEffect(() => {
     dispatch(getAllNfts());
     // eslint-disable-next-line
@@ -33,7 +33,7 @@ const MyDog = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <MyDogContainer>
         {(isSmallMobile || isMobile) && <CommonMobNav />}
         {(isTablet || isSmallMobile || isMobile) && (
