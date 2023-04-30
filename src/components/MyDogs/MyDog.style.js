@@ -21,6 +21,7 @@ export const MyDogHeadBtns = styled.div`
   @media screen and (max-width: 1110px) {
     flex-direction: column;
     grid-gap: 10px;
+    align-items: flex-start;
     div:nth-child(1) {
       align-self: flex-start;
     }
