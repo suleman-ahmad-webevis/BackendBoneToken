@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { IoIosPeople } from "react-icons/io";
 
-export const MyDogPage = styled.div`
- 
-`;
+export const MyDogPage = styled.div``;
 
 export const MyDogContainer = styled.div`
   display: flex;
@@ -11,6 +9,9 @@ export const MyDogContainer = styled.div`
   gap: 2rem;
   width: 100%;
   padding: 20px;
+  @media screen and (max-width: 450px) {
+    padding: 20px 5px;
+  }
 `;
 
 export const MyDogHeadBtns = styled.div`
@@ -40,7 +41,7 @@ export const HeadButton = styled.button`
   border: 1px solid;
   border: 1.25467px solid #d1ebff;
   border-radius: 8px;
-  color: ${({ color }) => color ?? "#fff"};
+  color: #fff;
   font-weight: 300;
   font-size: 16px;
   line-height: 36px;
@@ -50,13 +51,22 @@ export const HeadButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 0px 20px;
+  white-space: nowrap;
   @media screen and (max-width: 1400px) {
     padding: 0px 12px;
   }
   @media screen and (max-width: 1300px) {
-    padding: 0px 8px;
+    padding: 0px 10px;
+  }
+  @media screen and (max-width: 1110px) {
+    background: ${({ mobBgColor }) => mobBgColor ?? "#79999D"};
   }
   @media screen and (max-width: 900px) {
+    font-size: 14px;
+    line-height: 30px;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 0px 6px;
     font-size: 12px;
   }
 `;
@@ -82,6 +92,13 @@ export const MessageBtn = styled.div`
     border-radius: 100px;
     padding: 7px 10px;
     color: #45a8fb;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 14px;
+    line-height: 15px;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 12px;
   }
 `;
 

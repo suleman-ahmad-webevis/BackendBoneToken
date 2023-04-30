@@ -16,8 +16,12 @@ import Loader from "../Loader/Loader";
 import { Img } from "../../GlobalStyles";
 import MsgIcon from "../../assets/images/MyDog/MsgIcon.png";
 import MyDogSetting from "../../assets/images/MyDog/MyDogSetting.png";
+import useBreakpoint from "../../hooks/useBreakPoint";
+import CommonTabNav from "../CommonMTNav/CommonTabNav";
+import CommonMobNav from "../CommonMTNav/CommonMobNav";
 
 const MyDog = () => {
+  const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [expand, setExpand] = useState(false);
@@ -29,13 +33,17 @@ const MyDog = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <MyDogContainer>
+        {(isSmallMobile || isMobile) && <CommonMobNav />}
+        {(isTablet || isSmallMobile || isMobile) && (
+          <CommonTabNav Width="60%" />
+        )}
         <MyDogHeadBtns>
           <MyDogHeadBtn>
             <HeadButton
               bgColor="#0E626D"
-              color="#fff"
+              mobBgColor="#0E626D"
               onClick={() => navigate("/create-dog-nft/dog-register")}
             >
               + Add Dog
@@ -46,24 +54,12 @@ const MyDog = () => {
             </MessageBtn>
           </MyDogHeadBtn>
           <MyDogHeadBtn>
-            <HeadButton bgColor="#0E626D">
-              <p>Dogs</p>
-            </HeadButton>
-            <HeadButton bgColor="#0E626D">
-              <p>Puppies</p>
-            </HeadButton>
-            <HeadButton bgColor="#0E626D">
-              <p>For sale</p>
-            </HeadButton>
-            <HeadButton bgColor="#0E626D">
-              <p>Sold</p>
-            </HeadButton>
-            <HeadButton bgColor="#0E626D">
-              <p>Paid</p>
-            </HeadButton>
-            <HeadButton bgColor="#0E626D">
-              <p>Unpaid</p>
-            </HeadButton>
+            <HeadButton bgColor="#0E626D">Dogs</HeadButton>
+            <HeadButton bgColor="#0E626D">Puppies</HeadButton>
+            <HeadButton bgColor="#0E626D">For sale</HeadButton>
+            <HeadButton bgColor="#0E626D">Sold</HeadButton>
+            <HeadButton bgColor="#0E626D">Paid</HeadButton>
+            <HeadButton bgColor="#0E626D">Unpaid</HeadButton>
             <HeadButton bgColor="#0E626D">
               <Img src={MyDogSetting} alt="MyDogSetting" />
             </HeadButton>
