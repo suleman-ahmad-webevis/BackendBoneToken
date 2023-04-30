@@ -78,7 +78,7 @@ const MyDog = () => {
               ))}
             </DogDetail>
           ) : (
-            <h2 style={{ color: "#fff" }}>No, Dog Registered.</h2>
+            <h2 style={{ color: "#fff" }}>No, Dog Registered Yet.</h2>
           )}
         </MyDogsWrapper>
       </MyDogContainer>
