@@ -33,7 +33,7 @@ const MyDog = () => {
 
   return (
     <>
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
       <MyDogContainer>
         {(isSmallMobile || isMobile) && <CommonMobNav />}
         {(isTablet || isSmallMobile || isMobile) && (
