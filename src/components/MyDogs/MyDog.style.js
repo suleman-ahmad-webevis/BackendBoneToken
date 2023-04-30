@@ -18,10 +18,10 @@ export const MyDogHeadBtns = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  grid-gap: 10px;
   @media screen and (max-width: 1110px) {
     flex-direction: column;
     grid-gap: 10px;
-    align-items: flex-start;
     div:nth-child(1) {
       align-self: flex-start;
     }
