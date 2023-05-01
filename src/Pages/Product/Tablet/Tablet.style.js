@@ -20,6 +20,7 @@ export const FilterDropDown = styled.div`
     font-size: 14px;
     font-weight: 500;
     color: rgba(27, 21, 61, 0.55);
+    cursor: pointer;
   }
 `;
 
@@ -41,6 +42,7 @@ export const FilterItems = styled.div`
     line-height: 16px;
     letter-spacing: -0.24px;
     color: rgba(27, 21, 61, 0.55);
+    cursor: pointer;
   }
 `;
 

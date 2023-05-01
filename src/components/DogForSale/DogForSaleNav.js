@@ -1,42 +1,11 @@
-import priceDropDown from "../../assets/images/Filterbar/priceDropDown.png";
 import styled from "styled-components";
-
-const dogSaleNavData = [
-  {
-    title: "Price",
-    icon: priceDropDown,
-  },
-  {
-    title: "Country",
-    icon: priceDropDown,
-  },
-  {
-    title: "Breed",
-    icon: priceDropDown,
-  },
-  {
-    title: "Age",
-    icon: priceDropDown,
-  },
-  {
-    title: "Microchipped",
-    icon: priceDropDown,
-  },
-  {
-    title: "Posted at",
-    icon: priceDropDown,
-  },
-  {
-    title: "Gender",
-    icon: priceDropDown,
-  },
-];
+import { dogSaleNavData } from "./DFSNavData";
 
 const DogForSaleNav = () => {
   return (
     <DogSaleNavWrapper>
-      {dogSaleNavData.map((value) => (
-        <NavItem key={value._id}>
+      {dogSaleNavData.map((value, index) => (
+        <NavItem key={index}>
           <h1>{value.title}</h1>
           <img src={value.icon} alt="dog-for-sale" />
         </NavItem>
@@ -50,11 +19,14 @@ export const DogSaleNavWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80%;
-  border: 1px solid #dde4ff;
+  border: 1px solid rgba(14, 98, 109, 0.5);
   border-radius: 8px;
-  background: #79999d;
+  background: #fff;
   height: 45px;
   padding: 10px 15px;
+  @media screen and (max-width: 1300px) {
+    width: 90%;
+  }
 `;
 
 export const NavItem = styled.div`
@@ -65,7 +37,7 @@ export const NavItem = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    color: #fff;
+    color: #0e626d;
     @media screen and (max-width: 1400px) {
       font-size: 14px;
     }

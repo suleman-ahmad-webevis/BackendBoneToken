@@ -146,13 +146,16 @@ const ProductsFilterBar = () => {
                 onClick={() => setOpenFB(!openFB)}
                 style={{
                   transform: "translate(90%,10%)",
+                  cursor: "pointer",
                 }}
               >
                 x
               </p>
               <FilterItems>
                 {proNavData.map(({ title }, index) => (
-                  <h5 onClick={() => prodNavHandler(index)}>{title}</h5>
+                  <h5 key={index} onClick={() => prodNavHandler(index)}>
+                    {title}
+                  </h5>
                 ))}
               </FilterItems>
             </Filters>
