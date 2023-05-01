@@ -2,32 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Img } from "../../GlobalStyles";
 import styled from "styled-components";
-import priceDropDown from "../../assets/images/Filterbar/priceDropDown.png";
+import { proNavData } from "./ProNavData";
+
 const ProductNavComp = () => {
   const navigate = useNavigate();
-
-  const proNavData = [
-    { title: "All" },
-    {
-      title: "New",
-    },
-    {
-      title: "Featured",
-    },
-    {
-      title: "Popular",
-    },
-    {
-      title: "Recently Viewed",
-    },
-    {
-      title: "Rated",
-    },
-    {
-      title: "Price",
-      icon: priceDropDown,
-    },
-  ];
 
   const prodNavHandler = (index) => {
     if (index === 0) {

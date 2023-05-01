@@ -128,28 +128,28 @@ export const PTabCategories = styled.div`
   }
 `;
 
-export const CategoriesNav = styled(NavLink)`
+export const CategoriesNav = styled.p`
   text-decoration: none;
   white-space: nowrap;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(27, 21, 61, 0.55);
-
-  &.active {
-    color: #5b41ff;
-    ::before {
-      content: "";
-      display: block;
-      border-top: 0px solid black;
-      /* margin-bottom: 10px; */
-    }
-    ::after {
-      content: "";
-      display: block;
-      border-top: 1px solid #5b41ff;
-      margin-top: 10px;
-      width: 50px;
-    }
+  color: ${({ activeCat, activeIdx, keyIs }) =>
+    activeCat && activeIdx === keyIs ? "#5b41ff;" : "rgba(27, 21, 61, 0.55);"};
+  ::before {
+    content: "";
+    display: block;
+    border-top: 0px solid black;
+    /* margin-bottom: 10px; */
+  }
+  ::after {
+    content: "";
+    display: block;
+    border-top: ${({ activeCat, activeIdx, keyIs }) =>
+      activeCat && activeIdx === keyIs
+        ? "  1px solid #5b41ff;"
+        : "  0px solid #5b41ff;"};
+    margin-top: 10px;
+    width: 50px;
   }
 `;
 
