@@ -27,7 +27,7 @@ export const linkData = [
   },
   {
     image: dogsForSale,
-    text: "Dog For Sale",
+    text: "Dogs For Sale",
     path: "/dog-for-sale",
   },
   {

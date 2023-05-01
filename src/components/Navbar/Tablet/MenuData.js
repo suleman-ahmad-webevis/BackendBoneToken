@@ -27,7 +27,7 @@ export const MenuData = [
   },
   {
     img: DogForSale,
-    text: "Dog For Sale",
+    text: "Dogs For Sale",
     link: "/dog-for-sale",
   },
   {
