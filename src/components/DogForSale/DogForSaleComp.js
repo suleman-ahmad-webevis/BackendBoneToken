@@ -6,7 +6,7 @@ const DogForSaleComp = () => {
   return (
     <DogSaleComContainer>
       {/* <DogForSaleCard /> */}
-      <h5>No dog for sale found.</h5>
+      <h5 style={{ color: "#fff" }}>No dog for sale found.</h5>
     </DogSaleComContainer>
   );
 };

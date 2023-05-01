@@ -113,10 +113,6 @@ export const ProductsList = styled.div`
     border-left: none;
     border-radius: 10px;
   }
-
-  @media screen and (max-width: 1300px) {
-    grid-template-columns: 1fr 1fr;
-  }
   @media screen and (max-width: 760px) {
     grid-template-columns: 1fr 1fr;
   }

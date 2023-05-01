@@ -21,18 +21,20 @@ import mobFav from "../../../assets/images/LandingPage/MobFav.png";
 import mobChat from "../../../assets/images/LandingPage/MobChat.png";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/Navbar/FlagsDropDown.png";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTheProducts, reset } from "../../../redux/product/productSlice";
 import useBreakpoint from "../../../hooks/useBreakPoint";
+import { proNavData } from "./ProNavData";
 
 const ProductsFilterBar = () => {
-  console.log("I render");
+  const { search } = useLocation();
+  console.log("I render", search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //StatesForSearching
-  const [search, setSearch] = useState("");
+  const [searchPro, setSearchPro] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(setSearchParams);
   //StoreData
@@ -43,7 +45,7 @@ const ProductsFilterBar = () => {
 
   const searchHandler = () => {
     let obj = {
-      search,
+      search: searchPro,
       category,
     };
     dispatch(getTheProducts(obj));
@@ -52,6 +54,56 @@ const ProductsFilterBar = () => {
 
   const [openFB, setOpenFB] = useState(false);
   const { isSmallMobile, isMobile } = useBreakpoint();
+
+  //WhichRouteActive
+  const [activeCat, setActiveCat] = useState(false);
+  const [activeIdx, setActiveIndex] = useState(0);
+  const activeRoute = (path, index) => {
+    switch (path) {
+      case path:
+        setActiveCat(true);
+        setActiveIndex(index);
+        navigate(path);
+    }
+  };
+
+  const prodNavHandler = (index) => {
+    if (index === 0) {
+      navigate("/shop", {
+        state: {
+          index: index,
+        },
+      });
+    }
+    if (index === 1) {
+      navigate("/shop?new=true", {
+        state: {
+          index: index,
+        },
+      });
+    }
+    if (index === 2) {
+      navigate("/shop?featured=true", {
+        state: {
+          index: index,
+        },
+      });
+    }
+    if (index === 4) {
+      navigate("/shop/recently-viewed", {
+        state: {
+          index: index,
+        },
+      });
+    }
+    if (index === 5) {
+      navigate("/shop?rated=true", {
+        state: {
+          index: index,
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -99,13 +151,9 @@ const ProductsFilterBar = () => {
                 x
               </p>
               <FilterItems>
-                <h5>All</h5>
-                <h5>New </h5>
-                <h5>Featured</h5>
-                <h5>Popular</h5>
-                <h5>Recently Viewed</h5>
-                <h5>Rated</h5>
-                <h5>Price</h5>
+                {proNavData.map(({ title }, index) => (
+                  <h5 onClick={() => prodNavHandler(index)}>{title}</h5>
+                ))}
               </FilterItems>
             </Filters>
           )}
@@ -114,8 +162,8 @@ const ProductsFilterBar = () => {
           <input
             type="text"
             placeholder="Search Product"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchPro}
+            onChange={(e) => setSearchPro(e.target.value)}
           />
           <Img
             src={Search}
@@ -127,8 +175,16 @@ const ProductsFilterBar = () => {
       </PTabHeader>
       <PTabTitle>Find your suitable product now.</PTabTitle>
       <PTabCategories>
-        {categoriesData.map((value) => (
-          <CategoriesNav to={value.path}>{value.title}</CategoriesNav>
+        {categoriesData.map((value, index) => (
+          <CategoriesNav
+            key={index}
+            onClick={() => activeRoute(value.path, index)}
+            activeIdx={activeIdx}
+            activeCat={activeCat}
+            keyIs={index}
+          >
+            {value.title}
+          </CategoriesNav>
         ))}
       </PTabCategories>
     </>

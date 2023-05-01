@@ -9,20 +9,21 @@ const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
   const pathname = window?.location?.pathname;
   const { id, name } = useParams();
 
-  useEffect(() => {
-  }, [pathname]);
+  useEffect(() => {}, [pathname]);
   return (
     <CategoriesSidebar toggle={toggle}>
       {(pathname === "/" ||
         pathname === "/shop" ||
-        pathname === "/shop/category") && (
+        pathname === "/shop/category" ||
+        pathname === "/shop/recently-viewed") && (
         <SelectCategories>
           <CategorySelector />
         </SelectCategories>
       )}
       {pathname === "/shop" ||
       pathname === `/shop/product-detail/${id}` ||
-      pathname === `/shop/category?${name}` ? (
+      pathname === `/shop/category?${name}` ||
+      pathname === "/shop/recently-viewed" ? (
         <ShopCategoriesWithSidebar
           //WithItsOwnSidebar
           pageTop="15px"

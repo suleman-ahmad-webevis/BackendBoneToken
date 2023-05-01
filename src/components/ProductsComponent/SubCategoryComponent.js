@@ -58,16 +58,6 @@ export const ProductsList = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: none;
   }
-  @media screen and (max-width: 1350px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media screen and (max-width: 990px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 1fr;
-    align-self: center;
-  }
 `;
 
 const NoProducts = styled.div`

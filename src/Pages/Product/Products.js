@@ -27,16 +27,7 @@ const Products = () => {
 };
 
 export const ProductPageContainer = styled.div`
-  /* display: flex; */
   padding: 20px 0;
-  /* grid-gap: 5px; */
-  /* position: relative; */
-  /* @media screen and (max-width: 900px) {
-    margin-top: 60px;
-  } */
-  /* @media screen and (max-width: 760px) {
-    margin-top: 60px;
-  } */
 `;
 
 export const ProductsListContainer = styled.div`
@@ -44,10 +35,8 @@ export const ProductsListContainer = styled.div`
   flex-direction: column;
   grid-gap: 5px;
   width: 100%;
-  @media screen and (max-width: 760px) {
-    width: 100%;
-  }
 `;
+
 export const CategoriesButton = styled.div`
   background: #64baff;
   border-radius: 8px;

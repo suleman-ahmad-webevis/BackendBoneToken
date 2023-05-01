@@ -40,14 +40,6 @@ const Button = styled(NavLink)`
   text-align: center;
   color: #9fb4ff;
   text-decoration: none;
-
-  &.active {
-    color: #ffffff;
-    background: #79999d;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border: 1px solid #79999d;
-    border-radius: 8px;
-  }
 `;
 export const ButtonToggle = styled(Button)`
   &:hover {
@@ -57,6 +49,15 @@ export const ButtonToggle = styled(Button)`
     }
     img {
       display: none;
+    }
+  }
+  &.active {
+    background: #79999d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid #79999d;
+    border-radius: 8px;
+    p {
+      color: #fff;
     }
   }
 `;
