@@ -64,6 +64,7 @@ const ProductsFilterBar = () => {
         setActiveCat(true);
         setActiveIndex(index);
         navigate(path);
+        break;
       default:
         setActiveCat(false);
         setActiveIndex(0);
