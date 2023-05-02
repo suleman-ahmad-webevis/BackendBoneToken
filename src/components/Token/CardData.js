@@ -5,14 +5,14 @@ import ESmall from "../../assets/images/Tokenomics/Tab/ESmall.png";
 export const CardData = [
   {
     imgOne: S,
-    heading: "$DOG token",
+    heading: "$DOG tokens",
     imgTwo: BSmall,
     bgColor: "rgba(109, 88, 14, 0.15);",
     headBgColor: "rgba(109, 88, 14, 0.3);",
   },
   {
     imgOne: C,
-    heading: "$DOG token",
+    heading: "$DOG tokens",
     imgTwo: ESmall,
     bgColor: "rgba(14, 109, 103, 0.15);",
     headBgColor: "rgba(14, 109, 103, 0.3);",
