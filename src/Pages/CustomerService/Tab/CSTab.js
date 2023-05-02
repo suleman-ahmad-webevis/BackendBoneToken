@@ -1,13 +1,36 @@
 import React from "react";
-import styled from "styled-components";
 import { csFirstBox, csSecondBox } from "./CSData";
 import { Img } from "../../../GlobalStyles";
 import UpdateMe from "../../../assets/images/CustomerService/UpdateMe.png";
 import Chat from "../../../assets/images/CustomerService/Chat.png";
+import CommonMobNav from "../../../components/CommonMTNav/CommonMobNav";
+import useBreakpoint from "../../../hooks/useBreakPoint";
+import CommonTabNav from "../../../components/CommonMTNav/CommonTabNav";
+import {
+  CSCard,
+  CSHeading,
+  CSPolicySection,
+  CSTabContainer,
+  CountriesSection,
+  Country,
+  CountryName,
+  OInputSection,
+  OrderUpdateSection,
+  ShippingCostHeading,
+  ShippingCostSection,
+  UpdateSection,
+} from "./CSTab.style";
+import {
+  sCostOne,
+  sCostTwo,
+} from "../../../components/CustomerService/Tab/CSTabData";
 
 const CSTab = () => {
+  const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
     <CSTabContainer>
+      {(isSmallMobile || isMobile) && <CommonMobNav Width="100%" />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav Width="100%" />}
       <CSHeading>
         <h5>Customer Service</h5>
       </CSHeading>
@@ -40,112 +63,52 @@ const CSTab = () => {
       </OrderUpdateSection>
       <ShippingCostSection>
         <ShippingCostHeading>
-          <h5>Shipping costs</h5>
-          <h5>up to 5kg</h5>
-          <h5>up to 30kg</h5>
+          <h5 style={{ width: "33%" }}> Shipping costs</h5>
+          <h5 style={{ width: "33%" }}>up to 5kg</h5>
+          <h5 style={{ width: "33%" }}>up to 30kg</h5>
         </ShippingCostHeading>
-        {/* <CountriesSection>
-        </CountriesSection> */}
+        <CountriesSection>
+          {sCostOne.map(({ name, fiveKg, thirtyKg, fontSize }) => (
+            <>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{name}</CountryName>
+              </Country>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{fiveKg}</CountryName>
+              </Country>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{thirtyKg}</CountryName>
+              </Country>
+            </>
+          ))}
+          {sCostTwo.map(({ name, fiveKg, thirtyKg, fontSize }) => (
+            <>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{name}</CountryName>
+              </Country>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{fiveKg}</CountryName>
+              </Country>
+              <Country>
+                <h5>Country</h5>
+                <CountryName fontSize={fontSize}>{thirtyKg}</CountryName>
+              </Country>
+            </>
+          ))}
+        </CountriesSection>
       </ShippingCostSection>
+      <CSPolicySection>
+        <h5>Disclaimer</h5>
+        <h5>Privacy</h5>
+        <h5>Terms and Conditions</h5>
+      </CSPolicySection>
     </CSTabContainer>
   );
 };
 
 export default CSTab;
-
-export const CSTabContainer = styled.div`
-  padding: 20px 20px 10px 10px;
-  display: flex;
-  flex-direction: column;
-  grid-gap: 15px;
-`;
-
-export const CSHeading = styled.div`
-  h5 {
-    font-weight: 900;
-    font-size: 36px;
-    line-height: 42px;
-  }
-`;
-
-export const CSCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #f4f4f4;
-  border-radius: 10px;
-  width: 90%;
-  grid-gap: 15px;
-  padding: 20px 10px;
-  h5 {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19px;
-  }
-  p {
-    font-size: 14px;
-    line-height: 19px;
-    font-weight: 400;
-  }
-`;
-
-export const OrderUpdateSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #f4f4f4;
-  border-radius: 10px;
-  width: 90%;
-  grid-gap: 15px;
-  padding: 20px 10px;
-  h5 {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19px;
-  }
-`;
-
-export const OInputSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  grid-gap: 10px;
-  p {
-    font-weight: 400;
-    font-size: 12px;
-  }
-  input {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
-    padding: 20px 10px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 18.78px;
-    width: 100%;
-  }
-`;
-
-export const UpdateSection = styled.div`
-  align-self: center;
-  display: flex;
-  grid-gap: 15px;
-  align-items: center;
-`;
-
-export const ShippingCostSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #f4f4f4;
-  border-radius: 10px;
-  width: 80%; //TemporaryWidth
-`;
-
-export const ShippingCostHeading = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const CountriesSection = styled.div`
-  display: flex;
-  grid-gap: 10px;
-  width: 100%;
-`;

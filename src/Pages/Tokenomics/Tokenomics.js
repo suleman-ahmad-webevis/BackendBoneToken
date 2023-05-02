@@ -47,265 +47,324 @@ import {
 } from "./Tokenomics.style";
 import { GlobalHeading, Img } from "../../GlobalStyles";
 import { boneTokenData, clubToke } from "./TokenomicsData";
+import useBreakpoint from "../../hooks/useBreakPoint";
+import TokenTab from "../../components/Token/TokenTab";
 
 const Tokenomics = () => {
+  const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
-    <TNPage>
-      <TNCardsSec>
-        <Section>
-          {/*------------------------------------1stSection------------------------------------ */}
-          {/* FirstCard */}
-          <Token>
-            <TokenHeading>
-              <Img src={DogToken} alt='Dog-token' />
-              <GlobalHeading FontSize="22px" Color="#fff">
-                $DOG token
-              </GlobalHeading>
-              <Img
-                src={BinanceSmall}
-                alt="BinanceSmall"
-                style={{
-                  position: "absolute",
-                  right: "9px",
-                  top: "9px",
-                }}
-              />
-            </TokenHeading>
-            <TokenItems>
-              {boneTokenData.map((elem, ind) => (
-                <TokenData key={ind}>
-                  <TokenText RespFZ="16px" color="#92A3BF">
-                    {elem.title}:
-                  </TokenText>
-                  <TokenText FW="700" FZ="20px" RespFZ="14px" color="#92A3BF">
-                    {elem.value}
-                  </TokenText>
-                </TokenData>
-              ))}
-            </TokenItems>
-          </Token>
-        </Section>
-        <Section>
-          {/* SecondCard */}
-          <BuyToken>
-            <BuyTokenText>
-              <h2>Choose Exchange to Buy Token</h2>
-              <hr />
-            </BuyTokenText>
-            <CheckToken>
-              <Img src={BitForex} alt="BitForex" />
-              <Img src={HotBit} alt="HotBit" />
-            </CheckToken>
-            <BuyTokenText>
-              <h2>Check token on</h2>
-              <hr />
-            </BuyTokenText>
-            <img src={M} style={{ width: "53px", marginBottom: "10px" }} alt='M'/>
-          </BuyToken>
-        </Section>
-      </TNCardsSec>
-      <TNCardsSec>
-        <Section>
-          {/*------------------------------------2ndSection------------------------------------ */}
-          {/* FirstCard */}
-          <Token>
-            <TokenHeading>
-              <Img src={KennelClubToken} alt='KCT'/>
-              <GlobalHeading FontSize="22px" Color="#fff">
-                Kennel Club token
-              </GlobalHeading>
-              <Img
-                src={EthereumSmall}
-                alt="EthereumSmall"
-                style={{ position: "absolute", right: "9px", top: "9px" }}
-              />
-            </TokenHeading>
-            <TokenItems>
-              {clubToke.map((elem, ind) => (
-                <TokenData key={ind}>
-                  <TokenText RespFZ="16px" color="#92A3BF">
-                    {elem.title}:
-                  </TokenText>
-                  <TokenText FW="700" FZ="20px" RespFZ="14px" color="#92A3BF">
-                    {elem.value}
-                  </TokenText>
-                </TokenData>
-              ))}
-            </TokenItems>
-          </Token>
-        </Section>
-        <Section>
-          {/* SecondCard */}
-          <BuyToken>
-            <BuyTokenText>
-              <h2>Buy Token</h2>
-              <hr />
-            </BuyTokenText>
-            <CheckToken>
-              <img src={BinancePay} alt="BinancePay" />
-              <img src={Buy} alt="Buy" />
-            </CheckToken>
-            <BuyTokenText>
-              <h2>Check token on</h2>
-              <hr />
-            </BuyTokenText>
-            <img src={M} style={{ width: "53px", marginBottom: "10px" }} alt='M' />
-          </BuyToken>
-        </Section>
-      </TNCardsSec>
-      <Deck>
-        <ExchangeWrapper>
-          <ExchangeSec>
-            <ExchangeText FZ="21px" color="#2775CA" align M>
-              Swap
-            </ExchangeText>
-            <Img src={SwapLine} alt="SwapLine" style={{ width: "90%" }} />
-            <Coinswap>
-              <Coin>
-                <Cointext width="20%" height="auto">
-                  <Img src={CBig} alt='Cbig'/>
-                  <Text>
-                    <TextWrap Color="#20388C" FontSize="15px" FontWeight="700">
-                      <p>From:</p> &nbsp; <span> KC</span>
-                    </TextWrap>
-                    <TextWrap Color="#20388C" FontSize="22px" FontWeight="700">
-                      <span> 2500000</span>
-                    </TextWrap>
-                    <TextWrap Color="#3D6EFF" FontSize="12px" FontWeight="700">
-                      <p>Balance:</p> &nbsp;
-                      <p style={{ color: "#2F3641", fontWeight: "900" }}>
-                        {" "}
-                        2500000{" "}
-                      </p>
-                      &nbsp;
-                      <span>MAX</span>
-                    </TextWrap>
-                    <TextWrap Color="#20388C" FontSize="22px" FontWeight="700">
-                      {" "}
-                      <span>$25</span>
-                    </TextWrap>
-                  </Text>
-                </Cointext>
-              </Coin>
-              {/* SwapImages */}
-              <SwapImages>
-                <Img src={Swap} alt='Swap'/>
-                <Img src={SwapBtn} alt='SwapBtn'/>
-              </SwapImages>
-              {/* SwapImages */}
-              <Coin>
-                <Cointext width="20%" height="auto">
-                  <Img src={SBig} alt='sBig'/>
-                  <Text>
-                    <TextWrap Color="#20388C" FontSize="15px" FontWeight="700">
-                      <p>To:</p> <span> &nbsp; $DOG </span>
-                    </TextWrap>
-                    <TextWrap Color="#20388C" FontSize="22px" FontWeight="700">
-                      <span> 25 </span>
-                    </TextWrap>
-                    <TextWrap Color="#3D6EFF" FontSize="12px" FontWeight="700">
-                      <p>Balance:</p> &nbsp;
-                      <p style={{ color: "#2F3641", fontWeight: "900" }}>
-                        0.00{" "}
-                      </p>{" "}
-                      &nbsp;
-                      <span> MAX </span>
-                    </TextWrap>
-                    <TextWrap Color="#20388C" FontSize="22px" FontWeight="700">
-                      <span> $25</span>
-                    </TextWrap>
-                  </Text>
-                </Cointext>
-              </Coin>
-            </Coinswap>
-          </ExchangeSec>
-          {/* <ImageLine src={Line} alt="divider" />
+    <>
+      {isDesktop ? (
+        <TNPage>
+          <TNCardsSec>
+            <Section>
+              {/*------------------------------------1stSection------------------------------------ */}
+              {/* FirstCard */}
+              <Token>
+                <TokenHeading>
+                  <Img src={DogToken} alt="Dog-token" />
+                  <GlobalHeading FontSize="22px" Color="#fff">
+                    $DOG token
+                  </GlobalHeading>
+                  <Img
+                    src={BinanceSmall}
+                    alt="BinanceSmall"
+                    style={{
+                      position: "absolute",
+                      right: "9px",
+                      top: "9px",
+                    }}
+                  />
+                </TokenHeading>
+                <TokenItems>
+                  {boneTokenData.map((elem, ind) => (
+                    <TokenData key={ind}>
+                      <TokenText RespFZ="16px" color="#92A3BF">
+                        {elem.title}:
+                      </TokenText>
+                      <TokenText
+                        FW="700"
+                        FZ="20px"
+                        RespFZ="14px"
+                        color="#92A3BF"
+                      >
+                        {elem.value}
+                      </TokenText>
+                    </TokenData>
+                  ))}
+                </TokenItems>
+              </Token>
+            </Section>
+            <Section>
+              {/* SecondCard */}
+              <BuyToken>
+                <BuyTokenText>
+                  <h2>Choose Exchange to Buy Token</h2>
+                  <hr />
+                </BuyTokenText>
+                <CheckToken>
+                  <Img src={BitForex} alt="BitForex" />
+                  <Img src={HotBit} alt="HotBit" />
+                </CheckToken>
+                <BuyTokenText>
+                  <h2>Check token on</h2>
+                  <hr />
+                </BuyTokenText>
+                <img
+                  src={M}
+                  style={{ width: "53px", marginBottom: "10px" }}
+                  alt="M"
+                />
+              </BuyToken>
+            </Section>
+          </TNCardsSec>
+          <TNCardsSec>
+            <Section>
+              {/*------------------------------------2ndSection------------------------------------ */}
+              {/* FirstCard */}
+              <Token>
+                <TokenHeading>
+                  <Img src={KennelClubToken} alt="KCT" />
+                  <GlobalHeading FontSize="22px" Color="#fff">
+                    Kennel Club token
+                  </GlobalHeading>
+                  <Img
+                    src={EthereumSmall}
+                    alt="EthereumSmall"
+                    style={{ position: "absolute", right: "9px", top: "9px" }}
+                  />
+                </TokenHeading>
+                <TokenItems>
+                  {clubToke.map((elem, ind) => (
+                    <TokenData key={ind}>
+                      <TokenText RespFZ="16px" color="#92A3BF">
+                        {elem.title}:
+                      </TokenText>
+                      <TokenText
+                        FW="700"
+                        FZ="20px"
+                        RespFZ="14px"
+                        color="#92A3BF"
+                      >
+                        {elem.value}
+                      </TokenText>
+                    </TokenData>
+                  ))}
+                </TokenItems>
+              </Token>
+            </Section>
+            <Section>
+              {/* SecondCard */}
+              <BuyToken>
+                <BuyTokenText>
+                  <h2>Buy Token</h2>
+                  <hr />
+                </BuyTokenText>
+                <CheckToken>
+                  <img src={BinancePay} alt="BinancePay" />
+                  <img src={Buy} alt="Buy" />
+                </CheckToken>
+                <BuyTokenText>
+                  <h2>Check token on</h2>
+                  <hr />
+                </BuyTokenText>
+                <img
+                  src={M}
+                  style={{ width: "53px", marginBottom: "10px" }}
+                  alt="M"
+                />
+              </BuyToken>
+            </Section>
+          </TNCardsSec>
+          <Deck>
+            <ExchangeWrapper>
               <ExchangeSec>
-                <ExchangeText
-                  FZ="21px"
-                  color="#2775CA"
-                  align
-                  M
-                  onClick={() => {
-                    setOpacity(!true);
-                  }}
-                >
-                  Liquidity
+                <ExchangeText FZ="21px" color="#2775CA" align M>
+                  Swap
                 </ExchangeText>
-                <hr />
-                <Coinswap opacity={opacity}>
-                  <CoinsWrapper>
-                    <Coins>
-                      <img src={T} />
-                      <h3>$0.00</h3>
-                    </Coins>
-                    <Coins>
-                      <img src={E} />
-                      <h3>$0.00</h3>
-                    </Coins>
-                    <Coins>
-                      <img src={Dollar} />
-                      <h3>$0.00</h3>
-                    </Coins>
-                  </CoinsWrapper>
-                  <Coinswap D opacity={opacity}>
-                    <Coin>
-                      <Cointext>
-                        <Text>
-                          <TextWrap>
-                            From:
-                            <img
-                              src={Paws}
-                              title="swap"
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                            KC
-                          </TextWrap>
-                          <TextWrap>
-                            <span> 00.00</span>
-                          </TextWrap>
-                          <TextWrap>Balance: 25.00 MAX</TextWrap>
-                        </Text>
-                      </Cointext>
-                    </Coin>
-                    <Coin align>
-                      <Cointext>
-                        <img
-                          src={Swap}
-                          title="swap"
-                          style={{ transform: "rotate(90deg)" }}
-                          width="64px"
-                          height="60px"
-                        />
-                      </Cointext>
-                    </Coin>
-                    <Coin>
-                      <Cointext>
-                        <Text>
-                          <TextWrap>
-                            To:
-                            <img
-                              src={HeaderBoneTwo}
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                            <span> Bone</span>
-                          </TextWrap>
-                          <TextWrap>
-                            <span> 00.00</span>
-                          </TextWrap>
-                          <TextWrap>
-                            Balance: 00.00 <span> MAX</span>
-                          </TextWrap>
-                        </Text>
-                      </Cointext>
-                    </Coin>
-                  </Coinswap>
-                  <Button>Swap</Button>
+                <Img src={SwapLine} alt="SwapLine" style={{ width: "90%" }} />
+                <Coinswap>
+                  <Coin>
+                    <Cointext width="20%" height="auto">
+                      <Img src={CBig} alt="Cbig" />
+                      <Text>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="15px"
+                          FontWeight="700"
+                        >
+                          <p>From:</p> &nbsp; <span> KC</span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="22px"
+                          FontWeight="700"
+                        >
+                          <span> 2500000</span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#3D6EFF"
+                          FontSize="12px"
+                          FontWeight="700"
+                        >
+                          <p>Balance:</p> &nbsp;
+                          <p style={{ color: "#2F3641", fontWeight: "900" }}>
+                            {" "}
+                            2500000{" "}
+                          </p>
+                          &nbsp;
+                          <span>MAX</span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="22px"
+                          FontWeight="700"
+                        >
+                          {" "}
+                          <span>$25</span>
+                        </TextWrap>
+                      </Text>
+                    </Cointext>
+                  </Coin>
+                  {/* SwapImages */}
+                  <SwapImages>
+                    <Img src={Swap} alt="Swap" />
+                    <Img src={SwapBtn} alt="SwapBtn" />
+                  </SwapImages>
+                  {/* SwapImages */}
+                  <Coin>
+                    <Cointext width="20%" height="auto">
+                      <Img src={SBig} alt="sBig" />
+                      <Text>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="15px"
+                          FontWeight="700"
+                        >
+                          <p>To:</p> <span> &nbsp; $DOG </span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="22px"
+                          FontWeight="700"
+                        >
+                          <span> 25 </span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#3D6EFF"
+                          FontSize="12px"
+                          FontWeight="700"
+                        >
+                          <p>Balance:</p> &nbsp;
+                          <p style={{ color: "#2F3641", fontWeight: "900" }}>
+                            0.00{" "}
+                          </p>{" "}
+                          &nbsp;
+                          <span> MAX </span>
+                        </TextWrap>
+                        <TextWrap
+                          Color="#20388C"
+                          FontSize="22px"
+                          FontWeight="700"
+                        >
+                          <span> $25</span>
+                        </TextWrap>
+                      </Text>
+                    </Cointext>
+                  </Coin>
                 </Coinswap>
-              </ExchangeSec> */}
-        </ExchangeWrapper>
-      </Deck>
-    </TNPage>
+              </ExchangeSec>
+              {/* <ImageLine src={Line} alt="divider" />
+                <ExchangeSec>
+                  <ExchangeText
+                    FZ="21px"
+                    color="#2775CA"
+                    align
+                    M
+                    onClick={() => {
+                      setOpacity(!true);
+                    }}
+                  >
+                    Liquidity
+                  </ExchangeText>
+                  <hr />
+                  <Coinswap opacity={opacity}>
+                    <CoinsWrapper>
+                      <Coins>
+                        <img src={T} />
+                        <h3>$0.00</h3>
+                      </Coins>
+                      <Coins>
+                        <img src={E} />
+                        <h3>$0.00</h3>
+                      </Coins>
+                      <Coins>
+                        <img src={Dollar} />
+                        <h3>$0.00</h3>
+                      </Coins>
+                    </CoinsWrapper>
+                    <Coinswap D opacity={opacity}>
+                      <Coin>
+                        <Cointext>
+                          <Text>
+                            <TextWrap>
+                              From:
+                              <img
+                                src={Paws}
+                                title="swap"
+                                style={{ width: "24px", height: "24px" }}
+                              />
+                              KC
+                            </TextWrap>
+                            <TextWrap>
+                              <span> 00.00</span>
+                            </TextWrap>
+                            <TextWrap>Balance: 25.00 MAX</TextWrap>
+                          </Text>
+                        </Cointext>
+                      </Coin>
+                      <Coin align>
+                        <Cointext>
+                          <img
+                            src={Swap}
+                            title="swap"
+                            style={{ transform: "rotate(90deg)" }}
+                            width="64px"
+                            height="60px"
+                          />
+                        </Cointext>
+                      </Coin>
+                      <Coin>
+                        <Cointext>
+                          <Text>
+                            <TextWrap>
+                              To:
+                              <img
+                                src={HeaderBoneTwo}
+                                style={{ width: "24px", height: "24px" }}
+                              />
+                              <span> Bone</span>
+                            </TextWrap>
+                            <TextWrap>
+                              <span> 00.00</span>
+                            </TextWrap>
+                            <TextWrap>
+                              Balance: 00.00 <span> MAX</span>
+                            </TextWrap>
+                          </Text>
+                        </Cointext>
+                      </Coin>
+                    </Coinswap>
+                    <Button>Swap</Button>
+                  </Coinswap>
+                </ExchangeSec> */}
+            </ExchangeWrapper>
+          </Deck>
+        </TNPage>
+      ) : (
+        (isTablet || isMobile || isSmallMobile) && <TokenTab />
+      )}
+    </>
   );
 };
 
