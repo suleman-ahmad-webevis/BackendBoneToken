@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { FlagSection } from "./CommonTabNav";
 import styled from "styled-components";
 
-const CommonMobNav = ({ Width }) => {
+const CommonMobNav = () => {
   //StoreData
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
   const { cartQuantityIs } = useSelector((state) => state.cart);

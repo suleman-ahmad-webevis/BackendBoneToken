@@ -35,8 +35,12 @@ const Register = () => {
 
   return (
     <RegContainer>
-      {(isSmallMobile || isMobile) && <CommonMobNav />}
-      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav Width="80%" />}
+      {(isSmallMobile || isMobile) && (
+        <CommonMobNav style={{ alignSelf: "center", width: "65%" }} />
+      )}
+      {(isTablet || isSmallMobile || isMobile) && (
+        <CommonTabNav style={{ alignSelf: "center", width: "65%" }} />
+      )}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -56,12 +60,11 @@ export const RegContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0px;
+  padding: 20px 20px;
 `;
 
 export const StyledFForm = styled(Form)`
+  align-self: center;
   background: "red";
   display: flex;
   flex-direction: column;

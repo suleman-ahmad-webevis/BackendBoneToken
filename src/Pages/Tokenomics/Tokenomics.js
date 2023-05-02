@@ -64,7 +64,7 @@ const Tokenomics = () => {
                 <TokenHeading>
                   <Img src={DogToken} alt="Dog-token" />
                   <GlobalHeading FontSize="22px" Color="#fff">
-                    $DOG token
+                    $DOG tokens
                   </GlobalHeading>
                   <Img
                     src={BinanceSmall}
