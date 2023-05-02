@@ -6,25 +6,42 @@ import { Img } from "../../../GlobalStyles";
 const FilterBar = () => {
   const [menu, showMenu] = useState(false);
   return (
-    <DSTab>
-      {!menu && <h5 onClick={() => showMenu(!menu)}>Filter</h5>}
+    <>
       {menu && (
-        <Menu>
-          <ul>
-            {dogSaleNavData.map(({ title, icon }, index) => (
-              <MenuItem>
-                <li key={index}>{title}</li>
-                <Img src={icon} />
-              </MenuItem>
-            ))}
-          </ul>
-        </Menu>
+        <Overlay menu={menu} onClick={() => showMenu(false)}>
+          {" "}
+        </Overlay>
       )}
-    </DSTab>
+
+      <DSTab>
+        {!menu && <h5 onClick={() => showMenu(true)}>Filter</h5>}
+        {menu && (
+          <Menu>
+            <ul>
+              {dogSaleNavData.map(({ title, icon }, index) => (
+                <MenuItem key={index}>
+                  <li>{title}</li>
+                  <Img src={icon} />
+                </MenuItem>
+              ))}
+            </ul>
+          </Menu>
+        )}
+      </DSTab>
+    </>
   );
 };
 
 export default FilterBar;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 270px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 300px;
+`;
 
 export const DSTab = styled.div`
   position: relative;
@@ -34,6 +51,7 @@ export const DSTab = styled.div`
     line-height: 19px;
     letter-spacing: -0.24px;
     color: rgba(27, 21, 61, 0.55);
+    width: 30px;
   }
 `;
 

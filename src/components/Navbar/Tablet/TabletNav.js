@@ -166,6 +166,8 @@ export const MenuBar = styled.div`
   background: #0e626d;
   height: 100vh;
   transition: all 1s ease-in-out;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const MenuItems = styled.div`

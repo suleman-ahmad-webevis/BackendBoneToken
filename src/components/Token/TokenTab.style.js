@@ -114,6 +114,7 @@ export const Buy = styled.div`
   flex-direction: column;
   grid-gap: 7px;
   padding: 7px 10px;
+  width: 141px;
   h5 {
     font-weight: 400;
     font-size: 12px;
