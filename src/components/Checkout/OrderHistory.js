@@ -6,8 +6,7 @@ import {
   CheckoutLink,
   TotalBill,
   OrderHistoryContainer,
-  Wrapper,
-
+  CheckoutWrapper,
   OrderHistoryWrapper,
 } from "./CheckoutStyle";
 
@@ -17,7 +16,7 @@ const OrderHistory = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Wrapper>
+    <CheckoutWrapper>
       {/* <Img src={orderHistory} /> */}
       <OrderHistoryWrapper>
         <OrderHistoryContainer>
@@ -57,7 +56,7 @@ const OrderHistory = () => {
           </CheckoutColor>
         </OrderHistoryContainer>
       </OrderHistoryWrapper>
-    </Wrapper>
+    </CheckoutWrapper>
   );
 };
 

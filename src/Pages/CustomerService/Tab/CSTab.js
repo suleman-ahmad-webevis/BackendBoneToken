@@ -29,8 +29,8 @@ const CSTab = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
     <CSTabContainer>
-      {(isSmallMobile || isMobile) && <CommonMobNav Width="100%" />}
-      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav Width="100%" />}
+      {(isSmallMobile || isMobile) && <CommonMobNav />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       <CSHeading>
         <h5>Customer Service</h5>
       </CSHeading>

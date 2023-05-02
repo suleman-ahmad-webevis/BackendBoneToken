@@ -7,10 +7,10 @@ import styled from "styled-components";
 import PawSearch from "../../assets/images/RegisterLogin/PawSearch.png";
 import HeartSearch from "../../assets/images/RegisterLogin/HeartSearch.png";
 
-const CommonTabNav = ({ Width }) => {
+const CommonTabNav = () => {
   return (
     <>
-      <CoinsIconWrapper Width={Width}>
+      <CoinsIconWrapper>
         <CurrBox>
           {" "}
           <Img src={S} alt="S" />
@@ -26,7 +26,7 @@ const CommonTabNav = ({ Width }) => {
           <h5>Connect</h5>
         </ConnectBox>
       </CoinsIconWrapper>
-      <SearchWrapper Width={Width}>
+      <SearchWrapper>
         <Search>
           <input placeholder="Smart Search" />
           <Img src={HeartSearch} alt="Search" />
@@ -46,10 +46,6 @@ export const CoinsIconWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: ${(Width) => Width ?? "65%"};
-  @media screen and (max-width: 768px) {
-    width: ${(Width) => Width ?? "80%"};
-  }
 `;
 
 export const CurrBox = styled.div`
@@ -97,10 +93,6 @@ export const SearchWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: ${(Width) => Width ?? "65%"};
-  @media screen and (max-width: 768px) {
-    width: ${(Width) => Width ?? "80%"};
-  }
 `;
 
 export const Search = styled.div`

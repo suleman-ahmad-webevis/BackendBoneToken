@@ -20,7 +20,7 @@ const CommonMobNav = ({ Width }) => {
 
   const navigate = useNavigate();
   return (
-    <NavIcons Width={Width}>
+    <CMNWrapper>
       <FlagSection>
         <Img src={Flags} alt="Flags" />
         <Img src={FlagsDropDown} alt="DropDown" />
@@ -48,15 +48,15 @@ const CommonMobNav = ({ Width }) => {
         </Items>
         <Img src={mobChat} alt="mobChat" />
       </MobileComIcon>
-    </NavIcons>
+    </CMNWrapper>
   );
 };
 
 export default CommonMobNav;
 
-export const NavIcons = styled.div`
+export const CMNWrapper = styled.div`
   display: flex;
-  width: ${(Width) => Width ?? "80%"};
   justify-content: space-between;
   align-items: center;
+  margin: 0px -18px;
 `;

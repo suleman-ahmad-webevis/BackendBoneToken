@@ -37,7 +37,7 @@ const MyDog = () => {
       <MyDogContainer>
         {(isSmallMobile || isMobile) && <CommonMobNav />}
         {(isTablet || isSmallMobile || isMobile) && (
-          <CommonTabNav Width="60%" />
+          <CommonTabNav/>
         )}
         <MyDogHeadBtns>
           <MyDogHeadBtn>

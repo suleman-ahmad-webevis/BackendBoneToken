@@ -7,7 +7,7 @@ import {
   Label,
   Form,
   ShareProduct,
-  Wrapper,
+  CheckoutWrapper,
   CheckoutRight,
   CheckoutItems,
   CheckoutFooter,
@@ -48,7 +48,7 @@ const CheckOut = () => {
   }, [cartQuantityIs]);
 
   return (
-    <Wrapper>
+    <CheckoutWrapper>
       <Checkout>
         <CheckoutForm>
           <CheckoutRight>
@@ -218,7 +218,7 @@ const CheckOut = () => {
           </CheckoutLeft>
         </CheckoutForm>
       </Checkout>
-    </Wrapper>
+    </CheckoutWrapper>
   );
 };
 

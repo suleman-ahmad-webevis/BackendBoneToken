@@ -13,7 +13,7 @@ export const CheckoutForm = styled.div`
     margin: 0;
   }
 `;
-export const Wrapper = styled.div`
+export const CheckoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;

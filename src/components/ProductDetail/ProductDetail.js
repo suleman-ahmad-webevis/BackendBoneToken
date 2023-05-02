@@ -113,7 +113,8 @@ const ProductDetail = () => {
     tempInventory[index].description = singlePro?.description;
     tempInventory[index].productImages = singlePro?.productImages;
     if (tempInventory[index].quantity) {
-      // tempInventory[index].quantity = tempInventory[index].quantity;
+      // eslint-disable-next-line
+      tempInventory[index].quantity = tempInventory[index].quantity;
     } else {
       tempInventory[index].quantity = 1;
     }

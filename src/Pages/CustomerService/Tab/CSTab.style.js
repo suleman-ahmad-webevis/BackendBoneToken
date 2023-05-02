@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CSTabContainer = styled.div`
-  padding: 20px 20px 10px 15px;
+  padding: 20px 25px 10px 25px;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;

@@ -10,9 +10,9 @@ import Hamburger from "../../../assets/images/Navbar/Tab/Hamburger.png";
 import { LangSelect } from "../NavbarStyles";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/Navbar/FlagsDropDown.png";
-import { Link, useNavigate } from "react-router-dom";
 import Close from "../../../assets/images/Navbar/Tab/Close.png";
 import { MenuData } from "./MenuData";
+import { useNavigate } from "react-router-dom";
 
 const Tablet = () => {
   const navigate = useNavigate();
@@ -70,9 +70,15 @@ const Tablet = () => {
             {MenuData.map((value) => (
               <Menu>
                 <Img src={value.img} alt="Shop" />
-                <Link to={value.link} style={{textDecoration:'none'}}>
-                  <h5>{value.text}</h5>
-                </Link>
+                <h5
+                  onClick={() => {
+                    setShowMenu(false);
+                    navigate(value.link);
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
+                  {value.text}
+                </h5>
               </Menu>
             ))}
           </MenuItems>

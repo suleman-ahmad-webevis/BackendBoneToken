@@ -13,8 +13,8 @@ const Faq = () => {
 
   return (
     <FaqContainer>
-      {(isSmallMobile || isMobile) && <CommonMobNav Width="100%" />}
-      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav Width="100%" />}
+      {(isSmallMobile || isMobile) && <CommonMobNav  />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       <FaqHeading>
         <h5>FAQ</h5>
       </FaqHeading>

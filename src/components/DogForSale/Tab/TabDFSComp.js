@@ -10,7 +10,7 @@ const TabDFSComp = () => {
   return (
     <>
       {(isSmallMobile || isMobile) && <CommonMobNav />}
-      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav Width="60%" />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       <FilterBar />
     </>
   );

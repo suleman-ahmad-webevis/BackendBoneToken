@@ -40,7 +40,7 @@ const TokenTab = () => {
         <TokenTabNav>
           {(isSmallMobile || isMobile) && <CommonMobNav />}
           {(isTablet || isSmallMobile || isMobile) && (
-            <CommonTabNav Width="60%" />
+            <CommonTabNav />
           )}
         </TokenTabNav>
         <TTabHeading>Tokenomics</TTabHeading>
