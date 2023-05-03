@@ -32,8 +32,8 @@ const MayLikeBlogs = ({ category }) => {
       {mayLikeBlogs.length > 0 && <Title>You may also like:</Title>}
       <MayLikeCards>
         {mayLikeBlogs.length > 0 ? (
-          mayLikeBlogs.map((blog) => (
-            <BlogCardLike>
+          mayLikeBlogs.map((blog, index) => (
+            <BlogCardLike key={index}>
               <CardImageContainer>
                 <Img src={blog.featuredImg} alt="blog-image" />
               </CardImageContainer>

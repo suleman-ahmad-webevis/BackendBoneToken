@@ -5,8 +5,8 @@ import { teMenuBarData } from "./TEMenuBarData";
 const TEMenuBar = () => {
   return (
     <TEMenuBarContainer>
-      {teMenuBarData.map((value) => (
-        <TEMenu>
+      {teMenuBarData.map((value, index) => (
+        <TEMenu key={index}>
           <MenuText>{value}</MenuText>
           <MenuText>0</MenuText>
         </TEMenu>

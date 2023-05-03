@@ -20,7 +20,7 @@ const FilterBar = () => {
             <ul>
               {dogSaleNavData.map(({ title, icon }, index) => (
                 <MenuItem key={index}>
-                  <li>{title}</li>
+                  <li key={index}>{title}</li>
                   <Img src={icon} />
                 </MenuItem>
               ))}

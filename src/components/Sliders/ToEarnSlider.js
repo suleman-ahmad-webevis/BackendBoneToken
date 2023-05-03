@@ -80,7 +80,7 @@ export default function ToEarnSlider() {
         className="mySwiper2"
       >
       {BigSlideData.map((item, i) => (
-        <SwiperSlide>
+        <SwiperSlide key={index}>
           <SwiperSlideImg src={item.image} />
         </SwiperSlide>
       ))}
@@ -97,7 +97,7 @@ export default function ToEarnSlider() {
         className="mySwiper"
       >
       {SmallSlideData.map((item, i) => (
-        <SwiperSlide>
+        <SwiperSlide key={i}>
           <SwiperSlideImg src={item.image} />
         </SwiperSlide>
       ))}

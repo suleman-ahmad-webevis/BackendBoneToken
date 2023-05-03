@@ -39,44 +39,47 @@ const TokenTab = () => {
       <TTabContainer>
         <TokenTabNav>
           {(isSmallMobile || isMobile) && <CommonMobNav />}
-          {(isTablet || isSmallMobile || isMobile) && (
-            <CommonTabNav />
-          )}
+          {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
         </TokenTabNav>
         <TTabHeading>Tokenomics</TTabHeading>
         <TTabCards>
-          {CardData.map(({ imgOne, heading, imgTwo, bgColor, headBgColor }) => (
-            <>
-              <TTabCard bgColor={bgColor}>
-                <TTCardHeading headBgColor={headBgColor}>
-                  <ImgText>
-                    <Img src={imgOne} alt="imgOne" />
-                    <h5>{heading}</h5>
-                  </ImgText>
-                  <Img src={imgTwo} alt="imgTwo" />
-                </TTCardHeading>
-                <TTData>
-                  {boneTokenData.map(({ title, value }) => (
-                    <>
-                      <DataCol>
-                        <h5 style={{ textAlign: "start" }}>{title}</h5>
-                      </DataCol>
-                      <DataCol>
-                        {" "}
-                        <h5 style={{ textAlign: "end", fontWeight: "700" }}>
-                          {value}
-                        </h5>
-                      </DataCol>
-                    </>
-                  ))}
-                </TTData>
-              </TTabCard>
-            </>
-          ))}
+          {CardData.map(
+            ({ imgOne, heading, imgTwo, bgColor, headBgColor }, index) => (
+              <>
+                <TTabCard bgColor={bgColor} key={index}>
+                  <TTCardHeading headBgColor={headBgColor}>
+                    <ImgText>
+                      <Img src={imgOne} alt="imgOne" />
+                      <h5>{heading}</h5>
+                    </ImgText>
+                    <Img src={imgTwo} alt="imgTwo" />
+                  </TTCardHeading>
+                  <TTData>
+                    {boneTokenData.map(({ title, value }, index) => (
+                      <>
+                        <DataCol key={index}>
+                          <h5 style={{ textAlign: "start" }}>{title}</h5>
+                        </DataCol>
+                        <DataCol>
+                          {" "}
+                          <h5 style={{ textAlign: "end", fontWeight: "700" }}>
+                            {value}
+                          </h5>
+                        </DataCol>
+                      </>
+                    ))}
+                  </TTData>
+                </TTabCard>
+              </>
+            )
+          )}
         </TTabCards>
         {ChooseBuy.map(
-          ({ titleOne, imgOne, two, titleTwo, imgThree, paddingTop }) => (
-            <ChooseSection paddingTop={paddingTop}>
+          (
+            { titleOne, imgOne, two, titleTwo, imgThree, paddingTop },
+            index
+          ) => (
+            <ChooseSection paddingTop={paddingTop} key={index}>
               <h5>{titleOne}</h5>
               <ChooseImg>
                 <Img src={imgOne} alt="BitForex" />

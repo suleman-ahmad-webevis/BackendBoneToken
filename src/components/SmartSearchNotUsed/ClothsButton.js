@@ -50,13 +50,13 @@ function ClothesButton({ setCloths }) {
   const [active, setActive] = useState(types[0]);
 
   return types.map((type) => (
-    <ButtonGroup>
+    <ButtonGroup key={type.label}>
       <ButtonToggle
         key={type.label}
         active={active === type}
         onClick={() => clothsHandler(type)}
       >
-        <div>{type.image}</div> 
+        <div>{type.image}</div>
       </ButtonToggle>
     </ButtonGroup>
   ));

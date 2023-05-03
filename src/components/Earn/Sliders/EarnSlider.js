@@ -90,7 +90,7 @@ const EarnSlider = () => {
         className="mySwiper"
       >
         {data.map((item, i) => (
-          <SwiperSlide>
+          <SwiperSlide key={i}>
             <SwiperSlideImg src={item.image} />
             <SlideText>{item.text}</SlideText>
           </SwiperSlide>

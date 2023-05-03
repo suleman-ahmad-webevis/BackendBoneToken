@@ -28,8 +28,8 @@ const FavouritesListTable = () => {
       {favouritesItems?.length > 0 ? (
         <CheckoutContainer>
           <CheckoutCard>
-            {favouritesItems?.map((item) => (
-              <CheckoutItem>
+            {favouritesItems?.map((item, index) => (
+              <CheckoutItem key={index}>
                 <CheckoutProImg>
                   <Img src={item?.productImages[0]?.secureUrl} alt="" />
                 </CheckoutProImg>

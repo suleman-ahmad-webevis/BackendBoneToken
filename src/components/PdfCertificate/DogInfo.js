@@ -66,8 +66,8 @@ const DogInfo = ({ regDog }) => {
         {/* Left */}
         <DogInfoLeftRight>
           <DogInfoTitle>
-            {LDogInfo.map((value) => (
-              <div style={{ display: "flex", gridGap: "20px" }}>
+            {LDogInfo.map((value, index) => (
+              <div style={{ display: "flex", gridGap: "20px" }} key={index}>
                 <p>{value.title}</p>
                 <p>{value.value}</p>
               </div>
@@ -77,8 +77,8 @@ const DogInfo = ({ regDog }) => {
         {/* Right */}
         <DogInfoLeftRight>
           <DogInfoTitle>
-            {RDogInfo.map((value) => (
-              <div style={{ display: "flex", gridGap: "20px" }}>
+            {RDogInfo.map((value, index) => (
+              <div style={{ display: "flex", gridGap: "20px" }} key={index}>
                 <p>{value.title}</p>
                 <p>{value.value}</p>
               </div>

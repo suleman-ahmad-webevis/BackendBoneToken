@@ -37,7 +37,7 @@ function DogAgeButton({ setDogAge }) {
   };
   const [active, setActive] = useState(types[0]);
   return types.map((type) => (
-    <ButtonGroup>
+    <ButtonGroup key={type}>
       <ButtonToggle
         key={type}
         active={active === type}

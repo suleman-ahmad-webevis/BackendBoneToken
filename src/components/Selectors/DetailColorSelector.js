@@ -50,7 +50,7 @@ const DetailColorSelector = ({ color, setColor }) => {
 
   return (
     <ColorList>
-      {options.map((option, index) => (
+      {options.map((option) => (
         <div key={option.colorName}>
           <ColorBox
             onClick={() => onOptionClicked(option)}

@@ -8,16 +8,16 @@ const NftCerSetting = () => {
   return (
     <SettingContainer>
       <SettingWrapper>
-        {nftCerLeft.map((value) => (
-          <SettingBtnWrapper>
+        {nftCerLeft.map((value, index) => (
+          <SettingBtnWrapper key={index}>
             <h5>{value}</h5>
             <NftCertificateSwitch defaultChecked />
           </SettingBtnWrapper>
         ))}
       </SettingWrapper>
       <SettingWrapper>
-        {nftCerRight.map((value) => (
-          <SettingBtnWrapper>
+        {nftCerRight.map((value, index) => (
+          <SettingBtnWrapper key={index}>
             <h5>{value}</h5>
             <NftCertificateSwitch defaultChecked />
           </SettingBtnWrapper>

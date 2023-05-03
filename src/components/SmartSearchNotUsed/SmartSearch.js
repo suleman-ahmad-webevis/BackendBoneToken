@@ -23,8 +23,6 @@ const SmartSearchModal = ({ productId }) => {
   //ToSendApi
   const [coatColor, setCoatColor] = useState("Black");
 
-
-
   return (
     <ModalContentContainer>
       <ModalField>

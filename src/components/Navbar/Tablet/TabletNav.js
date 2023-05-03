@@ -67,8 +67,8 @@ const Tablet = () => {
             <Img src={Close} alt="Close" onClick={() => setShowMenu(false)} />
           </CloseIcon>
           <MenuItems>
-            {MenuData.map((value) => (
-              <Menu>
+            {MenuData.map((value, index) => (
+              <Menu key={index}>
                 <Img src={value.img} alt="Shop" />
                 <h5
                   onClick={() => {

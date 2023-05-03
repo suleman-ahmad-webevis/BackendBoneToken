@@ -13,8 +13,8 @@ const InsuranceInfo = () => {
       <InsuranceInfoWrapper>
         <InsuranceInfoItem>
           <Title>
-            {title.map((value) => (
-              <p>{value}</p>
+            {title.map((value, index) => (
+              <p key={index}>{value}</p>
             ))}
           </Title>
           <Title>

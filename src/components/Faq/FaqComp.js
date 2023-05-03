@@ -146,8 +146,8 @@ const FaqComp = () => {
     <FaqBoxesWrapper>
       {/* FirstCol */}
       <FaqCol>
-        {faqOne.map((value) => (
-          <FaqBox>
+        {faqOne.map((value, index) => (
+          <FaqBox key={index}>
             <h5>{value.title}</h5>
             <p>{value.desc}</p>
           </FaqBox>
@@ -155,8 +155,8 @@ const FaqComp = () => {
       </FaqCol>
       {/* SecondCol */}
       <FaqCol>
-        {faqTwo.map((value) => (
-          <FaqBox>
+        {faqTwo.map((value, index) => (
+          <FaqBox key={index}>
             <h5>{value.title}</h5>
             <p>{value.desc}</p>
           </FaqBox>
@@ -164,8 +164,8 @@ const FaqComp = () => {
       </FaqCol>
       {/* ThirdCol */}
       <FaqCol>
-        {faqThree.map((value) => (
-          <FaqBox>
+        {faqThree.map((value, index) => (
+          <FaqBox key={index}>
             {value.title}
             {value.desc}
           </FaqBox>

@@ -32,8 +32,8 @@ const BasicInfo = ({ regDog, regOwner }) => {
   return (
     <BasicInfoContainer>
       <div>
-        {basicInfoData.map((value) => (
-          <BasicInfoWrapper>
+        {basicInfoData.map((value, index) => (
+          <BasicInfoWrapper key={index}>
             <Title>{value.title}</Title>
             <Img src={GoldenPaw} />
             <Data>{value.value}</Data>

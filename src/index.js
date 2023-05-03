@@ -37,7 +37,7 @@ import ROADMAP from "./Pages/Roadmap/Roadmap";
 import TOEARN from "./Pages/Earn/Earn";
 import FAQ from "./Pages/Faq/Faq";
 import CUSTOMERSERVICE from "./Pages/CustomerService/CustomerService";
-import DOGSHOWSPAGE from "./Pages/DogShowSPage/DogShowsPage";
+import DOGSHOWSPAGE from "./Pages/DogShow/DogShow";
 import TOKENOMICS from "./Pages/Tokenomics/Tokenomics";
 import SETTINGS from "./Pages/Settings/Settings";
 import WHITEPAPER from "./Pages/WhitePaper/WhitePaper";

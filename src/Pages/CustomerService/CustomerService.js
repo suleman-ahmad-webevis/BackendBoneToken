@@ -42,16 +42,16 @@ const CustomerService = () => {
               {/* Boxes */}
               <CSBoxesWrapper>
                 <CSBoxWrapper>
-                  {csBoxL.map((value) => (
-                    <CSBox>
+                  {csBoxL.map((value, index) => (
+                    <CSBox key={index}>
                       <h5>{value.title}</h5>
                       <CSBoxContent>{value.text}</CSBoxContent>
                     </CSBox>
                   ))}
                 </CSBoxWrapper>
                 <CSBoxWrapper>
-                  {csBoxR.map((value) => (
-                    <CSBox>
+                  {csBoxR.map((value, index) => (
+                    <CSBox key={index}>
                       <h5>{value.title}</h5>
                       <CSBoxContent minHeight={value.boxMinHeight}>
                         {value.text}
@@ -86,8 +86,8 @@ const CustomerService = () => {
                     <div>upto 5kg </div>
                     <div>upto 30kg</div>
                   </ShippingSecHeading>
-                  {sCostOne.map((value) => (
-                    <ShippingSecContent>
+                  {sCostOne.map((value, index) => (
+                    <ShippingSecContent key={index}>
                       <div>
                         {" "}
                         <h5>{value.name}</h5>
@@ -109,8 +109,8 @@ const CustomerService = () => {
                     <div>upto 5kg </div>
                     <div>upto 30kg</div>
                   </ShippingSecHeading>
-                  {sCostTwo.map((value) => (
-                    <ShippingSecContent fontSize={value.fontSize}>
+                  {sCostTwo.map((value, index) => (
+                    <ShippingSecContent fontSize={value.fontSize} key={index}>
                       <div>
                         {" "}
                         <h5>{value.name}</h5>

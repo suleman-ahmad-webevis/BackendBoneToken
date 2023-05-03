@@ -74,7 +74,7 @@ const EarnSlider = () => {
         modules={[Navigation]}
       >
         {data.map((item, i) => (
-          <SwiperSlide>
+          <SwiperSlide key={i}>
             <SwiperSlideImg src={item.image} />
             <SlideText>{item.text}</SlideText>
           </SwiperSlide>

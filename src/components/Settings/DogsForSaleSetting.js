@@ -7,22 +7,22 @@ import {
   SettingWrapper,
 } from "./NftCerSetting";
 import { dogSaleLeft, dogSaleRight } from "./BtnData";
-import './Setting.css';
+import "./Setting.css";
 
 const DogsForSale = () => {
   return (
     <SettingContainer>
       <SettingWrapper>
-        {dogSaleLeft.map((value) => (
-          <SettingBtnWrapper>
+        {dogSaleLeft.map((value, index) => (
+          <SettingBtnWrapper key={index}>
             <h5>{value}</h5>
             <NftCertificateSwitch defaultChecked />
           </SettingBtnWrapper>
         ))}
       </SettingWrapper>
       <SettingWrapper>
-        {dogSaleRight.map((value) => (
-          <SettingBtnWrapper>
+        {dogSaleRight.map((value, index) => (
+          <SettingBtnWrapper key={index}>
             <h5>{value}</h5>
             <NftCertificateSwitch defaultChecked />
           </SettingBtnWrapper>

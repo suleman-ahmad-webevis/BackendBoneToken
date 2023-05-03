@@ -21,8 +21,8 @@ const DogForSaleCard = () => {
     <DogSaleCard>
       <DogCardWrapper>
         <DogCardDetail>
-          {saleCardData.map((value) => (
-            <DogCardInfo>
+          {saleCardData.map((value, index) => (
+            <DogCardInfo key={index}>
               <GlobalHeading
                 Color={"#8F98A8"}
                 FontSize={"12px"}

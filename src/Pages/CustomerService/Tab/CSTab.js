@@ -34,14 +34,14 @@ const CSTab = () => {
       <CSHeading>
         <h5>Customer Service</h5>
       </CSHeading>
-      {csFirstBox.map((value) => (
-        <CSCard>
+      {csFirstBox.map((value, index) => (
+        <CSCard key={index}>
           <h5>{value.title}</h5>
           {value.text}
         </CSCard>
       ))}
-      {csSecondBox.map((value) => (
-        <CSCard>
+      {csSecondBox.map((value, index) => (
+        <CSCard key={index}>
           <h5>{value.title}</h5>
           {value.text}
         </CSCard>
@@ -68,33 +68,33 @@ const CSTab = () => {
           <h5 style={{ width: "33%" }}>up to 30kg</h5>
         </ShippingCostHeading>
         <CountriesSection>
-          {sCostOne.map(({ name, fiveKg, thirtyKg, fontSize }) => (
+          {sCostOne.map(({ name, fiveKg, thirtyKg, fontSize }, index) => (
             <>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{name}</CountryName>
               </Country>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{fiveKg}</CountryName>
               </Country>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{thirtyKg}</CountryName>
               </Country>
             </>
           ))}
-          {sCostTwo.map(({ name, fiveKg, thirtyKg, fontSize }) => (
+          {sCostTwo.map(({ name, fiveKg, thirtyKg, fontSize }, index) => (
             <>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{name}</CountryName>
               </Country>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{fiveKg}</CountryName>
               </Country>
-              <Country>
+              <Country key={index}>
                 <h5>Country</h5>
                 <CountryName fontSize={fontSize}>{thirtyKg}</CountryName>
               </Country>
