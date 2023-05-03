@@ -1,5 +1,5 @@
 import React from "react";
-import Me from "../../assets/images/Earn/Me.png";
+import MyPuppies from "../../assets/images/Earn/MyPuppies.png";
 import MyDogs from "../../assets/images/Earn/MyDogs.png";
 import styled from "styled-components";
 import { Img } from "../../GlobalStyles";
@@ -8,10 +8,10 @@ const TEBtnSection = ({ swapComp, setSwapComp }) => {
   return (
     <TEBtnContainer>
       <MeBtn onClick={() => setSwapComp(true)} swapComp={swapComp}>
-        <Img src={Me} />
+        <Img src={MyDogs} />
       </MeBtn>
       <MyDogBtn onClick={() => setSwapComp(false)} swapComp={swapComp}>
-        <Img src={MyDogs} />
+        <Img src={MyPuppies} />
       </MyDogBtn>
     </TEBtnContainer>
   );
