@@ -112,7 +112,7 @@ export const one = [
         youtube: require("../../assets/images/DogShowsImages/youtube.png"),
       },
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Slovenia.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/Maribor.png"),
         date: "22/23",
         alt: "Flag",
         city: "Maribor",
@@ -144,14 +144,14 @@ export const two = [
     month: "May",
     leftData: [
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Czech.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/czech.png"),
         date: "6/7",
         alt: "Flag",
         city: "Prague",
         youtube: require("../../assets/images/DogShowsImages/youtube.png"),
       },
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Romania.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/denmark.png"),
         date: "12/14",
         alt: "Flag",
         city: "Timisoara",
@@ -160,7 +160,7 @@ export const two = [
     ],
     rightData: [
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Denmark.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/denmark.png"),
         date: "18/20",
         alt: "Flag",
         city: " Herning EDS",
@@ -203,7 +203,7 @@ export const two = [
         youtube: require("../../assets/images/DogShowsImages/youtube.png"),
       },
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Budapest.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/Kaunas.png"),
         date: "30/1",
         alt: "Flag",
         city: "Moletai",
@@ -233,7 +233,7 @@ export const two = [
     ],
     rightData: [
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Slovenia.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/Maribor.png"),
         date: "27/30",
         alt: "Flag",
         city: "Split",
@@ -262,7 +262,7 @@ export const two = [
     ],
     rightData: [
       {
-        imageUrl: require("../../assets/images/DogShowsImages/Slovenia.png"),
+        imageUrl: require("../../assets/images/DogShowsImages/Maribor.png"),
         date: "27/30",
         alt: "Flag",
         city: "Haapsalu",
