@@ -33,7 +33,7 @@ import DOGFORSALE from "./Pages/DogForSale/DogForSale";
 import PDFCERTIFICATE from "./Pages/PdfCertificate";
 import MYDOGS from "./Pages/MyDogs/MyDogs";
 //OthersRoutes
-import ROADMAP from "./Pages/RoadMap/RoadMap";
+// import ROADMAP from "./Pages/RoadMap/RoadMap";
 import TOEARN from "./Pages/Earn/Earn";
 import FAQ from "./Pages/Faq/Faq";
 import CUSTOMERSERVICE from "./Pages/CustomerService/CustomerService";
@@ -140,10 +140,10 @@ const router = createBrowserRouter([
         path: "/dog-for-sale",
         element: <DOGFORSALE />,
       },
-      {
-        path: "/road-map",
-        element: <ROADMAP />,
-      },
+      // {
+      //   path: "/road-map",
+      //   element: <ROADMAP />,
+      // },
       {
         path: "/tokenomics",
         element: <TOKENOMICS />,
