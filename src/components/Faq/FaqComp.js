@@ -138,7 +138,11 @@ const FaqComp = () => {
     },
     {
       title: <h5>What is the link to the Whitepaper</h5>,
-      desc: <Link to="/white-paper"> https://Kennel.Ai/whitepaper</Link>,
+      desc: <Link to="/whitepaper"> https://Kennel.Ai/whitepaper</Link>,
+    },
+    {
+      title: <h5>What is the link to the projects pitchdeck</h5>,
+      desc: <Link to="/pitchdeck"> https://Kennel.Ai/pitchdeck</Link>,
     },
   ];
 

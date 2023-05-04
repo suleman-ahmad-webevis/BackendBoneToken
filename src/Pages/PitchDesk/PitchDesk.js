@@ -4,11 +4,11 @@ import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import styled from "styled-components";
-import WhitePaper from "../../assets/pdf/WhitePaper.pdf";
+import PirchDeck from "../../assets/pdf/PirchDeck.pdf";
+import { PDFContainer } from "../WhitePaper/WhitePaper";
 
-const WPComp = () => {
-  const [defaultPdfFile] = useState(WhitePaper);
+const PPComp = () => {
+  const [defaultPdfFile] = useState(PirchDeck);
   const defLayoutPlugin = defaultLayoutPlugin();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,10 +26,4 @@ const WPComp = () => {
   );
 };
 
-export default WPComp;
-
-export const PDFContainer = styled.div`
-  height: 1780px;
-  max-width: 900px;
-  margin: 0 auto;
-`;
+export default PPComp;

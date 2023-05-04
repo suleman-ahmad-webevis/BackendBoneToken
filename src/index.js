@@ -41,6 +41,7 @@ import DOGSHOWSPAGE from "./Pages/DogShow/DogShow";
 import TOKENOMICS from "./Pages/Tokenomics/Tokenomics";
 import SETTINGS from "./Pages/Settings/Settings";
 import WHITEPAPER from "./Pages/WhitePaper/WhitePaper";
+import PITCHDECK from "./Pages/PitchDesk/PitchDesk";
 //NotFoundRoutes
 import NOTFOUND from "./Pages/404/NotFound";
 //Toastify
@@ -152,8 +153,12 @@ const router = createBrowserRouter([
         element: <SETTINGS />,
       },
       {
-        path: "/white-paper",
+        path: "/whitepaper",
         element: <WHITEPAPER />,
+      },
+      {
+        path: "/pitchdeck",
+        element: <PITCHDECK />,
       },
       {
         path: "/certificate",
