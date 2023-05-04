@@ -40,7 +40,7 @@ const ProductsListComponent = () => {
       })
     );
     // eslint-disable-next-line
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     dispatch(setAllProducts());

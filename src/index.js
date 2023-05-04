@@ -33,7 +33,7 @@ import DOGFORSALE from "./Pages/DogForSale/DogForSale";
 import PDFCERTIFICATE from "./Pages/PdfCertificate";
 import MYDOGS from "./Pages/MyDogs/MyDogs";
 //OthersRoutes
-import ROADMAP from "./Pages/Roadmap/Roadmap";
+import ROADMAP from "./Pages/RoadMap/RoadMap";
 import TOEARN from "./Pages/Earn/Earn";
 import FAQ from "./Pages/Faq/Faq";
 import CUSTOMERSERVICE from "./Pages/CustomerService/CustomerService";
