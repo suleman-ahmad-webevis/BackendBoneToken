@@ -16,11 +16,9 @@ const WPComp = () => {
   return (
     <PDFContainer>
       {defaultPdfFile && (
-        <>
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-            <Viewer fileUrl={defaultPdfFile} plugins={[defLayoutPlugin]} />
-          </Worker>
-        </>
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
+          <Viewer fileUrl={defaultPdfFile} plugins={[defLayoutPlugin]} />
+        </Worker>
       )}
     </PDFContainer>
   );
@@ -30,6 +28,6 @@ export default WPComp;
 
 export const PDFContainer = styled.div`
   height: 1780px;
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
 `;

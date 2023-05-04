@@ -3,7 +3,6 @@ import styled from "styled-components";
 import DogForSaleComp from "../../components/DogForSale/DogForSaleComp";
 import DogForSaleNav from "../../components/DogForSale/DogForSaleNav";
 import useBreakpoint from "../../hooks/useBreakPoint";
-
 import TabDFSComp from "../../components/DogForSale/Tab/TabDFSComp";
 
 const DogForSale = () => {
