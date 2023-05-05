@@ -45,7 +45,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const url = useLocation()?.pathname?.slice(20);
+
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("The setSearchParams", setSearchParams);
   //StatesForSearching
   const [search, setSearch] = useState("");
   const category = searchParams.get("category");
@@ -56,7 +58,6 @@ const Navbar = () => {
   const [active, setActive] = useState(false);
   const [simpleNav, setSimpleNav] = useState(false);
   // const [isToggle, setIsToggle] = useState(false);
-  console.log(setSearchParams);
   useEffect(() => {
     if (locations.includes(location?.pathname)) {
       setSimpleNav(true);

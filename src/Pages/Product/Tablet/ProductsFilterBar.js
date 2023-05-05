@@ -29,14 +29,15 @@ import { proNavData } from "./ProNavData";
 
 const ProductsFilterBar = () => {
   const { search } = useLocation();
-  console.log("I render", search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log("The search", search);
   //StatesForSearching
   const [searchPro, setSearchPro] = useState("");
+
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(setSearchParams);
+  console.log("The setSearchParams", setSearchParams);
+
   //StoreData
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
   const { cartQuantityIs } = useSelector((state) => state.cart);

@@ -10,8 +10,8 @@ import "swiper/swiper-bundle.min.css";
 // import required modules
 import { Navigation } from "swiper";
 //Dog images
-import dog1 from "../../assets/images/Slides2/dog1.png";
-import dog2 from "../../assets/images/Slides2/dog2.png";
+// import dog1 from "../../assets/images/Slides2/dog1.png";
+// import dog2 from "../../assets/images/Slides2/dog2.png";
 import nextButton from "../../assets/images/Slides2/polygon2.png";
 import prevButton from "../../assets/images/Slides2/polygon1.png";
 import paw from "../../assets/images/Slides2/paw.png";

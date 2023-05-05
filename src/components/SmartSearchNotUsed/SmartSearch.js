@@ -6,18 +6,16 @@ import ColorSelector from "./ColorSelector";
 import BreedSelector from "./BreedSelector";
 import GenderButton from "./GenderButtons";
 import SeasonsButton from "./SeasonsButton";
-import { useDispatch } from "react-redux";
 import DogAgeButton from "./DogAge";
 import FCIGroupSelector from "./FCIGroupSelector";
-import { toast } from "react-toastify";
 
 const SmartSearchModal = ({ productId }) => {
-  const dispatch = useDispatch();
   const [gender, setGender] = useState();
   const [season, setSeason] = useState();
   const [dogAge, setDogAge] = useState();
   const [smartBreed, setSmartBreed] = useState("Affenpinscher");
   const [FCIGroup, setFCIGroup] = useState();
+  console.log("FCIGroup", FCIGroup);
   //ForBackgroundColorOfSelect
   const [color, setColor] = useState("Black");
   //ToSendApi

@@ -20,8 +20,7 @@ const Slider = () => {
   const swiper = useSwiper();
 
   const [index, setIndex] = useState("");
-  console.log(index);
-
+  console.log("The index", index);
   const data = [dog1, dog2, dog1, dog2, dog1, dog2, dog1, dog2];
 
   const handleMouseOver = (i) => {

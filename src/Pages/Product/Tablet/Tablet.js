@@ -17,6 +17,7 @@ const Tablet = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("The setSearchParams", setSearchParams);
   const category = searchParams.get("category");
   const featured = searchParams.get("featured");
   const newParam = searchParams.get("new");
@@ -61,11 +62,10 @@ const Tablet = () => {
       );
     }
   };
-  console.log(setSearchParams);
 
   return (
     <PTabContainer>
-    <ProductsFilterBar />
+      <ProductsFilterBar />
       {isLoading && <Loader />}
       {allProducts?.length ? (
         <PTabProductList id="ProductListContainer">

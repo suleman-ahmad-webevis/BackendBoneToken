@@ -11,14 +11,14 @@ import Instagram from "../../assets/images/ToEarn/New/Instagram.png";
 import Reddit from "../../assets/images/ToEarn/New/Reddit.png";
 import Youtube from "../../assets/images/ToEarn/New/Youtube.png";
 import M from "../../assets/images/ToEarn/New/M.png";
-import TwoEarn from "../../assets/images/ToEarn/New/TwoEarn.png";
+// import TwoEarn from "../../assets/images/ToEarn/New/TwoEarn.png";
 import ToggleEarnButtons from "./ToggleEarnButtons";
-import EarnSlider from "../../components/Sliders/OLDEarnSlider";
-import TopBoneDrop from "../../assets/images/ToEarn/New/TopBoneDrop.png";
-import TopAirdrop from "../../assets/images/ToEarn/New/TopAirdrop.png";
+// import EarnSlider from "../../components/Sliders/OLDEarnSlider";
+// import TopBoneDrop from "../../assets/images/ToEarn/New/TopBoneDrop.png";
+// import TopAirdrop from "../../assets/images/ToEarn/New/TopAirdrop.png";
 import SummaryBone from "../../assets/images/ToEarn/New/SummaryBone.png";
 import ToEarnSlider from "../../components/Sliders/ToEarnSlider";
-import SidebarStatic from "../../components/Sidebar/SidebarStatic";
+// import SidebarStatic from "../../components/Sidebar/SidebarStatic";
 
 const ToEarn = () => {
   useEffect(() => {
@@ -293,10 +293,10 @@ const ToEarn = () => {
               <Img src={Telegram} alt="Telegram" />
               <Img src={Twitter} alt="Twitter" />
               <Img src={Discord} alt="Discord" />
-              <a href="https://www.facebook.com/DogsData/" target="_blank">
+              <a href="https://www.facebook.com/DogsData/" target="_blank" rel="noreferrer">
                 <Img src={Facebook} alt="Facebook" />
               </a>
-              <a href="https://www.instagram.com/blockpuppys/" target="_blank">
+              <a href="https://www.instagram.com/blockpuppys/" target="_blank" rel="noreferrer">
                 <Img src={Instagram} alt="Instagram" />
               </a>
               <Img src={Reddit} alt="Reddit" />

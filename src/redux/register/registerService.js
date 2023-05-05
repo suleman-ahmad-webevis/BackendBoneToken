@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import API from "../../utils/Interceptor";
 
 const registerTheDog = async (obj) => {

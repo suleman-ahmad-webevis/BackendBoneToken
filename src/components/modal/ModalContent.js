@@ -13,7 +13,7 @@ import {
 import DogAgeButton from "./DogAge";
 import SmartSearchIcon from "../../assets/images/SmartSearchIcon.png";
 import ColorSelector from "../Selectors/ColorSelector";
-import { breedsOptions, dogFCIOptions } from "../Selectors/SSearchOptions";
+// import { breedsOptions, dogFCIOptions } from "../Selectors/SSearchOptions";
 import FCIGroupSelector from "./FCIGroupSelector";
 import BreedSelector from "./SearchableDropdown/BreedSelector";
 

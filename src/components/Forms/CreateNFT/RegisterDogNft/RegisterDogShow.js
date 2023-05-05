@@ -28,9 +28,9 @@ const RegisterDogShow = () => {
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
+  console.log("The setSessionData", setSessionData);
   const [dogS, setDogS] = useState([]);
-  console.log(dogS);
-  console.log(setSessionData);
+  console.log("The dogS", dogS);
   const [dogShow, setDogShow] = useState({
     showName: sessionData[0]?.showName ?? "",
     officialShowName: sessionData[0]?.officialShowName ?? "",
