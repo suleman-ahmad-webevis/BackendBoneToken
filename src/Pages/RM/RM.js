@@ -35,6 +35,9 @@ export const RMContainer = styled.div`
   @media screen and (max-width: 768px) {
     padding: 10px 15px 20px 15px;
   }
+  @media screen and (max-width: 600px) {
+    padding: 10px 2px 20px 2px;
+  }
 `;
 
 export const RMHeading = styled.h5`
