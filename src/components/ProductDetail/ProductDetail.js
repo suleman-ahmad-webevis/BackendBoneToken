@@ -265,6 +265,7 @@ const ProductDetail = () => {
                   <CheckBox
                     type="checkbox"
                     checked={value?.checked && index == checkIndex}
+                    // checked={value?.checked && index === checkIndex}
                     onChange={(e) => ItemSelector(e.target.checked, index)}
                   />
                 </ProductMeasurement>
