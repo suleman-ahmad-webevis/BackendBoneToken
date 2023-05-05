@@ -29,9 +29,8 @@ const RegisterDogShow = () => {
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
   console.log("The setSessionData", setSessionData);
-  // eslint-disable-next-line
   const [dogS, setDogS] = useState([]);
-  console.log("The dogS", dogs);
+  console.log("The dogS", dogS);
   const [dogShow, setDogShow] = useState({
     showName: sessionData[0]?.showName ?? "",
     officialShowName: sessionData[0]?.officialShowName ?? "",
