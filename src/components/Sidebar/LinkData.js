@@ -8,6 +8,7 @@ import faq from "../../assets/images/Sidebar/faq.png";
 import earn from "../../assets/images/Sidebar/earn.png";
 import dogShows from "../../assets/images/Sidebar/dogShows.png";
 import history from "../../assets/images/Sidebar/history.png";
+import roadmap from "../../assets/images/Sidebar/roadmap.png";
 
 export const linkData = [
   {
@@ -59,5 +60,10 @@ export const linkData = [
     image: history,
     text: "History",
     path: "/order-history",
+  },
+  {
+    image: roadmap,
+    text: "Roadmap",
+    path: "/road-map",
   },
 ];

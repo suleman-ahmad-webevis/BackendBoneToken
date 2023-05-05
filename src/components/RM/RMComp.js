@@ -47,8 +47,11 @@ export const RMWrapper = styled.div`
 export const RMImage = styled.div`
   width: 32%;
   max-width: 32%;
+  img {
+    margin: auto;
+  }
   @media screen and (max-width: 1110px) {
-    width: 50%;
-    max-width: 50%;
+    width: 60%;
+    max-width: 60%;
   }
 `;

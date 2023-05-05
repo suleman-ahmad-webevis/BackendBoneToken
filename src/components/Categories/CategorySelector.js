@@ -92,7 +92,7 @@ const DropDownList = styled("ul")`
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
-  color: #b7b7b7;
+  color: #a6ccea;
   z-index: 400;
   background: #fff;
   overflow-y: ${({ isOpen }) => (isOpen ? "scroll" : "hidden")};
@@ -107,7 +107,7 @@ const DropDownList = styled("ul")`
     /* border: 1px solid ${(props) => props.theme.body}; */
   }
   ::-webkit-scrollbar-thumb {
-    /* background: #79999d; */
+    background: #a6ccea;
     border-radius: 5px;
     border-left: 7px solid #a6ccea;
     border-right: 7px solid #a6ccea;
