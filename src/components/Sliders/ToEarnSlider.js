@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
@@ -8,8 +8,6 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/grid";
-
-
 
 // import required modules
 import { FreeMode, Navigation, Thumbs, Grid } from "swiper";
@@ -79,7 +77,7 @@ export default function ToEarnSlider() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-      {BigSlideData.map((item, i) => (
+      {BigSlideData.map((item, index) => (
         <SwiperSlide key={index}>
           <SwiperSlideImg src={item.image} />
         </SwiperSlide>

@@ -90,6 +90,7 @@ const cartSlice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item) => item._id === newSinglePro._id
       );
+      console.log("The itemIndex", itemIndex);
       // if (itemIndex >= 0) {
       //   state.cartItems[itemIndex].cartQuantity += quantity > 0 ? quantity : 1;
       //   toast.success("Product added to cart ", { theme: "colored" });

@@ -42,7 +42,7 @@ const options = [
 
 const DetailColorSelector = ({ color, setColor }) => {
   const [selectedOption, setSelectedOption] = useState("Black");
-
+  console.log("The selectedOption", selectedOption);
   const onOptionClicked = (value) => {
     setSelectedOption(value.colorName);
     setColor(value.colorName);

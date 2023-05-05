@@ -46,8 +46,8 @@ const Navbar = () => {
   const location = useLocation();
   const url = useLocation()?.pathname?.slice(20);
 
-  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("The setSearchParams", setSearchParams);
   //StatesForSearching
   const [search, setSearch] = useState("");
   const category = searchParams.get("category");

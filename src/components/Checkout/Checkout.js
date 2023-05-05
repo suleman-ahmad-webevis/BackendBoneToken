@@ -32,7 +32,7 @@ import CheckoutCardCom from "./CheckoutCard";
 import { useDispatch } from "react-redux";
 import { getCartTotalAmount } from "../../redux/cart/cartSlice";
 
-const CheckOut = () => {
+const CheckOutComp = () => {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   const { cartItems, cartQuantityIs, cartAmountIs, cartTotalAmountIs } =
@@ -222,4 +222,4 @@ const CheckOut = () => {
   );
 };
 
-export default CheckOut;
+export default CheckOutComp;

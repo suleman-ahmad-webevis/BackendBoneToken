@@ -25,15 +25,13 @@ import Back from "../../../../assets/images/Back.png";
 const RegisterDogShow = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  // eslint-disable-next-line
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
-
+  console.log("The setSessionData", setSessionData);
   // eslint-disable-next-line
   const [dogS, setDogS] = useState([]);
-
+  console.log("The dogS", dogs);
   const [dogShow, setDogShow] = useState({
     showName: sessionData[0]?.showName ?? "",
     officialShowName: sessionData[0]?.officialShowName ?? "",

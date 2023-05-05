@@ -28,16 +28,16 @@ import useBreakpoint from "../../../hooks/useBreakPoint";
 import { proNavData } from "./ProNavData";
 
 const ProductsFilterBar = () => {
-  // eslint-disable-next-line
   const { search } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log("The search", search);
   //StatesForSearching
   const [searchPro, setSearchPro] = useState("");
 
-  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("The setSearchParams", setSearchParams);
+
   //StoreData
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
   const { cartQuantityIs } = useSelector((state) => state.cart);

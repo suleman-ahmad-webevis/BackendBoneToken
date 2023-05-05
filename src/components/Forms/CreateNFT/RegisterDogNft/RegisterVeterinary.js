@@ -23,12 +23,14 @@ const RegisterVeterinay = () => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const navigate = useNavigate();
 
-  // eslint-disable-next-line
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
   );
-  // eslint-disable-next-line
   const [vac, setVac] = useState([]);
+
+  console.log("The setSessionData", setSessionData);
+  console.log("The vac", vac);
+
   const [vaccination, setVaccination] = useState({
     vacType: sessionData[0]?.vacType ?? "",
     vacSerialNo: sessionData[0]?.vacSerialNo ?? "",

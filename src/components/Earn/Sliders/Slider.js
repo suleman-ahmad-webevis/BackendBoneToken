@@ -19,9 +19,8 @@ import prevButton from "../../../assets/images/Earn/previous.png";
 const Slider = () => {
   const swiper = useSwiper();
 
-  // eslint-disable-next-line
   const [index, setIndex] = useState("");
-
+  console.log("The index", index);
   const data = [dog1, dog2, dog1, dog2, dog1, dog2, dog1, dog2];
 
   const handleMouseOver = (i) => {

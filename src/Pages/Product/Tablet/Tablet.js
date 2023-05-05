@@ -16,8 +16,8 @@ import ProductsFilterBar from "./ProductsFilterBar";
 const Tablet = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("The setSearchParams", setSearchParams);
   const category = searchParams.get("category");
   const featured = searchParams.get("featured");
   const newParam = searchParams.get("new");
