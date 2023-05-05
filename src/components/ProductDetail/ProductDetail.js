@@ -264,7 +264,7 @@ const ProductDetail = () => {
                   <ProductWeight>{value?.minRetailPrice} &euro;</ProductWeight>
                   <CheckBox
                     type="checkbox"
-                    checked={value?.checked && index === checkIndex}
+                    checked={value?.checked && index == checkIndex}
                     onChange={(e) => ItemSelector(e.target.checked, index)}
                   />
                 </ProductMeasurement>
@@ -415,9 +415,7 @@ export const PriceContainer = styled.div`
   flex-direction: column;
   grid-gap: 13px;
   align-self: flex-start;
-  @media screen and (max-width: 1500px) {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 export const CombinedProductFields = styled.div`
