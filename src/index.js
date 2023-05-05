@@ -34,6 +34,7 @@ import PDFCERTIFICATE from "./Pages/PdfCertificate";
 import MYDOGS from "./Pages/MyDogs/MyDogs";
 //OthersRoutes
 import TOEARN from "./Pages/Earn/Earn";
+import RM from "./Pages/RM/RM";
 import FAQ from "./Pages/Faq/Faq";
 import CUSTOMERSERVICE from "./Pages/CustomerService/CustomerService";
 import DOGSHOWSPAGE from "./Pages/DogShow/DogShow";
@@ -143,6 +144,11 @@ const router = createBrowserRouter([
         path: "/tokenomics",
         element: <TOKENOMICS />,
       },
+      {
+        path:'/road-map',
+        element:<RM/>
+      },
+
       {
         path: "/settings",
         element: <SETTINGS />,
