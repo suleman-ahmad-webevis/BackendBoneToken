@@ -150,7 +150,7 @@ const ProductDetail = () => {
     <>
       {isDesktop ? (
         <ProductDetailContainer>
-          <ColumnOne>
+          <ColumnOneTwo>
             <DetailMainImage>
               {imageUrl ? <ReactImageZoom {...props} /> : null}
             </DetailMainImage>
@@ -166,8 +166,8 @@ const ProductDetail = () => {
                   </DetailImages>
                 ))}
             </ProductPhotoContainer>
-          </ColumnOne>
-          <ColumnTwo>
+          </ColumnOneTwo>
+          <ColumnOneTwo>
             <ProductForm>
               <ProductField>
                 <FieldLabel>Product Name</FieldLabel>
@@ -248,7 +248,7 @@ const ProductDetail = () => {
                 />
               </ProductField>
             </RatingField>
-          </ColumnTwo>
+          </ColumnOneTwo>
           <ColumnThree>
             <ProductMeasurementList>
               <FieldLabel>Details</FieldLabel>
@@ -357,14 +357,11 @@ const ProductDetail = () => {
 };
 
 export const ProductDetailContainer = styled.div`
-  padding: 10px;
+  padding: 10px 15px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 32px;
-  @media screen and (max-width: 1500px) {
-    flex-wrap: wrap;
-  }
 `;
 
 export const ProductField = styled.div`
@@ -390,18 +387,21 @@ export const ProductPrice = styled.div`
   align-self: flex-end;
 `;
 
-export const ColumnOne = styled.div`
-  width: 352px;
+export const ColumnOneTwo = styled.div`
+  width: 33%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 `;
 
-export const ColumnTwo = styled.div`
-  width: 352px;
+export const ColumnThree = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  width: 33%;
+  grid-gap: 12px;
+  @media screen and (max-width: 1500px) {
+    width: 28%;
+  }
 `;
 
 export const FieldLabel = styled.div`
@@ -415,6 +415,9 @@ export const PriceContainer = styled.div`
   flex-direction: column;
   grid-gap: 13px;
   align-self: flex-start;
+  @media screen and (max-width: 1500px) {
+    width: 100%;
+  }
 `;
 
 export const CombinedProductFields = styled.div`
@@ -425,7 +428,6 @@ export const CombinedProductFields = styled.div`
 export const CombinedProduct = styled.div`
   display: flex;
   grid-gap: 20px;
-
   FieldLabel {
     font-family: "DM Sans";
     font-style: normal;
@@ -560,8 +562,7 @@ export const AddToCartButton = styled.div`
 export const ProductRating = styled.div`
   display: flex;
   justify-content: space-between;
-
-  @media screen and (max-width: 820px) {
+  @media screen and (max-width: 1500px) {
     flex-direction: column;
   }
 `;
@@ -572,6 +573,21 @@ export const RatingField = styled.div`
   margin-top: 20px;
   .css-jue3ft-MuiRating-root {
     font-size: 34px;
+  }
+  @media screen and (max-width: 1500px) {
+    .css-jue3ft-MuiRating-root {
+      font-size: 30px;
+    }
+  }
+  @media screen and (max-width: 1300px) {
+    .css-jue3ft-MuiRating-root {
+      font-size: 28px;
+    }
+  }
+  @media screen and (max-width: 1300px) {
+    .css-jue3ft-MuiRating-root {
+      font-size: 26px;
+    }
   }
 `;
 
@@ -629,13 +645,14 @@ const AddCart = styled.button`
   box-shadow: 0px 0px 30px #aeecd4, inset 0px 0px 20px #6be7b7;
   border-radius: 5px;
   margin-top: 30px;
-  width: 296px;
+  /* width: 296px; */
   height: 44px;
   border: none;
   font-weight: 700;
   font-size: 14px;
   color: #000000;
 `;
+
 const PriceSection = styled.div`
   display: flex;
   align-items: center;
@@ -696,36 +713,28 @@ export const CartItem = styled.div`
   border-radius: 8px;
   gap: 30px;
   border-radius: 8px;
-  width: 300px;
+  width: 100%;
   padding: 10px 20px;
 `;
-export const ColumnThree = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-  grid-gap: 12px;
-`;
+
 export const ProductMeasurementList = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 10px;
   height: 372px;
   overflow-y: auto;
-
   ::-webkit-scrollbar {
     width: 5px;
   }
-
   ::-webkit-scrollbar-track {
-    background: rgba(144, 202, 249, 0.5);
+    background: rgba(0, 0, 0, 0.35);
+    -webkit-border-radius: 10px;
   }
-
   ::-webkit-scrollbar-thumb {
-    background: rgba(144, 202, 249, 1);
+    background-color: #314552;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: none;
+    background-color: #314552;
   }
 `;
 
@@ -738,7 +747,7 @@ export const ProductMeasurement = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 300px;
+  width: 100%;
   padding: 12px 10px;
 `;
 
