@@ -86,10 +86,10 @@ const cartSlice = createSlice({
       const { singlePro, selectedPro, navigate } = action.payload;
       const newSinglePro = { ...singlePro };
       newSinglePro.selectedProDetail = selectedPro;
+      // eslint-disable-next-line
       const itemIndex = state.cartItems.findIndex(
         (item) => item._id === newSinglePro._id
       );
-      console.log(itemIndex);
       // if (itemIndex >= 0) {
       //   state.cartItems[itemIndex].cartQuantity += quantity > 0 ? quantity : 1;
       //   toast.success("Product added to cart ", { theme: "colored" });

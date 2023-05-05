@@ -45,6 +45,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const url = useLocation()?.pathname?.slice(20);
+
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   //StatesForSearching
   const [search, setSearch] = useState("");
@@ -56,7 +58,6 @@ const Navbar = () => {
   const [active, setActive] = useState(false);
   const [simpleNav, setSimpleNav] = useState(false);
   // const [isToggle, setIsToggle] = useState(false);
-  console.log(setSearchParams);
   useEffect(() => {
     if (locations.includes(location?.pathname)) {
       setSimpleNav(true);

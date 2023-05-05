@@ -16,6 +16,7 @@ import ProductsFilterBar from "./ProductsFilterBar";
 const Tablet = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category");
   const featured = searchParams.get("featured");
@@ -61,11 +62,10 @@ const Tablet = () => {
       );
     }
   };
-  console.log(setSearchParams);
 
   return (
     <PTabContainer>
-    <ProductsFilterBar />
+      <ProductsFilterBar />
       {isLoading && <Loader />}
       {allProducts?.length ? (
         <PTabProductList id="ProductListContainer">

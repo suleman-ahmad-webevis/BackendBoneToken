@@ -22,12 +22,13 @@ import { SaveNftBtn, SaveText } from "./CreateNFT.style";
 const RegisterVeterinay = () => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const navigate = useNavigate();
+
+  // eslint-disable-next-line
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
   );
-  console.log(setSessionData);
+  // eslint-disable-next-line
   const [vac, setVac] = useState([]);
-  console.log(vac);
   const [vaccination, setVaccination] = useState({
     vacType: sessionData[0]?.vacType ?? "",
     vacSerialNo: sessionData[0]?.vacSerialNo ?? "",

@@ -21,12 +21,13 @@ import { SaveNftBtn, SaveText } from "./CreateNFT.style";
 
 const RegisterInsurance = () => {
   const navigate = useNavigate();
+
+  // eslint-disable-next-line
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerInsurance")) ?? {}
   );
-  console.log("setSessionData", setSessionData);
+  // eslint-disable-next-line
   const [ins, setIns] = useState([]);
-  console.log("ins", ins);
   const [insurance, setInsurance] = useState({
     contactName: sessionData[0]?.contactName ?? "",
     certificateNo: sessionData[0]?.certificateNo ?? "",

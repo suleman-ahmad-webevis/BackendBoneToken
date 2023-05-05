@@ -105,8 +105,8 @@ export const ButtonGroup = styled.div``;
 //   ));
 // }
 
+// eslint-disable-next-line
 const VaccinationTypes = () => {
-  console.log("---");
 };
 
 export default VaccinationTypes;
