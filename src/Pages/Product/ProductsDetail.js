@@ -26,7 +26,7 @@ const ProductsDetail = ({ showSidebar, setShowSidebar }) => {
 
 const ProductsListContainer = styled.div`
   width: 100%;
-  margin-top: 170px;
+  margin-top: 100px;
   @media screen and (max-width: 1110px) {
     margin-top: 50px;
   }

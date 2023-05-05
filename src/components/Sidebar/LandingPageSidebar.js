@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
   const pathname = window?.location?.pathname;
   const { id, name } = useParams();
-
   useEffect(() => {}, [pathname]);
   return (
     <CategoriesSidebar toggle={toggle}>
@@ -22,7 +21,7 @@ const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
       )}
       {pathname === "/shop" ||
       pathname === `/shop/product-detail/${id}` ||
-      pathname === `/shop/category?${name}` ||
+      pathname === `/shop/category` ||
       pathname === "/shop/recently-viewed" ? (
         <ShopCategoriesWithSidebar
           //WithItsOwnSidebar
