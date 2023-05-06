@@ -292,6 +292,7 @@ const ProductDetail = () => {
                   <ProductWeight>{value?.minRetailPrice} &euro;</ProductWeight>
                   <CheckBox
                     type="checkbox"
+                    // eslint-disable-next-line
                     checked={value?.checked && index == checkIndex}
                     // checked={value?.checked && index === checkIndex}
                     onChange={(e) => ItemSelector(e.target.checked, index)}
