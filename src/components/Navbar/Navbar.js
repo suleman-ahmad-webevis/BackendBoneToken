@@ -169,14 +169,6 @@ const Navbar = () => {
                 <Img src={Flags} alt="Flags" />
                 <Img src={FlagsDropDown} alt="FlagsDropDown" />
               </LangSelect>
-              {/* <NavIcon
-                onClick={() => {
-                  setIsToggle(!isToggle);
-                  setTheme(!theme);
-                }}
-              >
-                {isToggle ? <ToggleOn /> : <ToggleOff />}
-              </NavIcon> */}
             </NavbarIcons>
           </NavbarRightBlock>
           <NavbarRightBlock>
@@ -195,8 +187,6 @@ const Navbar = () => {
               <h3>$0</h3>
             </NavbarButton>
             <ProfileContainer>
-              {/* <Img src={bone} alt="bone" />
-              <Token>0</Token> */}
               <Img
                 src={connectWallet}
                 alt="connectWallet"
@@ -205,8 +195,6 @@ const Navbar = () => {
               <span onClick={() => dispatch(metaMaskConnection())}>
                 Connect
               </span>
-              {/* <Img src={profile} alt='profile' />
-          35bb21.....3n123 */}
             </ProfileContainer>
           </NavbarRightBlock>
         </NavbarRight>

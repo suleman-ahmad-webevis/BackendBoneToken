@@ -50,13 +50,14 @@ export const ProductsList = styled.div`
   ::-webkit-scrollbar-track {
     background: white;
   }
-
   ::-webkit-scrollbar-thumb {
     background: white;
   }
-
   ::-webkit-scrollbar-thumb:hover {
     background: none;
+  }
+  @media screen and (max-width: 1110px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 

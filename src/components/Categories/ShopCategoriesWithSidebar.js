@@ -71,12 +71,6 @@ const ShopCategoriesWithSidebar = ({
     scroll.scrollToTop();
   };
 
-  // const pathChecker = (path) => {
-  //   if (path == "/shop" || path == "/shop/category") {
-  //     return true;
-  //   }
-  // };
-
   return (
     <>
       <SidebarToggler

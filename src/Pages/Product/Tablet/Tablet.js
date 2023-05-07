@@ -12,6 +12,7 @@ import {
 import Loader from "../../../components/Loader/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductsFilterBar from "./ProductsFilterBar";
+import TabAllCategory from "../../../components/ProductsComponent/TabAllCategory/TabAllCategory";
 
 const Tablet = () => {
   const dispatch = useDispatch();
@@ -67,20 +68,26 @@ const Tablet = () => {
     <PTabContainer>
       <ProductsFilterBar />
       {isLoading && <Loader />}
-      {allProducts?.length ? (
-        <PTabProductList id="ProductListContainer">
-          {allProducts.map((product) => (
-            <TabProductCard product={product} />
-          ))}
-          <InfiniteScroll
-            dataLength={allProducts?.length}
-            next={fetchMore}
-            hasMore={allProducts?.length < total ? true : false}
-            scrollableTarget="ProductListContainer"
-          ></InfiniteScroll>
-        </PTabProductList>
+      {location.pathname == "/shop" ? (
+        <>
+          {allProducts?.length ? (
+            <PTabProductList id="ProductListContainer">
+              {allProducts.map((product) => (
+                <TabProductCard product={product} />
+              ))}
+              <InfiniteScroll
+                dataLength={allProducts?.length}
+                next={fetchMore}
+                hasMore={allProducts?.length < total ? true : false}
+                scrollableTarget="ProductListContainer"
+              ></InfiniteScroll>
+            </PTabProductList>
+          ) : (
+            <h2>No Products</h2>
+          )}
+        </>
       ) : (
-        <h2>No Products</h2>
+        <TabAllCategory />
       )}
     </PTabContainer>
   );

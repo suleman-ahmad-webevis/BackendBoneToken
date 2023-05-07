@@ -152,6 +152,7 @@ const ProductsFilterBar = () => {
                 style={{
                   transform: "translate(90%,10%)",
                   cursor: "pointer",
+                  color: "#fff",
                 }}
               >
                 x

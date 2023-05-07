@@ -77,14 +77,11 @@ export const SearchBar = styled.div`
 export const PTabTitle = styled.h5`
   color: #1b153d;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 36px;
   line-height: 48px;
   letter-spacing: -0.24px;
-  @media screen and (max-width: 912px) {
-    font-size: 30px;
-  }
-  @media screen and (max-width: 840px) {
-    font-size: 45px;
+  @media screen and (max-width: 600px) {
+    font-size: 28px;
   }
 `;
 
