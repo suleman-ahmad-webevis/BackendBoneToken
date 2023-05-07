@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const DogShowContainer = styled.div`
   width: 100%;
   padding: 10px 50px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
 `;
 
 export const DogShowWrapper = styled.div`

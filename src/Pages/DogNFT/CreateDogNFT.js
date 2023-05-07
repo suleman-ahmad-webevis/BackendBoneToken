@@ -54,7 +54,7 @@ const CreateDogNFT = () => {
           >
             {(isSmallMobile || isMobile) && <CommonMobNav />}
             {(isTablet || isSmallMobile || isMobile) && (
-              <CommonTabNav Width="100%" />
+              <CommonTabNav />
             )}
           </div>
           <FilterForms>

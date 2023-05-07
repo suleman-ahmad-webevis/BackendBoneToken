@@ -29,14 +29,10 @@ export const RMContainer = styled.div`
   grid-gap: 20px;
   width: 100%;
   @media screen and (max-width: 1110px) {
-    width: 100%;
-    padding: 10px 5px 20px 5px;
+    width: 80%;
   }
   @media screen and (max-width: 768px) {
-    padding: 10px 15px 20px 15px;
-  }
-  @media screen and (max-width: 600px) {
-    padding: 10px 2px 20px 2px;
+    width: 100%;
   }
 `;
 
