@@ -6,10 +6,13 @@ import { Img } from "../../GlobalStyles";
 import styled from "styled-components";
 import PawSearch from "../../assets/images/RegisterLogin/PawSearch.png";
 import HeartSearch from "../../assets/images/RegisterLogin/HeartSearch.png";
+import { metaMaskConnection } from "../../redux/walletConn/walletConnSlice";
+import { useDispatch } from "react-redux";
 
 const CommonTabNav = () => {
+  const dispatch = useDispatch();
   return (
-    <>
+    <CTNWrapper>
       <CoinsIconWrapper>
         <CurrBox>
           {" "}
@@ -22,8 +25,12 @@ const CommonTabNav = () => {
           <h5>$0.00</h5>
         </CurrBox>
         <ConnectBox>
-          <Img src={ConnectedUser} alt="user" />
-          <h5>Connect</h5>
+          <Img
+            src={ConnectedUser}
+            alt="connectWallet"
+            onClick={() => dispatch(metaMaskConnection())}
+          />
+          <h5 onClick={() => dispatch(metaMaskConnection())}>Connect</h5>
         </ConnectBox>
       </CoinsIconWrapper>
       <SearchWrapper>
@@ -36,11 +43,18 @@ const CommonTabNav = () => {
           <Img src={PawSearch} />
         </Search>
       </SearchWrapper>
-    </>
+    </CTNWrapper>
   );
 };
 
 export default CommonTabNav;
+
+export const CTNWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+`;
 
 export const CoinsIconWrapper = styled.div`
   display: flex;

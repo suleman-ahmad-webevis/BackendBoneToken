@@ -68,7 +68,7 @@ const Tablet = () => {
     <PTabContainer>
       <ProductsFilterBar />
       {isLoading && <Loader />}
-      {location.pathname == "/shop" ? (
+      {location.pathname === "/shop" ? (
         <>
           {allProducts?.length ? (
             <PTabProductList id="ProductListContainer">

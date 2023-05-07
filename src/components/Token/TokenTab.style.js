@@ -13,6 +13,10 @@ export const TTabContainer = styled.div`
   padding: 20px 10px;
   grid-gap: 20px;
   width: 80%;
+  @media screen and (max-width: 1110px) {
+    width: 85%;
+    padding: 20px 25px;
+  }
   @media screen and (max-width: 768px) {
     width: 90%;
     padding: 20px 40px;

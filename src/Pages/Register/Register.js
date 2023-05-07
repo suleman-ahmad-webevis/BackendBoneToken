@@ -35,12 +35,8 @@ const Register = () => {
 
   return (
     <RegContainer>
-      {(isSmallMobile || isMobile) && (
-        <CommonMobNav style={{ alignSelf: "center", width: "65%" }} />
-      )}
-      {(isTablet || isSmallMobile || isMobile) && (
-        <CommonTabNav style={{ alignSelf: "center", width: "65%" }} />
-      )}
+      {(isSmallMobile || isMobile) && <CommonMobNav />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

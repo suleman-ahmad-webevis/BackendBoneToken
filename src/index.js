@@ -148,7 +148,6 @@ const router = createBrowserRouter([
         path:'/road-map',
         element:<RM/>
       },
-
       {
         path: "/settings",
         element: <SETTINGS />,

@@ -103,17 +103,6 @@ export const CheckToken = styled.div`
   gap: 10px;
   margin-top: 1rem;
   padding: 0 10px;
-  /* img {
-    width: 118px;
-    height: 102px;
-    border: 2px solid #252536;
-    border-radius: 10px;
-    cursor: pointer;
-    @media screen and (max-width: 1440px) {
-      width: 96px;
-      height: 80px;
-    }
-  } */
 `;
 
 export const Deck = styled.div`

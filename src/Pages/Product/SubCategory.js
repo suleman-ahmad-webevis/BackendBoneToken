@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import SubCategoryListComponent from "../../components/ProductsComponent/SubCategoryComponent";
 import ProductNavComp from "../../components/ProductsComponent/ProductNavComp";
 import useBreakpoint from "../../hooks/useBreakPoint";
