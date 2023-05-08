@@ -13,16 +13,18 @@ const PDFModal = ({ children, active, hideModal }) => {
   return (
     <Fragment>
       {active && (
-        <ModalBlock>
-          <ModalOverlay onClick={() => hideModal()}></ModalOverlay>
-          <ModalContainer>
-            <ModalHeader>
-              <ModalTitle>White Paper PDF</ModalTitle>
-              <ModalClose onClick={() => hideModal()}>X</ModalClose>
-            </ModalHeader>
-            <ModalBody>{children}</ModalBody>
-          </ModalContainer>
-        </ModalBlock>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <ModalBlock>
+            <ModalOverlay onClick={() => hideModal()}></ModalOverlay>
+            <ModalContainer>
+              <ModalHeader>
+                <ModalTitle></ModalTitle>
+                <ModalClose onClick={() => hideModal()}>X</ModalClose>
+              </ModalHeader>
+              <ModalBody>{children}</ModalBody>
+            </ModalContainer>
+          </ModalBlock>
+        </div>
       )}
     </Fragment>
   );

@@ -5,7 +5,7 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import styled from "styled-components";
-import WhitePaper from "../../assets/pdf/WhitePaper.pdf";
+import WhitePaper from "../../assets/pdf/Faq/Whitepaper.pdf";
 
 const WPComp = () => {
   const [defaultPdfFile] = useState(WhitePaper);
