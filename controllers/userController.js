@@ -12,12 +12,15 @@ const authToken = "4e2bb9e0f19a1edac3a2f96f97776bdb";
 const client = require("twilio")(accountSid, authToken);
 
 const register = catchAsyncErrors(async (req, res, next) => {
-  const { email, phone } = req.body.data;
-  if (req.body.password !== req.body.confirmPassword) {
+  const firstForm = JSON.parse(req.body.firstForm);
+  const secondForm = JSON.parse(req.body.secondForm);
+  const { email } = firstForm;
+
+  if (req.body.values.password !== req.body.values.repeatPassword) {
     return next(
       new ErrorHandler(
         StatusCodes.BAD_REQUEST,
-        "Password and confirm password dnt match"
+        "Password and repeat password dnt match"
       )
     );
   }
@@ -57,7 +60,9 @@ const register = catchAsyncErrors(async (req, res, next) => {
   //   });
   // }
   const user = new User({
-    ...req.body.data,
+    ...firstForm,
+    ...secondForm,
+    ...req.body.values,
   });
   await user.save();
   // mailSender();

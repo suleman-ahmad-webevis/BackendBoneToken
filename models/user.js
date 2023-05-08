@@ -5,13 +5,21 @@ const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
+    name: {
       type: String,
-      required: [true, "Please enter first name"],
+      required: [true, "Please enter name"],
     },
-    lastName: {
+    mName: {
       type: String,
-      required: [true, "Please enter last name"],
+    },
+    lName: {
+      type: String,
+      required: [true, "Please enter lastname"],
+      unique: [true, "Email already exist"],
+    },
+    dob: {
+      type: String,
+      required: [true, "Please enter date of birth"],
     },
     email: {
       type: String,
@@ -19,34 +27,33 @@ const userSchema = new mongoose.Schema(
       unique: [true, "Email already exist"],
       validate: [validator.isEmail, "Please enter a valid email"],
     },
-    password: {
-      type: String,
-      required: [true, "Please enter password"],
-    },
-    confirmPassword: {
-      type: String,
-      required: [true, "Please enter confirm password"],
-    },
-    dateOfBirth: {
+    phoneNo: {
       type: String,
     },
-    gender: {
-      type: String,
-      required: [true, "Please select the gender"],
-    },
-    countryOfBirth: {
-      type: String,
-      required: [true, "Please select the country of birth"],
-    },
-    streetAddress: {
+    sAddress: {
       type: String,
       required: [true, "Please enter street address"],
       maxLength: [40, "Street cannot exceed 40 characters"],
     },
-    streetAddressLineTwo: {
+    sAddressLine: {
       type: String,
-      required: [true, "Please enter street address line two"],
-      maxLength: [40, "Street number cannot exceed 40 characters"],
+      maxLength: [40, "Street cannot exceed 40 characters"],
+    },
+    city: {
+      type: String,
+      required: [true, "Please enter city"],
+    },
+    region: {
+      type: String,
+      required: [true, "Please enter region"],
+    },
+    country: {
+      type: String,
+      required: [true, "Please enter country"],
+    },
+    postalZipCode: {
+      type: String,
+      required: [true, "Please enter postal zip code"],
     },
     city: {
       type: String,
@@ -64,9 +71,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add the postal zip code"],
     },
-    phone: {
-      type: Number,
-      required: [true, "Please add the phone of birth"],
+    password: {
+      type: String,
+      required: [true, "Please enter the password"],
+    },
+    repeatPassword: {
+      type: String,
+      required: [true, "Please enter the repeat password"],
     },
   },
   { timestamps: true }
