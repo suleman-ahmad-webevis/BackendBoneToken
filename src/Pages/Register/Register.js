@@ -19,7 +19,7 @@ const Register = () => {
   const components = [
     <FirstForm setPage={setPage} />,
     <SecondForm setPage={setPage} />,
-    <ThirdForm setPage={setPage} />,
+    <ThirdForm />,
   ];
 
   return (

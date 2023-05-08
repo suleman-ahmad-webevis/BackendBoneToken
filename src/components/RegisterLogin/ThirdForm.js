@@ -16,7 +16,6 @@ const ThirdForm = () => {
   };
   const onSubmit = (values) => {
     console.log("The value", values);
-    setPage(1);
   };
   return (
     <Formik
