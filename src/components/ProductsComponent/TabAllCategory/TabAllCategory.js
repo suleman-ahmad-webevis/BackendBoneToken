@@ -40,6 +40,25 @@ export const TACContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   grid-gap: 10px;
+  height: 390px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.35);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #314552;
+    border-right: none;
+    border-left: none;
+    border-radius: 10px;
+  }
 `;
 
 export const CategoryCard = styled.div`
