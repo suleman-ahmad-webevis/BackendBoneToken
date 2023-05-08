@@ -3,94 +3,111 @@ import { Img } from "../../GlobalStyles";
 import {
   ConBtn,
   FieldCol,
-  StyledFEM,
   StyledFField,
   StyledFForm,
 } from "../../Pages/Register/Register";
 import styled from "styled-components";
 import FBIcon from "../../assets/images/RegisterLogin/FBIcon.png";
+import { ErrorMessage, Formik } from "formik";
+import { firstFormSchema } from "../../schema/registerLoginSchema";
 
 const FirstForm = ({ setPage }) => {
-  const formHandler = () => {
+  //FormikSetup
+  const initialValues = {
+    name: "",
+    mName: "",
+    lName: "",
+    dob: "",
+    email: "",
+    phoneNo: "",
+  };
+  const onSubmit = (values) => {
+    console.log("The value", values);
     setPage(1);
   };
   return (
     <>
-      <StyledFForm>
-        <h5>New User Registration</h5>
-        {/* InputField */}
-        <FieldCol>
-          <label htmlFor="name">
-            Name <p style={{ color: "red" }}>*</p>
-          </label>
-          <StyledFField id="name" type="text" name="name" placeHolder="Name" />
-          <StyledFEM name="name" />
-        </FieldCol>
-
-        <FieldCol>
-          <label htmlFor="middleName">Middle Name</label>
-          <StyledFField
-            id="middleName"
-            type="text"
-            name="middleName"
-            placeHolder="Middle Name"
-          />
-          <StyledFEM name="middleName" />
-        </FieldCol>
-
-        <FieldCol>
-          <label htmlFor="lastName">
-            Last Name <p style={{ color: "red" }}>*</p>
-          </label>
-          <StyledFField
-            id="lastName"
-            type="text"
-            name="lastName"
-            placeHolder="Last Name"
-          />
-          <StyledFEM name="lastName" />
-        </FieldCol>
-
-        <FieldCol>
-          <label htmlFor="dateOfBirth">
-            Date of Birth <p style={{ color: "red" }}>*</p>
-          </label>
-          <StyledFField
-            id="dateOfBirth"
-            type="text"
-            name="dateOfBirth"
-            placeHolder="DD/MM/YY"
-          />
-          <StyledFEM name="dateOfBirth" />
-        </FieldCol>
-
-        <FieldCol>
-          <label htmlFor="emailAddress">
-            Email address <p style={{ color: "red" }}>*</p>
-          </label>
-          <StyledFField
-            id="emailAddress"
-            type="text"
-            name="emailAddress"
-            placeHolder="Email Address"
-          />
-          <StyledFEM name="emailAddress" />
-        </FieldCol>
-
-        <FieldCol>
-          <label htmlFor="phoneNo">Phone number</label>
-          <StyledFField
-            id="phoneNo"
-            type="text"
-            name="phoneNo"
-            placeHolder="Phone Number"
-          />
-          <StyledFEM name="phoneNo" />
-        </FieldCol>
-        <ConBtn>
-          <button onClick={() => formHandler()}>Continue</button>
-        </ConBtn>
-      </StyledFForm>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={firstFormSchema}
+        onSubmit={onSubmit}
+      >
+        <StyledFForm>
+          <h5>New User Registration</h5>
+          {/* InputField */}
+          <FieldCol>
+            <label htmlFor="name">
+              Name <p style={{ color: "red" }}>*</p>
+            </label>
+            <StyledFField
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
+            <ErrorMessage component="p" name="name" className="error" />
+          </FieldCol>
+          <FieldCol>
+            <label htmlFor="mName">Middle Name</label>
+            <StyledFField
+              id="mName"
+              type="text"
+              name="mName"
+              placeholder="Middle Name"
+            />
+            <ErrorMessage component="p" name="mName" className="error" />
+          </FieldCol>
+          <FieldCol>
+            <label htmlFor="lName">
+              Last Name <p style={{ color: "red" }}>*</p>
+            </label>
+            <StyledFField
+              id="lName"
+              type="text"
+              name="lName"
+              placeholder="Last Name"
+            />
+            <ErrorMessage component="p" name="lName" className="error" />
+          </FieldCol>
+          <FieldCol>
+            <label htmlFor="dob">
+              Date of Birth <p style={{ color: "red" }}>*</p>
+            </label>
+            <StyledFField
+              id="dob"
+              type="text"
+              name="dob"
+              placeholder="DD/MM/YY"
+            />
+            <ErrorMessage component="p" name="dob" className="error" />
+          </FieldCol>
+          <FieldCol>
+            <label htmlFor="email">
+              Email address <p style={{ color: "red" }}>*</p>
+            </label>
+            <StyledFField
+              id="email"
+              type="text"
+              name="email"
+              placeholder="Email Address"
+            />
+            <ErrorMessage component="p" name="email" className="error" />
+          </FieldCol>
+          <FieldCol>
+            <label htmlFor="phoneNo">Phone number</label>
+            <StyledFField
+              id="phoneNo"
+              type="text"
+              name="phoneNo"
+              placeholder="Phone Number"
+            />
+            <ErrorMessage component="p" name="phoneNo" className="error" />
+          </FieldCol>
+          <ConBtn>
+            <button type="submit">Continue</button>
+          </ConBtn>
+        </StyledFForm>
+      </Formik>
       <FBBtn>
         <Img src={FBIcon} />
         <h5>Continue With Facebook</h5>

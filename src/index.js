@@ -22,7 +22,7 @@ import INSTAGRAMHANDLER from "./components/ProductDetail/InstagramHandler";
 //RegisterationRoutes
 import REGISTERUSER from "./Pages/Register/Register";
 import USERLOGIN from "./Pages/Login/Login";
-import OTP from "./Pages/Registeration/Otp";
+import OTP from "./Pages/Otp/Otp";
 //BlogsRoutes
 import BLOGS from "./Pages/Blogs/Blogs";
 import BLOGDETAIL from "./Pages/Blogs/BlogsDetail";

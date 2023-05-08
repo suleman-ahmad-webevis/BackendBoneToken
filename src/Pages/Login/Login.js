@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {
   FieldCol,
   RegContainer,
-  StyledFEM,
   StyledFField,
   StyledFForm,
 } from "../../Pages/Register/Register";
@@ -45,7 +44,6 @@ const Login = () => {
               name="email"
               placeHolder="Email"
             />
-            <StyledFEM name="email" />
           </FieldCol>
 
           <FieldCol>
@@ -58,7 +56,6 @@ const Login = () => {
               name="password"
               placeHolder="************"
             />
-            <StyledFEM name="password" />
           </FieldCol>
           <RegBtn>
             <button type="submit">Login</button>

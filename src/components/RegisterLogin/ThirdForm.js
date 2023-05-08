@@ -1,46 +1,62 @@
 import React from "react";
 import {
   FieldCol,
-  StyledFEM,
   StyledFField,
   StyledFForm,
 } from "../../Pages/Register/Register";
 import styled from "styled-components";
+import { ErrorMessage, Formik } from "formik";
+import { thirdFormSchema } from "../../schema/registerLoginSchema";
 
 const ThirdForm = () => {
+  //FormikSetup
+  const initialValues = {
+    password: "",
+    repeatPassword: "",
+  };
+  const onSubmit = (values) => {
+    console.log("The value", values);
+    setPage(1);
+  };
   return (
-    <StyledFForm>
-      <h5>New User Registration</h5>
-      {/* InputField */}
-      <FieldCol>
-        <label htmlFor="password">
-          Create Password <p style={{ color: "red" }}>*</p>
-        </label>
-        <StyledFField
-          id="password"
-          type="password"
-          name="password"
-          placeHolder="************"
-        />
-        <StyledFEM name="password" />
-      </FieldCol>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={thirdFormSchema}
+      onSubmit={onSubmit}
+    >
+      <StyledFForm>
+        <h5>New User Registration</h5>
+        {/* InputField */}
+        <FieldCol>
+          <label htmlFor="password">
+            Create Password <p style={{ color: "red" }}>*</p>
+          </label>
+          <StyledFField
+            id="password"
+            type="password"
+            name="password"
+            placeholder="************"
+          />
+          <ErrorMessage component="p" name="password" className="error" />
+        </FieldCol>
 
-      <FieldCol>
-        <label htmlFor="repeatPassword">
-          Repeat Password <p style={{ color: "red" }}>*</p>
-        </label>
-        <StyledFField
-          id="repeatPassword"
-          type="password"
-          name="repeatPassword"
-          placeHolder="************"
-        />
-        <StyledFEM name="repeatPassword" />
-      </FieldCol>
-      <RegBtn>
-        <button type="submit">Register</button>
-      </RegBtn>
-    </StyledFForm>
+        <FieldCol>
+          <label htmlFor="repeatPassword">
+            Repeat Password <p style={{ color: "red" }}>*</p>
+          </label>
+          <StyledFField
+            id="repeatPassword"
+            type="password"
+            name="repeatPassword"
+            placeholder="************"
+          />
+          <ErrorMessage component="p" name="repeatPassword" className="error" />
+        </FieldCol>
+        <RegBtn>
+          <button type="submit">Register</button>
+        </RegBtn>
+      </StyledFForm>
+    </Formik>
   );
 };
 

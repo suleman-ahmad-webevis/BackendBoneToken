@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FirstForm from "../../components/RegisterLogin/FirstForm";
 import SecondForm from "../../components/RegisterLogin/SecondForm";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Form, Field } from "formik";
 import ThirdForm from "../../components/RegisterLogin/ThirdForm";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
@@ -10,23 +10,12 @@ import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 
 const Register = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
-  const [page, setPage] = useState(0);
-  const initialValues = {
-    name: "",
-  };
-  const onSubmit = (values) => {};
-  const validate = (values) => {
-    let errors = {};
-    if (!values.name) {
-      errors.name = "Required";
-    }
-    return errors;
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  //Pages
+  const [page, setPage] = useState(0);
   const components = [
     <FirstForm setPage={setPage} />,
     <SecondForm setPage={setPage} />,
@@ -37,13 +26,7 @@ const Register = () => {
     <RegContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validate={validate}
-      >
-        {components[page]}
-      </Formik>
+      {components[page]}
     </RegContainer>
   );
 };
@@ -130,8 +113,4 @@ export const ConBtn = styled.div`
     font-size: 16px;
     color: #ffffff;
   }
-`;
-
-export const StyledFEM = styled(ErrorMessage)`
-  color: red;
 `;

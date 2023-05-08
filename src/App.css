@@ -81,3 +81,8 @@ body::-webkit-scrollbar-thumb {
   padding: 16.5px 14px;
 }
 
+/* ForFormikErrorMessage */
+.error {
+  color: red;
+  font-size: 12px;
+}
