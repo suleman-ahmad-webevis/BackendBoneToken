@@ -10,7 +10,10 @@ import Heading from "../Heading/Heading";
 import ProductNavComp from "../../components/ProductsComponent/ProductNavComp";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import TabProductCard from "../../Pages/Product/Tablet/TabProductCard";
-import { PTabContainer, PTabProductList } from "../../Pages/Product/Tablet/Tablet.style";
+import {
+  PTabContainer,
+  PTabProductList,
+} from "../../Pages/Product/Tablet/Tablet.style";
 import ProductsFilterBar from "../../Pages/Product/Tablet/ProductsFilterBar";
 
 const RecentlyViewedProducts = () => {
