@@ -22,7 +22,7 @@ const FirstForm = ({ setPage }) => {
     phoneNo: "",
   };
   const onSubmit = (values) => {
-    console.log("The value", values);
+    sessionStorage.setItem("firstForm", JSON.stringify(values));
     setPage(1);
   };
   return (

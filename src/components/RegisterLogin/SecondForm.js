@@ -21,7 +21,7 @@ const SecondForm = ({ setPage }) => {
     postalZipCode: "",
   };
   const onSubmit = (values) => {
-    console.log("The value", values);
+    sessionStorage.setItem("secondForm", JSON.stringify(values));
     setPage(2);
   };
   return (

@@ -7,15 +7,20 @@ import {
 import styled from "styled-components";
 import { ErrorMessage, Formik } from "formik";
 import { thirdFormSchema } from "../../schema/registerLoginSchema";
+import { useDispatch } from "react-redux";
+import { registerTheUser } from "../../redux/user/userSlice";
 
 const ThirdForm = () => {
+  const dispatch = useDispatch();
   //FormikSetup
   const initialValues = {
     password: "",
     repeatPassword: "",
   };
   const onSubmit = (values) => {
-    console.log("The value", values);
+    const firstForm = sessionStorage.getItem("firstForm");
+    const secondForm = sessionStorage.getItem("secondForm");
+    dispatch(registerTheUser({firstForm, secondForm, values}));
   };
   return (
     <Formik
