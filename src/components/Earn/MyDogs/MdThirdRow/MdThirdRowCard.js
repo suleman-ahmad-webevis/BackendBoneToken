@@ -14,10 +14,20 @@ const MdThirdRowCard = ({ value }) => {
         </PurchasesText>
       </ImgAndText>
       <CombinedText>
-        <PurchasesText Color="#79999D" FontSize="20px" FontWeight="900">
+        <PurchasesText
+          Color="#79999D"
+          FontSize="20px"
+          SmallLaptopFS="18px"
+          FontWeight="900"
+        >
           {value.titleTwo}
         </PurchasesText>
-        <PurchasesText Color="#33A2B0" FontSize="35px" FontWeight="900">
+        <PurchasesText
+          Color="#33A2B0"
+          FontSize="35px"
+          SmallLaptopFS="20px"
+          FontWeight="900"
+        >
           {value.valueTwo}
         </PurchasesText>
       </CombinedText>

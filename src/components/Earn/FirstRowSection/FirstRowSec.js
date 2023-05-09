@@ -11,7 +11,7 @@ const FirstRowSec = () => {
       <MultiRowsSlider>
         <EarnSlider />
       </MultiRowsSlider>
-      <SwapCards>
+      <SwapCards Width="48%">
         <SwapCardOne />
         <SwapCardTwo />
       </SwapCards>
@@ -27,20 +27,16 @@ export const RowSecContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 0px 10px;
-  @media screen and (max-width: 1300px) {
-    flex-direction: column;
-  }
 `;
 
 export const MultiRowsSlider = styled.div`
   width: 48%;
 `;
-export const Swipper = styled.div``;
 
 export const SwapCards = styled.div`
   padding-top: 22px;
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
-  width: 48%;
+  width: ${({ Width }) => Width};
 `;

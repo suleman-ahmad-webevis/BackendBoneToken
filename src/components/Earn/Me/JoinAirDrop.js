@@ -6,7 +6,12 @@ const JoinAirDrop = () => {
   return (
     <JADContainer>
       <JADTextWrapper>
-        <PurchasesText Color="#0E626D" FontSize="24px" FontWeight="900">
+        <PurchasesText
+          Color="#0E626D"
+          FontSize="24px"
+          SmallLaptopFS="20px"
+          FontWeight="900"
+        >
           Join Airdrop
         </PurchasesText>
       </JADTextWrapper>
@@ -47,4 +52,10 @@ export const CWBtn = styled.button`
   padding: 10px 8px;
   font-weight: 900;
   font-size: 20px;
+  @media screen and (max-width: 1400px) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: 1300px) {
+    font-size: 12px;
+  }
 `;

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { teMenuBarData } from "./TEMenuBarData";
+import { MenuData } from "./TEMenuBarData";
 
 const TEMenuBar = () => {
   return (
     <TEMenuBarContainer>
-      {teMenuBarData.map((value, index) => (
+      {MenuData.map((value, index) => (
         <TEMenu key={index}>
           <MenuText>{value}</MenuText>
           <MenuText>0</MenuText>

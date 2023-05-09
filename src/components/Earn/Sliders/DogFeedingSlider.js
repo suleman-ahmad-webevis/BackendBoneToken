@@ -16,7 +16,7 @@ import nextButton from "../../../assets/images/Earn/next.png";
 import prevButton from "../../../assets/images/Earn/previous.png";
 //EditButtonComponent
 
-const Slider = () => {
+const DogFeedingSlider = () => {
   const swiper = useSwiper();
 
   const [index, setIndex] = useState("");
@@ -101,6 +101,15 @@ export const SliderContainer = styled.div`
     -webkit-align-items: center;
     align-items: center;
   }
+  @media screen and (max-width: 1380px) {
+    width: 58vw;
+  }
+  @media screen and (max-width: 1270px) {
+    width: 56vw;
+  }
+  @media screen and (max-width: 1230px) {
+    width: 54vw;
+  }
 `;
 
 export const BackButtonWrapper = styled.div`
@@ -144,4 +153,4 @@ export const SlideText = styled.h3`
   color: #000000;
 `;
 
-export default Slider;
+export default DogFeedingSlider;

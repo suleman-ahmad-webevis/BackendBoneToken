@@ -20,14 +20,24 @@ const MyDogs = () => {
           <MdThirdRowCard value={value} key={value.titleOne} />
         ))}
         <TotalDogData>
-          <PurchasesText Color="#0E626D" FontSize="24px" FontWeight="900">
+          <PurchasesText
+            Color="#0E626D"
+            FontSize="24px"
+            SmallLaptopFS="20px"
+            FontWeight="900"
+          >
             TotalDogData
           </PurchasesText>
           <CombinedText>
             <PurchasesText Color="#79999D" FontSize="20px" FontWeight="900">
               $DOG earned
             </PurchasesText>
-            <PurchasesText Color="#33A2B0" FontSize="35px" FontWeight="900">
+            <PurchasesText
+              Color="#33A2B0"
+              FontSize="35px"
+              SmallLaptopFS="24px"
+              FontWeight="900"
+            >
               121
             </PurchasesText>
           </CombinedText>

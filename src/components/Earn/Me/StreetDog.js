@@ -4,28 +4,53 @@ import { CombinedText, PurchasesText } from "./Purchases";
 import DonateIcons from "../../../assets/images/Earn/DonateIcons.png";
 import DownArrow from "../../../assets/images/Earn/DownArrow.png";
 import { Img } from "../../../GlobalStyles";
-import Slider from "../Sliders/Slider";
+import DogFeedingSlider from "../Sliders/DogFeedingSlider";
 
 const SDF = () => {
   return (
     <SDFContainer>
       <FirstRow>
-        <PurchasesText Color="#0E626D" FontSize="24px" FontWeight="900">
+        <PurchasesText
+          Color="#0E626D"
+          FontSize="24px"
+          SmallLaptopFS="20px"
+          FontWeight="900"
+        >
           Street Dog Feeding
         </PurchasesText>
         <CombinedText Gap="22px">
-          <PurchasesText Color="#79999D" FontSize="20px" FontWeight="900">
+          <PurchasesText
+            Color="#79999D"
+            FontSize="20px"
+            SmallLaptopFS="16px"
+            FontWeight="900"
+          >
             Amount Donated
           </PurchasesText>
-          <PurchasesText Color="#33A2B0" FontSize="35px" FontWeight="900">
+          <PurchasesText
+            Color="#33A2B0"
+            FontSize="35px"
+            SmallLaptopFS="22px"
+            FontWeight="900"
+          >
             $0
           </PurchasesText>
         </CombinedText>
         <CombinedText Gap="22px">
-          <PurchasesText Color="#79999D" FontSize="20px" FontWeight="900">
+          <PurchasesText
+            Color="#79999D"
+            FontSize="20px"
+            SmallLaptopFS="16px"
+            FontWeight="900"
+          >
             DOG earned
           </PurchasesText>
-          <PurchasesText Color="#33A2B0" FontSize="35px" FontWeight="900">
+          <PurchasesText
+            Color="#33A2B0"
+            FontSize="35px"
+            SmallLaptopFS="22px"
+            FontWeight="900"
+          >
             0
           </PurchasesText>
         </CombinedText>
@@ -45,7 +70,7 @@ const SDF = () => {
           <DonateBtn>Donate</DonateBtn>
         </DonateSection>
       </FirstRow>
-      <Slider />
+      <DogFeedingSlider />
       <SecondRow></SecondRow>
     </SDFContainer>
   );

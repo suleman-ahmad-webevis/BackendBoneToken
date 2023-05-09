@@ -5,19 +5,39 @@ import styled from "styled-components";
 const MDSecRowCard = ({ value }) => {
   return (
     <MDCardWrapper>
-      <CombinedText>
-        <PurchasesText Color="#0E626D" FontSize="24px" FontWeight="900">
+      <CombinedText Gap="10px">
+        <PurchasesText
+          Color="#0E626D"
+          FontSize="24px"
+          SmallLaptopFS="20px"
+          FontWeight="900"
+        >
           {value.titleOne}
         </PurchasesText>
-        <PurchasesText Color="#1D8B6A" FontSize="35px" FontWeight="900">
+        <PurchasesText
+          Color="#1D8B6A"
+          FontSize="35px"
+          SmallLaptopFS="24px"
+          FontWeight="900"
+        >
           {value.valueOne}
         </PurchasesText>
       </CombinedText>
-      <CombinedText>
-        <PurchasesText Color="#79999D" FontSize="20px" FontWeight="900">
+      <CombinedText Gap="5px">
+        <PurchasesText
+          Color="#79999D"
+          FontSize="20px"
+          SmallLaptopFS="18px"
+          FontWeight="900"
+        >
           {value.titleTwo}
         </PurchasesText>
-        <PurchasesText Color="#33A2B0" FontSize="35px" FontWeight="900">
+        <PurchasesText
+          Color="#33A2B0"
+          FontSize="35px"
+          SmallLaptopFS="20px"
+          FontWeight="900"
+        >
           {value.valueTwo}
         </PurchasesText>
       </CombinedText>

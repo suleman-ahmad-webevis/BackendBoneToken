@@ -20,22 +20,47 @@ const SwapCardOne = () => {
         {/* FirstColumn */}
         <SwapContent>
           <One>
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#637592">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="10px"
+              FontWeight="800"
+              Color="#637592"
+            >
               From:
             </SwapContentText>
             <Img src={C} alt="C" />
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#0E626D">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="12px"
+              FontWeight="800"
+              Color="#0E626D"
+            >
               $DOG
             </SwapContentText>
           </One>
-          <SwapContentText FontSize="22px" FontWeight="800" Color="#0E626D">
+          <SwapContentText
+            FontSize="22px"
+            SmallLaptopFS="18px"
+            FontWeight="800"
+            Color="#0E626D"
+          >
             $0.00
           </SwapContentText>
           <Two>
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#0E626D">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="12px"
+              FontWeight="800"
+              Color="#0E626D"
+            >
               Balance: 0.00
             </SwapContentText>
-            <SwapContentText FontSize="12px" FontWeight="800" Color="#3D6EFF">
+            <SwapContentText
+              FontSize="12px"
+              SmallLaptopFS="10px"
+              FontWeight="800"
+              Color="#3D6EFF"
+            >
               MAX
             </SwapContentText>
           </Two>
@@ -45,22 +70,47 @@ const SwapCardOne = () => {
         {/* ThirdColumn */}
         <SwapContent>
           <One>
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#637592">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="12px"
+              FontWeight="800"
+              Color="#637592"
+            >
               To:
             </SwapContentText>
             <Img src={S} alt="S" />
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#0E626D">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="12px"
+              FontWeight="800"
+              Color="#0E626D"
+            >
               KC
             </SwapContentText>
           </One>
-          <SwapContentText FontSize="22px" FontWeight="800" Color="#0E626D">
+          <SwapContentText
+            FontSize="22px"
+            SmallLaptopFS="18px"
+            FontWeight="800"
+            Color="#0E626D"
+          >
             $0.00
           </SwapContentText>
           <Two>
-            <SwapContentText FontSize="15px" FontWeight="800" Color="#0E626D">
+            <SwapContentText
+              FontSize="15px"
+              SmallLaptopFS="12px"
+              FontWeight="800"
+              Color="#0E626D"
+            >
               Balance: 0.00
             </SwapContentText>
-            <SwapContentText FontSize="12px" FontWeight="800" Color="#3D6EFF">
+            <SwapContentText
+              FontSize="12px"
+              SmallLaptopFS="10px"
+              FontWeight="800"
+              Color="#3D6EFF"
+            >
               MAX
             </SwapContentText>
           </Two>
@@ -76,7 +126,7 @@ const SwapCardOne = () => {
 export default SwapCardOne;
 
 export const SwapCardWrapper = styled.div`
-  /* width: 561px; */ 
+  /* width: 561px; */
   height: 278px;
   background: #ffffff;
   border: 1px solid #e6fafd;
@@ -110,6 +160,12 @@ export const CardSwapSection = styled.div`
   justify-content: space-between;
   align-items: center;
   grid-gap: 65px;
+  @media screen and (max-width: 1400px) {
+    grid-gap: 40px;
+  }
+  @media screen and (max-width: 1400px) {
+    grid-gap: 20px;
+  }
 `;
 
 export const SwapContent = styled.div`
@@ -125,9 +181,12 @@ export const One = styled.div`
 `;
 
 export const SwapContentText = styled.h5`
-  font-size: ${({ FontSize }) => FontSize ?? "0px"};
-  font-weight: ${({ FontWeight }) => FontWeight ?? "0"};
+  font-size: ${({ FontSize }) => FontSize};
+  font-weight: ${({ FontWeight }) => FontWeight};
   color: ${({ Color }) => Color ?? "#fff"};
+  @media screen and (max-width: 1300px) {
+    font-size: ${({ SmallLaptopFS }) => SmallLaptopFS};
+  }
 `;
 
 export const Two = styled.div`

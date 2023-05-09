@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/grid";
 // import required modules
 import { Grid, Navigation } from "swiper";
-import dog from "../../../assets/images/Earn/dog.png";
+// import dog from "../../../assets/images/Earn/dog.png";
 import nextButton from "../../../assets/images/Earn/down.png";
 import prevButton from "../../../assets/images/Earn/up.png";
 
@@ -16,47 +16,46 @@ const EarnSlider = () => {
 
   // const [index, setIndex] = useState("");
   const data = [
-    {
-      image: dog,
-      text: "Johnathon",
-    },
-    {
-      image: dog,
-      text: "Blaze",
-    },
-    {
-      image: dog,
-      text: "George",
-    },
-    {
-      image: dog,
-      text: "Wendy",
-    },
-
-    {
-      image: dog,
-      text: "Blaze",
-    },
-    {
-      image: dog,
-      text: "George",
-    },
-    {
-      image: dog,
-      text: "Wendy",
-    },
-    {
-      image: dog,
-      text: "Blaze",
-    },
-    {
-      image: dog,
-      text: "George",
-    },
-    {
-      image: dog,
-      text: "Wendy",
-    },
+    // {
+    //   image: dog,
+    //   text: "Johnathon",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Blaze",
+    // },
+    // {
+    //   image: dog,
+    //   text: "George",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Wendy",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Blaze",
+    // },
+    // {
+    //   image: dog,
+    //   text: "George",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Wendy",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Blaze",
+    // },
+    // {
+    //   image: dog,
+    //   text: "George",
+    // },
+    // {
+    //   image: dog,
+    //   text: "Wendy",
+    // },
   ];
 
   // const handleMouseOver = (i) => {

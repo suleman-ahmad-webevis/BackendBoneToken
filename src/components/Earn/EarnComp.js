@@ -5,16 +5,31 @@ import TEMenuBar from "./TEMenuBar/TEMenuBar";
 import FirstRowSec from "./FirstRowSection/FirstRowSec";
 import Me from "./Me/Me";
 import MyDogs from "./MyDogs/MyDogs";
+import useBreakpoint from "../../hooks/useBreakPoint";
+import EarnTab from "./Tab/EarnTab";
+import CommonMobNav from "../CommonMTNav/CommonMobNav";
+import CommonTabNav from "../CommonMTNav/CommonTabNav";
 
 const EarnComp = () => {
   const [swapComp, setSwapComp] = useState(true);
+  const { isDesktop, isTablet, isMobile, isSmallMobile } = useBreakpoint();
+
   return (
     <EarnCompContainer>
+      {(isSmallMobile || isMobile) && <CommonMobNav />}
+      {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+      {(isTablet || isSmallMobile || isMobile) && <TabHeading>2Earn</TabHeading>}
       <TEBtnSection swapComp={swapComp} setSwapComp={setSwapComp} />
-      <TEMenuBar />
-      <FirstRowSec />
-      {swapComp ? <Me /> : <MyDogs />}
-      <TEMenuBar />
+      {isDesktop ? (
+        <>
+          <TEMenuBar />
+          <FirstRowSec />
+          {swapComp ? <Me /> : <MyDogs />}
+          <TEMenuBar />
+        </>
+      ) : (
+        <EarnTab />
+      )}
     </EarnCompContainer>
   );
 };
@@ -27,4 +42,10 @@ export const EarnCompContainer = styled.div`
   flex-direction: column;
   grid-gap: 25px;
   padding: 15px 20px;
+`;
+
+export const TabHeading = styled.h5`
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 42px;
 `;
