@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Img } from "../../GlobalStyles";
 import youtube from "../../assets/images/Navbar/youtube.png";
 import facebook from "../../assets/images/Navbar/facebook.png";
-import twitter from "../../assets/images/Navbar/twitter.png";
+import telegram from "../../assets/images/Navbar/telegram.png";
 import instagram from "../../assets/images/Navbar/instagram.png";
 import dogProfile from "../../assets/images/Navbar/dogProfile.png";
 import heart from "../../assets/images/Navbar/heart.png";
@@ -155,7 +155,13 @@ const Navbar = () => {
               >
                 <Img src={youtube} alt="youtube" />
               </a>
-              <Img src={twitter} alt="twitter" />
+              <a
+                href="https://t.me/Dogdata"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Img src={telegram} alt="telegram" />
+              </a>
               <a
                 href="https://www.facebook.com/DogsData"
                 target="_blank"
@@ -163,7 +169,13 @@ const Navbar = () => {
               >
                 <Img src={facebook} alt="facebook" />
               </a>
-              <Img src={instagram} alt="instagram" />
+              <a
+                href="https://www.instagram.com/kennelshopai/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Img src={instagram} alt="instagram" />
+              </a>
               <Img src={dogProfile} alt="dogProfile" />
               <LangSelect>
                 <Img src={Flags} alt="Flags" />
