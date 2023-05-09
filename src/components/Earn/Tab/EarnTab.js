@@ -3,8 +3,10 @@ import EMenu from "./EMenu/EMenu";
 import { SwapCards } from "../FirstRowSection/FirstRowSec";
 import SwapCardOne from "../FirstRowSection/SwapCard/SwapCardOne";
 import SwapCardTwo from "../FirstRowSection/SwapCard/SwapCardTwo";
+import Me from "./Me/Me";
+import MyDogs from "./MyDogs/MyDogs";
 
-const EarnTab = () => {
+const EarnTab = ({ swapComp }) => {
   return (
     <>
       <EMenu />
@@ -12,6 +14,7 @@ const EarnTab = () => {
         <SwapCardOne />
         <SwapCardTwo />
       </SwapCards>
+      {swapComp ? <Me /> : <MyDogs />}
     </>
   );
 };

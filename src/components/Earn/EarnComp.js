@@ -3,8 +3,8 @@ import TEBtnSection from "./TEBtnSection";
 import styled from "styled-components";
 import TEMenuBar from "./TEMenuBar/TEMenuBar";
 import FirstRowSec from "./FirstRowSection/FirstRowSec";
-import Me from "./Me/Me";
-import MyDogs from "./MyDogs/MyDogs";
+import Me from "./Tab/Me/Me";
+import MyDogs from "./Tab/MyDogs/MyDogs";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import EarnTab from "./Tab/EarnTab";
 import CommonMobNav from "../CommonMTNav/CommonMobNav";
@@ -18,7 +18,9 @@ const EarnComp = () => {
     <EarnCompContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
-      {(isTablet || isSmallMobile || isMobile) && <TabHeading>2Earn</TabHeading>}
+      {(isTablet || isSmallMobile || isMobile) && (
+        <TabHeading>2Earn</TabHeading>
+      )}
       <TEBtnSection swapComp={swapComp} setSwapComp={setSwapComp} />
       {isDesktop ? (
         <>
@@ -28,7 +30,7 @@ const EarnComp = () => {
           <TEMenuBar />
         </>
       ) : (
-        <EarnTab />
+        <EarnTab swapComp={swapComp} />
       )}
     </EarnCompContainer>
   );
