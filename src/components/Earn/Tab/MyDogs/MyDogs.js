@@ -1,7 +1,8 @@
 import React from "react";
+import Price from "./Price/Price";
 
 const MyDogs = () => {
-  return <div>MyDogs</div>;
+  return <Price />;
 };
 
 export default MyDogs;

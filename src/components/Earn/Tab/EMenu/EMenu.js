@@ -5,8 +5,8 @@ import { TabMenuData } from "../../TEMenuBar/TEMenuBarData";
 const EMenu = () => {
   return (
     <MenuWrapper>
-      {TabMenuData.map(({ title, width, bGColor }, index) => (
-        <MenuItem Width={width} key={index}>
+      {TabMenuData.map(({ title, width,resWidth, bGColor }, index) => (
+        <MenuItem Width={width} ResWidth={resWidth} key={index}>
           <h5> {title}</h5>
           <Price BGColor={bGColor}>
             <h5>0</h5>
@@ -23,12 +23,15 @@ const EMenu = () => {
 export default EMenu;
 
 export const MenuWrapper = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  grid-gap: 10px 0px;
+  grid-gap: 10px 15px;
+  background: #fafff9;
+  border-radius: 10px;
+  padding: 16px;
 `;
 
 export const MenuItem = styled.div`
@@ -41,6 +44,9 @@ export const MenuItem = styled.div`
     font-size: 12px;
     line-height: 14px;
     color: #a1b8ba;
+  }
+  @media screen and (max-width: 420px) {
+    width: ${({ ResWidth }) => ResWidth};
   }
 `;
 

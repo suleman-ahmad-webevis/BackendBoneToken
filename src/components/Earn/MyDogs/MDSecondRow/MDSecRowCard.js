@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const MDSecRowCard = ({ value }) => {
   return (
-    <MDCardWrapper>
+    <MDCardWrapper key={value.titleOne}>
       <CombinedText Gap="10px">
         <PurchasesText
           Color="#0E626D"

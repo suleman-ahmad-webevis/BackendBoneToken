@@ -10,18 +10,17 @@ import "swiper/swiper-bundle.min.css";
 // import required modules
 import { Navigation } from "swiper";
 //Dog images
-import dog1 from "../../../assets/images/Earn/dog1.png";
-import dog2 from "../../../assets/images/Earn/dog2.png";
+
 import nextButton from "../../../assets/images/Earn/next.png";
 import prevButton from "../../../assets/images/Earn/previous.png";
 //EditButtonComponent
 
-const DogFeedingSlider = () => {
+const DogFeedingSlider = ({data}) => {
   const swiper = useSwiper();
 
   const [index, setIndex] = useState("");
   console.log("The index", index);
-  const data = [dog1, dog2, dog1, dog2, dog1, dog2, dog1, dog2];
+  
 
   const handleMouseOver = (i) => {
     setIndex(i);
@@ -79,7 +78,8 @@ export const SliderContainer = styled.div`
   align-items: center;
   padding: 20px 5px;
   cursor: pointer;
-  width: 60vw;
+  /* width:60vw; */
+  width: 100%;
 
   .swiper-slide {
     display: flex;
@@ -100,15 +100,6 @@ export const SliderContainer = styled.div`
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
-  }
-  @media screen and (max-width: 1380px) {
-    width: 58vw;
-  }
-  @media screen and (max-width: 1270px) {
-    width: 56vw;
-  }
-  @media screen and (max-width: 1230px) {
-    width: 54vw;
   }
 `;
 

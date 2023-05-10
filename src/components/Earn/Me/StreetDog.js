@@ -5,8 +5,19 @@ import DonateIcons from "../../../assets/images/Earn/DonateIcons.png";
 import DownArrow from "../../../assets/images/Earn/DownArrow.png";
 import { Img } from "../../../GlobalStyles";
 import DogFeedingSlider from "../Sliders/DogFeedingSlider";
+import StreetDog from "../../../assets/images/Earn/StreetDog.png";
 
 const SDF = () => {
+  const data = [
+    StreetDog,
+    StreetDog,
+    StreetDog,
+    StreetDog,
+    StreetDog,
+    StreetDog,
+    StreetDog,
+    StreetDog,
+  ];
   return (
     <SDFContainer>
       <FirstRow>
@@ -70,7 +81,7 @@ const SDF = () => {
           <DonateBtn>Donate</DonateBtn>
         </DonateSection>
       </FirstRow>
-      <DogFeedingSlider />
+      <DogFeedingSlider data={data} />
       <SecondRow></SecondRow>
     </SDFContainer>
   );

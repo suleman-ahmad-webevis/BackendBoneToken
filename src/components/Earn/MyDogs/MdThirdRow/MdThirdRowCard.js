@@ -6,7 +6,7 @@ import { CombinedText, PurchasesText } from "../../Me/Purchases";
 
 const MdThirdRowCard = ({ value }) => {
   return (
-    <MdThirdCardWrapper>
+    <MdThirdCardWrapper key={value.titleOne}>
       <ImgAndText>
         <Img src={EarnDog} />
         <PurchasesText Color="#0E626D" FontSize="24px" FontWeight="900">

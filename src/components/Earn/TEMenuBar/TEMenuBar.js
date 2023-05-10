@@ -37,8 +37,8 @@ export const TEMenu = styled.div`
   border: 1px solid #ebf0f0;
   border-radius: 8px;
   display: flex;
-  padding: 15px 12px;
-  grid-gap: 40px;
+  padding: 10px;
+  grid-gap: 30px;
   background: #fff;
   h4 {
     font-weight: bold;
@@ -50,6 +50,16 @@ export const TEMenu = styled.div`
     font-weight: bold;
     font-size: 14px;
     color: #33a2b0;
+  }
+  @media screen and (max-width: 1520px) {
+    grid-gap: 20px;
+  }
+  @media screen and (max-width: 1420px) {
+    grid-gap: 10px;
+  }
+  @media screen and (max-width: 1320px) {
+    grid-gap: 5px;
+    padding: 8px;
   }
 `;
 

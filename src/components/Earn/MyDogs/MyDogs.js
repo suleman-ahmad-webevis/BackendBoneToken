@@ -11,13 +11,13 @@ const MyDogs = () => {
       {/* 2nd Row */}
       <MDSecRowWrapper>
         {MDSecRowData.map((value) => (
-          <MDSecRowCard value={value} key={value.titleOne} />
+          <MDSecRowCard value={value} />
         ))}
       </MDSecRowWrapper>
       {/* 3rd Row */}
       <MDThirdRowWrapper>
         {MDThirdRowData.map((value) => (
-          <MdThirdRowCard value={value} key={value.titleOne} />
+          <MdThirdRowCard value={value} />
         ))}
         <TotalDogData>
           <PurchasesText
@@ -38,7 +38,7 @@ const MyDogs = () => {
               SmallLaptopFS="24px"
               FontWeight="900"
             >
-              121
+              0
             </PurchasesText>
           </CombinedText>
         </TotalDogData>

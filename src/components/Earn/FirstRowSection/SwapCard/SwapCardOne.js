@@ -41,7 +41,7 @@ const SwapCardOne = () => {
           <SwapContentText
             FontSize="22px"
             SmallLaptopFS="18px"
-            FontWeight="800"
+            FontWeight="900"
             Color="#0E626D"
           >
             $0.00
@@ -91,7 +91,7 @@ const SwapCardOne = () => {
           <SwapContentText
             FontSize="22px"
             SmallLaptopFS="18px"
-            FontWeight="800"
+            FontWeight="900"
             Color="#0E626D"
           >
             $0.00
@@ -160,12 +160,6 @@ export const CardSwapSection = styled.div`
   justify-content: space-between;
   align-items: center;
   grid-gap: 65px;
-  @media screen and (max-width: 1400px) {
-    grid-gap: 40px;
-  }
-  @media screen and (max-width: 1400px) {
-    grid-gap: 20px;
-  }
 `;
 
 export const SwapContent = styled.div`

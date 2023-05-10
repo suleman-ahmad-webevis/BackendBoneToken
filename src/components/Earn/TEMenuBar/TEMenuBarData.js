@@ -13,42 +13,50 @@ export const MenuData = [
 export const TabMenuData = [
   {
     title: "Shop",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "Crypto",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "Rating",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "Donations",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "Social Media",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "Airdrop",
-    width: "33%",
+    width: "30%",
+    resWidth:'29%',
     bGColor: "#fff",
   },
   {
     title: "DogData",
-    width: "48%",
+    width: "47%",
+    resWidth:'46%',
     bGColor: "#fff",
   },
   {
     title: "Total",
-    width: "48%",
+    width: "47%",
+    resWidth:'46%',
     bGColor: "#fff",
   },
 ];

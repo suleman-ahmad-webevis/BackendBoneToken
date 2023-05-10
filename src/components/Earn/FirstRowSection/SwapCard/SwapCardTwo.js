@@ -39,7 +39,7 @@ const SwapCardTwo = () => {
               KC
             </SwapContentText>
           </One>
-          <SwapContentText FontSize="22px" FontWeight="800" Color="#0E626D">
+          <SwapContentText FontSize="22px" FontWeight="900" Color="#0E626D">
             $0.00
           </SwapContentText>
           <Two>
@@ -64,7 +64,7 @@ const SwapCardTwo = () => {
               USDT
             </SwapContentText>
           </One>
-          <SwapContentText FontSize="22px" FontWeight="800" Color="#0E626D">
+          <SwapContentText FontSize="22px" FontWeight="900" Color="#0E626D">
             $0.00
           </SwapContentText>
           <Two>
