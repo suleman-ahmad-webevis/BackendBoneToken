@@ -4,7 +4,7 @@ import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import PirchDeck from "../../assets/pdf/PirchDeck.pdf";
+import PirchDeck from "../../assets/pdf/Faq/Pirchdeck.pdf";
 import { PDFContainer } from "../WhitePaper/WhitePaper";
 
 const PPComp = () => {
