@@ -10,15 +10,15 @@ import WhitePaper from "../../assets/pdf/Faq/Whitepaper.pdf";
 const WPComp = () => {
   const [defaultPdfFile] = useState(WhitePaper);
   const defLayoutPlugin = defaultLayoutPlugin();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   return (
     <PDFContainer>
       {defaultPdfFile && (
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-          <Viewer fileUrl={defaultPdfFile} plugins={[defLayoutPlugin]} />
-        </Worker>
+        <>
+          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
+            <Viewer fileUrl={defaultPdfFile} plugins={[defLayoutPlugin]} />
+          </Worker>
+        </>
       )}
     </PDFContainer>
   );
