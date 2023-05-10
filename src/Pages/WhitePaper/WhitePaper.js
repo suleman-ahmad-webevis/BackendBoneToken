@@ -7,6 +7,7 @@ const WPComp = () => {
       height="850px"
       data={WhitePaper}
       type="application/pdf"
+      aria-label="Pdf"
     ></object>
   );
 };

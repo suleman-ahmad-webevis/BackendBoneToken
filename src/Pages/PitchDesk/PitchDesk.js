@@ -7,6 +7,7 @@ const PPComp = () => {
       height="850px"
       data={PirchDeck}
       type="application/pdf"
+      aria-label="Pdf"
     ></object>
   );
 };
