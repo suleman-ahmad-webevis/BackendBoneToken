@@ -10,14 +10,6 @@ import useBreakpoint from "../hooks/useBreakPoint";
 
 const ContainerWrapper = styled("div")`
   position: relative;
-  /* .popup-model {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-  } */
   .container {
     width: 100%;
     height: 100%;
@@ -49,7 +41,6 @@ const ContainerWrapper = styled("div")`
     width: ${(props) => props.pageNotFoundedWid};
     overflow: auto;
     padding: 0 0 20px;
-    /* background: #0f212e; */
     background: ${(props) => props.purpleLeftSidebar};
     overflow-x: hidden;
 
@@ -81,7 +72,6 @@ const ContainerWrapper = styled("div")`
     overflow-y: ${(props) => props.removeBodyScroll};
     overflow-x: hidden;
     z-index: 9;
-    /* top: 69px; */
     top: ${(props) => props.pageNotFoundedTop};
 
     &::-webkit-scrollbar {
@@ -100,24 +90,6 @@ const ContainerWrapper = styled("div")`
       border-left: none;
       border-radius: 10px;
     }
-
-    /* .main-wrapper-parent {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      justify-content: space-between;
-      .pie {
-        display: flex;
-        justify-content: center;
-        background: #223542;
-        border-radius: 8px;
-        width: 100%;
-        max-width: 630px;
-        height: 400px;
-        margin: 50px auto;
-        filter: drop-shadow(0px 2.404px 2.404px rgba(0, 0, 0, 0.25));
-      }
-    }  */
   }
 
   @media screen and (max-width: 768px) {

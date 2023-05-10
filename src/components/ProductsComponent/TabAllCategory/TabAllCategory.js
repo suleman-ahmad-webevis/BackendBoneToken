@@ -40,7 +40,7 @@ export const TACContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   grid-gap: 10px;
-  height: 390px;
+  height: 845px;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -96,5 +96,8 @@ export const CategoryName = styled.div`
     color: #fff;
     text-align: center;
     line-height: 65px;
+    @media screen and (max-width: 800px) {
+      font-size: 14px;
+    }
   }
 `;

@@ -278,7 +278,7 @@ const ProductDetail = () => {
             </RatingField>
           </ColumnOneTwo>
           <ColumnThree>
-            <ProductMeasurementList>
+            <ProductMeasurementList isScroll={newProInventory?.length}>
               <FieldLabel>Details</FieldLabel>
               {newProInventory?.map((value, index) => (
                 <ProductMeasurement key={value?._id}>

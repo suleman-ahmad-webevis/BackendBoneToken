@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const TabProductCard = ({ product }) => {
   const navigate = useNavigate();
   return (
-    <>
       <TProCard key={product._id}>
         <Img
           src={product?.productImages[0]?.secureUrl}
@@ -27,7 +26,6 @@ const TabProductCard = ({ product }) => {
             product?.productInventory[0]?.minRetailPrice}
         </h4>
       </TProCard>
-    </>
   );
 };
 

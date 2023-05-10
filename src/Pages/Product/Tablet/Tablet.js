@@ -69,23 +69,21 @@ const Tablet = () => {
       <ProductsFilterBar />
       {isLoading && <Loader />}
       {location.pathname === "/shop" ? (
-        <>
-          {allProducts?.length ? (
-            <PTabProductList id="ProductListContainer">
-              {allProducts.map((product) => (
-                <TabProductCard product={product} />
-              ))}
-              <InfiniteScroll
-                dataLength={allProducts?.length}
-                next={fetchMore}
-                hasMore={allProducts?.length < total ? true : false}
-                scrollableTarget="ProductListContainer"
-              ></InfiniteScroll>
-            </PTabProductList>
-          ) : (
-            <h2>No Products</h2>
-          )}
-        </>
+        allProducts?.length ? (
+          <PTabProductList id="ProductListContainer">
+            {allProducts.map((product) => (
+              <TabProductCard product={product} />
+            ))}
+            <InfiniteScroll
+              dataLength={allProducts?.length}
+              next={fetchMore}
+              hasMore={allProducts?.length < total ? true : false}
+              scrollableTarget="ProductListContainer"
+            ></InfiniteScroll>
+          </PTabProductList>
+        ) : (
+          <h2>No Products</h2>
+        )
       ) : (
         <TabAllCategory />
       )}

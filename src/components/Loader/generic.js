@@ -5,6 +5,9 @@ export const Article = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  @media screen and (max-width: 800px) {
+    height: 50vh;
+  }
 `;
 
 export const list = [

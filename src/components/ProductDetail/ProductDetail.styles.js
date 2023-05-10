@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ProductDetailContainer = styled.div`
-  padding: 10px 15px;
+  padding: 10px 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -58,10 +58,6 @@ export const PriceContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 13px;
-  align-self: flex-start;
-  @media screen and (max-width: 1500px) {
-    width: 100%;
-  }
 `;
 
 export const CombinedProductFields = styled.div`
@@ -365,7 +361,7 @@ export const ProductMeasurementList = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 10px;
-  height: 372px;
+  height: ${({ isScroll }) => (isScroll > 4 ? "372px" : "0x")};
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 5px;
