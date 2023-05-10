@@ -40,9 +40,9 @@ export const TACContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   grid-gap: 10px;
-  height: 845px;
+  min-height: 205px;
+  max-height: 845px;
   overflow-y: scroll;
-
   &::-webkit-scrollbar {
     display: block;
     width: 8px;

@@ -86,7 +86,7 @@ export const PTabTitle = styled.h5`
 `;
 
 export const PTabProductList = styled.div`
-  height: 100vh;
+  height: 60vh;
   overflow-y: auto;
   display: flex;
   justify-content: space-between;
