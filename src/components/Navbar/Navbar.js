@@ -45,7 +45,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const url = useLocation()?.pathname?.slice(20);
-
   const [searchParams, setSearchParams] = useSearchParams();
   console.log("The setSearchParams", setSearchParams);
   //StatesForSearching
@@ -72,7 +71,7 @@ const Navbar = () => {
     "/shop",
     "/shop/category",
     "/shop/recently-viewed",
-    `/shop/product-detail/${url}`,
+    `/shop/product-detail${url}`,
     "/checkout",
     "/favourites",
     "/customerDelivery",
@@ -155,11 +154,7 @@ const Navbar = () => {
               >
                 <Img src={youtube} alt="youtube" />
               </a>
-              <a
-                href="https://t.me/Dogdata"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://t.me/Dogdata" target="_blank" rel="noreferrer">
                 <Img src={telegram} alt="telegram" />
               </a>
               <a

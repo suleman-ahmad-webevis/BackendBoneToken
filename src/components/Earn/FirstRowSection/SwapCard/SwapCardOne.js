@@ -160,6 +160,15 @@ export const CardSwapSection = styled.div`
   justify-content: space-between;
   align-items: center;
   grid-gap: 65px;
+  @media screen and (max-width: 1400px) {
+    grid-gap: 40px;
+  }
+  @media screen and (max-width: 450px) {
+    grid-gap: 30px;
+  }
+  @media screen and (max-width: 400px) {
+    grid-gap: 10px;
+  }
 `;
 
 export const SwapContent = styled.div`

@@ -15,12 +15,11 @@ import nextButton from "../../../assets/images/Earn/next.png";
 import prevButton from "../../../assets/images/Earn/previous.png";
 //EditButtonComponent
 
-const DogFeedingSlider = ({data}) => {
+const DogFeedingSlider = ({ data }) => {
   const swiper = useSwiper();
 
   const [index, setIndex] = useState("");
   console.log("The index", index);
-  
 
   const handleMouseOver = (i) => {
     setIndex(i);
@@ -37,11 +36,14 @@ const DogFeedingSlider = ({data}) => {
       </BackButtonWrapper>
       <Swiper
         breakpoints={{
-          1450: {
-            slidesPerView: 5,
+          1390: {
+            slidesPerView: 3,
+            spaceBetween: 30,
           },
-          760: {
-            slidesPerView: 4,
+          // when window width is >= 640px
+          1400: {
+            slidesPerView: 5,
+            spaceBetween: 20,
           },
         }}
         navigation={{
