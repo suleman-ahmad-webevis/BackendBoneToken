@@ -145,8 +145,8 @@ const router = createBrowserRouter([
         element: <TOKENOMICS />,
       },
       {
-        path:'/road-map',
-        element:<RM/>
+        path: "/road-map",
+        element: <RM />,
       },
       {
         path: "/settings",
@@ -184,18 +184,18 @@ const router = createBrowserRouter([
   },
 ]);
 
-const renderApp = () => {
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <RouterProvider router={router} />
-          <ToastContainer />
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>
-  );
-};
+// const renderApp = () => {
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
+// };
 
 // initFacebookSDK().then(() => {
 //   renderApp();
