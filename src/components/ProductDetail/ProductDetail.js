@@ -5,7 +5,7 @@ import Facebook from "../../assets/images/ProductDetail/Facebook.png";
 import Instagram from "../../assets/images/ProductDetail/Instagram.png";
 import Heading from "../Heading/Heading";
 import Rating from "@mui/material/Rating";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getTheProductById,
@@ -55,7 +55,7 @@ const ProductDetail = () => {
 
   const [imageUrl, setImageUrl] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id } = useParams();
   const [newProInventory, setNewProInventory] = useState([]);
   const { singlePro, isLoading } = useSelector((state) => state.product);
@@ -366,7 +366,7 @@ const ProductDetail = () => {
                 </FacebookShareButton>
                 <Img
                   src={Instagram}
-                  onClick={() => navigate("/instagram-handler")}
+                  // onClick={() => navigate("/instagram-handler")}
                   alt="Instagram"
                 />
               </SocialIcon>
