@@ -4,7 +4,7 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import initFacebookSDK from "./utils/InitFacebookSDK";
+// import initFacebookSDK from "./utils/InitFacebookSDK";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 //MainRouteFile
 import DASHBOARD from "./routes/Dashboard";
@@ -197,6 +197,6 @@ const renderApp = () => {
   );
 };
 
-initFacebookSDK().then(() => {
-  renderApp();
-});
+// initFacebookSDK().then(() => {
+//   renderApp();
+// });
