@@ -1,6 +1,7 @@
 import React from "react";
 import BreedSelector from "../../../BreedSelector";
 import {
+  FieldError,
   FileAccept,
   NextButton,
   PageChanged,
@@ -33,32 +34,74 @@ import {
   WHLWrapper,
 } from "./RTab.style";
 
-const RDTab = () => {
+const RDTab = ({
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+  handleSubmit,
+  setFieldValue,
+  priceIcon,
+}) => {
   const dogPicUploaded = useRef(null);
+  const dogPicUploader = useRef(null);
   const dogMotherPicUploaded = useRef(null);
   const dogMotherPicUploader = useRef(null);
+  const dogFatherPicUploaded = useRef(null);
+  const dogFatherPicUploader = useRef(null);
+
+  const handleImageUpload = (event) => {
+    const [file] = event.target.files;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (event.target.name === "dogPic") {
+          dogPicUploaded.current.src = e.target.result;
+          setFieldValue("dogPic", dogPicUploaded.current.src);
+        } else if (event.target.name === "dogMotherPic") {
+          dogMotherPicUploaded.current.src = e.target.result;
+          setFieldValue("dogMotherPic", dogMotherPicUploaded.current.src);
+        } else if (event.target.name === "dogFatherPic") {
+          dogFatherPicUploaded.current.src = e.target.result;
+          setFieldValue("dogFatherPic", dogFatherPicUploaded.current.src);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <RDTabContainer>
-      <RDForm>
+      <RDForm onSubmit={handleSubmit}>
         <RDInput
           id="outlined-basic"
           label="Name *"
           variant="outlined"
           Width="100%"
+          name="dogName"
+          values={values.dogName}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
-        <BreedSelector />
+        <FieldError>
+          {touched.dogName && errors.dogName && <>{errors.dogName}</>}
+        </FieldError>
+        <BreedSelector breed={values.breed} setFieldValue={setFieldValue} />
+        <FieldError>
+          {touched.breed && errors.breed && <>{errors.breed}</>}
+        </FieldError>
         <UploadPicsWrapper>
           <Upload
-            // onClick={() => dogPicUploader.current.click()}
+            onClick={() => dogPicUploader.current.click()}
             style={{ width: "49%" }}
           >
             <input
               type="file"
               accept="image/*"
               name="dogPic"
-              // onChange={(e) => handleImageUpload(e)}
-              // ref={dogPicUploader}
+              onChange={(e) => handleImageUpload(e)}
+              ref={dogPicUploader}
               style={{
                 display: "none",
               }}
@@ -75,6 +118,10 @@ const RDTab = () => {
           label="Upload Video Link"
           variant="outlined"
           Width="100%"
+          name="dogVideoLink"
+          value={values.dogVideoLink}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <DBGWrapper>
           <RDInput
@@ -83,10 +130,10 @@ const RDTab = () => {
             name="dob"
             label="Date of Birth"
             type="date"
-            // value={values.dob}
-            // setFieldValue={setFieldValue}
-            // onChange={handleChange}
-            // onBlur={handleBlur}
+            value={values.dob}
+            setFieldValue={setFieldValue}
+            onChange={handleChange}
+            onBlur={handleBlur}
             InputLabelProps={{
               shrink: true,
             }}
@@ -95,12 +142,10 @@ const RDTab = () => {
         </DBGWrapper>
         <CLWrapper>
           <CountryBirth
-          // countryOfBirth={values.countryOfBirth}
-          // setFieldValue={setFieldValue}
+            countryOfBirth={values.countryOfBirth}
+            setFieldValue={setFieldValue}
           />
-          <Location
-          // location={values.location} setFieldValue={setFieldValue}
-          />
+          <Location location={values.location} setFieldValue={setFieldValue} />
         </CLWrapper>
         <DFamilyWrapper>
           <RDInput
@@ -108,16 +153,17 @@ const RDTab = () => {
             label="Mother Name"
             variant="outlined"
             Width="100%"
+            name="dogMotherName"
+            value={values.dogMotherName}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
-          <Upload
-            Differ
-            // onClick={() => dogMotherPicUploader.current.click()}
-          >
+          <Upload Differ onClick={() => dogMotherPicUploader.current.click()}>
             <input
               type="file"
               accept="image/*"
               name="dogMotherPic"
-              // onChange={(e) => handleImageUpload(e)}
+              onChange={(e) => handleImageUpload(e)}
               ref={dogMotherPicUploader}
               style={{
                 display: "none",
@@ -137,6 +183,10 @@ const RDTab = () => {
           label="Mother NFT Number"
           variant="outlined"
           Width="100%"
+          name="dogMotherNftNo"
+          value={values.dogMotherNftNo}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <DFamilyWrapper>
           <RDInput
@@ -144,6 +194,10 @@ const RDTab = () => {
             label="Father Name"
             variant="outlined"
             Width="100%"
+            name="dogFatherName"
+            value={values.dogFatherName}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <Upload
             Differ
@@ -153,7 +207,7 @@ const RDTab = () => {
               type="file"
               accept="image/*"
               name="dogMotherPic"
-              // onChange={(e) => handleImageUpload(e)}
+              onChange={(e) => handleImageUpload(e)}
               ref={dogMotherPicUploader}
               style={{
                 display: "none",
@@ -173,6 +227,10 @@ const RDTab = () => {
           id="outlined-basic"
           label="Father NFT Number"
           variant="outlined"
+          name="dogFatherNftNo"
+          value={values.dogFatherNftNo}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <WHLWrapper>
           <WHL>Weight (kg)</WHL>
@@ -193,12 +251,20 @@ const RDTab = () => {
           <ThreeCoats>Short coat</ThreeCoats>
           <ThreeCoats>Double coat</ThreeCoats>
         </CoatsWrapper>
+        <CoatsWrapper>
+          <TwoCoats>Combination coat</TwoCoats>
+          <TwoCoats>Hairless coat</TwoCoats>
+        </CoatsWrapper>
         <PriceWrapper>
           <RDInput
             Width="60%"
             id="outlined-basic"
-            label="Value"
+            label={`Value ${priceIcon(values?.currency)} `}
             variant="outlined"
+            name="price"
+            value={values.price}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <Curr>EUR</Curr>
           <Curr>USD</Curr>

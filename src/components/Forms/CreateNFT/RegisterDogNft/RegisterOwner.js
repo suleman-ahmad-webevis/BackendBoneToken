@@ -31,7 +31,6 @@ import useBreakpoint from "../../../../hooks/useBreakPoint";
 
 const RegisterOwner = () => {
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
-
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerOwner")) ?? {}
@@ -64,7 +63,7 @@ const RegisterOwner = () => {
     onSubmit: (data) => {
       sessionStorage.setItem("registerOwner", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerOwner")));
-      navigate("/createDogNFT/veterinaryRegister");
+      navigate("/create-dog-nft/register-veterinary");
     },
   });
 
@@ -271,7 +270,7 @@ const RegisterOwner = () => {
                   src={Back}
                   alt="back"
                   onClick={() => {
-                    navigate("/createDogNFT/dogRegister");
+                    navigate("/create-dog-nft/register-dogData");
                   }}
                 />
               </NextButton>
@@ -283,7 +282,17 @@ const RegisterOwner = () => {
           <NFTFooter />
         </RegisterDogContainer>
       ) : (
-        (isTablet || isMobile || isSmallMobile) && <ROTab />
+        (isTablet || isMobile || isSmallMobile) && (
+          <ROTab
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            setFieldValue={setFieldValue}
+          />
+        )
       )}
     </>
   );

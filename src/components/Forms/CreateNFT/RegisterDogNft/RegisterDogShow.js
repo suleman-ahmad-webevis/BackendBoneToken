@@ -25,12 +25,10 @@ import Back from "../../../../assets/images/Back.png";
 const RegisterDogShow = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [sessionData, setSessionData] = useState(
+  const [sessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
-  console.log("The setSessionData", setSessionData);
   const [dogS, setDogS] = useState([]);
-  console.log("The dogS", dogS);
   const [dogShow, setDogShow] = useState({
     showName: sessionData[0]?.showName ?? "",
     officialShowName: sessionData[0]?.officialShowName ?? "",
@@ -62,7 +60,7 @@ const RegisterDogShow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createDogNft({ navigate }));
+    dispatch(createDogNft({ navigate, dogS }));
   };
   return (
     <RegisterDogContainer>
@@ -227,7 +225,7 @@ const RegisterDogShow = () => {
               src={Back}
               alt="back"
               onClick={() => {
-                navigate("/createDogNFT/insuranceRegister");
+                navigate("/create-dog-nft/register-insurance");
               }}
             />
           </NextButton>

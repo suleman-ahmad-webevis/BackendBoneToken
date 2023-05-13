@@ -69,7 +69,6 @@ export const CombinedProduct = styled.div`
   display: flex;
   grid-gap: 20px;
   FieldLabel {
-    font-family: "DM Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -86,7 +85,6 @@ export const CombinedProduct = styled.div`
   }
 
   ::placeholder {
-    font-family: "DM Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -162,14 +160,12 @@ export const Counter = styled.div`
     box-shadow: none;
     border-radius: none;
     text-align: center;
-    font-family: "DM Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
 
     ::placeholder {
-      font-family: "DM Sans";
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
@@ -184,7 +180,6 @@ export const AddToCartButton = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px 20px;
-  font-family: "DM Sans";
   font-style: normal;
   font-size: 21px;
   line-height: 27px;

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   RDForm,
   RDInput,
@@ -6,6 +6,7 @@ import {
   UploadPicsWrapper,
 } from "./RTab.style";
 import {
+  FieldError,
   FileAccept,
   NextButton,
   PageChanged,
@@ -17,10 +18,18 @@ import uploadImage from "../../../../../assets/images/upload.png";
 import Transparent from "../../../../../assets/images/transparent.png";
 import Next from "../../../../../assets/images/Next.png";
 import Back from "../../../../../assets/images/Back.png";
+import { useNavigate } from "react-router-dom";
 
-const ROTab = () => {
-  const dogPicUploaded = useRef(null);
-
+const ROTab = ({
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+  handleSubmit,
+  setFieldValue,
+}) => {
+  const navigate = useNavigate();
   return (
     <RDTabContainer>
       <RDForm>
@@ -29,7 +38,14 @@ const ROTab = () => {
           variant="outlined"
           id="outlined-basic"
           Width="100%"
+          name="ownerName"
+          value={values.ownerName}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
+        <FieldError>
+          {touched.ownerName && errors.ownerName && <>{errors.ownerName}</>}
+        </FieldError>
         <UploadPicsWrapper>
           <Upload
             // onClick={() => dogPicUploader.current.click()}
@@ -48,7 +64,7 @@ const ROTab = () => {
             <img src={uploadImage} alt="img" />
             <UploadText>Photo upload</UploadText>
             <FileAccept>
-              <Img ref={dogPicUploaded} src={Transparent} alt="img" />
+              <Img src={Transparent} alt="img" />
             </FileAccept>
           </Upload>
         </UploadPicsWrapper>
@@ -58,12 +74,20 @@ const ROTab = () => {
           variant="outlined"
           id="outlined-basic"
           Width="100%"
+          name="ownerVideoLink"
+          value={values.ownerVideoLink}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <RDInput
           label="Are you dog breeder?"
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="areYouBreeder"
+          value={values.areYouBreeder}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
 
         <RDInput
@@ -71,6 +95,10 @@ const ROTab = () => {
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="breederKennelName"
+          value={values.breederKennelName}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
 
         <RDInput
@@ -78,6 +106,10 @@ const ROTab = () => {
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
 
         <RDInput
@@ -85,6 +117,10 @@ const ROTab = () => {
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="website"
+          value={values.website}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
 
         <RDInput
@@ -99,6 +135,10 @@ const ROTab = () => {
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="location"
+          value={values.location}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
 
         <RDInput
@@ -106,17 +146,30 @@ const ROTab = () => {
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="fbPage"
+          value={values.fbPage}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
-
         <RDInput
           label="Instagram Page"
           Width="100%"
           variant="outlined"
           id="outlined-basic"
+          name="instaPage"
+          value={values.instaPage}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <PageChanged>
           <NextButton Back>
-            <Img src={Back} alt="back" />
+            <Img
+              src={Back}
+              alt="back"
+              onClick={() => {
+                navigate("/create-dog-nft/register-dogData");
+              }}
+            />
           </NextButton>
           <NextButton type="submit">
             <Img src={Next} alt="next" />

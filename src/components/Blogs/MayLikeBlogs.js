@@ -33,7 +33,7 @@ const MayLikeBlogs = ({ category }) => {
       <MayLikeCards>
         {mayLikeBlogs.length > 0 ? (
           mayLikeBlogs.map((blog, index) => (
-            <BlogCardLike key={index}>
+            <MayLikeCard key={index}>
               <CardImageContainer>
                 <Img src={blog.featuredImg} alt="blog-image" />
               </CardImageContainer>
@@ -42,8 +42,8 @@ const MayLikeBlogs = ({ category }) => {
                 <h4>{blog.category} </h4>
               </BlogCardTitle>
               <BlogCardContent>
-                {blog.blogShortDesc.length > 170
-                  ? `${blog.blogShortDesc.slice(0, 170)}...`
+                {blog.blogShortDesc.length > 120
+                  ? `${blog.blogShortDesc.slice(0, 120)}...`
                   : blog.blogShortDesc}
               </BlogCardContent>
               <BlogCardFooter>
@@ -65,7 +65,7 @@ const MayLikeBlogs = ({ category }) => {
               <Popular>
                 <Img src={PopularIcon} alt="PopularIcon" /> Popular
               </Popular>
-            </BlogCardLike>
+            </MayLikeCard>
           ))
         ) : (
           <h2>No related blogs</h2>
@@ -81,27 +81,12 @@ export const MayLikeContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  grid-gap: 30px;
+  grid-gap: 50px;
   background: #f5f5f5;
-`;
-export const MayLikeCards = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  grid-gap: 30px;
-  background: #f5f5f5;
-  max-width: 100%;
-  @media screen and (max-width: 1700px) {
-    margin-left: 20%;
-  }
-  @media screen and (max-width: 1300px) {
-    flex-wrap: wrap;
-  }
+  overflow-x: scroll;
 `;
 
-export const Title = styled.div`
-  font-family: "Poppins-Regular";
+export const Title = styled.h5`
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
@@ -109,9 +94,18 @@ export const Title = styled.div`
   color: #000000;
 `;
 
-export const BlogCardLike = styled.div`
+export const MayLikeCards = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  grid-gap: 30px;
+  background: #f5f5f5;
+  width: 100%;
+`;
+
+export const MayLikeCard = styled.div`
   position: relative;
-  width: 33%;
 `;
 
 export const Popular = styled.div`
@@ -122,7 +116,6 @@ export const Popular = styled.div`
   height: 34px;
   background: #fee96c;
   border-radius: 15px;
-  font-family: "Urbanist-Regular";
   font-style: normal;
   font-weight: 600;
   font-size: 15px;

@@ -47,16 +47,13 @@ export const BlogSidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
   gap: 14px;
-  max-width: 278px;
-  width: 100%;
+  width: 20%;
   height: 700px;
   background: #ffffff;
   border-radius: 12px;
   position: relative;
-
-  @media screen and (max-width: 1511px) {
+  @media screen and (max-width: 1110px) {
     display: ${({ open }) => (open ? "block" : "none")};
     position: absolute;
     left: 10px;
@@ -64,14 +61,9 @@ export const BlogSidebarContainer = styled.div`
     margin-top: -10px;
     background-color: #fff;
   }
-
-  @media screen and (max-width: 1590px) {
-    width: 220px;
-  }
 `;
 
 export const SidebarTitle = styled.div`
-  font-family: "Urbanist-Regular";
   font-style: normal;
   font-weight: ${({ FontWeight }) => (FontWeight ? "600" : "800")};
   font-size: 18px;
@@ -81,13 +73,8 @@ export const SidebarTitle = styled.div`
 `;
 
 export const SidebarDivider = styled.div`
-  width: 238px;
-  height: 0px;
+  width: 100%;
   border: 1px solid #000f5c;
-
-  @media screen and (max-width: 1590px) {
-    width: 200px;
-  }
 `;
 
 export const DogsList = styled.div`
@@ -95,7 +82,6 @@ export const DogsList = styled.div`
 `;
 
 export const DogTypes = styled.div`
-  font-family: "Urbanist-Regular";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

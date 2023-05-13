@@ -42,7 +42,7 @@ const MyDog = () => {
             <HeadButton
               bgColor="#0E626D"
               mobBgColor="#0E626D"
-              onClick={() => navigate("/create-dog-nft/dog-register")}
+              onClick={() => navigate("/create-dog-nft/register-dog")}
             >
               + Add Dog
             </HeadButton>

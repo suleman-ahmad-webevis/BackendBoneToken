@@ -28,15 +28,12 @@ import useBreakpoint from "../../../hooks/useBreakPoint";
 import { proNavData } from "./ProNavData";
 
 const ProductsFilterBar = () => {
-  const { search } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log("The search", search);
   //StatesForSearching
   const [searchPro, setSearchPro] = useState("");
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log("The setSearchParams", setSearchParams);
+  const [searchParams] = useSearchParams();
 
   //StoreData
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);

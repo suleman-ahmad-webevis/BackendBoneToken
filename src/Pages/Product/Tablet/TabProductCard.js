@@ -6,26 +6,26 @@ import { useNavigate } from "react-router-dom";
 const TabProductCard = ({ product }) => {
   const navigate = useNavigate();
   return (
-      <TProCard key={product._id}>
-        <Img
-          src={product?.productImages[0]?.secureUrl}
-          onClick={() => {
-            navigate(`/shop/product-detail/${product._id}`);
-          }}
-        />
-        <h5>{product?.name}</h5>
-        <p>
-          {product?.description.length > 50
-            ? `${product.description.slice(0, 50)}...read more`
-            : product.description}
-        </p>
-        <h4>
-          {" "}
-          €&nbsp;
-          {product?.productInventory?.length &&
-            product?.productInventory[0]?.minRetailPrice}
-        </h4>
-      </TProCard>
+    <TProCard key={product._id}>
+      <Img
+        src={product?.productImages[0]?.secureUrl}
+        onClick={() => {
+          navigate(`/shop/product-detail/${product._id}`);
+        }}
+      />
+      <h5>{product?.name}</h5>
+      <p>
+        {product?.description.length > 50
+          ? `${product.description.slice(0, 50)}...read more`
+          : product.description}
+      </p>
+      <h4>
+        {" "}
+        €&nbsp;
+        {product?.productInventory?.length &&
+          product?.productInventory[0]?.minRetailPrice}
+      </h4>
+    </TProCard>
   );
 };
 
@@ -54,7 +54,6 @@ export const TProCard = styled.div`
     color: #1b153d;
   }
   p {
-    font-family: "Raleway";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;

@@ -23,13 +23,10 @@ const RegisterVeterinay = () => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const navigate = useNavigate();
 
-  const [sessionData, setSessionData] = useState(
+  const [sessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
   );
   const [vac, setVac] = useState([]);
-
-  console.log("The setSessionData", setSessionData);
-  console.log("The vac", vac);
 
   const [vaccination, setVaccination] = useState({
     vacType: sessionData[0]?.vacType ?? "",
@@ -44,6 +41,7 @@ const RegisterVeterinay = () => {
     });
   };
   const handleSave = (e) => {
+    console.log("The vac", vac);
     e.preventDefault();
     setVac((prev) => {
       const updatedVac = [...prev, vaccination];
@@ -126,13 +124,13 @@ const RegisterVeterinay = () => {
               src={Back}
               alt="back"
               onClick={() => {
-                navigate("/createDogNFT/ownerRegister");
+                navigate("/create-dog-nft/register-owner");
               }}
             />
           </NextButton>
           <NextButton
             onClick={() => {
-              navigate("/createDogNFT/insuranceRegister");
+              navigate("/create-dog-nft/register-insurance");
             }}
           >
             <Img src={Next} alt="next" />

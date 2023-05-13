@@ -187,7 +187,6 @@ export const SlideOverlay = styled.div`
   width: 397.05px;
 
   h3 {
-    font-family: "Urbanist-Regular";
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -196,7 +195,6 @@ export const SlideOverlay = styled.div`
   }
 
   h2 {
-    font-family: "Poppins-Regular";
     font-style: normal;
     font-weight: 600;
     font-size: 40px;
@@ -212,7 +210,6 @@ export const SlideOverlay = styled.div`
     height: 70px;
     margin-top: 30px;
     cursor: pointer;
-    font-family: "Urbanist-Regular";
     font-style: normal;
     font-weight: 600;
     font-size: 20px;

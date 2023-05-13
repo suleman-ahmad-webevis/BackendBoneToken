@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import styled from "styled-components";
@@ -7,27 +7,21 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.min.css";
-// import required modules
-import { Navigation } from "swiper";
-//Dog images
 
+import { Navigation } from "swiper";
 import nextButton from "../../../assets/images/Earn/next.png";
 import prevButton from "../../../assets/images/Earn/previous.png";
-//EditButtonComponent
 
 const DogFeedingSlider = ({ data }) => {
   const swiper = useSwiper();
 
-  const [index, setIndex] = useState("");
-  console.log("The index", index);
-
-  const handleMouseOver = (i) => {
-    setIndex(i);
-  };
-
-  const handleMouseOut = () => {
-    setIndex("");
-  };
+  // const [index, setIndex] = useState("");
+  // const handleMouseOver = (i) => {
+  //   setIndex(i);
+  // };
+  // const handleMouseOut = () => {
+  //   setIndex("");
+  // };
 
   return (
     <SliderContainer>
@@ -40,7 +34,6 @@ const DogFeedingSlider = ({ data }) => {
             slidesPerView: 3,
             spaceBetween: 30,
           },
-          // when window width is >= 640px
           1400: {
             slidesPerView: 5,
             spaceBetween: 20,
@@ -55,8 +48,8 @@ const DogFeedingSlider = ({ data }) => {
         {data.map((item, i) => (
           <SwiperSlide
             key={i}
-            onMouseOver={() => handleMouseOver(i + 1)}
-            onMouseOut={handleMouseOut}
+            // onMouseOver={() => handleMouseOver(i + 1)}
+            // onMouseOut={handleMouseOut}
           >
             <SwiperSlideImg src={item} />
           </SwiperSlide>

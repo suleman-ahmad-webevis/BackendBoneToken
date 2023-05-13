@@ -86,8 +86,6 @@ export const PayButton = styled.div`
   justify-content: center;
   align-self: flex-end;
   cursor: pointer;
-
-  font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -97,7 +95,6 @@ export const PayButton = styled.div`
 `;
 
 export const CardLabel = styled.div`
-  font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;

@@ -24,7 +24,7 @@ const BlogDetail = () => {
   return (
     <BlogDetailContainer>
       <MainImage>
-        <img src={blog?.featuredImg} alt="blog" />
+        <Img src={blog?.featuredImg} alt="blog" style={{ width: "100%" }} />
       </MainImage>
       <BlogWriter>
         <Img src={Dogdatalogo} alt="writer" />
@@ -33,7 +33,7 @@ const BlogDetail = () => {
           {new Date(blog?.createdAt).toLocaleString().substring(0, 9)}
         </p>
       </BlogWriter>
-      <h2>{blog.titleOfBlog}</h2>
+      <BlogTitle>{blog.titleOfBlog}</BlogTitle>
       <Detail
         dangerouslySetInnerHTML={{
           __html: blog?.blogDesc,
@@ -50,18 +50,11 @@ export const BlogDetailContainer = styled.div`
   border-radius: 12px;
   padding: 30px;
   grid-gap: 20px;
-  width: 970px;
-  @media screen and (max-width: 1400px) {
-    width: 925px;
-    align-self: center;
-  }
-  @media screen and (max-width: 1300px) {
-    width: 90%;
-  }
 `;
 
 export const MainImage = styled.div`
-  img {
+  width: 100%;
+  /* img {
     width: 925px;
     height: 505px;
     border-radius: 12px;
@@ -70,13 +63,25 @@ export const MainImage = styled.div`
     img {
       width: 870px;
       height: 505px;
+      border-radius: 12px;
     }
   }
   @media screen and (max-width: 1300px) {
     img {
       width: 100%;
       height: 100%;
+      border-radius: 12px;
     }
+  } */
+`;
+
+export const BlogTitle = styled.h5`
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 40px;
+  @media screen and (max-width: 600px) {
+    font-size: 24px;
+    line-height: 35px;
   }
 `;
 

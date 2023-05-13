@@ -5,7 +5,7 @@ const createDogNft = async ({ obj, allFormsData }) => {
   let API_URL = `dogNft/createDogNft`;
   const res = await API.post(API_URL, allFormsData);
   if (res.status === 200 || res.status === 201) {
-    obj.navigate("/createDogNFT/congratulations");
+    obj.navigate("/create-dog-nft/congratulations");
   }
   toast.success(res.data.message, { theme: "colored" });
   return res.data;

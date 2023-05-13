@@ -4,8 +4,14 @@ import BlogSidebar from "../../components/Sidebar/BlogSidebar";
 import BlogDetail from "../../components/Blogs/BlogDetail";
 import MayLikeBlogs from "../../components/Blogs/MayLikeBlogs";
 import { useLocation } from "react-router-dom";
+import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
+import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
+import useBreakpoint from "../../hooks/useBreakPoint";
+import BlogTabMenu from "../../components/Blogs/TabMob/BlogTabMenu";
 
 const BlogsDetail = () => {
+  const { isTablet, isMobile, isSmallMobile } = useBreakpoint();
+
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const Toggle = () => {
@@ -16,42 +22,33 @@ const BlogsDetail = () => {
   }, []);
   return (
     <BlogsPageContainer>
-      <BlogsContainer>
-        <BlogSidebar open={open} Toggle={Toggle} />
-        <BlogsContent>
-          <BlogDetail />
-          <MayLikeBlogs category={location.state?.category} />
-        </BlogsContent>
-      </BlogsContainer>
+      <BlogSidebar open={open} Toggle={Toggle} />
+      <BlogsContent>
+        {(isSmallMobile || isMobile) && <CommonMobNav />}
+        {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+        {(isTablet || isSmallMobile || isMobile) && <BlogTabMenu />}
+        <BlogDetail />
+        <MayLikeBlogs category={location.state?.category} />
+      </BlogsContent>
     </BlogsPageContainer>
   );
 };
 
 export const BlogsPageContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 30px;
-  background: #fff;
-`;
-
-export const BlogsContainer = styled.div`
-  display: flex;
   justify-content: center;
-  @media screen and (max-width: 1350px) {
-    grid-gap: 30px;
-  }
+  grid-gap: 30px;
+  padding: 30px;
+  width: 100%;
 `;
 
 export const BlogsContent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   grid-gap: 30px;
-  /* padding: 0 20px; */
-  background: #fff;
-  @media screen and (max-width: 600px) {
-    margin-top: 50px;
-    grid-gap: 5px;
+  width: 78%;
+  @media screen and (max-width: 1110px) {
+    width: 100%;
   }
 `;
 

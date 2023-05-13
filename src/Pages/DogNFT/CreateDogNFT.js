@@ -11,6 +11,8 @@ import Confirmation from "../../components/Forms/CreateNFT/RegisterDogNft/Confir
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
+import SelectBlockChain from "../../components/Forms/CreateNFT/RegisterDogNft/SelectBlockChain";
+import { NftTabNav } from "../../components/Forms/CreateNFT/RegisterDogNft/Tab/RTab.style";
 
 const CreateDogNFT = () => {
   const { pageName } = useParams();
@@ -23,15 +25,17 @@ const CreateDogNFT = () => {
 
   const getPage = () => {
     switch (pageName) {
-      case "dog-register":
+      case "register-dog":
+        return <SelectBlockChain />;
+      case "register-dogData":
         return <RegisterDog />;
-      case "owner-register":
+      case "register-owner":
         return <RegisterOwner />;
-      case "veterinary-register":
+      case "register-veterinary":
         return <RegisterVeterinary />;
-      case "insurance-register":
+      case "register-insurance":
         return <RegisterInsurance />;
-      case "dogShow-register":
+      case "register-dogShow":
         return <RegisterDogShow />;
       case "congratulations":
         return <Confirmation />;
@@ -44,19 +48,10 @@ const CreateDogNFT = () => {
     <>
       <NFTMainContainer>
         <NFTContainer>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gridGap: "20px",
-            }}
-          >
+          <NftTabNav>
             {(isSmallMobile || isMobile) && <CommonMobNav />}
-            {(isTablet || isSmallMobile || isMobile) && (
-              <CommonTabNav />
-            )}
-          </div>
+            {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+          </NftTabNav>
           <FilterForms>
             <FormFilter />
           </FilterForms>
@@ -93,8 +88,8 @@ export const NFTContainer = styled.div`
     width: 100%;
     max-width: 100%;
   }
-  @media screen and (max-width: 900px) {
-    padding: 50px 15px;
+  @media screen and (max-width: 1110px) {
+    padding: 50px 30px;
   }
 `;
 
@@ -102,8 +97,7 @@ export const FilterForms = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 15px;
-  @media screen and (max-width: 1110px) {
-    width: 100%;
+  @media screen and (max-width: 960px) {
     flex-wrap: wrap;
   }
 `;

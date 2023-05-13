@@ -73,11 +73,8 @@ export const BlogCardTitle = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   cursor: pointer;
-  margin-top: 10px;
-  width: 100%;
-
+  padding-top: 10px;
   h2 {
-    font-family: "Urbanist-Regular";
     font-style: normal;
     font-weight: 800;
     font-size: 18px;
@@ -85,7 +82,6 @@ export const BlogCardTitle = styled.div`
     color: #000f5c;
   }
   h4 {
-    font-family: "Urbanist-Regular";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -95,7 +91,6 @@ export const BlogCardTitle = styled.div`
 `;
 
 export const BlogCardContent = styled.div`
-  font-family: "Urbanist-Regular";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -106,6 +101,7 @@ export const BlogCardContent = styled.div`
 export const BlogCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
+  padding:10px 0px;
   align-items: center;
 `;
 
@@ -113,29 +109,25 @@ export const CardDate = styled.div`
   display: flex;
   grid-gap: 20px;
   align-items: center;
-
   h3 {
-    font-family: "Poppins-Regular";
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
     color: #000f5c;
-  }
-
-  @media screen and (max-width: 400px) {
-    grid-gap: 10px;
+    @media screen and (max-width: 1650px) {
+      font-size: 12px;
+    }
+    @media screen and (max-width: 1450px) {
+      font-size: 10px;
+    }
   }
 `;
 
 export const CardShareIcons = styled.div`
   display: flex;
-  grid-gap: 20px;
+  grid-gap: 10px;
   align-items: center;
-
-  @media screen and (max-width: 400px) {
-    grid-gap: 10px;
-  }
 `;
 
 export const ShareIcon = styled.div`
@@ -157,7 +149,6 @@ export const Popular = styled.div`
   height: 34px;
   background: #fee96c;
   border-radius: 15px;
-  font-family: "Urbanist-Regular";
   font-style: normal;
   font-weight: 600;
   font-size: 15px;

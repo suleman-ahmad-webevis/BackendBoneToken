@@ -17,8 +17,7 @@ import TabAllCategory from "../../../components/ProductsComponent/TabAllCategory
 const Tablet = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log("The setSearchParams", setSearchParams);
+  const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
   const featured = searchParams.get("featured");
   const newParam = searchParams.get("new");

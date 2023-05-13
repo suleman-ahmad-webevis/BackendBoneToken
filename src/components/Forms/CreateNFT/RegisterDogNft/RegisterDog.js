@@ -80,7 +80,7 @@ const RegisterDog = () => {
     onSubmit: (data) => {
       sessionStorage.setItem("registerDog", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerDog")));
-      navigate("/createDogNFT/ownerRegister");
+      navigate("/create-dog-nft/register-owner");
     },
   });
 
@@ -449,7 +449,18 @@ const RegisterDog = () => {
           <NFTFooter />
         </RegisterDogContainer>
       ) : (
-        (isTablet || isMobile || isSmallMobile) && <RDTab />
+        (isTablet || isMobile || isSmallMobile) && (
+          <RDTab
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            setFieldValue={setFieldValue}
+            priceIcon={priceIcon}
+          />
+        )
       )}
     </>
   );

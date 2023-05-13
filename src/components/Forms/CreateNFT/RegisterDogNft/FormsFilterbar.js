@@ -8,21 +8,25 @@ function FormFilter() {
 
   const types = [
     {
-      text: "Dog",
-      path: "/create-dog-nft/dog-register",
+      text: "Register Dog ",
+      path: "/create-dog-nft/register-dog",
     },
-    { text: "Owner", path: "/create-dog-nft/owner-register" },
+    {
+      text: "DogData ",
+      path: "/create-dog-nft/register-dogData",
+    },
+    { text: "Owner", path: "/create-dog-nft/register-owner" },
     {
       text: "Veterinary",
-      path: "/create-dog-nft/veterinary-register",
+      path: "/create-dog-nft/register-veterinary",
     },
     {
       text: "Insurance",
-      path: "/create-dog-nft/insurance-register",
+      path: "/create-dog-nft/register-insurance",
     },
     {
       text: "DogShow",
-      path: "/create-dog-nft/dogShow-register",
+      path: "/create-dog-nft/register-dogShow",
     },
   ];
   if (location?.pathname?.includes("/create-dog-nft/congratulations")) {
@@ -43,7 +47,7 @@ function FormFilter() {
 const Button = styled(NavLink)`
   cursor: pointer;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
   display: flex;
   align-items: center;
@@ -56,14 +60,27 @@ const Button = styled(NavLink)`
   height: 50px;
   padding: 20px;
 
+  @media screen and (max-width: 1650px) {
+    padding: 18px;
+    font-size: 16px;
+  }
+  @media screen and (max-width: 1260px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 1210px) {
+    font-size: 13px;
+  }
+  @media screen and (max-width: 1110px) {
+    font-size: 12px;
+    line-height: 14.18px;
+    padding: 10px;
+  }
+
   &.active {
     color: #ffffff;
     background: #79999d;
     border: 1.25467px solid #d1ebff;
     border-radius: 10.0374px;
-  }
-  @media screen and (max-width: 1260px) {
-    font-size: 16px;
   }
 `;
 export const ButtonToggle = styled(Button)``;
@@ -71,6 +88,7 @@ export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 10px;
+
 `;
 
 export default FormFilter;

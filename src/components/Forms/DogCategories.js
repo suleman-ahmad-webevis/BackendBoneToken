@@ -27,7 +27,7 @@ export const ButtonToggle = styled(Button)`
   `}
 `;
 export const ButtonGroup = styled.div``;
-const types = [
+const coatTypes = [
   "Heavy coat",
   "Curly/Wavy/Fleece coat",
   "Long coat",
@@ -46,7 +46,7 @@ function CategoryButton({ coatType, setFieldValue }) {
     setFieldValue("coatType", type);
   };
   const [active, setActive] = useState(coatType ?? "");
-  return types.map((type) => (
+  return coatTypes.map((type) => (
     <ButtonGroup key={type.label}>
       <ButtonToggle
         key={type}

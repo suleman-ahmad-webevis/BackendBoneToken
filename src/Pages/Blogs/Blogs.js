@@ -42,6 +42,11 @@ export const BlogsContent = styled.div`
   grid-gap: 30px;
   padding: 30px 0px;
   background: #fff;
+
+  width: 78%;
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+  }
 `;
 
 export const Hamburger = styled.div`

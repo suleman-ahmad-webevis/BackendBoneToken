@@ -9,13 +9,12 @@ import SeasonsButton from "./SeasonsButton";
 import DogAgeButton from "./DogAge";
 import FCIGroupSelector from "./FCIGroupSelector";
 
-const SmartSearchModal = ({ productId }) => {
+const SmartSearchModal = () => {
   const [gender, setGender] = useState();
   const [season, setSeason] = useState();
   const [dogAge, setDogAge] = useState();
   const [smartBreed, setSmartBreed] = useState("Affenpinscher");
   const [FCIGroup, setFCIGroup] = useState();
-  console.log("FCIGroup", FCIGroup);
   //ForBackgroundColorOfSelect
   const [color, setColor] = useState("Black");
   //ToSendApi
@@ -64,7 +63,7 @@ const SmartSearchModal = ({ productId }) => {
         <Heading Font level={5}>
           DogGroup FCI
         </Heading>
-        <FCIGroupSelector setFCIGroup={setFCIGroup} />
+        <FCIGroupSelector FCIGroup={FCIGroup} setFCIGroup={setFCIGroup} />
       </ModalDataField>
       <ModalDataField>
         <Heading Font level={5}>

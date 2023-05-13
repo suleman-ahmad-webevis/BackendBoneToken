@@ -31,7 +31,6 @@ export const ProductCategory = styled.div`
   color: ${(props) => props.theme.ProductCategory};
   font-size: 16px;
   line-height: 24px;
-  font-family: Ruddy-Bold;
 `;
 const CardData = styled.div`
   display: flex;

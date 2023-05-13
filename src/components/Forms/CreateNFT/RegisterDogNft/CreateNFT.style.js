@@ -79,3 +79,56 @@ export const SaveText = styled.div`
   border-radius: 8px;
   cursor: pointer;
 `;
+
+//Select Block Chain
+
+export const SBCContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 50px;
+  justify-content: center;
+`;
+
+export const SBCHeading = styled.h5`
+  font-weight: 700;
+  font-size: 20px;
+ 19px
+  color: #0e626d;
+`;
+
+export const BChainsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  grid-gap: 10px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const BChain = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #79999d;
+  border-radius: 8px;
+  width: 24%;
+  height: 104px;
+  padding: 15px 30px;
+  cursor: pointer;
+  @media screen and (max-width: 1200px) {
+    padding: 15px 18px;
+  }
+  @media screen and (max-width: 960px) {
+    height: 80px;
+    padding: 15px 10px;
+  }
+  @media screen and (max-width: 768px) {
+    height: 104px;
+    padding: 10px 5px;
+  }
+  @media screen and (max-width: 550px) {
+    height: 80px;
+    padding: 10px 5px;
+  }
+`;

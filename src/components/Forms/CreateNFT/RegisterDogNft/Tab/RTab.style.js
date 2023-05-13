@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { TextField } from "@mui/material";
 
+//TabNav
+export const NftTabNav = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+`;
 //Common and RegisterDog
 export const RDTabContainer = styled.div`
   display: flex;
