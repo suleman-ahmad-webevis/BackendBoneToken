@@ -21,7 +21,7 @@ import mobFav from "../../../assets/images/LandingPage/MobFav.png";
 import mobChat from "../../../assets/images/LandingPage/MobChat.png";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/Navbar/FlagsDropDown.png";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTheProducts, reset } from "../../../redux/product/productSlice";
 import useBreakpoint from "../../../hooks/useBreakPoint";

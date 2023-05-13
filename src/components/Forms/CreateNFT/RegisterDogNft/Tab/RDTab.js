@@ -49,7 +49,7 @@ const RDTab = ({
   const dogMotherPicUploaded = useRef(null);
   const dogMotherPicUploader = useRef(null);
   const dogFatherPicUploaded = useRef(null);
-  const dogFatherPicUploader = useRef(null);
+  // const dogFatherPicUploader = useRef(null);
 
   const handleImageUpload = (event) => {
     const [file] = event.target.files;
