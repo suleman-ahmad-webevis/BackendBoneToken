@@ -16,7 +16,6 @@ import {
 } from "../../UserStyles";
 import { useNavigate } from "react-router-dom";
 // import { registerInsuranceSchema } from "../../../../schema/createDogNftSchema";
-import NFTFooter from "./NFTFooter";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
 
 const RegisterInsurance = () => {
@@ -199,7 +198,6 @@ const RegisterInsurance = () => {
           </NextButton>
         </PageChanged>
       </Form>
-      <NFTFooter />
     </RegisterDogContainer>
   );
 };

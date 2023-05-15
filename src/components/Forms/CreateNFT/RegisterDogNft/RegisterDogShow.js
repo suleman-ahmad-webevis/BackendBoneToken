@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import trophy from "../../../../assets/images/Trophy.png";
-// import search from "../../../../assets/images/Search.png";
+import Binance from "../../../../assets/images/CreateNFT/SBC/Binance.png";
+import Solana from "../../../../assets/images/CreateNFT/SBC/Solana.png";
+import Bitcoin from "../../../../assets/images/CreateNFT/SBC/Bitcoin.png";
+import Ethereum from "../../../../assets/images/CreateNFT/SBC/Ethereum.png";
 import person from "../../../../assets/images/Person.png";
 import segments from "../../../../assets/images/Segments.png";
 import {
@@ -17,9 +20,18 @@ import Countries from "../../Countries";
 import { PhoneIcon } from "../../UserStyles";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import NFTFooter from "./NFTFooter";
 import { createDogNft } from "../../../../redux/createDogNft/createDogNftSlice";
-import { CreateDogNftBtn, SaveNftBtn, SaveText } from "./CreateNFT.style";
+import {
+  BChain,
+  BChainsWrapper,
+  CreateDogNftBtn,
+  SBCContainer,
+  SBCHeading,
+  SaveCreateNft,
+  SaveNftBtn,
+  SaveText,
+  DogShowBtns,
+} from "./CreateNFT.style";
 import Back from "../../../../assets/images/Back.png";
 
 const RegisterDogShow = () => {
@@ -206,19 +218,35 @@ const RegisterDogShow = () => {
             {touched.result && errors.result && <>{errors.result}</>}
           </FieldError> */}
         </FormField>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+      </Form>
+      {/* StyleFromSelectBlockChain */}
+      <SBCContainer>
+        <SBCHeading>Select Blockchain to create your Pet Dog NFT</SBCHeading>
+        <BChainsWrapper>
+          <BChain>
+            <Img src={Solana} />
+          </BChain>
+          <BChain>
+            <Img src={Bitcoin} />
+          </BChain>
+          <BChain>
+            <Img src={Ethereum} />
+          </BChain>
+          <BChain>
+            <Img src={Binance} />
+          </BChain>
+        </BChainsWrapper>
+      </SBCContainer>
+      {/* StyleFromSelectBlockChain */}
+      <DogShowBtns>
+        <SaveCreateNft>
           <SaveNftBtn onClick={handleSave}>
             <SaveText>
               <h1>Save</h1>
             </SaveText>
           </SaveNftBtn>
-        </div>
+          <CreateDogNftBtn type="submit">Create Dog NFT</CreateDogNftBtn>
+        </SaveCreateNft>
         <PageChanged>
           <NextButton Back>
             <Img
@@ -229,10 +257,10 @@ const RegisterDogShow = () => {
               }}
             />
           </NextButton>
-          <CreateDogNftBtn type="submit">Create Dog NFT</CreateDogNftBtn>
+          <div></div>
+          {/* Empty <div> to put next on end */}
         </PageChanged>
-      </Form>
-      <NFTFooter />
+      </DogShowBtns>
     </RegisterDogContainer>
   );
 };

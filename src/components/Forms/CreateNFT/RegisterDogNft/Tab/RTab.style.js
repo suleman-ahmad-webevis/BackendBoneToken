@@ -90,20 +90,6 @@ export const WHLWrapper = styled.div`
   width: 100%;
 `;
 
-export const WHL = styled.div`
-  width: 33%;
-  background: #ffffff;
-  border: 2px solid rgba(121, 153, 157, 0.15);
-  border-radius: 8px;
-  padding: 10px;
-  color: #b7b7b7;
-  font-weight: 900;
-  font-size: 12px;
-  @media screen and (max-width: 820px) {
-    font-size: 11px;
-  }
-`;
-
 export const CoatsWrapper = styled.div`
   display: flex;
   grid-gap: 10px;
@@ -120,6 +106,16 @@ export const TwoCoats = styled.div`
   width: 49%;
   font-size: 12px;
   font-weight: 900;
+
+  ${({ active }) =>
+    active &&
+    `
+    color:#79999D;
+    background: #F2F4F4;;
+    opacity: 1;
+    border: 2px solid #79999D;
+  `}
+
   @media screen and (max-width: 820px) {
     font-size: 11px;
   }
@@ -132,6 +128,14 @@ export const ThreeCoats = styled.div`
   border-radius: 8px;
   padding: 10px;
   width: 33%;
+  ${({ active }) =>
+    active &&
+    `
+    color:#79999D;
+    background: #F2F4F4;;
+    opacity: 1;
+    border: 2px solid #79999D;
+  `}
 `;
 
 export const PriceWrapper = styled.div`
@@ -148,6 +152,15 @@ export const Curr = styled.div`
   color: #b7b7b7;
   text-align: center;
   font-weight: 900;
+
+  ${({ active }) =>
+    active &&
+    `
+    color:#79999D;
+    background: #F2F4F4;;
+    opacity: 1;
+    border: 2px solid #79999D;
+  `}
 `;
 
 //RegisterOwner

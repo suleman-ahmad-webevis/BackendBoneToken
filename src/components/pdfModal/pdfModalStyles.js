@@ -1,29 +1,28 @@
 import styled from "styled-components";
 
 export const ModalBlock = styled.div`
+  display: flex;
   align-items: center;
-  bottom: 0;
   justify-content: center;
-  left: 0;
   overflow: hidden;
   padding: 0.4rem;
   position: fixed;
-  right: 0;
-  top: 0;
-  display: flex;
+  top: 80px;
+  right: 10px;
+  width: 90%;
   opacity: 1;
   z-index: 1001;
 `;
 
 export const ModalOverlay = styled.a`
   background: rgba(247, 248, 249, 0.75);
-  bottom: 0;
   cursor: default;
   display: block;
-  left: 0;
   position: absolute;
-  right: 0;
   top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 `;
 
 export const ModalClose = styled.a`
@@ -45,7 +44,7 @@ export const ModalContainer = styled.div`
   padding: 0 0.8rem;
   width: 100%;
   animation: slide-down 0.2s ease 1;
-  z-index: 1;
+  z-index: 1111;
   box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
 `;
 

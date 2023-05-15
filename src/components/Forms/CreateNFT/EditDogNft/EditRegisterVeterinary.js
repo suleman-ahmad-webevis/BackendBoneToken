@@ -12,7 +12,6 @@ import {
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { registerVeterinarySchema } from "../../../../schema/createDogNftSchema";
-import NFTFooter from "./NFTFooter";
 import VaccinationTypes from "../../VaccinationTypes";
 import {
   SaveEditNftBtn,
@@ -124,7 +123,6 @@ const EditRegisterVeterinary = () => {
           <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
         </PageChanged>
       </Form>
-      <NFTFooter />
     </RegisterDogContainer>
   );
 };

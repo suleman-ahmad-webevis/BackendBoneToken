@@ -24,7 +24,6 @@ import uploadImage from "../../../../assets/images/upload.png";
 import { useNavigate } from "react-router-dom";
 import { registerOwnerSchema } from "../../../../schema/createDogNftSchema";
 import Transparent from "../../../../assets/images/transparent.png";
-import NFTFooter from "./NFTFooter";
 import { useRef } from "react";
 import ROTab from "./Tab/ROTab";
 import useBreakpoint from "../../../../hooks/useBreakPoint";
@@ -279,7 +278,6 @@ const RegisterOwner = () => {
               </NextButton>
             </PageChanged>
           </Form>
-          <NFTFooter />
         </RegisterDogContainer>
       ) : (
         (isTablet || isMobile || isSmallMobile) && (

@@ -11,22 +11,20 @@ import {
 
 const PDFModal = ({ children, active, hideModal }) => {
   return (
-    <Fragment>
+    <>
       {active && (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <ModalBlock>
-            <ModalOverlay onClick={() => hideModal()}></ModalOverlay>
-            <ModalContainer>
-              <ModalHeader>
-                <ModalTitle></ModalTitle>
-                <ModalClose onClick={() => hideModal()}>X</ModalClose>
-              </ModalHeader>
-              <ModalBody>{children}</ModalBody>
-            </ModalContainer>
-          </ModalBlock>
-        </div>
+        <ModalBlock>
+          <ModalOverlay onClick={() => hideModal()}></ModalOverlay>
+          <ModalContainer>
+            <ModalHeader>
+              <ModalTitle></ModalTitle>
+              <ModalClose onClick={() => hideModal()}>X</ModalClose>
+            </ModalHeader>
+            <ModalBody>{children}</ModalBody>
+          </ModalContainer>
+        </ModalBlock>
       )}
-    </Fragment>
+    </>
   );
 };
 export default PDFModal;

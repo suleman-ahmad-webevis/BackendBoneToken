@@ -29,10 +29,11 @@ import CP from "../../../assets/pdf/CS/CP.pdf";
 import PP from "../../../assets/pdf/CS/PP.pdf";
 import TC from "../../../assets/pdf/CS/TC.pdf";
 import PDFModal from "../../../components/pdfModal/pdfModal";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+//ToShowPdf
+import { Worker } from "@react-pdf-viewer/core";
+import { Viewer } from "@react-pdf-viewer/core";
+// Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const CSTab = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -144,8 +145,8 @@ const CSTab = () => {
         </h5>
       </CSPolicySection>
       <PDFModal active={active} hideModal={() => setActive(false)}>
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-          <Viewer fileUrl={defaultPdfFile} plugins={[defaultLayoutPlugin]} />
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+          <Viewer fileUrl={defaultPdfFile} />;
         </Worker>
       </PDFModal>
     </CSTabContainer>

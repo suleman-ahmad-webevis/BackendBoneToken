@@ -23,7 +23,6 @@ import BreedSelector from "../../BreedSelector";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { registerDogSchema } from "../../../../schema/createDogNftSchema";
-import NFTFooter from "./NFTFooter";
 import Currencies from "../../CurrencySelect";
 import CountryBirth from "../../CountryBirth";
 import Location from "../../Location";
@@ -406,7 +405,6 @@ const EditRegisterDog = ({ dog }) => {
           <SaveEditNftBtn>Save</SaveEditNftBtn>
         </PageChanged>
       </Form>
-      <NFTFooter />
     </RegisterDogContainer>
   );
 };

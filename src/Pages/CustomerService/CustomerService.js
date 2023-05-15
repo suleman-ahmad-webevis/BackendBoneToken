@@ -21,19 +21,19 @@ import {
 } from "./CustomerService.Style";
 import { Img } from "../../GlobalStyles";
 import DogProfileSmall from "../../assets/images/DogProfileSmall.png";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { FormInput } from "../../components/Forms/UserStyles";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CSTab from "./Tab/CSTab";
 //ToShowPDF
 import PDFModal from "../../components/pdfModal/pdfModal";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import CP from "../../assets/pdf/CS/CP.pdf";
 import PP from "../../assets/pdf/CS/PP.pdf";
 import TC from "../../assets/pdf/CS/TC.pdf";
+//ToShowPdf
+import { Worker } from "@react-pdf-viewer/core";
+import { Viewer } from "@react-pdf-viewer/core";
+// Import the styles
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const CustomerService = () => {
   const { isDesktop, isTablet, isMobile, isSmallMobile } = useBreakpoint();
@@ -146,6 +146,7 @@ const CustomerService = () => {
                     setActive(!active);
                     setDefaultPdfFile(CP);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Disclaimer
                 </Heading>
@@ -155,6 +156,7 @@ const CustomerService = () => {
                     setActive(!active);
                     setDefaultPdfFile(PP);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Privacy
                 </Heading>
@@ -164,16 +166,14 @@ const CustomerService = () => {
                     setActive(!active);
                     setDefaultPdfFile(TC);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Terms and Conditions
                 </Heading>
               </CSPolicy>
               <PDFModal active={active} hideModal={() => setActive(false)}>
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-                  <Viewer
-                    fileUrl={defaultPdfFile}
-                    plugins={[defaultLayoutPlugin]}
-                  />
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                  <Viewer fileUrl={defaultPdfFile} width="100%" />
                 </Worker>
               </PDFModal>
             </CSContentWrapper>

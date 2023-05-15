@@ -5,7 +5,7 @@ import Facebook from "../../assets/images/ProductDetail/Facebook.png";
 import Instagram from "../../assets/images/ProductDetail/Instagram.png";
 import Heading from "../Heading/Heading";
 import Rating from "@mui/material/Rating";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getTheProductById,
@@ -289,7 +289,10 @@ const ProductDetail = () => {
                   <ProductWeight>
                     {value?.weight === "0 kg" ? "" : value?.weight}
                   </ProductWeight>
-                  <ProductWeight>{value?.minRetailPrice} &euro;</ProductWeight>
+                  <ProductWeight>
+                    {value?.minRetailPrice}
+                    &euro;
+                  </ProductWeight>
                   <CheckBox
                     type="checkbox"
                     // eslint-disable-next-line
@@ -348,7 +351,6 @@ const ProductDetail = () => {
                 }}
               >
                 Add to Cart
-                {/* <Img src={addCart} title="Add To Cart" /> */}
               </AddCart>
             </PriceContainer>
             <SocialIcons>
@@ -379,6 +381,11 @@ const ProductDetail = () => {
             singlePro={singlePro}
             newProInventory={newProInventory}
             priceFinder={priceFinder}
+            handleQuantity={handleQuantity}
+            checkIndex={checkIndex}
+            ItemSelector={ItemSelector}
+            dogDataPrice={dogDataPrice}
+            selectedPro={selectedPro}
           />
         )
       )}

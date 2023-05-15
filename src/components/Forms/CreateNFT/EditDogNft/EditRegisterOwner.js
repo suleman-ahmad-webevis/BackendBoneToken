@@ -21,7 +21,6 @@ import uploadImage from "../../../../assets/images/upload.png";
 import { useNavigate } from "react-router-dom";
 import { registerOwnerSchema } from "../../../../schema/createDogNftSchema";
 import Transparent from "../../../../assets/images/transparent.png";
-import NFTFooter from "./NFTFooter";
 import { SaveEditNftBtn } from "../RegisterDogNft/CreateNFT.style";
 
 const EditRegisterOwner = () => {
@@ -259,7 +258,6 @@ const EditRegisterOwner = () => {
           <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
         </PageChanged>
       </Form>
-      <NFTFooter />
     </RegisterDogContainer>
   );
 };

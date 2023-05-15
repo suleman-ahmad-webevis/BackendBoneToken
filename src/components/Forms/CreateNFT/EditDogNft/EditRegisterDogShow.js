@@ -17,7 +17,6 @@ import Countries from "../../Countries";
 import { PhoneIcon } from "../../UserStyles";
 import { useFormik } from "formik";
 import { registerDogShowSchema } from "../../../../schema/createDogNftSchema";
-import NFTFooter from "./NFTFooter";
 import {
   SaveEditNftBtn,
   SaveNftBtn,
@@ -215,7 +214,6 @@ const EditRegisterDogShow = () => {
             <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
           </PageChanged>
         </Form>
-        <NFTFooter />
       </RegisterDogContainer>
       <DogShows />
     </>

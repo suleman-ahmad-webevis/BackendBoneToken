@@ -5,7 +5,7 @@ export const CreateDogNftBtn = styled.button`
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   border: none;
-  width: 70%;
+  width: 50%;
   height: 65px;
   font-weight: 700;
   font-size: 24px;
@@ -93,7 +93,6 @@ export const SBCContainer = styled.div`
 export const SBCHeading = styled.h5`
   font-weight: 700;
   font-size: 20px;
- 19px
   color: #0e626d;
 `;
 
@@ -131,4 +130,20 @@ export const BChain = styled.div`
     height: 80px;
     padding: 10px 5px;
   }
+`;
+
+export const SaveCreateNft = styled.div`
+  width: 100%;
+  display: flex;
+  grid-gap: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DogShowBtns = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  position: relative;
+  width: 100%;
 `;

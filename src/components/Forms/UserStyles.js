@@ -33,6 +33,7 @@ export const RegisterDogContainer = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
+  grid-gap: 60px;
 `;
 
 export const Form = styled.form`

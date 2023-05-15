@@ -33,13 +33,21 @@ const Tablet = () => {
         </RegLoginSection>
         <IconsSection>
           <Item>
-            <Img src={FavIcon} alt="" />
+            <Img
+              src={FavIcon}
+              alt="heart"
+              onClick={() => navigate("/favourites")}
+            />
             <Counter>
               <p>{favouritesTotalQuantity ? favouritesTotalQuantity : 0}</p>
             </Counter>
           </Item>
           <Item>
-            <Img src={CartIcon} alt="" />
+            <Img
+              src={CartIcon}
+              alt="cart"
+              onClick={() => navigate("/checkout")}
+            />
             <Counter>
               <p>{cartQuantityIs ? cartQuantityIs : 0}</p>
             </Counter>

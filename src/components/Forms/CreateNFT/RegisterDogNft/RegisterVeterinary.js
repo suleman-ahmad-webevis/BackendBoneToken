@@ -15,7 +15,6 @@ import {
 } from "../../UserStyles";
 import { useNavigate } from "react-router-dom";
 // import { registerVeterinarySchema } from "../../../../schema/createDogNftSchema";
-import NFTFooter from "./NFTFooter";
 import VaccinationTypes from "../../VaccinationTypes";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
 
@@ -87,7 +86,7 @@ const RegisterVeterinay = () => {
                   position: "absolute",
                   top: "26.5%",
                   left: "20px",
-                  color: "#b7b7b7",
+                  color: "#000",
                 }}
               >
                 {vaccination.vacType ?? ""}
@@ -137,7 +136,6 @@ const RegisterVeterinay = () => {
           </NextButton>
         </PageChanged>
       </Form>
-      <NFTFooter />
     </RegisterDogContainer>
   );
 };

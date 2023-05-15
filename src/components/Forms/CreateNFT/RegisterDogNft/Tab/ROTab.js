@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   RDForm,
   RDInput,
@@ -30,6 +30,23 @@ const ROTab = ({
   setFieldValue,
 }) => {
   const navigate = useNavigate();
+
+  const uploadedImage = useRef(null);
+  const imageUploader = useRef(null);
+
+  const handleImageUpload = (e) => {
+    const [file] = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = (e) => {
+        current.src = e.target.result;
+        setFieldValue("ownerPic", current.src);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <RDTabContainer>
       <RDForm>
@@ -48,15 +65,15 @@ const ROTab = ({
         </FieldError>
         <UploadPicsWrapper>
           <Upload
-            // onClick={() => dogPicUploader.current.click()}
+            onClick={() => imageUploader.current.click()}
             style={{ width: "49%" }}
           >
             <input
               type="file"
               accept="image/*"
-              name="dogPic"
-              // onChange={(e) => handleImageUpload(e)}
-              // ref={dogPicUploader}
+              name="ownerPic"
+              onChange={(e) => handleImageUpload(e)}
+              ref={imageUploader}
               style={{
                 display: "none",
               }}
@@ -64,7 +81,7 @@ const ROTab = ({
             <img src={uploadImage} alt="img" />
             <UploadText>Photo upload</UploadText>
             <FileAccept>
-              <Img src={Transparent} alt="img" />
+              <Img ref={uploadedImage} src={Transparent} alt="img" />
             </FileAccept>
           </Upload>
         </UploadPicsWrapper>

@@ -20,6 +20,7 @@ import {
   ShareProSection,
   ShareIcons,
   PriceSec,
+  IncDecBtn,
 } from "./TabProDetail.style";
 import { Img } from "../../../GlobalStyles";
 import { MobileComIcon } from "../../../Pages/Product/Tablet/Tablet.style";
@@ -28,28 +29,36 @@ import {
   LangSelect,
   Counter as NavCounter,
 } from "../../Navbar/NavbarStyles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //ImagesImport
 import mobCart from "../../../assets/images/LandingPage/MobCart.png";
 import mobFav from "../../../assets/images/LandingPage/MobFav.png";
 import mobChat from "../../../assets/images/LandingPage/MobChat.png";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/RegisterLogin/FlagsDropDown.png";
-import Min from "../../../assets/images/ProductDetail/Tab/Min.png";
-import Max from "../../../assets/images/ProductDetail/Tab/Max.png";
 import FB from "../../../assets/images/ProductDetail/Tab/FB.png";
 import Insta from "../../../assets/images/ProductDetail/Tab/Insta.png";
 import useBreakpoint from "../../../hooks/useBreakPoint";
 import { useNavigate } from "react-router-dom";
+import { addToYourCart } from "../../../redux/cart/cartSlice";
 
-const TabProDetail = ({ singlePro, newProInventory, priceFinder }) => {
+const TabProDetail = ({
+  singlePro,
+  newProInventory,
+  priceFinder,
+  handleQuantity,
+  checkIndex,
+  ItemSelector,
+  dogDataPrice,
+  selectedPro,
+}) => {
   const { isSmallMobile, isMobile } = useBreakpoint();
   const navigate = useNavigate();
   //StoreData
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
   const { cartQuantityIs } = useSelector((state) => state.cart);
   const [showReviews, setShowReview] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <TabProDetailContainer>
       {(isSmallMobile || isMobile) && (
@@ -83,7 +92,6 @@ const TabProDetail = ({ singlePro, newProInventory, priceFinder }) => {
           </MobileComIcon>
         </>
       )}
-
       <ProDetailImg>
         <Img
           src={
@@ -132,10 +140,13 @@ const TabProDetail = ({ singlePro, newProInventory, priceFinder }) => {
           <ProductDetail>
             {newProInventory?.length &&
               newProInventory?.map((value, index) => (
-                <DetailItem key={index}>
+                <DetailItem
+                  key={index}
+                  onClick={() => ItemSelector("checked", index)}
+                >
                   <h5>{value?.productCode}</h5>
                   <h5>{value?.size}(kg)</h5>
-                  <h5>{value?.minRetailPrice} &euro</h5>
+                  <h5>{value?.minRetailPrice} &euro;</h5>
                 </DetailItem>
               ))}
           </ProductDetail>
@@ -144,9 +155,34 @@ const TabProDetail = ({ singlePro, newProInventory, priceFinder }) => {
           <h5>Quantity </h5>
           <CounterSection>
             <Counter>
-              <Img src={Min} />
-              <h5>1</h5>
-              <Img src={Max} />
+              <IncDecBtn
+                BG="#E1E9F0"
+                FC="#000"
+                disabled={
+                  checkIndex &&
+                  newProInventory?.length &&
+                  newProInventory[checkIndex]?.quantity > 1
+                    ? false
+                    : true
+                }
+                onClick={() => handleQuantity("dec")}
+              >
+                <h5>-</h5>
+              </IncDecBtn>
+              <h5>
+                {" "}
+                {checkIndex && newProInventory && newProInventory?.length
+                  ? newProInventory[checkIndex]?.quantity
+                  : 0}
+              </h5>
+              <IncDecBtn
+                BG="#3DBB8B"
+                FC="#FFFFFF"
+                disabled={checkIndex ? false : true}
+                onClick={() => handleQuantity("inc")}
+              >
+                <h5>+</h5>
+              </IncDecBtn>
             </Counter>
           </CounterSection>
         </QuantitySection>
@@ -156,13 +192,24 @@ const TabProDetail = ({ singlePro, newProInventory, priceFinder }) => {
             <h5>{priceFinder()?.toFixed(2)} &euro;</h5>
           </Price>
           <Price>
-            <h5>Retail Price</h5>
-            <h5>$0</h5>
+            <h5>DogData Price</h5>
+            <h5>{dogDataPrice?.toFixed(2)} &euro;</h5>
           </Price>
           <Price></Price>
         </PriceSection>
         <BtnSection>
-          <button>Add to cart</button>
+          <button
+            disabled={!selectedPro?.length && true}
+            onClick={() => {
+              dispatch(
+                addToYourCart({
+                  selectedPro,
+                })
+              );
+            }}
+          >
+            Add to cart
+          </button>
         </BtnSection>
         <ShareProSection>
           <h5>Share Product</h5>

@@ -143,10 +143,30 @@ export const Counter = styled.div`
   display: flex;
   grid-gap: 35px;
   align-items: center;
+
   h5 {
     font-weight: 700;
     font-size: 20px;
     color: #434343;
+  }
+`;
+
+export const IncDecBtn = styled.button`
+  background: ${({ BG }) => BG};
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  padding: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h5 {
+    color: ${({ FC }) => FC};
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
   }
 `;
 

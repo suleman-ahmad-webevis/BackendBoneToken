@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreedSelector from "../../../BreedSelector";
 import {
   FieldError,
@@ -19,7 +19,6 @@ import CountryBirth from "../../../CountryBirth";
 import Location from "../../../Location";
 import {
   CLWrapper,
-  CoatsWrapper,
   Curr,
   DBGWrapper,
   DFamilyWrapper,
@@ -27,12 +26,10 @@ import {
   RDForm,
   RDInput,
   RDTabContainer,
-  ThreeCoats,
-  TwoCoats,
   UploadPicsWrapper,
-  WHL,
   WHLWrapper,
 } from "./RTab.style";
+import CoatSelector from "./CoatSelector";
 
 const RDTab = ({
   values,
@@ -49,7 +46,7 @@ const RDTab = ({
   const dogMotherPicUploaded = useRef(null);
   const dogMotherPicUploader = useRef(null);
   const dogFatherPicUploaded = useRef(null);
-  // const dogFatherPicUploader = useRef(null);
+  const dogFatherPicUploader = useRef(null);
 
   const handleImageUpload = (event) => {
     const [file] = event.target.files;
@@ -69,6 +66,16 @@ const RDTab = ({
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  //ForCurrSelector
+  const [active, setActive] = useState("");
+
+  const currTypes = ["EUR", "USD", "GBP"];
+
+  const currHandler = (type) => {
+    setActive(type);
+    setFieldValue("price", type);
   };
 
   return (
@@ -138,7 +145,11 @@ const RDTab = ({
               shrink: true,
             }}
           />
-          <GenderButton style={{ width: "50%" }} />
+          <GenderButton
+            gender={values.gender}
+            setFieldValue={setFieldValue}
+            style={{ width: "50%" }}
+          />
         </DBGWrapper>
         <CLWrapper>
           <CountryBirth
@@ -199,16 +210,13 @@ const RDTab = ({
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Upload
-            Differ
-            // onClick={() => dogMotherPicUploader.current.click()}
-          >
+          <Upload Differ onClick={() => dogFatherPicUploader.current.click()}>
             <input
               type="file"
               accept="image/*"
-              name="dogMotherPic"
+              name="dogFatherPic"
               onChange={(e) => handleImageUpload(e)}
-              ref={dogMotherPicUploader}
+              ref={dogFatherPicUploader}
               style={{
                 display: "none",
               }}
@@ -218,7 +226,7 @@ const RDTab = ({
             </SmallImage>
             <UploadText Differ>Photo upload</UploadText>
             <FileAccept>
-              <Img ref={dogMotherPicUploaded} src={Transparent} alt="img" />
+              <Img ref={dogFatherPicUploaded} src={Transparent} alt="img" />
             </FileAccept>
           </Upload>
         </DFamilyWrapper>
@@ -233,28 +241,41 @@ const RDTab = ({
           onBlur={handleBlur}
         />
         <WHLWrapper>
-          <WHL>Weight (kg)</WHL>
-          <WHL>Height (cm)</WHL>
-          <WHL>Length (cm)</WHL>
+          <RDInput
+            id="outlined-basic"
+            label="Weight (kg)"
+            name="weight"
+            variant="outlined"
+            value={values.weight}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            Width="33%"
+          />
+          <RDInput
+            id="outlined-basic"
+            label="Height (cm)"
+            variant="outlined"
+            name="height"
+            value={values.height}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            Width="33%"
+          />
+          <RDInput
+            id="outlined-basic"
+            label="Length (cm)"
+            variant="outlined"
+            name="length"
+            value={values.length}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            Width="33%"
+          />
         </WHLWrapper>
-        <CoatsWrapper>
-          <TwoCoats>Heavy coat</TwoCoats>
-          <TwoCoats>Curly/Wavy/Fleece coat</TwoCoats>
-        </CoatsWrapper>
-        <CoatsWrapper>
-          <ThreeCoats>Long coat</ThreeCoats>
-          <ThreeCoats>Wire coat</ThreeCoats>
-          <ThreeCoats>Silk coat</ThreeCoats>
-        </CoatsWrapper>
-        <CoatsWrapper>
-          <ThreeCoats>Smooth coat</ThreeCoats>
-          <ThreeCoats>Short coat</ThreeCoats>
-          <ThreeCoats>Double coat</ThreeCoats>
-        </CoatsWrapper>
-        <CoatsWrapper>
-          <TwoCoats>Combination coat</TwoCoats>
-          <TwoCoats>Hairless coat</TwoCoats>
-        </CoatsWrapper>
+        <CoatSelector
+          coatType={values.coatType}
+          setFieldValue={setFieldValue}
+        />
         <PriceWrapper>
           <RDInput
             Width="60%"
@@ -266,9 +287,24 @@ const RDTab = ({
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Curr>EUR</Curr>
-          <Curr>USD</Curr>
-          <Curr>GBP</Curr>
+          <Curr
+            active={active === currTypes[0]}
+            onClick={() => currHandler(currTypes[0])}
+          >
+            EUR
+          </Curr>
+          <Curr
+            active={active === currTypes[1]}
+            onClick={() => currHandler(currTypes[1])}
+          >
+            USD
+          </Curr>
+          <Curr
+            active={active === currTypes[2]}
+            onClick={() => currHandler(currTypes[2])}
+          >
+            GBP
+          </Curr>
         </PriceWrapper>
         <PageChanged>
           <div></div>
