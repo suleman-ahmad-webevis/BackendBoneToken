@@ -61,7 +61,6 @@ const ProductDetail = () => {
   const { singlePro, isLoading } = useSelector((state) => state.product);
   const { clearSelectedPro } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.user);
-
   //AllRatings
   const [quantityR, setQuantityR] = useState(0);
   const [fitPurposeR, setFitPurposeR] = useState(0);
@@ -73,7 +72,6 @@ const ProductDetail = () => {
   const [checkIndex, setCheckIndex] = useState("");
   const [dogDataPrice, setDogDataPrice] = useState(0);
   const [minRP, setMinRP] = useState(0);
-
   useEffect(() => {
     dispatch(getTheProductById(id));
     // eslint-disable-next-line
@@ -108,7 +106,6 @@ const ProductDetail = () => {
     // eslint-disable-next-line
   }, [clearSelectedPro]);
 
-  console.log("The selectedPro", selectedPro);
   const handleQuantity = (type) => {
     const tempInventory = [...newProInventory];
     if (checkIndex) {

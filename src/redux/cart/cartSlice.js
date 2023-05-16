@@ -13,13 +13,30 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     //Used in Product Detail
+    // addToYourCart(state, action) {
+    //   const { selectedPro } = action.payload;
+    //   selectedPro.forEach((cartItem) => {
+    //     state.cartItems.push(cartItem);
+    //   });
+    //   state.clearSelectedPro = !state.clearSelectedPro;
+    //   toast.success("Product added to cart ", { theme: "colored" });
+    // },
     addToYourCart(state, action) {
       const { selectedPro } = action.payload;
-      selectedPro.forEach((cartItem) => {
-        state.cartItems.push(cartItem);
-      });
-      state.clearSelectedPro = !state.clearSelectedPro;
-      toast.success("Product added to cart ", { theme: "colored" });
+      console.log("The selectedPor", selectedPro);
+      const filterPro = selectedPro.filter(
+        (obj) =>
+          !state.cartItems.some(
+            (item) => item.minRetailPrice === obj.minRetailPrice
+          )
+      );
+      if (filterPro.length) {
+        filterPro.forEach((value) => state.cartItems.push(value));
+        state.clearSelectedPro = !state.clearSelectedPro;
+        toast.success("Product added to cart ", { theme: "colored" });
+      } else {
+        toast.error("Already selected ", { theme: "colored" });
+      }
     },
     //Used in Navbar
     getCartTotal(state, action) {
