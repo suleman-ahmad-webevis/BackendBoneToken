@@ -38,12 +38,3 @@ export const RMHeading = styled.h5`
   align-self: flex-start;
 `;
 
-export const RMImg = styled.img`
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  right: 50%;
-  left: 50%;
-  z-index: 1;
-  height: auto;
-`;
