@@ -107,7 +107,7 @@ const ProductDetail = () => {
     setSelectedPro([]);
     // eslint-disable-next-line
   }, [clearSelectedPro]);
-  
+
   console.log("The selectedPro", selectedPro);
   const handleQuantity = (type) => {
     const tempInventory = [...newProInventory];
@@ -141,6 +141,7 @@ const ProductDetail = () => {
       }
     };
     priceFinder();
+    // eslint-disable-next-line
   }, [checkIndex, handleQuantity]);
 
   if (isLoading) {
