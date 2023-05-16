@@ -16,9 +16,6 @@ const EditDogNFT = () => {
   const dispatch = useDispatch();
   const { singleDogNft } = useSelector((state) => state.dogNft);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pageName]);
 
   useEffect(() => {
     dispatch(getDogNft({ id }));

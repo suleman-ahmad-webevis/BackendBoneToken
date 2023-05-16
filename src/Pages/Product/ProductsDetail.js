@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import { useDispatch } from "react-redux";
@@ -10,9 +10,6 @@ const ProductsDetail = ({ showSidebar, setShowSidebar }) => {
   window.addEventListener("popstate", () => {
     dispatch(reset());
   });
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <ProductsListContainer>
       <ProductDetail

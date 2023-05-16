@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import DogForSaleComp from "../../components/DogForSale/DogForSaleComp";
 import DogForSaleNav from "../../components/DogForSale/DogForSaleNav";
@@ -8,9 +8,6 @@ import TabDFSComp from "../../components/DogForSale/Tab/TabDFSComp";
 const DogForSale = () => {
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
   return (
     <DogForSaleContainer>
       <DogForSaleWrapper>

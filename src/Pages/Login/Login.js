@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FieldCol,
   RegContainer,
@@ -14,10 +14,6 @@ import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 
 const Login = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <RegContainer>

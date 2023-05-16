@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import styled from "styled-components";
 import BlogSidebar from "../../components/Sidebar/BlogSidebar";
 import BlogDetail from "../../components/Blogs/BlogDetail";
@@ -17,9 +17,6 @@ const BlogsDetail = () => {
   const Toggle = () => {
     setOpen(!open);
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <BlogsPageContainer>
       <BlogSidebar open={open} Toggle={Toggle} />

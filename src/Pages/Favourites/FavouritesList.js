@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Heading from "../../components/Heading/Heading";
 import FavouritesListTable from "../../components/Favorites/FavouritesListTable";
@@ -9,9 +9,6 @@ import useBreakpoint from "../../hooks/useBreakPoint";
 const FavouritesList = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <FavouritesListContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav />}

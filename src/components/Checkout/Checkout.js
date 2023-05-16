@@ -39,10 +39,6 @@ const CheckOutComp = () => {
     useSelector((state) => state.cart);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    // eslint-disable-next-line
-  }, []);
-  useEffect(() => {
     dispatch(getCartTotalAmount());
     // eslint-disable-next-line
   }, [cartQuantityIs]);

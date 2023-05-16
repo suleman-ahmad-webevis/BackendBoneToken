@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import BlogCards from "../../components/Blogs/BlogCards";
 import BlogSidebar from "../../components/Sidebar/BlogSidebar";
@@ -10,9 +10,6 @@ const Blogs = () => {
   const Toggle = () => {
     setOpen(!open);
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <BlogsContainer>
       <Hamburger open={open} onClick={() => setOpen(!open)}>

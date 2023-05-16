@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useEffect } from "react";
 import ProductsListComponent from "../../components/ProductsComponent/ProductsComponent";
 import ProductNavComp from "../../components/ProductsComponent/ProductNavComp";
 import Tablet from "./Tablet/Tablet";
@@ -7,10 +6,6 @@ import useBreakpoint from "../../hooks/useBreakPoint";
 
 const Products = () => {
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <ProductPageContainer>

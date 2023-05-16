@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import {
   ProductPageContainer,
@@ -20,9 +20,6 @@ const RecentlyViewedProducts = () => {
   const { recentlyViewedProducts } = useSelector(
     (state) => state.recentlyViewedPro
   );
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
 

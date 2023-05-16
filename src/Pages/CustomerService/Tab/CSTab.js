@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { csFirstBox, csSecondBox } from "./CSData";
 import { Img } from "../../../GlobalStyles";
 import UpdateMe from "../../../assets/images/CustomerService/UpdateMe.png";
@@ -39,9 +39,6 @@ const CSTab = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   const [active, setActive] = useState(false);
   const [defaultPdfFile, setDefaultPdfFile] = useState();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <CSTabContainer>

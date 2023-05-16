@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import FormFilter from "../../components/Forms/CreateNFT/RegisterDogNft/FormsFilterbar";
@@ -16,10 +16,6 @@ import { NftTabNav } from "../../components/Forms/CreateNFT/RegisterDogNft/Tab/R
 
 const CreateDogNFT = () => {
   const { pageName } = useParams();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pageName]);
 
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
 

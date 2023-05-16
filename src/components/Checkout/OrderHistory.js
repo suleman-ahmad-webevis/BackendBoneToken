@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   CheckoutColor,
   CheckOutSection,
@@ -12,9 +12,6 @@ import {
 
 const OrderHistory = () => {
   // const [quantity, setQuantity] = useState(0);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <CheckoutWrapper>
       {/* <Img src={orderHistory} /> */}

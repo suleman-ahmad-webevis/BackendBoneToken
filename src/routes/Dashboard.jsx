@@ -123,6 +123,17 @@ const Dashboard = () => {
     // eslint-disable-next-line
   }, [cartQuantityIs, favouritesTotalQuantity]);
 
+  function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => {
+      const mainContent = document.getElementById("detail");
+      if (mainContent) {
+        mainContent.scrollTop = 0;
+      }
+    }, [pathname]);
+    return null;
+  }
+
   return (
     <>
       <ContainerWrapper
@@ -167,6 +178,7 @@ const Dashboard = () => {
             )}
             <div className="main-content" id="detail">
               <Outlet />
+              <ScrollToTop />
               <ToastContainer
                 position="top-right"
                 autoClose={1000}

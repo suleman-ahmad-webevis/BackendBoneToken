@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Heading from "../../components/Heading/Heading";
 import { csBoxR, csBoxL, sCostOne, sCostTwo } from "./csData";
 import {
@@ -39,9 +39,6 @@ const CustomerService = () => {
   const { isDesktop, isTablet, isMobile, isSmallMobile } = useBreakpoint();
   const [active, setActive] = useState(false);
   const [defaultPdfFile, setDefaultPdfFile] = useState();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>

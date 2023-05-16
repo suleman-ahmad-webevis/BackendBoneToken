@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import ProductsListComponent from "../../components/ProductsComponent/ProductsComponent";
 import ProductNavComp from "../../components/ProductsComponent/ProductNavComp";
@@ -6,10 +5,6 @@ import Tablet from "./Tablet/Tablet";
 import useBreakpoint from "../../hooks/useBreakPoint";
 
 const LandingPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import FaqComp from "../../components/Faq/FaqComp";
 import useBreakpoint from "../../hooks/useBreakPoint";
@@ -7,10 +7,6 @@ import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 
 const Faq = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <FaqContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav  />}
