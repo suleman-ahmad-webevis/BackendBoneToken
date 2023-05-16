@@ -3,6 +3,7 @@ import {
   FieldCol,
   StyledFField,
   StyledFForm,
+  SubscribeSection,
 } from "../../Pages/Register/Register";
 import styled from "styled-components";
 import { ErrorMessage, Formik } from "formik";
@@ -16,12 +17,15 @@ const ThirdForm = () => {
   const initialValues = {
     password: "",
     repeatPassword: "",
+    checkboxOpt: false,
   };
   const onSubmit = (values) => {
     const firstForm = sessionStorage.getItem("firstForm");
     const secondForm = sessionStorage.getItem("secondForm");
-    dispatch(registerTheUser({firstForm, secondForm, values}));
+    const sub = values.checkboxOpt[0].value;
+    dispatch(registerTheUser({ firstForm, secondForm, values, sub }));
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -43,7 +47,6 @@ const ThirdForm = () => {
           />
           <ErrorMessage component="p" name="password" className="error" />
         </FieldCol>
-
         <FieldCol>
           <label htmlFor="repeatPassword">
             Repeat Password <p style={{ color: "red" }}>*</p>
@@ -56,6 +59,14 @@ const ThirdForm = () => {
           />
           <ErrorMessage component="p" name="repeatPassword" className="error" />
         </FieldCol>
+        <SubscribeSection>
+          <StyledFField
+            type="checkbox"
+            id="subscribeCheckbox"
+            name="checkboxOpt[0].value"
+          />
+          <h5>Subscribe to newsletter </h5>
+        </SubscribeSection>
         <RegBtn>
           <button type="submit">Register</button>
         </RegBtn>

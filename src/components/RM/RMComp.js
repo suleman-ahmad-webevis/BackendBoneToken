@@ -9,6 +9,7 @@ import Six from "../../assets/images/RoadMap/Six.png";
 import { Img } from "../../GlobalStyles";
 import Line from "../../assets/images/RoadMap/Tab/Line.png";
 import useBreakpoint from "../../hooks/useBreakPoint";
+import { RMImg } from "../../Pages/RM/RM";
 
 const RMComp = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -17,14 +18,7 @@ const RMComp = () => {
     <>
       <RMWrapper>
         {(isTablet || isSmallMobile || isMobile) && (
-          <Img
-            src={Line}
-            style={{
-              position: "absolute",
-              top: "10px",
-              zIndex: "1",
-            }}
-          />
+          <RMImg src={Line} alt="line" />
         )}
         <RMImage>
           <Img src={One} alt="One" />
@@ -59,6 +53,8 @@ export const RMWrapper = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
+  background: red;
+  max-height: auto;
 `;
 
 export const RMImage = styled.div`
@@ -69,11 +65,11 @@ export const RMImage = styled.div`
     margin: auto;
   }
   @media screen and (max-width: 1110px) {
-    width: 60%;
-    max-width: 60%;
+    width: 50%;
+    max-width: 50%;
   }
-`;
-
-export const LineWrapper = styled.div`
-  position: relative;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    max-width: 90%;
+  }
 `;

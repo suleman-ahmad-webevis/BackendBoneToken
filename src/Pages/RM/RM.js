@@ -28,12 +28,6 @@ export const RMContainer = styled.div`
   flex-direction: column;
   grid-gap: 20px;
   width: 100%;
-  @media screen and (max-width: 1110px) {
-    width: 80%;
-  }
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
 `;
 
 export const RMHeading = styled.h5`
@@ -42,4 +36,14 @@ export const RMHeading = styled.h5`
   line-height: 52px;
   color: #000000;
   align-self: flex-start;
+`;
+
+export const RMImg = styled.img`
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  right: 50%;
+  left: 50%;
+  z-index: 1;
+  height: auto;
 `;

@@ -18,7 +18,7 @@ import CHECKOUT from "./components/Checkout/Checkout";
 import ORDERHISTORY from "./components/Checkout/OrderHistory";
 import RECENTLYVIEWEDPRODUCTS from "./components/ProductsComponent/RecentlyViewed";
 import SUBCATEGORY from "./Pages/Product/SubCategory";
-import INSTAGRAMHANDLER from "./components/ProductDetail/InstagramHandler";
+// import INSTAGRAMHANDLER from "./components/ProductDetail/InstagramHandler";
 //RegisterationRoutes
 import REGISTERUSER from "./Pages/Register/Register";
 import USERLOGIN from "./Pages/Login/Login";
@@ -172,10 +172,10 @@ const router = createBrowserRouter([
         path: "/otp",
         element: <OTP />,
       },
-      {
-        path: "/instagram-handler",
-        element: <INSTAGRAMHANDLER />,
-      },
+      // {
+      //   path: "/instagram-handler",
+      //   element: <INSTAGRAMHANDLER />,
+      // },
       {
         path: "*",
         element: <NOTFOUND />,

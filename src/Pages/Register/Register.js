@@ -114,3 +114,8 @@ export const ConBtn = styled.div`
     color: #ffffff;
   }
 `;
+
+export const SubscribeSection = styled.div`
+  display: flex;
+  grid-gap: 10px;
+`;

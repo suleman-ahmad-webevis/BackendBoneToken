@@ -11,7 +11,7 @@ import {
   getTheProductById,
   rateTheProduct,
 } from "../../redux/product/productSlice";
-import { addToYourCart } from "../../redux/cart/cartSlice";
+import { addToYourCart, getCartTotal } from "../../redux/cart/cartSlice";
 import { FacebookShareButton } from "react-share";
 import { recentlyViewPro } from "../../redux/recentlyViewed/recentlySlice";
 import LoadingBar from "../Loader/LoadingBar";
@@ -59,6 +59,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [newProInventory, setNewProInventory] = useState([]);
   const { singlePro, isLoading } = useSelector((state) => state.product);
+  const { clearSelectedPro } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.user);
 
   //AllRatings
@@ -70,6 +71,8 @@ const ProductDetail = () => {
   //AddToCart
   const [selectedPro, setSelectedPro] = useState([]);
   const [checkIndex, setCheckIndex] = useState("");
+  const [dogDataPrice, setDogDataPrice] = useState(0);
+  const [minRP, setMinRP] = useState(0);
 
   useEffect(() => {
     dispatch(getTheProductById(id));
@@ -100,6 +103,46 @@ const ProductDetail = () => {
     // eslint-disable-next-line
   }, [total]);
 
+  useEffect(() => {
+    setSelectedPro([]);
+    // eslint-disable-next-line
+  }, [clearSelectedPro]);
+  
+  console.log("The selectedPro", selectedPro);
+  const handleQuantity = (type) => {
+    const tempInventory = [...newProInventory];
+    if (checkIndex) {
+      tempInventory[checkIndex].quantity =
+        type === "inc"
+          ? tempInventory[checkIndex].quantity + 1
+          : tempInventory[checkIndex].quantity - 1;
+      tempInventory[checkIndex].itemTotalPrice =
+        tempInventory[checkIndex].minRetailPrice *
+        tempInventory[checkIndex].quantity;
+      setNewProInventory(tempInventory);
+    }
+    setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
+  };
+
+  useEffect(() => {
+    const priceFinder = () => {
+      if (singlePro?.productInventory?.length) {
+        if (checkIndex) {
+          setDogDataPrice(
+            newProInventory[Number(checkIndex)]?.minRetailPrice *
+              newProInventory[Number(checkIndex)]?.quantity *
+              (1 - 0.05)
+          );
+          setMinRP(
+            newProInventory[Number(checkIndex)]?.minRetailPrice *
+              newProInventory[Number(checkIndex)]?.quantity
+          );
+        }
+      }
+    };
+    priceFinder();
+  }, [checkIndex, handleQuantity]);
+
   if (isLoading) {
     return <LoadingBar />;
   }
@@ -112,30 +155,14 @@ const ProductDetail = () => {
     img: imageUrl,
   };
 
-  let dogDataPrice = 0;
-  const priceFinder = () => {
-    if (singlePro?.productInventory?.length) {
-      if (checkIndex) {
-        dogDataPrice =
-          newProInventory[Number(checkIndex)]?.minRetailPrice *
-          newProInventory[Number(checkIndex)]?.quantity *
-          (1 - 0.05);
-        return (
-          newProInventory[Number(checkIndex)]?.minRetailPrice *
-          newProInventory[Number(checkIndex)]?.quantity
-        );
-      } else return 0;
-    }
-  };
-
   const ItemSelector = (value, index) => {
     let tempInventory = [...newProInventory];
-    // tempInventory = tempInventory.map((elem) => {
-    //   return {
-    //     ...elem,
-    //     checked: false,
-    //   };
-    // });
+    tempInventory = tempInventory.map((elem) => {
+      return {
+        ...elem,
+        checked: false,
+      };
+    });
     tempInventory[index].checked = value;
     tempInventory[index].name = singlePro?.name;
     tempInventory[index].description = singlePro?.description;
@@ -157,21 +184,6 @@ const ProductDetail = () => {
     if (selectedIndex) {
       setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
     }
-  };
-
-  const handleQuantity = (type) => {
-    const tempInventory = [...newProInventory];
-    if (checkIndex) {
-      tempInventory[checkIndex].quantity =
-        type === "inc"
-          ? tempInventory[checkIndex].quantity + 1
-          : tempInventory[checkIndex].quantity - 1;
-      tempInventory[checkIndex].itemTotalPrice =
-        tempInventory[checkIndex].minRetailPrice *
-        tempInventory[checkIndex].quantity;
-      setNewProInventory(tempInventory);
-    }
-    setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
   };
 
   return (
@@ -333,7 +345,7 @@ const ProductDetail = () => {
               <PriceSection>
                 <p>Price</p>
                 {/* <Img src={price} alt="price" /> */}
-                <Price>{priceFinder()?.toFixed(2)} &euro;</Price>
+                <Price>{minRP?.toFixed(2)} &euro;</Price>
               </PriceSection>
               <PriceSection>
                 DogData Price
@@ -348,6 +360,8 @@ const ProductDetail = () => {
                       selectedPro,
                     })
                   );
+                  dispatch(getCartTotal());
+                  setSelectedPro([]);
                 }}
               >
                 Add to Cart
@@ -380,11 +394,11 @@ const ProductDetail = () => {
           <TabProDetail
             singlePro={singlePro}
             newProInventory={newProInventory}
-            priceFinder={priceFinder}
             handleQuantity={handleQuantity}
             checkIndex={checkIndex}
             ItemSelector={ItemSelector}
             dogDataPrice={dogDataPrice}
+            minRP={minRP}
             selectedPro={selectedPro}
           />
         )

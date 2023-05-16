@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
@@ -7,6 +7,9 @@ import TabNav from "../components/Navbar/Tablet/TabletNav";
 import MobileNav from "../components/Navbar/Mobile/MobileNav";
 import LandingPageSidebar from "../components/Sidebar/LandingPageSidebar";
 import useBreakpoint from "../hooks/useBreakPoint";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartTotal } from "../redux/cart/cartSlice";
+import { getTotalsFavourites } from "../redux/favourites/favouritesSlice";
 
 const ContainerWrapper = styled("div")`
   position: relative;
@@ -108,6 +111,18 @@ const Dashboard = () => {
   const { pathname } = useLocation();
   const isNotFoundPage = pathname === "/404";
   const screenSize = window?.screen?.availWidth;
+
+  //Cart
+  const dispatch = useDispatch();
+  const { cartQuantityIs } = useSelector((state) => state.cart);
+  const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
+
+  useEffect(() => {
+    dispatch(getCartTotal());
+    dispatch(getTotalsFavourites());
+    // eslint-disable-next-line
+  }, [cartQuantityIs, favouritesTotalQuantity]);
+
   return (
     <>
       <ContainerWrapper
@@ -124,9 +139,24 @@ const Dashboard = () => {
         <div className="container">
           {!isNotFoundPage && (
             <header>
-              {isDesktop && <Navbar />}
-              {isTablet && <TabNav />}
-              {(isMobile || isSmallMobile) && <MobileNav />}
+              {isDesktop && (
+                <Navbar
+                  cartQuantityIs={cartQuantityIs}
+                  favouritesTotalQuantity={favouritesTotalQuantity}
+                />
+              )}
+              {isTablet && (
+                <TabNav
+                  cartQuantityIs={cartQuantityIs}
+                  favouritesTotalQuantity={favouritesTotalQuantity}
+                />
+              )}
+              {(isMobile || isSmallMobile) && (
+                <MobileNav
+                  cartQuantityIs={cartQuantityIs}
+                  favouritesTotalQuantity={favouritesTotalQuantity}
+                />
+              )}
             </header>
           )}
           <div className="wrapper-main">

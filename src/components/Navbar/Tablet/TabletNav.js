@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Img } from "../../../GlobalStyles";
-import { useSelector } from "react-redux";
 import DogDataLogo from "../../../assets/images/Navbar/Tab/DogDataLogo.png";
 import CartIcon from "../../../assets/images/Navbar/Tab/CartIcon.png";
 import FavIcon from "../../../assets/images/Navbar/Tab/FavIcon.png";
@@ -14,12 +13,9 @@ import Close from "../../../assets/images/Navbar/Tab/Close.png";
 import { MenuData } from "./MenuData";
 import { useNavigate } from "react-router-dom";
 
-const Tablet = () => {
+const Tablet = ({ cartQuantityIs, favouritesTotalQuantity }) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  //StoreData
-  const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
-  const { cartQuantityIs } = useSelector((state) => state.cart);
 
   return (
     <TabNavContainer>

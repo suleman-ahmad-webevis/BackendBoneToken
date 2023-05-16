@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Img } from "../../../GlobalStyles";
 import DogDataLogo from "../../../assets/images/Navbar/Tab/DogDataLogo.png";
 import Hamburger from "../../../assets/images/Navbar/Tab/Hamburger.png";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuBar, MenuItems, Menu, CloseIcon } from "../Tablet/TabletNav";
 import Close from "../../../assets/images/Navbar/Tab/Close.png";
 import { MenuData } from "../Tablet/MenuData";
 
-const Mobile = () => {
+const Mobile = ({ cartQuantityIs, favouritesTotalQuantity }) => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
@@ -34,7 +34,7 @@ const Mobile = () => {
             {MenuData.map((value, index) => (
               <Menu key={index}>
                 <Img src={value.img} alt="Shop" />
-                 <h5
+                <h5
                   onClick={() => {
                     setShowMenu(false);
                     navigate(value.link);

@@ -32,15 +32,13 @@ import {
   LangSelect,
 } from "./NavbarStyles";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getTotalsFavourites } from "../../redux/favourites/favouritesSlice";
+import { useDispatch } from "react-redux";
 // import { debounce } from "lodash";
 import { getTheProducts, reset } from "../../redux/product/productSlice";
 import { metaMaskConnection } from "../../redux/walletConn/walletConnSlice";
-import { getCartTotal } from "../../redux/cart/cartSlice";
 import SSModal from "../modal/SSModal/SSModal";
 
-const Navbar = () => {
+const Navbar = ({ cartQuantityIs, favouritesTotalQuantity }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,13 +47,10 @@ const Navbar = () => {
   //StatesForSearching
   const [search, setSearch] = useState("");
   const category = searchParams.get("category");
-  //StoreData
-  const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
-  const { cartItems, cartQuantityIs } = useSelector((state) => state.cart);
   //ForDynamicNavbar
   const [active, setActive] = useState(false);
   const [simpleNav, setSimpleNav] = useState(false);
-  // const [isToggle, setIsToggle] = useState(false);
+
   useEffect(() => {
     if (locations.includes(location?.pathname)) {
       setSimpleNav(true);
@@ -75,12 +70,6 @@ const Navbar = () => {
     "/favourites",
     "/customerDelivery",
   ];
-
-  useEffect(() => {
-    dispatch(getTotalsFavourites());
-    dispatch(getCartTotal());
-    // eslint-disable-next-line
-  }, [cartItems]);
 
   const searchHandler = () => {
     let obj = {

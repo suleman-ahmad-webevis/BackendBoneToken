@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DRData,
   DRHeading,
@@ -22,15 +22,18 @@ import {
   PriceSec,
   IncDecBtn,
 } from "./TabProDetail.style";
-import { Img } from "../../../GlobalStyles";
-import { MobileComIcon } from "../../../Pages/Product/Tablet/Tablet.style";
 import {
   Items,
   LangSelect,
   Counter as NavCounter,
 } from "../../Navbar/NavbarStyles";
+import { MobileComIcon } from "../../../Pages/Product/Tablet/Tablet.style";
 import { useDispatch, useSelector } from "react-redux";
+import useBreakpoint from "../../../hooks/useBreakPoint";
+import { useNavigate } from "react-router-dom";
+import { addToYourCart, getCartTotal } from "../../../redux/cart/cartSlice";
 //ImagesImport
+import { Img } from "../../../GlobalStyles";
 import mobCart from "../../../assets/images/LandingPage/MobCart.png";
 import mobFav from "../../../assets/images/LandingPage/MobFav.png";
 import mobChat from "../../../assets/images/LandingPage/MobChat.png";
@@ -38,18 +41,15 @@ import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/RegisterLogin/FlagsDropDown.png";
 import FB from "../../../assets/images/ProductDetail/Tab/FB.png";
 import Insta from "../../../assets/images/ProductDetail/Tab/Insta.png";
-import useBreakpoint from "../../../hooks/useBreakPoint";
-import { useNavigate } from "react-router-dom";
-import { addToYourCart } from "../../../redux/cart/cartSlice";
 
 const TabProDetail = ({
   singlePro,
   newProInventory,
-  priceFinder,
   handleQuantity,
   checkIndex,
   ItemSelector,
   dogDataPrice,
+  minRP,
   selectedPro,
 }) => {
   const { isSmallMobile, isMobile } = useBreakpoint();
@@ -59,6 +59,8 @@ const TabProDetail = ({
   const { cartQuantityIs } = useSelector((state) => state.cart);
   const [showReviews, setShowReview] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {}, [dogDataPrice]);
   return (
     <TabProDetailContainer>
       {(isSmallMobile || isMobile) && (
@@ -189,7 +191,7 @@ const TabProDetail = ({
         <PriceSection>
           <Price>
             <h5>Price</h5>
-            <h5>{priceFinder()?.toFixed(2)} &euro;</h5>
+            <h5>{minRP?.toFixed(2)} &euro;</h5>
           </Price>
           <Price>
             <h5>DogData Price</h5>
@@ -206,6 +208,7 @@ const TabProDetail = ({
                   selectedPro,
                 })
               );
+              dispatch(getCartTotal());
             }}
           >
             Add to cart
