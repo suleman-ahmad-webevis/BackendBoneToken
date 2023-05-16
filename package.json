@@ -4,7 +4,7 @@
   "description": "Bonetoken admin and website backend",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "node app.js",
     "nodemon": "nodemon app"
   },
   "author": "",
