@@ -15,10 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTheVideos } from "../../redux/dogShow/dogShowSlice";
 
 const DogShow = () => {
-  const { videoInfo } = useSelector((state) => state.product);
+  // const { videoInfo } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTheVideos());
+    // eslint-disable-next-line
   }, []);
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
