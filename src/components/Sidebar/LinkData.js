@@ -9,6 +9,7 @@ import earn from "../../assets/images/Sidebar/earn.png";
 import dogShows from "../../assets/images/Sidebar/dogShows.png";
 import history from "../../assets/images/Sidebar/history.png";
 import roadmap from "../../assets/images/Sidebar/roadmap.png";
+import assets from "../../assets/images/Sidebar/assets.png";
 
 export const linkData = [
   {
@@ -65,5 +66,10 @@ export const linkData = [
     image: roadmap,
     text: "Roadmap",
     path: "/road-map",
+  },
+  {
+    image: assets,
+    text: "Assets",
+    path: "/assets",
   },
 ];
