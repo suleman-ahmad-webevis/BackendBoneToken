@@ -16,7 +16,6 @@ export const getTheVideos = createAsyncThunk(
       return await DogShowService.getTheVideosService();
     } catch (error) {
       const message = error.message;
-      toast.error(message, { theme: "colored" });
       return thunkAPI.rejectWithValue(message);
     }
   }
