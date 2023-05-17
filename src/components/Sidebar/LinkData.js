@@ -69,7 +69,7 @@ export const linkData = [
   },
   {
     image: assets,
-    text: "Assets",
-    path: "/assets",
+    text: "Airdrop",
+    path: "/airdrop",
   },
 ];
