@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import Next from "../../../../assets/images/Next.png";
 import Back from "../../../../assets/images/Back.png";
 import Phone from "../../../../assets/images/GrayPhone.png";

@@ -52,13 +52,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.react-tel-input .country-list {
-  width: 220px;
-}
-.react-tel-input .country-list .country {
-  padding: 7px 38px !important;
-}
-
 .ljFXUF .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   color: #b7b7b7 !important;
 }
@@ -85,4 +78,12 @@ body::-webkit-scrollbar-thumb {
 .error {
   color: red;
   font-size: 12px;
+}
+
+/* React phone input 2 */
+.react-tel-input .country-list .country {
+  display: flex;
+}
+.react-tel-input .country-list {
+  width: 220px;
 }
