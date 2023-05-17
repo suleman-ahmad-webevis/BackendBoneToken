@@ -191,7 +191,7 @@ const RegisterInsurance = () => {
           </NextButton>
           <NextButton
             onClick={() => {
-              navigate("/createDogNFT/dogShowRegister");
+              navigate("/createDogNFT/register-dogShow");
             }}
           >
             <Img src={Next} alt="next" />
