@@ -11,7 +11,7 @@ import Shows from "../../components/DogShow/Show";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getTheVideos } from "../../redux/dogShow/dogShowSlice";
 
 const DogShow = () => {
