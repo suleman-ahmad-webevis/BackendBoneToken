@@ -29,8 +29,8 @@ const SubTab = () => {
               <Img
                 src={value?.subCategoryImg}
                 onClick={() => {
-                  navigate(`/shop?subCategory=${subCategory.path}`, {
-                    state: { subCategory: subCategory._id },
+                  navigate(`/shop?subCategory=${value.path}`, {
+                    state: { subCategory: value._id },
                   });
                 }}
               />
