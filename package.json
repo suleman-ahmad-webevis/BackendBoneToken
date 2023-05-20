@@ -4,8 +4,7 @@
   "description": "Bonetoken admin and website backend",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "nodemon": "nodemon app"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
