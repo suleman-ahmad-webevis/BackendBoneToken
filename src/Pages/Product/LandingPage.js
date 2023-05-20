@@ -23,16 +23,7 @@ const LandingPage = () => {
 export default LandingPage;
 
 export const ProductPageContainer = styled.div`
-  /* padding: 20px 0; */
-  /* padding: 0px 20px 0px 0px; */
   width: 100%;
-
-  /* @media screen and (max-width: 900px) {
-    margin-top: 60px;
-  } */
-  /* @media screen and (max-width: 760px) {
-    margin-top: 60px;
-  } */
 `;
 
 export const ProductsListContainer = styled.div`

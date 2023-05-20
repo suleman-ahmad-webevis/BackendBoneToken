@@ -4,7 +4,8 @@ const API = axios.create({
   // baseURL: "https://btoken-backend.herokuapp.com",
   // baseURL: "https://backendbt.up.railway.app",
   // baseURL: "http://localhost:5000",
-  baseURL: "https://cooperative-kilt-tuna.cyclic.app",
+  // baseURL: "https://cooperative-kilt-tuna.cyclic.app",
+  baseURL:'https://outstanding-moth-boot.cyclic.app',
   timeout: 20000,
   headers: {
     Accept: "*/*",
