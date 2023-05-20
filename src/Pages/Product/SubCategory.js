@@ -4,6 +4,7 @@ import ProductNavComp from "../../components/ProductsComponent/ProductNavComp";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import ProductsFilterBar from "./Tablet/ProductsFilterBar";
 import { PTabContainer } from "./Tablet/Tablet.style";
+import SubTab from "../../components/ProductsComponent/SubCategoryTab/SubTab";
 
 const SubCategory = () => {
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -17,12 +18,11 @@ const SubCategory = () => {
       {(isTablet || isMobile || isSmallMobile) && (
         <PTabContainer>
           <ProductsFilterBar />
-          <SubCategoryListComponent />
+          <SubTab />
         </PTabContainer>
       )}
     </>
   );
 };
-
 
 export default SubCategory;
