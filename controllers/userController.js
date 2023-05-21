@@ -15,7 +15,7 @@ const register = catchAsyncErrors(async (req, res, next) => {
   const firstForm = JSON.parse(req.body.firstForm);
   const secondForm = JSON.parse(req.body.secondForm);
   const { email } = firstForm;
-
+  
   if (req.body.values.password !== req.body.values.repeatPassword) {
     return next(
       new ErrorHandler(
@@ -73,7 +73,7 @@ const register = catchAsyncErrors(async (req, res, next) => {
 
 //LoginUser
 const login = catchAsyncErrors(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body.values;
   if (!email || !password)
     return next(
       new ErrorHandler(
