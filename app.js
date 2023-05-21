@@ -16,7 +16,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const subCategoryRoutes = require("./routes/subCategoryRoutes");
 const nftRoutes = require("./routes/nftRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
-const stripePaymentRoutes = require("./routes/stripeRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 const { StatusCodes } = require("http-status-codes");
 //Middleware
 app.use(cors());
@@ -57,7 +57,7 @@ app.use("/category", categoryRoutes);
 app.use("/subCategory", subCategoryRoutes);
 app.use("/dogNft", nftRoutes);
 app.use("/supplier", supplierRoutes);
-app.use("/payment", stripePaymentRoutes);
+app.use("/payment", paymentRoutes);
 
 app.use("*", () => {
   res.status(StatusCodes.NOT_FOUND).json({

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { makeIntent } = require("../controllers/stripeController");
+const { makeIntent } = require("../controllers/paymentController");
 
 router.post("/createCheckoutSession", makeIntent);
 
