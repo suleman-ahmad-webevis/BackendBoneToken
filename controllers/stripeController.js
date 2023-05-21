@@ -16,7 +16,7 @@ const makeIntent = catchAsyncErrors(async (req, res, next) => {
             id: item._id,
           },
         },
-        unit_amount: item.minRetailPrice,
+        unit_amount: Math.round(item.minRetailPrice),
       },
       quantity: item.quantity,
     };
