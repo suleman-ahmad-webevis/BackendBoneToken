@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+//Redux Setup
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";

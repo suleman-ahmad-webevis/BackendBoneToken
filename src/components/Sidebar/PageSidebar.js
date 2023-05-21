@@ -5,7 +5,7 @@ import SidebarStatic from "./SidebarStatic";
 import ShopCategoriesWithSidebar from "../Categories/ShopCategoriesWithSidebar";
 import { useParams } from "react-router-dom";
 
-const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
+const PageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
   const pathname = window?.location?.pathname;
   const { id, name } = useParams();
   useEffect(() => {}, [pathname]);
@@ -24,7 +24,6 @@ const LandingPageSidebar = ({ toggle, setShowSidebar, showSidebar }) => {
       pathname === `/shop/category` ||
       pathname === "/shop/recently-viewed" ? (
         <ShopCategoriesWithSidebar
-          //WithItsOwnSidebar
           pageTop="15px"
           categoriesMarginTop="70px"
           showSidebar={showSidebar}
@@ -88,4 +87,4 @@ const CategoriesContainer = styled.div`
   position: relative;
 `;
 
-export default LandingPageSidebar;
+export default PageSidebar;

@@ -68,6 +68,35 @@ const BlogCard = ({ blog }) => {
   );
 };
 
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  grid-gap: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  width: 49%;
+  position: relative;
+  overflow: auto;
+  @media screen and (max-width: 1490px) {
+    width: 47%;
+    margin: auto;
+  }
+  @media screen and (max-width: 1455px) {
+    width: 95%;
+    margin: auto;
+  }
+`;
+
+export const CardImageContainer = styled.div`
+  img {
+    width: 100%;
+    height: 300px;
+    max-height: 385px;
+    object-fit: cover;
+  }
+`;
+
 export const BlogCardTitle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -101,8 +130,12 @@ export const BlogCardContent = styled.div`
 export const BlogCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  padding:10px 0px;
+  padding: 10px 0px;
   align-items: center;
+  @media screen and (max-width: 1400px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const CardDate = styled.div`
@@ -149,42 +182,12 @@ export const Popular = styled.div`
   height: 34px;
   background: #fee96c;
   border-radius: 15px;
-  font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 160%;
   color: #000000;
   position: absolute;
   cursor: pointer;
-`;
-
-export const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  grid-gap: 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  width: 49%;
-  position: relative;
-
-  @media screen and (max-width: 1490px) {
-    width: 47%;
-    margin: auto;
-  }
-  @media screen and (max-width: 1455px) {
-    width: 70%;
-    margin: auto;
-  }
-`;
-
-export const CardImageContainer = styled.div`
-  img {
-    width: 100%;
-    height: 300px;
-    max-height: 385px;
-    object-fit: cover;
-  }
 `;
 
 export default BlogCard;

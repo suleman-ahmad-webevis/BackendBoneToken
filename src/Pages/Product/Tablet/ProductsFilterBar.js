@@ -10,6 +10,7 @@ import {
   LangSelect,
   Filters,
   FilterItems,
+  CloseDropDown,
 } from "./Tablet.style";
 import Search from "../../../assets/images/LandingPage/Search.png";
 import { Img } from "../../../GlobalStyles";
@@ -144,16 +145,9 @@ const ProductsFilterBar = () => {
             <h5>Filter</h5>
           ) : (
             <Filters>
-              <p
-                onClick={() => setOpenFB(!openFB)}
-                style={{
-                  transform: "translate(90%,10%)",
-                  cursor: "pointer",
-                  color: "#fff",
-                }}
-              >
+              <CloseDropDown onClick={() => setOpenFB(!openFB)}>
                 x
-              </p>
+              </CloseDropDown>
               <FilterItems>
                 {proNavData.map(({ title }, index) => (
                   <h5 key={index} onClick={() => prodNavHandler(index)}>

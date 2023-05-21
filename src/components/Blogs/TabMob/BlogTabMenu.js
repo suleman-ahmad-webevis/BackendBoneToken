@@ -1,14 +1,39 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { Img } from "../../../GlobalStyles";
 import Search from "../../../assets/images/LandingPage/Search.png";
-import styled from "styled-components";
+import { blogCat } from "../../Sidebar/BlogSidebar";
 
 const BlogTabMenu = () => {
-  const [searchPro, setSearchPro] = useState("");
+  const navigate = useNavigate();
 
+  const [searchPro, setSearchPro] = useState("");
+  const [openMenu, setOpenMenu] = useState(false);
   return (
-    <MenuWrapper>
-      <h5>Categories</h5>
+    <BlogMenuWrapper>
+      <FilterDropDown onClick={() => setOpenMenu(!openMenu)}>
+        {!openMenu ? (
+          <h5>Categories</h5>
+        ) : (
+          <Filters>
+            <CloseDropDown onClick={() => setOpenMenu(!openMenu)}>
+              x
+            </CloseDropDown>
+            <FilterItems>
+              {blogCat.map((item, index) => (
+                <h5
+                  key={index}
+                  onClick={() => navigate(`/blogs?category=${item}`)}
+                >
+                  {item}
+                </h5>
+              ))}
+            </FilterItems>
+          </Filters>
+        )}
+      </FilterDropDown>
+
       <SearchBar>
         <input
           type="text"
@@ -22,23 +47,16 @@ const BlogTabMenu = () => {
           style={{ position: "absolute", top: "14px", left: "15px" }}
         />
       </SearchBar>
-    </MenuWrapper>
+    </BlogMenuWrapper>
   );
 };
 
-export const MenuWrapper = styled.div`
+export const BlogMenuWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   grid-gap: 10px;
-  h5 {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: -0.24px;
-    color: rgba(27, 21, 61, 0.55);
-  }
 `;
 
 export const SearchBar = styled.div`
@@ -67,6 +85,48 @@ export const SearchBar = styled.div`
   }
   @media screen and (max-width: 700px) {
     width: 60%;
+  }
+`;
+
+export const FilterDropDown = styled.div`
+  position: relative;
+  h5 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+    color: rgba(27, 21, 61, 0.55);
+  }
+`;
+
+export const Filters = styled.div`
+  position: absolute;
+  top: -25px;
+  left: 5px;
+  width: 160px;
+  z-index: 99;
+  padding: 5px 15px;
+  border-radius: 12px;
+  background: #fff;
+`;
+
+export const CloseDropDown = styled.div`
+  transform: translate(90%, 10%);
+  cursor: pointer;
+  color: #fff;
+`;
+
+export const FilterItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  h5 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+    color: rgba(27, 21, 61, 0.55);
+    cursor: pointer;
   }
 `;
 

@@ -20,3 +20,8 @@ export const thirdFormSchema = yup.object({
   password: yup.string().required("Required!"),
   repeatPassword: yup.string().required("Required!"),
 });
+
+export const loginSchema = yup.object({
+  email: yup.string().email("Invalid email").required("Required!"),
+  password: yup.string().required("Required!"),
+});

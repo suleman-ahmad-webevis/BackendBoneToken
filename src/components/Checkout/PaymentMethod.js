@@ -6,10 +6,12 @@ import MethodTwo from "../../assets/images/PayMethod/MethodTwo.png";
 import MethodThree from "../../assets/images/PayMethod/MethodThree.png";
 import MethodFour from "../../assets/images/PayMethod/MethodFour.png";
 import MethodFive from "../../assets/images/PayMethod/MethodFive.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCheckoutSession } from "../../redux/payment/paymentSlice";
 
 const PaymentMethod = ({ cartItems }) => {
+  const { userInfo } = useSelector((state) => state.user);
+  const { user } = userInfo;
   const dispatch = useDispatch();
   return (
     <>
@@ -22,7 +24,9 @@ const PaymentMethod = ({ cartItems }) => {
               src={MethodOne}
               alt="MethodOne"
               onClick={() =>
-                dispatch(createCheckoutSession({ cartItems, userId: 233232 }))
+                dispatch(
+                  createCheckoutSession({ cartItems, userId: user?._id })
+                )
               }
             />
             <Img src={MethodTwo} alt="MethodTwo" />

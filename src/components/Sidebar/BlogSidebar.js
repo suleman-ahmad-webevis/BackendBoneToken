@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const blogCategories = [
+export const blogCat = [
   "Breeding",
   "Puppies",
   "Training",
@@ -18,16 +18,15 @@ const blogCategories = [
   "NFT news",
 ];
 
-const BlogSidebar = ({ open, Toggle }) => {
+const BlogSidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <BlogSidebarContainer open={open}>
-      {/* <SidebarTitle>Dog</SidebarTitle> */}
+    <BlogSidebarContainer>
       <SidebarTitle FontWeight>Categories</SidebarTitle>
       <SidebarDivider />
       <DogsList>
-        {blogCategories.map((item, index) => (
+        {blogCat.map((item, index) => (
           <DogTypes
             key={index}
             onClick={() => navigate(`/blogs?category=${item}`)}
@@ -48,18 +47,13 @@ export const BlogSidebarContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
-  width: 20%;
+  width: 16%;
   height: 700px;
   background: #ffffff;
   border-radius: 12px;
   position: relative;
   @media screen and (max-width: 1110px) {
-    display: ${({ open }) => (open ? "block" : "none")};
-    position: absolute;
-    left: 10px;
-    z-index: 999;
-    margin-top: -10px;
-    background-color: #fff;
+    display: none;
   }
 `;
 

@@ -23,7 +23,6 @@ const cartSlice = createSlice({
     // },
     addToYourCart(state, action) {
       const { selectedPro } = action.payload;
-      console.log("The selectedPor", selectedPro);
       const filterPro = selectedPro.filter(
         (obj) =>
           !state.cartItems.some(

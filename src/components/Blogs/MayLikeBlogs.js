@@ -30,7 +30,7 @@ const MayLikeBlogs = ({ category }) => {
   return (
     <MayLikeContainer>
       {mayLikeBlogs.length > 0 && <Title>You may also like:</Title>}
-      <MayLikeCards>
+      <MLCardsWrapper>
         {mayLikeBlogs.length > 0 ? (
           mayLikeBlogs.map((blog, index) => (
             <MayLikeCard key={index}>
@@ -70,7 +70,7 @@ const MayLikeBlogs = ({ category }) => {
         ) : (
           <h2>No related blogs</h2>
         )}
-      </MayLikeCards>
+      </MLCardsWrapper>
     </MayLikeContainer>
   );
 };
@@ -83,7 +83,26 @@ export const MayLikeContainer = styled.div`
   padding: 20px;
   grid-gap: 50px;
   background: #f5f5f5;
+  width: 100%;
+`;
+
+export const MLCardsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  grid-gap: 30px;
+  background: #f5f5f5;
+  width: 100%;
   overflow-x: scroll;
+`;
+
+export const MayLikeCard = styled.div`
+  position: relative;
+  width: 32%;
+  @media screen and (max-width: 1100px) {
+    width: 49%;
+  }
 `;
 
 export const Title = styled.h5`
@@ -92,20 +111,6 @@ export const Title = styled.h5`
   font-size: 25px;
   line-height: 67px;
   color: #000000;
-`;
-
-export const MayLikeCards = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  grid-gap: 30px;
-  background: #f5f5f5;
-  width: 100%;
-`;
-
-export const MayLikeCard = styled.div`
-  position: relative;
 `;
 
 export const Popular = styled.div`

@@ -11,7 +11,7 @@ import {
 
 const PDFModal = ({ children, active, hideModal }) => {
   return (
-    <>
+    <Fragment>
       {active && (
         <ModalBlock>
           <ModalOverlay onClick={() => hideModal()}></ModalOverlay>
@@ -24,7 +24,7 @@ const PDFModal = ({ children, active, hideModal }) => {
           </ModalContainer>
         </ModalBlock>
       )}
-    </>
+    </Fragment>
   );
 };
 export default PDFModal;

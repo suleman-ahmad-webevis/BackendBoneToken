@@ -42,6 +42,11 @@ const CustomerService = () => {
 
   return (
     <>
+      <PDFModal active={active} hideModal={() => setActive(false)}>
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+          <Viewer fileUrl={defaultPdfFile} width="100%" />
+        </Worker>
+      </PDFModal>
       {isDesktop ? (
         <>
           <CSContainer>
@@ -168,11 +173,6 @@ const CustomerService = () => {
                   Terms and Conditions
                 </Heading>
               </CSPolicy>
-              <PDFModal active={active} hideModal={() => setActive(false)}>
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                  <Viewer fileUrl={defaultPdfFile} width="100%" />
-                </Worker>
-              </PDFModal>
             </CSContentWrapper>
           </CSContainer>
         </>

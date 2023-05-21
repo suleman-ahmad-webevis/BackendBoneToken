@@ -11,6 +11,32 @@ import Overlay from "../../assets/images/Blogs/Overlay.png";
 import { Img } from "../../GlobalStyles";
 
 const BlogSlider = () => {
+  const sliderData = [
+    {
+      slideImg: SlideOne,
+      heading: "Dog/Rottweiler",
+      para: "Doberman News",
+      btnTitle: "Read More",
+    },
+    {
+      slideImg: SlideTwo,
+      heading: "Dog/Doberman",
+      para: "Doberman News",
+      btnTitle: "Read More",
+    },
+    {
+      slideImg: SlideThree,
+      heading: "Dog/Amstaff",
+      para: "Doberman News",
+      btnTitle: "Read More",
+    },
+    {
+      slideImg: SlideOne,
+      heading: "Dog/Rottweiler",
+      para: "Doberman News",
+      btnTitle: "Read More",
+    },
+  ];
   const pagination = {
     clickable: true,
   };
@@ -26,85 +52,43 @@ const BlogSlider = () => {
           disableOnInteraction: false,
         }}
       >
-        <SwiperSlide>
-          <SwiperSlide>
-            <Img src={SlideOne} alt="SlideOne" loading="lazy" />
+        {sliderData.map((value, index) => (
+          <SwiperSlide key={index}>
+            <SwiperSlide>
+              <Img src={value.slideImg} alt="slideImg" loading="lazy" />
+            </SwiperSlide>
+            <SlideOverlay>
+              <h2>{value.heading}</h2>
+              <h1>{value.para}</h1>
+              <button>{value.btnTitle}</button>
+            </SlideOverlay>
           </SwiperSlide>
-          <SlideOverlay style={{ backgroundImage: `url(${Overlay})` }}>
-            <h3>Dog/Rottweiler</h3>
-            <h2>Doberman News</h2>
-            <button>Read More</button>
-          </SlideOverlay>
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperSlide>
-            <Img src={SlideTwo} alt="SlideTwo" loading="lazy" />
-          </SwiperSlide>
-          <SlideOverlay style={{ backgroundImage: `url(${Overlay})` }}>
-            <h3>Dog/Doberman</h3>
-            <h2>Doberman News</h2>
-            <button>Read More</button>
-          </SlideOverlay>
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperSlide>
-            <Img src={SlideThree} alt="SlideThree" loading="lazy" />
-          </SwiperSlide>
-          <SlideOverlay style={{ backgroundImage: `url(${Overlay})` }}>
-            <h3>Dog/Amstaff</h3>
-            <h2>Doberman News</h2>
-            <button>Read More</button>
-          </SlideOverlay>
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperSlide>
-            <Img src={SlideOne} alt="SlideOne" loading="lazy" />
-          </SwiperSlide>
-          <SlideOverlay style={{ backgroundImage: `url(${Overlay})` }}>
-            <h3>Dog/Poodle</h3>
-            <h2>Doberman News</h2>
-            <button>Read More</button>
-          </SlideOverlay>
-        </SwiperSlide>
+        ))}
       </Swiper>
     </BlogSliderContainer>
   );
 };
 
 export const BlogSliderContainer = styled.div`
-  margin-top: -30px;
   .swiper {
-    width: 925px;
+    width: 98%;
     height: 550px;
   }
-
-  .swiper-slide {
+  /* .swiper-slide {
     text-align: center;
     font-size: 18px;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
-  }
+  } */
 
-  .swiper-slide {
+  /* .swiper-slide {
     display: flex;
     justify-content: flex-start;
-    align-items: self-start;
-  }
+    align-items: flex-start;
+  } */
 
   .swiper-slide img {
-    display: block;
     width: 100%;
     height: 505px;
     object-fit: cover;
@@ -116,97 +100,64 @@ export const BlogSliderContainer = styled.div`
     background: #11223a;
     opacity: 1;
     border-radius: 12px;
+    @media screen and (max-width: 1110px) {
+      width: 18px;
+      height: 18px;
+    }
   }
   span.swiper-pagination-bullet-active {
     background: #53e4e4;
-  }
-
-  /* @media screen and (max-width: 1020px) {
-    .swiper {
-      width: 85vw;
-      height: 450px;
-    }
-    .swiper-slide img {
-      height: 90%;
-    }
-  }
-  @media screen and (max-width: 760px) {
-    .swiper {
-      height: 350px;
-      width: 80vw;
-    }
-  }
-  @media screen and (max-width: 600px) {
-    .swiper {
-      height: 300px;
-      width: 90vw;
-    }
-    .swiper-slide img {
-      height: 85%;
-    }
-  } */
-
-  //Slider Responsive
-  @media screen and (max-width: 1300px) {
-    .swiper {
-      width: 870px;
-      height: 550px;
-    }
-  }
-  @media screen and (max-width: 1250px) {
-    .swiper {
-      width: 830px;
-      height: 550px;
-    }
-  }
-  @media screen and (max-width: 1250px) {
-    .swiper {
-      width: 800px;
-      height: 550px;
-    }
-  }
-  @media screen and (max-width: 1250px) {
-    .swiper {
-      width: 770px;
-      height: 550px;
-    }
   }
 `;
 
 export const SlideOverlay = styled.div`
   display: flex;
   flex-direction: column;
-  grid-gap: 20px;
   align-items: center;
   justify-content: center;
+  grid-gap: 20px;
+  width: 45%;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 1px;
   bottom: 0;
+  background-image: url(${Overlay});
   background-repeat: no-repeat;
-  width: 397.05px;
 
-  h3 {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 160%;
-    color: #a0aec0;
-  }
-
-  h2 {
+  h1 {
     font-style: normal;
     font-weight: 600;
     font-size: 40px;
     line-height: 120%;
     text-align: center;
     color: #ffffff;
+    @media screen and (max-width: 1300px) {
+      font-size: 38px;
+    }
+    @media screen and (max-width: 900px) {
+      font-size: 34px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 32px;
+    }
+    @media screen and (max-width: 400px) {
+      font-size: 28px;
+    }
   }
-
+  h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 160%;
+    color: #a0aec0;
+    @media screen and (max-width: 400px) {
+      font-size: 16px;
+    }
+  }
   button {
     background: #eff8ff;
     border-radius: 21px;
-    width: 254.62px;
+    width: 60%;
     height: 70px;
     margin-top: 30px;
     cursor: pointer;
@@ -216,41 +167,11 @@ export const SlideOverlay = styled.div`
     line-height: 160%;
     text-align: center;
     color: #01101c;
-  }
-
-  @media screen and (max-width: 1020px) {
-    width: 45%;
-    height: 90%;
-    h2 {
-      font-size: 25px;
+    @media screen and (max-width: 1110px) {
+      width: 70%;
     }
-    button {
-      width: 164.62px;
-      height: 50px;
-    }
-  }
-  @media screen and (max-width: 760px) {
-    h2 {
-      font-size: 22px;
-    }
-    button {
-      width: 144.62px;
-      height: 45px;
+    @media screen and (max-width: 400px) {
       font-size: 16px;
-    }
-  }
-  @media screen and (max-width: 600px) {
-    height: 85%;
-    h2 {
-      font-size: 16px;
-    }
-    h3 {
-      font-size: 14px;
-    }
-    button {
-      width: 124.62px;
-      height: 40px;
-      font-size: 14px;
     }
   }
 `;

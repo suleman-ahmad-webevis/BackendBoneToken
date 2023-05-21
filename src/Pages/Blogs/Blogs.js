@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import BlogCards from "../../components/Blogs/BlogCards";
 import BlogSidebar from "../../components/Sidebar/BlogSidebar";
 import BlogSlider from "../../components/Blogs/BlogSlider";
-import { FaBars, FaTimes } from "react-icons/fa";
+import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
+import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
+import useBreakpoint from "../../hooks/useBreakPoint";
+import BlogTabMenu from "../../components/Blogs/TabMob/BlogTabMenu";
 
 const Blogs = () => {
-  const [open, setOpen] = useState(false);
-  const Toggle = () => {
-    setOpen(!open);
-  };
+  const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
+
   return (
     <BlogsContainer>
-      <Hamburger open={open} onClick={() => setOpen(!open)}>
-        {open ? <FaTimes /> : <FaBars />}
-      </Hamburger>
-      <BlogSidebar open={open} Toggle={Toggle} />
+      <BlogSidebar />
       <BlogsContent>
+        {(isSmallMobile || isMobile) && <CommonMobNav />}
+        {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+        {(isTablet || isSmallMobile || isMobile) && <BlogTabMenu />}
         <BlogSlider />
         <BlogCards />
       </BlogsContent>
@@ -27,9 +28,9 @@ const Blogs = () => {
 export const BlogsContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  grid-gap: 10px;
+  padding-top: 20px;
   background: #fff;
-  grid-gap: 20px;
 `;
 
 export const BlogsContent = styled.div`
@@ -37,31 +38,11 @@ export const BlogsContent = styled.div`
   flex-direction: column;
   justify-content: center;
   grid-gap: 30px;
-  padding: 30px 0px;
+  padding: 5px;
   background: #fff;
-
   width: 78%;
   @media screen and (max-width: 1110px) {
-    width: 100%;
-  }
-`;
-
-export const Hamburger = styled.div`
-  display: none;
-  position: absolute;
-  left: ${({ open }) => (open ? "250px" : "10px")};
-  z-index: 1000;
-  font-size: ${({ open }) => (open ? "20px" : "30px")};
-  color: #000f5c;
-  margin-top: ${({ open }) => (open ? "5px" : "5px")};
-  cursor: pointer;
-
-  @media screen and (max-width: 1511px) {
-    display: block;
-  }
-  @media screen and (max-width: 600px) {
-    margin-top: ${({ open }) => (open ? "5px" : "0")};
-    left: ${({ open }) => (open ? "250px" : "20px")};
+    width: 96%;
   }
 `;
 

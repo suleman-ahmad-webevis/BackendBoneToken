@@ -1,25 +1,20 @@
 import React from "react";
 import {
-  CheckoutColor,
-  CheckOutSection,
-  CheckoutFooter,
   CheckoutLink,
   TotalBill,
   OrderHistoryContainer,
-  CheckoutWrapper,
+  CheckoutContainer,
   OrderHistoryWrapper,
 } from "./CheckoutStyle";
 
 const OrderHistory = () => {
   // const [quantity, setQuantity] = useState(0);
   return (
-    <CheckoutWrapper>
+    <CheckoutContainer>
       {/* <Img src={orderHistory} /> */}
       <OrderHistoryWrapper>
         <OrderHistoryContainer>
-          <CheckoutColor>
-            <CheckOutSection>
-              {/* <OrderHistoryCard>
+          {/* <OrderHistoryCard>
                 <CardLeftPart>
                   <Img src={checkoutPro} />
                   <Text>
@@ -37,23 +32,17 @@ const OrderHistory = () => {
                   </CardAside>
                 </CardRightPart>
               </OrderHistoryCard> */}
-            </CheckOutSection>
-          </CheckoutColor>
-          <CheckoutColor>
-            <CheckoutFooter Differ>
-              <CheckoutLink>
-                <TotalBill>
-                  <h3>Shopping Cart Total Expenses: </h3>
-                </TotalBill>
-              </CheckoutLink>
-              <TotalBill>
-                <h3>{/* € <span>40.00</span> */}</h3>
-              </TotalBill>
-            </CheckoutFooter>
-          </CheckoutColor>
+          <CheckoutLink>
+            <TotalBill>
+              <h3>No Order Made </h3>
+            </TotalBill>
+          </CheckoutLink>
+          <TotalBill>
+            <h3>{/* € <span>40.00</span> */}</h3>
+          </TotalBill>
         </OrderHistoryContainer>
       </OrderHistoryWrapper>
-    </CheckoutWrapper>
+    </CheckoutContainer>
   );
 };
 

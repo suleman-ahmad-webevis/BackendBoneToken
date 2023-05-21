@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const ModalBlock = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 0.4rem;
   position: fixed;
   top: 80px;
   right: 10px;
   width: 90%;
   opacity: 1;
-  z-index: 1001;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.4rem;
 `;
 
 export const ModalOverlay = styled.a`

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Dogdatalogo from "../../assets/images/Dogdatalogo.png";
+import Logo from "../../assets/images/Dogdatalogo.png";
 import { Img } from "../../GlobalStyles";
 import { blogsById } from "../../redux/blog/blogSlice";
 import Loader from "../Loader/Loader";
@@ -23,11 +23,13 @@ const BlogDetail = () => {
 
   return (
     <BlogDetailContainer>
-      <MainImage>
-        <Img src={blog?.featuredImg} alt="blog" style={{ width: "100%" }} />
-      </MainImage>
+      <Img
+        src={blog?.featuredImg}
+        alt="blog"
+        style={{ borderRadius: "12px" }}
+      />
       <BlogWriter>
-        <Img src={Dogdatalogo} alt="writer" />
+        <Img src={Logo} alt="writer" />
         <p>
           {blog?.authorName} &nbsp;
           {new Date(blog?.createdAt).toLocaleString().substring(0, 9)}
@@ -52,29 +54,6 @@ export const BlogDetailContainer = styled.div`
   grid-gap: 20px;
 `;
 
-export const MainImage = styled.div`
-  width: 100%;
-  /* img {
-    width: 925px;
-    height: 505px;
-    border-radius: 12px;
-  }
-  @media screen and (max-width: 1400px) {
-    img {
-      width: 870px;
-      height: 505px;
-      border-radius: 12px;
-    }
-  }
-  @media screen and (max-width: 1300px) {
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-    }
-  } */
-`;
-
 export const BlogTitle = styled.h5`
   font-weight: 700;
   font-size: 30px;
@@ -90,7 +69,7 @@ export const BlogWriter = styled.div`
   align-items: center;
   grid-gap: 20px;
   img {
-    width: 30px;
+    width: 40px;
   }
 `;
 
@@ -98,6 +77,7 @@ export const Detail = styled.div`
   img {
     width: 100% !important;
     height: 100% !important;
+    border-radius: 12px;
   }
 `;
 

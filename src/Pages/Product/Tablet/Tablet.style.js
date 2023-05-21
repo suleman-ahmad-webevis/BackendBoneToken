@@ -31,6 +31,12 @@ export const Filters = styled.div`
   background: #fff;
 `;
 
+export const CloseDropDown = styled.div`
+  transform: translate(90%, 10%);
+  cursor: pointer;
+  color: #fff;
+`;
+
 export const FilterItems = styled.div`
   display: flex;
   flex-direction: column;

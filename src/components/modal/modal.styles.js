@@ -13,7 +13,6 @@ export const ModalBlock = styled.div`
   align-items: center;
   overflow: hidden;
   padding: 10px;
-  background: red;
 `;
 
 export const ModalOverlay = styled.a`

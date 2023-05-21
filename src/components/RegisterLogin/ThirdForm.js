@@ -23,6 +23,7 @@ const ThirdForm = () => {
     const firstForm = sessionStorage.getItem("firstForm");
     const secondForm = sessionStorage.getItem("secondForm");
     const sub = values.checkboxOpt[0].value;
+    delete values.checkboxOpt;
     dispatch(registerTheUser({ firstForm, secondForm, values, sub }));
   };
 

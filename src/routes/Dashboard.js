@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
+//Navbar's
 import Navbar from "../components/Navbar/Navbar";
 import TabNav from "../components/Navbar/Tablet/TabletNav";
 import MobileNav from "../components/Navbar/Mobile/MobileNav";
-import LandingPageSidebar from "../components/Sidebar/LandingPageSidebar";
-import useBreakpoint from "../hooks/useBreakPoint";
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getCartTotal } from "../redux/cart/cartSlice";
 import { getTotalsFavourites } from "../redux/favourites/favouritesSlice";
+//Other
+import PageSidebar from "../components/Sidebar/PageSidebar";
+import useBreakpoint from "../hooks/useBreakPoint";
 
 const ContainerWrapper = styled("div")`
   position: relative;
@@ -17,13 +20,11 @@ const ContainerWrapper = styled("div")`
     width: 100%;
     height: 100%;
   }
-
   .wrapper-main {
     position: relative;
     /* padding-left: 343px; */
     padding-left: ${(props) => props.pageNotFoundedPad};
   }
-
   header {
     position: fixed;
     top: 0;
@@ -44,7 +45,7 @@ const ContainerWrapper = styled("div")`
     width: ${(props) => props.pageNotFoundedWid};
     overflow: auto;
     padding: 0 0 20px;
-    background: ${(props) => props.purpleLeftSidebar};
+    /* background: ${(props) => props.purpleLeftSidebar}; */
     overflow-x: hidden;
 
     &::-webkit-scrollbar {
@@ -66,7 +67,7 @@ const ContainerWrapper = styled("div")`
   }
 
   .main-content {
-    background: ${(props) => props.purpleBackground};
+    /* background: ${(props) => props.purpleBackground}; */
     width: 100%;
     position: relative;
     flex-grow: 1;
@@ -173,7 +174,7 @@ const Dashboard = () => {
           <div className="wrapper-main">
             {!isNotFoundPage && (
               <div className="left-sidebar">
-                <LandingPageSidebar toggle={toggle} />
+                <PageSidebar toggle={toggle} />
               </div>
             )}
             <div className="main-content" id="detail">

@@ -68,10 +68,7 @@ const BlogCards = () => {
 };
 
 export const BlogContainer = styled.div`
-  width: 930px;
-  @media screen and (max-width: 990px) {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 export const BlogCardContainer = styled.div`
