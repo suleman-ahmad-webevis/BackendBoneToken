@@ -136,7 +136,7 @@ const Navbar = ({ cartQuantityIs, favouritesTotalQuantity }) => {
                 </Counter>
               </Items>
               <a
-                href="https://www.youtube.com/@streetdogbonedrop4651"
+                href="https://youtube.com/@Dogstoken"
                 target="_blank"
                 rel="noreferrer"
               >
