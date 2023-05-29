@@ -14,7 +14,7 @@ const BlogCard = ({ blog }) => {
   };
 
   return (
-    <CardContainer>
+    <CardContainer key={blog._id}>
       <CardImageContainer>
         <Img
           src={blog?.featuredImg}

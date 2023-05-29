@@ -44,11 +44,13 @@ import SETTINGS from "./Pages/Settings/Settings";
 import WHITEPAPER from "./Pages/WhitePaper/WhitePaper";
 import PITCHDECK from "./Pages/PitchDesk/PitchDesk";
 //NotFoundRoutes
+import AIRDROP from "./Pages/AirDrop/AirDrop";
 import NOTFOUND from "./Pages/404/NotFound";
 //Toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+
 //Authorization
 // import PaymentMethod from "./components/Checkout/PaymentMethod";
 // import { PrivateRouteCheckout } from "./utils/PrivateRoutes";
@@ -60,10 +62,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <DASHBOARD />,
+    errorElement: <NOTFOUND />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <LANDINGPAGE />,
+        //errorElement: <We could add the error element to every one of the child routes but, since it's all the same error page, this isn't recommended/>
       },
       {
         path: "/shop",
@@ -162,6 +166,10 @@ const router = createBrowserRouter([
         element: <PITCHDECK />,
       },
       {
+        path: "/airdrop",
+        element: <AIRDROP />,
+      },
+      {
         path: "/certificate",
         element: <PDFCERTIFICATE />,
       },
@@ -177,10 +185,10 @@ const router = createBrowserRouter([
       //   path: "/instagram-handler",
       //   element: <INSTAGRAMHANDLER />,
       // },
-      {
-        path: "*",
-        element: <NOTFOUND />,
-      },
+      // {
+      //   path: "*",
+      //   element: <NOTFOUND />,
+      // },
     ],
   },
 ]);

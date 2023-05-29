@@ -1,11 +1,13 @@
 import axios from "axios";
+import { store } from "../redux/store";
+//This is axios instance
 
 const API = axios.create({
   // baseURL: "https://btoken-backend.herokuapp.com",
   // baseURL: "https://backendbt.up.railway.app",
   // baseURL: "http://localhost:5000",
   // baseURL: "https://cooperative-kilt-tuna.cyclic.app",
-  baseURL:'https://outstanding-moth-boot.cyclic.app',
+  baseURL: "https://outstanding-moth-boot.cyclic.app",
   timeout: 20000,
   headers: {
     Accept: "*/*",
@@ -13,33 +15,33 @@ const API = axios.create({
   },
 });
 
-const handleRequest = async (req) => {
-  let token = localStorage.getItem("token");
-  if (token !== null || token !== undefined) {
-    req.headers.Authorization = `Bearer ${token}`;
+//Here creating interceptor for instance
+//The axios interceptor takes 2 arguments. 1st argument of config and 2nd argument of error
+
+API.interceptors.request.use(
+  (req) => {
+    console.log("Start");
+    const storeVal = store?.getState();
+    console.log(
+      "The storeVal.user.userInfo --> ",
+      typeof storeVal.user?.userInfo?.token
+    );
+    if (
+      storeVal?.user?.userInfo?.token !== null &&
+      storeVal?.user?.userInfo?.token !== undefined
+    ) {
+      console.log("If");
+      const token = storeVal?.user?.userInfo?.token;
+      // req.headers.Authorization = `Bearer ${token}`;
+    } else {
+      console.log("Else");
+    }
+    console.log("End");
+    return req;
+  },
+  (err) => {
+    console.log("The error", err);
   }
-
-  return req;
-};
-
-const handleError = (error) => {
-  let parsed_error = Object.assign({}, error);
-  if (
-    parsed_error.code === "ECONNABORTED" &&
-    !parsed_error.config.__isRetryRequest
-  ) {
-    parsed_error.config.__isRetryRequest = true;
-    return API.request(parsed_error.config);
-  }
-  return Promise.reject(parsed_error?.response?.data);
-};
-
-const handleResponse = (response) => {
-  return Promise.resolve(response);
-};
-
-API.interceptors.request.use(handleRequest);
-
-API.interceptors.response.use(handleResponse, handleError);
+);
 
 export default API;

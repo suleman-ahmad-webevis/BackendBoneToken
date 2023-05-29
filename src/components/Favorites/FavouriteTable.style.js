@@ -84,6 +84,5 @@ export const CheckoutPrice = styled.div`
 
 export const Price = styled.div`
   display: flex;
-  /* hello */
   grid-gap: 5px;
 `;

@@ -47,7 +47,7 @@ const BlogCards = () => {
       {allBlogs?.length ? (
         <BlogCardContainer id="BlogCardContainer">
           {allBlogs?.map((blog) => (
-            <BlogCard blog={blog} key={blog._id} />
+            <BlogCard blog={blog}  />
           ))}
           <InfiniteScroll
             dataLength={allBlogs?.length}

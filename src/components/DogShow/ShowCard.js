@@ -18,7 +18,7 @@ const ShowCard = ({ value }) => {
                 <Img src={imageUrl} alt={alt} />
                 <p>{date}</p>
                 <p>{city}</p>
-                <Img src={youtube} alt="youtube" />
+                {/* <Img src={youtube} alt="youtube" /> */}
               </DataItem>
             )
           )}
@@ -29,7 +29,7 @@ const ShowCard = ({ value }) => {
               <Img src={imageUrl} alt={alt} />
               <p>{date}</p>
               <p>{city}</p>
-              <Img src={youtube} alt="youtube" />
+              {/* <Img src={youtube} alt="youtube" /> */}
             </DataItem>
           ))}
         </DataItems>
