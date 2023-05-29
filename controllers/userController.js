@@ -15,7 +15,7 @@ const register = catchAsyncErrors(async (req, res, next) => {
   const firstForm = JSON.parse(req.body.firstForm);
   const secondForm = JSON.parse(req.body.secondForm);
   const { email } = firstForm;
-  
+
   if (req.body.values.password !== req.body.values.repeatPassword) {
     return next(
       new ErrorHandler(
@@ -87,7 +87,9 @@ const login = catchAsyncErrors(async (req, res, next) => {
   const isCorrect = await user.checkPassword(password);
   if (isCorrect) {
     const token = user.generateAuthToken();
-    return res.status(StatusCodes.OK).json({ token, user });
+    return res
+      .status(StatusCodes.OK)
+      .json({ token, user, message: "Login successful" });
   } else
     return next(
       new ErrorHandler(StatusCodes.UNAUTHORIZED, "Invalid credentials")
