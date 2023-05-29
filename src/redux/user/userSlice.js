@@ -29,7 +29,7 @@ export const loginTheUser = createAsyncThunk(
     try {
       return await userService.loginTheUserService(obj);
     } catch (error) {
-      const message = error.message;
+      const message = error.response.data.message;
       toast.error(message, { theme: "colored" });
       return thunkAPI.rejectWithValue(message);
     }

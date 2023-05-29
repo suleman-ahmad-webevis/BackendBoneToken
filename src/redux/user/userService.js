@@ -11,7 +11,7 @@ const registerTheUserService = async (obj) => {
 const loginTheUserService = async (obj) => {
   let API_URL = `user/loginUser`;
   const res = await API.post(API_URL, obj);
-  // toast.success(res.data.message, { theme: "colored" });
+  toast.success(res.data.message, { theme: "colored" });
   return res.data;
 };
 

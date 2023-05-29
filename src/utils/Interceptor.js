@@ -8,7 +8,7 @@ const API = axios.create({
   // baseURL: "http://localhost:5000",
   // baseURL: "https://cooperative-kilt-tuna.cyclic.app",
   baseURL: "https://outstanding-moth-boot.cyclic.app",
-  timeout: 20000,
+  timeout: 30000,
   headers: {
     Accept: "*/*",
     "Content-Type": "application/json",
@@ -20,27 +20,18 @@ const API = axios.create({
 
 API.interceptors.request.use(
   (req) => {
-    console.log("Start");
     const storeVal = store?.getState();
-    console.log(
-      "The storeVal.user.userInfo --> ",
-      typeof storeVal.user?.userInfo?.token
-    );
     if (
       storeVal?.user?.userInfo?.token !== null &&
       storeVal?.user?.userInfo?.token !== undefined
     ) {
-      console.log("If");
       const token = storeVal?.user?.userInfo?.token;
-      // req.headers.Authorization = `Bearer ${token}`;
-    } else {
-      console.log("Else");
+      req.headers.Authorization = `Bearer ${token}`;
     }
-    console.log("End");
     return req;
   },
   (err) => {
-    console.log("The error", err);
+    console.log("The error in interceptor", err);
   }
 );
 
