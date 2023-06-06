@@ -37,9 +37,9 @@ const ProductCard = ({ product }) => {
 
   const props = {
     zoomPosition: "original",
-    width: 273,
-    height: 320,
-    zoomWidth: 273,
+    width: '100%',
+    height: 319,
+    zoomWidth: '100%',
     img: imageUrl,
   };
 
