@@ -11,12 +11,14 @@ import {
   addToFavourites,
   removeFromFavourites,
 } from "../../../redux/favourites/favouritesSlice";
+import ReactImageZoom from "react-image-zoom";
 
 const ProductCard = ({ product }) => {
   const { favouritesItems } = useSelector((state) => state.favourites);
   const [isFav, setIsFav] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
     setIsFav(favouritesItems.find((item) => item._id === product._id));
@@ -33,24 +35,46 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const props = {
+    zoomPosition: "original",
+    width: 273,
+    height: 273,
+    zoomWidth: 273,
+    img: imageUrl,
+  };
+
   return (
     <ProductCardContainer key={product?._id}>
-      <CardData>
+      <CardData
+        onMouseLeave={() => {
+          setImageUrl(null);
+        }}
+      >
         {/* <ProductImage> */}
-        <Img
-          src={product?.productImages[0]?.secureUrl}
-          alt="ProductImage"
-          onClick={() => {
-            navigate(`/shop/product-detail/${product._id}`, {
-              state: {
-                productImages: product.productImages,
-              },
-            });
-          }}
-        />
+        {imageUrl ? (
+          <ReactImageZoom {...props} />
+        ) : (
+          <Img
+            src={product?.productImages[0]?.secureUrl}
+            alt="ProductImage"
+            onMouseEnter={() => {
+              setImageUrl(product?.productImages[0]?.secureUrl);
+            }}
+          />
+        )}
         {/* </ProductImage> */}
         <ItemName>
-          <ProductCategory>{product.name}</ProductCategory>
+          <ProductCategory
+            onClick={() => {
+              navigate(`/shop/product-detail/${product._id}`, {
+                state: {
+                  productImages: product.productImages,
+                },
+              });
+            }}
+          >
+            {product.name}
+          </ProductCategory>
           <Img
             onClick={() => {
               handleFavClick(product);
@@ -59,7 +83,15 @@ const ProductCard = ({ product }) => {
             alt="Heart"
           />
         </ItemName>
-        <ProductDescription>
+        <ProductDescription
+          onClick={() => {
+            navigate(`/shop/product-detail/${product._id}`, {
+              state: {
+                productImages: product.productImages,
+              },
+            });
+          }}
+        >
           <Heading level={4}>
             {product.description.length > 50
               ? `${product.description.slice(0, 50)}...read more`
