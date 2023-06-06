@@ -270,6 +270,7 @@ export const AddCart = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   background: linear-gradient(
     123.41deg,
     #65f753 28.58%,
@@ -325,6 +326,7 @@ export const IconBtn = styled.button`
   line-height: 29px;
   border: none;
   color: #a6b5bf;
+  cursor: pointer;
   &:hover {
     background: #3dbb8b;
     color: #ffffff;

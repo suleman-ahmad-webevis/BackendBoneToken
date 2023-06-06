@@ -93,6 +93,9 @@ export const ItemQuantity = styled.div`
   gap: 10px;
   border-radius: 8px;
   padding: 7px 20px;
+  @media screen and (max-width: 1200px) {
+    padding: 7px 10px;
+  }
 `;
 
 export const MinMaxBtn = styled.button`
@@ -222,6 +225,9 @@ export const Title = styled.h3`
   align-items: center;
   color: #000000;
   padding: 10px 0;
+  @media screen and (max-width: 1400px) {
+    font-size: 13px;
+  }
 `;
 
 export const Amount = styled.h3`
@@ -233,6 +239,9 @@ export const Amount = styled.h3`
   color: #000000;
   opacity: 0.4;
   padding: 10px 0;
+  @media screen and (max-width: 1400px) {
+    font-size: 13px;
+  }
 `;
 
 export const TotalBill = styled.div`
@@ -245,6 +254,9 @@ export const TotalBill = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #434343;
+    @media screen and (max-width: 1400px) {
+      font-size: 13px;
+    }
   }
   span {
     font-weight: 900;
@@ -252,7 +264,7 @@ export const TotalBill = styled.div`
     line-height: 25px;
     color: #434343;
     @media screen and (max-width: 1400px) {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 `;
@@ -284,12 +296,15 @@ export const PayButton = styled.div`
   line-height: 19px;
   color: #c1c1c1;
   cursor: pointer;
+  @media screen and (max-width: 1400px) {
+    font-size: 14px;
+  }
   h1 {
     font-size: 16px;
     line-height: 19px;
     color: #8c8c8c;
     @media screen and (max-width: 1400px) {
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 `;
