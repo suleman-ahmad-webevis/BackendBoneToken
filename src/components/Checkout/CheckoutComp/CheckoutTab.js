@@ -11,23 +11,22 @@ import {
   DDContainer,
   DDHead,
   DDItems,
-  Heading,
   HeadingSec,
   TopSec,
 } from "./CheckoutTab.style";
-import CommonMobNav from "../../CommonMTNav/CommonMobNav";
-import CommonTabNav from "../../CommonMTNav/CommonTabNav";
+// import CommonMobNav from "../../CommonMTNav/CommonMobNav";
+// import CommonTabNav from "../../CommonMTNav/CommonTabNav";
 import useBreakpoint from "../../../hooks/useBreakPoint";
 import { Img } from "../../../GlobalStyles";
-import Agility from "../../../assets/images/Shop/TabCat/Agility.png";
+// import Agility from "../../../assets/images/Shop/TabCat/Agility.png";
 import TabCheckArrow from "../../../assets/images/TabCheckArrow.png";
-import { useDispatch } from "react-redux";
-import { incDecQuantity } from "../../../redux/cart/cartSlice";
+// import { useDispatch } from "react-redux";
+// import { incDecQuantity } from "../../../redux/cart/cartSlice";
 
 const CheckoutTab = ({ cartItems, cartQuantityIs }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { isSmallMobile, isMobile, isTablet } = useBreakpoint();
+  // const { isSmallMobile, isMobile, isTablet } = useBreakpoint();
   console.log("The cartItems", cartItems);
   return (
     <>
@@ -74,7 +73,7 @@ const CheckoutTab = ({ cartItems, cartQuantityIs }) => {
                       <CartCounter>
                         <h5
                           onClick={() => {
-                            let type = "inc";
+                            // let type = "inc";
                             // dispatch(incDecQuantity({ cartItem.minRetailPrice, type }))
                           }}
                         >
@@ -83,7 +82,7 @@ const CheckoutTab = ({ cartItems, cartQuantityIs }) => {
                         <h5>{cartItem?.quantity}</h5>
                         <h5
                           onClick={() => {
-                            let type = "dec";
+                            // let type = "dec";
                             // dispatch(incDecQuantity({ cartItem.minRetailPrice, type }))
                           }}
                         >
