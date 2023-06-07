@@ -1,7 +1,6 @@
 import React from "react";
 import EarnComp from "../../components/Earn/EarnComp";
 import styled from "styled-components";
-import { Helmet } from "react-helmet";
 
 const Earn = () => {
   return (
