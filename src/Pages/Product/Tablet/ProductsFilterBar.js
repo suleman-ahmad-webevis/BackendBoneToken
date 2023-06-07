@@ -19,7 +19,7 @@ import { categoriesData } from "./CategoriesData";
 //ImagesImport
 import mobCart from "../../../assets/images/LandingPage/MobCart.png";
 import mobFav from "../../../assets/images/LandingPage/MobFav.png";
-import mobChat from "../../../assets/images/LandingPage/MobChat.png";
+import mobChat from "../../../assets/images/Navbar/Tab/ChatIcon.png";
 import Flags from "../../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../../assets/images/Navbar/FlagsDropDown.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
