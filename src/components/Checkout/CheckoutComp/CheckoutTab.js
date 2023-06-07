@@ -16,7 +16,7 @@ import {
 } from "./CheckoutTab.style";
 // import CommonMobNav from "../../CommonMTNav/CommonMobNav";
 // import CommonTabNav from "../../CommonMTNav/CommonTabNav";
-import useBreakpoint from "../../../hooks/useBreakPoint";
+// import useBreakpoint from "../../../hooks/useBreakPoint";
 import { Img } from "../../../GlobalStyles";
 // import Agility from "../../../assets/images/Shop/TabCat/Agility.png";
 import TabCheckArrow from "../../../assets/images/TabCheckArrow.png";
