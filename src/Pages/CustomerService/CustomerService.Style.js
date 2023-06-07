@@ -20,14 +20,14 @@ export const CSContentWrapper = styled("div")`
 
 export const CSLine = styled("div")`
   border-bottom: 2px solid #0e626d;
-  width: 95%;
+  width: 94.5%;
   margin: 10px 0px 10px 0px;
 `;
 
 export const CSBoxesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 95%;
+  /* width: 95%; */
   grid-gap: 40px;
   padding-bottom: 20px;
 `;

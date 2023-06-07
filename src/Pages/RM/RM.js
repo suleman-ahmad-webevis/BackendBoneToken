@@ -28,6 +28,9 @@ export const RMContainer = styled.div`
   flex-direction: column;
   grid-gap: 20px;
   width: 100%;
+  @media screen and (max-width: 600px) {
+    padding: 20px 15px 20px 15px;
+  }
 `;
 
 export const RMHeading = styled.h5`
@@ -37,4 +40,3 @@ export const RMHeading = styled.h5`
   color: #000000;
   align-self: flex-start;
 `;
-

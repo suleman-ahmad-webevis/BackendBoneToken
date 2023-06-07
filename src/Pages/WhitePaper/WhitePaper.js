@@ -10,7 +10,7 @@ const WPComp = () => {
     <>
       <div style={{ marginTop: "80px" }}>
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-          <Viewer fileUrl={WhitePaper} />;
+          <Viewer fileUrl={WhitePaper} />
         </Worker>
       </div>
     </>

@@ -24,14 +24,16 @@ const ShowCard = ({ value }) => {
           )}
         </DataItems>
         <DataItems>
-          {value.rightData.map(({ imageUrl, date, alt, city, youtube },index) => (
-            <DataItem key={index}>
-              <Img src={imageUrl} alt={alt} />
-              <p>{date}</p>
-              <p>{city}</p>
-              {/* <Img src={youtube} alt="youtube" /> */}
-            </DataItem>
-          ))}
+          {value.rightData.map(
+            ({ imageUrl, date, alt, city, youtube }, index) => (
+              <DataItem key={index}>
+                <Img src={imageUrl} alt={alt} />
+                <p>{date}</p>
+                <p>{city}</p>
+                {/* <Img src={youtube} alt="youtube" /> */}
+              </DataItem>
+            )
+          )}
         </DataItems>
       </CardData>
       {value.divider && isDesktop && (
@@ -59,12 +61,17 @@ const CardData = styled.div`
   }
   @media screen and (max-width: 1110px) {
     flex-direction: row;
+    min-height: 0px;
   }
   @media screen and (max-width: 920px) {
     flex-direction: column;
+    min-height: 110px;
   }
   @media screen and (max-width: 768px) {
     flex-direction: row;
+  }
+  @media screen and (max-width: 600px) {
+    grid-gap: 50px;
   }
 `;
 

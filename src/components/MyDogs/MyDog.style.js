@@ -57,7 +57,7 @@ export const HeadButton = styled.button`
     padding: 0px 12px;
   }
   @media screen and (max-width: 1300px) {
-    padding: 0px 10px;
+    padding: 0px 8px;
   }
   @media screen and (max-width: 1110px) {
     background: ${({ mobBgColor }) => mobBgColor ?? "#79999D"};

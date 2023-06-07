@@ -6,6 +6,9 @@ export const DogShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 10px;
+  @media screen and (max-width: 600px) {
+    padding: 20px;
+  }
 `;
 
 export const DogShowWrapper = styled.div`

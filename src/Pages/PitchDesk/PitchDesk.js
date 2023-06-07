@@ -9,7 +9,7 @@ const PPComp = () => {
   return (
     <>
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-        <Viewer fileUrl={PirchDeck} width="60" />;
+        <Viewer fileUrl={PirchDeck} width="60" />
       </Worker>
     </>
   );

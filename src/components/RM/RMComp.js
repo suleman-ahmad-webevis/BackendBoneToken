@@ -12,35 +12,35 @@ const RMComp = () => {
       heading: "2022",
       desc: "Design Platform UI UX Develop Platform Front End Develop Platform admin panel",
       bgPos: "100% 0%",
-      vlHeight: "28px",
+      vlHeight: "14px",
     },
     {
       bgImg: BoxBGL,
       heading: "2023 Q1",
       desc: "Develop 2000 Product WebShop Integrate Pet Dog NFT smart contract Factory Integrate Ecosystem Stabil TokenIntegrate Fiat and Crypto payment systems",
       bgPos: "0% 100%",
-      vlHeight: "28px",
+      vlHeight: "14px",
     },
     {
       bgImg: BoxBGR,
       heading: "2023 Q2",
       desc: "Launch Platform to pet Dog Breeders through European Interational Dog Shows (CACIB) Investment Round",
       bgPos: "100% 0%",
-      vlHeight: "28px",
+      vlHeight: "14px",
     },
     {
       bgImg: BoxBGL,
       heading: "2023 Q3",
       desc: "Smart Search AI development Kennel Club data platform integration Integrate Dog sale marketplace into Multi dimensional Pedigree Database",
       bgPos: "0% 100%",
-      vlHeight: "28px",
+      vlHeight: "14px",
     },
     {
       bgImg: BoxBGR,
       heading: "2023 Q4",
       desc: "Launch Dog breeders mating algorithm",
       bgPos: "100% 0%",
-      vlHeight: "28px",
+      vlHeight: "14px",
     },
     {
       bgImg: BoxBGL,
@@ -86,12 +86,19 @@ export const RMWrapper = styled.div`
   width: 100%;
   position: relative;
   padding: 10px 0px 60px 0px;
-  @media screen and (max-width: 1110px) {
-    justify-content: flex-start;
+  @media screen and (max-width: 1900px) {
+    grid-gap: 20px;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
+    grid-gap: 15px;
+  }
+  @media screen and (max-width: 1125px) {
+    grid-gap: 10px;
+  }
+  @media screen and (max-width: 1110px) {
     justify-content: center;
   }
+
 `;
 
 export const Box = styled.div`
@@ -99,7 +106,7 @@ export const Box = styled.div`
   background-repeat: no-repeat;
   background-position: ${({ BGPos }) => BGPos};
   height: 229px;
-  width: 28%;
+  width: 32%;
   border: 1px solid #dddfe3;
   border-radius: 24px;
   position: relative;
@@ -107,8 +114,8 @@ export const Box = styled.div`
   @media screen and (max-width: 1110px) {
     width: 70%;
   }
-  @media screen and (max-width: 768px) {
-    width: 90%;
+  @media screen and (max-width: 600px) {
+    width: 98%;
   }
 `;
 
@@ -137,7 +144,7 @@ export const VL = styled.div`
   border-left: 2px solid #0e626d4d;
   height: ${({ VLHeight }) => VLHeight};
   position: absolute;
-  bottom: ${({ VLHeight }) => (VLHeight === "28px" ? "-30px" : "-38px")};
+  bottom: ${({ VLHeight }) => (VLHeight === "14px" ? "-13px" : "-38px")};
   right: 50%;
   z-index: 0;
 `;
@@ -147,6 +154,7 @@ export const ThanksHeading = styled.h5`
   font-size: 30px;
   line-height: 100px;
   color: #000000;
+  padding-top: 20px;
 `;
 // export const RMImg = styled.img`
 //   position: absolute;

@@ -49,8 +49,8 @@ export const StyledFForm = styled(Form)`
   background: rgba(14, 98, 109, 0.1);
   border-radius: 10px;
   padding: 20px;
-  @media screen and (max-width: 768px) {
-    width: 80%;
+  @media screen and (max-width: 1110px) {
+    width: 100%;
   }
 `;
 

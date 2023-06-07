@@ -6,7 +6,9 @@ import { Counter, Items } from "../Navbar/NavbarStyles";
 //ImagesImport
 import mobCart from "../../assets/images/LandingPage/MobCart.png";
 import mobFav from "../../assets/images/LandingPage/MobFav.png";
-import mobChat from "../../assets/images/LandingPage/MobChat.png";
+import mobChat from "../../assets/images/Navbar/Tab/ChatIcon.png";
+import Settings from "../../assets/images/Navbar/Tab/Settings.png";
+
 import { useNavigate } from "react-router-dom";
 import { Img } from "../../GlobalStyles";
 import { useSelector } from "react-redux";
@@ -47,6 +49,7 @@ const CommonMobNav = () => {
           </Counter>
         </Items>
         <Img src={mobChat} alt="mobChat" />
+        <Img src={Settings} alt="settings" />
       </MobileComIcon>
     </CMNWrapper>
   );

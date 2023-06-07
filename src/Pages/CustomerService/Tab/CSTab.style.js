@@ -23,6 +23,9 @@ export const CSCard = styled.div`
   width: 90%;
   grid-gap: 15px;
   padding: 20px 10px;
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+  }
   h5 {
     font-weight: 700;
     font-size: 14px;
@@ -47,6 +50,9 @@ export const OrderUpdateSection = styled.div`
     font-weight: 700;
     font-size: 14px;
     line-height: 19px;
+  }
+  @media screen and (max-width: 1110px) {
+    width: 100%;
   }
 `;
 
@@ -85,6 +91,9 @@ export const ShippingCostSection = styled.div`
   border-radius: 10px;
   width: 90%;
   padding: 20px 10px;
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+  }
 `;
 
 export const ShippingCostHeading = styled.div`
