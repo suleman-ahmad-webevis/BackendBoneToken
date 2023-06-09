@@ -4,13 +4,15 @@ import FaqComp from "../../components/Faq/FaqComp";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
+import Back from "../../components/Back/Back";
 
 const Faq = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
     <FaqContainer>
-      {(isSmallMobile || isMobile) && <CommonMobNav  />}
+      {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+      <Back />
       <FaqHeading>
         <h5>FAQ</h5>
       </FaqHeading>
@@ -25,6 +27,9 @@ export const FaqContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
+  @media screen and (max-width: 400px) {
+    padding: 30px 10px;
+  }
 `;
 
 export const FaqHeading = styled.div`

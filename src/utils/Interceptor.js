@@ -8,7 +8,7 @@ const API = axios.create({
   // baseURL: "http://localhost:5000",
   // baseURL: "https://cooperative-kilt-tuna.cyclic.app",
   baseURL: "https://outstanding-moth-boot.cyclic.app",
-  timeout: 30000,
+  timeout: 90000,
   headers: {
     Accept: "*/*",
     "Content-Type": "application/json",

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const TokenTabNav = styled.div`
-  padding: 10px;
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
@@ -23,7 +22,10 @@ export const TTabContainer = styled.div`
   }
   @media screen and (max-width: 600px) {
     width: 100%;
-    padding: 20px 40px;
+    padding: 20px 35px;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 20px 5px;
   }
 `;
 

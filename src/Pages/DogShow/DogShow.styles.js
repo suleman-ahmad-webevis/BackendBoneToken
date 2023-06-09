@@ -9,6 +9,9 @@ export const DogShowContainer = styled.div`
   @media screen and (max-width: 600px) {
     padding: 20px;
   }
+  @media screen and (max-width: 400px) {
+    padding: 20px 5px;
+  }
 `;
 
 export const DogShowWrapper = styled.div`

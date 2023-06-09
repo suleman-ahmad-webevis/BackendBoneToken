@@ -31,6 +31,7 @@ import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../CommonMTNav/CommonMobNav";
 import CommonTabNav from "../CommonMTNav/CommonTabNav";
 import { CardData } from "./CardData";
+import Back from "../Back/Back";
 
 const TokenTab = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -41,6 +42,7 @@ const TokenTab = () => {
           {(isSmallMobile || isMobile) && <CommonMobNav />}
           {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
         </TokenTabNav>
+        <Back />
         <TTabHeading>Tokenomics</TTabHeading>
         <TTabCards>
           {CardData.map(

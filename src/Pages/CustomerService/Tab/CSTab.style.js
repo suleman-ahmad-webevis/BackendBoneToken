@@ -5,6 +5,9 @@ export const CSTabContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
+  @media screen and (max-width: 400px) {
+    padding: 20px 5px 10px 5px;
+  }
 `;
 
 export const CSHeading = styled.div`

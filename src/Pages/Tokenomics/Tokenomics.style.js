@@ -79,7 +79,6 @@ export const BuyTokenText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   width: 80%;
   margin: 0 auto;
 

@@ -36,11 +36,17 @@ export const NameDesc = styled.div`
     font-weight: 700;
     font-size: 20px;
     color: #1b153d;
+    @media screen and (max-width: 500px) {
+      font-size: 16px;
+    }
   }
   h5:nth-child(2) {
     color: #9095a6;
     font-size: 12px;
     font-weight: 500;
+    @media screen and (max-width: 500px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -52,6 +58,9 @@ export const PriceSec = styled.div`
     font-size: 24px;
     font-weight: 500;
     line-height: 19px;
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -188,6 +197,9 @@ export const Price = styled.div`
     color: #5b41ff;
     font-size: 24px;
     font-weight: 500;
+    @media screen and (max-width: 500px) {
+      font-size: 18px;
+    }
   }
 `;
 

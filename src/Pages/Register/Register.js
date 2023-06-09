@@ -36,6 +36,9 @@ export const RegContainer = styled.div`
   flex-direction: column;
   grid-gap: 20px;
   padding: 20px 20px;
+  @media screen and (max-width: 1110px) {
+    padding: 0px 20px;
+  }
 `;
 
 export const StyledFForm = styled(Form)`

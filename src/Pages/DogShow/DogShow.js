@@ -13,6 +13,7 @@ import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
 import { useDispatch } from "react-redux";
 import { getTheVideos } from "../../redux/dogShow/dogShowSlice";
+import Back from "../../components/Back/Back";
 
 const DogShow = () => {
   // const { videoInfo } = useSelector((state) => state.product);
@@ -28,7 +29,12 @@ const DogShow = () => {
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       <DogShowWrapper>
         {(isTablet || isSmallMobile || isMobile) && (
-          <DSHeading>Dog Shows</DSHeading>
+          <>
+            <div style={{ alignSelf: "flex-start" }}>
+              <Back />
+            </div>
+            <DSHeading>Dog Shows</DSHeading>
+          </>
         )}
         <MapImg>
           <Img src={WorldMap} alt="map" />

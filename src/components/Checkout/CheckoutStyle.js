@@ -309,6 +309,232 @@ export const PayButton = styled.div`
   }
 `;
 
+//For Tab
+export const SInfoHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15.12px;
+  }
+`;
+
+export const CheckoutData = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+`;
+
+export const SInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 25px;
+  background: rgba(245, 242, 255, 1);
+  padding: 20px;
+  border-radius: 10px;
+`;
+
+export const SNameAddress = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+  h5 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #281f17;
+  }
+`;
+
+export const Address = styled.div`
+  display: flex;
+  grid-gap: 5px;
+  p {
+    width: 95%;
+  }
+`;
+
+export const LocationImg = styled.div`
+  width: 5%;
+`;
+
+export const CInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 25px;
+  background: rgba(245, 242, 255, 1);
+  padding: 20px;
+  border-radius: 10px;
+  h3 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 27px;
+    color: #281f17;
+  }
+`;
+
+export const CourierInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+`;
+
+export const CInfoHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const PaymentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+`;
+
+export const PaymentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  span:nth-child(1) {
+    color: #281f17;
+  }
+  span:nth-child(2) {
+    color: rgba(77, 45, 206, 1);
+  }
+`;
+
+export const CardWrapper = styled.div`
+  background: linear-gradient(
+    108.03deg,
+    #ffb199 0%,
+    #ff84bb 69.75%,
+    #fdb2e8 108.34%
+  );
+  border-radius: 15px;
+`;
+
+export const CardData = styled.div`
+  width: 90%;
+  padding: 20px 0px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 177px;
+`;
+
+export const CardHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  color: ${({ Color }) => Color ?? "#fff"};
+  h2 {
+    font-weight: 700;
+    font-size: 32.6667px;
+    line-height: 49px;
+    letter-spacing: 0.025em;
+    color: #011b1f;
+  }
+  h5 {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 19px;
+  }
+  p {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+  }
+`;
+
+export const SummarySec = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  h5 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #281f17;
+  }
+`;
+
+export const AmountSec = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+`;
+
+export const AmountIs = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TitleIs = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #989898;
+`;
+export const Price = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #989898;
+`;
+
+export const POBtn = styled.div`
+  height: 81px;
+  background: #0e626d;
+  border-radius: 10px;
+  button {
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.24) 4px 8px 4px;
+    border-radius: 10px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 75%;
+    width: 90%;
+    margin: 2% auto;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.025em;
+    color: #281f17;
+    cursor: pointer;
+  }
+`;
+
+export const PaymentOpts = styled.div`
+  display: flex;
+  grid-gap: 10px;
+`;
+
+export const CryptoWrapper = styled.div`
+  background: linear-gradient(107.95deg, #fbfdb2 0%, #76ffa5 100%);
+  border-radius: 15px;
+`;
+
 //OrderHistory
 export const OrderHistoryWrapper = styled.div`
   display: flex;

@@ -22,7 +22,10 @@ const Products = () => {
 };
 
 export const ProductPageContainer = styled.div`
-  padding: 20px 0;
+  padding: 20px 0px;
+  @media screen and (max-width: 1110px) {
+    padding: 0px;
+  }
 `;
 
 export const ProductsListContainer = styled.div`

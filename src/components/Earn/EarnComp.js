@@ -9,6 +9,7 @@ import useBreakpoint from "../../hooks/useBreakPoint";
 import EarnTab from "./Tab/EarnTab";
 import CommonMobNav from "../CommonMTNav/CommonMobNav";
 import CommonTabNav from "../CommonMTNav/CommonTabNav";
+import Back from "../Back/Back";
 
 const EarnComp = () => {
   const [swapComp, setSwapComp] = useState(true);
@@ -19,7 +20,10 @@ const EarnComp = () => {
       {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
       {(isTablet || isSmallMobile || isMobile) && (
-        <TabHeading>2Earn</TabHeading>
+        <>
+          <Back />
+          <TabHeading>2Earn</TabHeading>
+        </>
       )}
       <TEBtnSection swapComp={swapComp} setSwapComp={setSwapComp} />
       {isDesktop ? (
@@ -44,6 +48,9 @@ export const EarnCompContainer = styled.div`
   flex-direction: column;
   grid-gap: 25px;
   padding: 15px 20px;
+  @media screen and (max-width: 400px) {
+    padding: 15px 0px;
+  }
 `;
 
 export const TabHeading = styled.h5`

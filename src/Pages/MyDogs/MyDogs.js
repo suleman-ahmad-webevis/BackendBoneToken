@@ -16,6 +16,9 @@ export const MyDogsContainer = styled.div`
   flex-direction: column;
   grid-gap: 15px;
   padding: 0px 15px;
+  @media screen and (max-width: 400px) {
+    padding: 2px;
+  }
 `;
 
 export default MyDogs;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useBreakpoint from "../../hooks/useBreakPoint";
 import CommonMobNav from "../../components/CommonMTNav/CommonMobNav";
 import CommonTabNav from "../../components/CommonMTNav/CommonTabNav";
+import Back from "../../components/Back/Back";
 
 const RM = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -12,6 +13,11 @@ const RM = () => {
     <RMContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+      {(isTablet || isSmallMobile || isMobile) && (
+        <div style={{ alignSelf: "flex-start" }}>
+          <Back />
+        </div>
+      )}
       <RMHeading>Roadmap</RMHeading>
       <RMComp />
     </RMContainer>

@@ -34,6 +34,7 @@ import { Worker } from "@react-pdf-viewer/core";
 import { Viewer } from "@react-pdf-viewer/core";
 // Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import Back from "../../../components/Back/Back";
 
 const CSTab = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
@@ -44,6 +45,7 @@ const CSTab = () => {
     <CSTabContainer>
       {(isSmallMobile || isMobile) && <CommonMobNav />}
       {(isTablet || isSmallMobile || isMobile) && <CommonTabNav />}
+      <Back />
       <CSHeading>
         <h5>Customer Service</h5>
       </CSHeading>
