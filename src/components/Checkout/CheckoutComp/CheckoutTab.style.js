@@ -9,7 +9,7 @@ export const CTabContainer = styled.div`
   grid-gap: 30px;
   padding: 20px 0px 20px 30px;
   @media screen and (max-width: 950px) {
-    width: 98%;
+    width: 95%;
     padding: 20px 0px 20px 25px;
   }
   @media screen and (max-width: 400px) {
