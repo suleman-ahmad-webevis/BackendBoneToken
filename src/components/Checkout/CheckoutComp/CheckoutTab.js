@@ -127,7 +127,7 @@ const CheckoutTab = ({
                       <CheckoutBtn>
                         <SubTotal>
                           <span>Subtotal</span>
-                          <h5>&euro; 000.00</h5>
+                          <h5>&euro; {cartTotalAmountIs.toFixed(2)}</h5>
                         </SubTotal>
                         <CheckOut onClick={() => setPage((page) => page + 1)}>
                           <h5>CHECK OUT</h5>
