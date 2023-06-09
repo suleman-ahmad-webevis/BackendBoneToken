@@ -8,7 +8,7 @@ export const CTabContainer = styled.div`
   justify-content: space-between;
   grid-gap: 30px;
   padding: 20px 0px 20px 30px;
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1110px) {
     width: 95%;
     padding: 20px 0px 20px 25px;
   }
