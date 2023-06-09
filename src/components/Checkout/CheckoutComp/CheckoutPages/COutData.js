@@ -15,7 +15,6 @@ import {
   LocationImg,
   POBtn,
   PaymentHeader,
-  PaymentOpts,
   PaymentWrapper,
   Price,
   SInfoHeader,
@@ -31,12 +30,7 @@ import RightArrow from "../../../../assets/images/RightArrow.png";
 import MasterCardLogo from "../../../../assets/images/PayMethod/MasterCardLogo.png";
 import Tick from "../../../../assets/images/PayMethod/Tick.png";
 import SmallTick from "../../../../assets/images/PayMethod/SmallTick.png";
-import {
-  CardOpt,
-  CardOptBox,
-  CryptoOpt,
-  SelectCard,
-} from "../CheckoutTab.style";
+import { CardOpt, CardOptBox, SelectCard } from "../CheckoutTab.style";
 
 const COutData = () => {
   const [PM, setPM] = useState(null);
