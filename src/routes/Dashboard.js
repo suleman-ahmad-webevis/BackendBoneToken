@@ -115,14 +115,14 @@ const Dashboard = () => {
 
   //Cart
   const dispatch = useDispatch();
-  const { cartQuantityIs } = useSelector((state) => state.cart);
+  const { cartQuantityIs, cartItems } = useSelector((state) => state.cart);
   const { favouritesTotalQuantity } = useSelector((state) => state.favourites);
 
   useEffect(() => {
     dispatch(getCartTotal());
     dispatch(getTotalsFavourites());
     // eslint-disable-next-line
-  }, [cartQuantityIs, favouritesTotalQuantity]);
+  }, [cartQuantityIs, favouritesTotalQuantity, cartItems]);
 
   function ScrollToTop() {
     const { pathname } = useLocation();

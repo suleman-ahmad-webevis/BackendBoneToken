@@ -29,8 +29,13 @@ import COutForm from "./CheckoutPages/COutForm";
 import COutData from "./CheckoutPages/COutData";
 import NextArrow from "../../../assets/images/NextArrow.png";
 
-const CheckoutTab = ({ cartItems, cartQuantityIs, cartAmountIs }) => {
-  const [page, setPage] = useState(2);
+const CheckoutTab = ({
+  cartItems,
+  cartQuantityIs,
+  cartAmountIs,
+  cartTotalAmountIs,
+}) => {
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { isSmallMobile, isMobile } = useBreakpoint();
@@ -116,7 +121,7 @@ const CheckoutTab = ({ cartItems, cartQuantityIs, cartAmountIs }) => {
                         </TopSec>
                         <BottomSec>
                           <p>{cartItem?.name}</p>
-                          <h5>&euro; {cartItem?.minRetailPrice.toFixed(2)}</h5>
+                          <h5>&euro; {cartItem?.itemTotalPrice?.toFixed(2)}</h5>
                         </BottomSec>
                       </CartCard>
                       <CheckoutBtn>
@@ -136,7 +141,12 @@ const CheckoutTab = ({ cartItems, cartQuantityIs, cartAmountIs }) => {
           </>
         )}
         {page === 3 && <COutForm />}
-        {page === 2 && <COutData cartAmountIs={cartAmountIs} />}
+        {page === 2 && (
+          <COutData
+            cartAmountIs={cartAmountIs}
+            cartTotalAmountIs={cartTotalAmountIs}
+          />
+        )}
       </CTabContainer>
     </>
   );

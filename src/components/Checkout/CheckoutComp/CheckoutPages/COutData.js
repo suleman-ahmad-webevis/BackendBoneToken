@@ -32,7 +32,7 @@ import Tick from "../../../../assets/images/PayMethod/Tick.png";
 import SmallTick from "../../../../assets/images/PayMethod/SmallTick.png";
 import { CardOpt, CardOptBox, SelectCard } from "../CheckoutTab.style";
 
-const COutData = ({ cartAmountIs }) => {
+const COutData = ({ cartAmountIs, cartTotalAmountIs }) => {
   const [PM, setPM] = useState(null);
   const nameRef = useRef(null);
   const copyName = () => {
@@ -152,7 +152,7 @@ const COutData = ({ cartAmountIs }) => {
         <AmountSec>
           <AmountIs>
             <TitleIs>Subtotal</TitleIs>
-            <Price>&euro; {cartAmountIs.toFixed(2)}</Price>
+            <Price>&euro; {cartAmountIs?.toFixed(2)}</Price>
           </AmountIs>
           <AmountIs>
             <TitleIs>Delivery</TitleIs>
@@ -165,7 +165,7 @@ const COutData = ({ cartAmountIs }) => {
           <hr />
           <AmountIs>
             <TitleIs>Shopping Cart Total:</TitleIs>
-            <Price>&euro; 000.00</Price>
+            <Price>&euro; {cartTotalAmountIs?.toFixed(2)}</Price>
           </AmountIs>
         </AmountSec>
       </SummarySec>

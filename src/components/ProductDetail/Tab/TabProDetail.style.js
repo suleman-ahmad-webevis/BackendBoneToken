@@ -210,15 +210,17 @@ export const BtnSection = styled.div`
   align-items: center;
   background: linear-gradient(225deg, #43ff6c 0%, #0e626d 100%);
   border-radius: 10px;
-  padding: 23px 115px;
+  padding: 5px 95px;
   button {
     border: none;
-    background: none;
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
     color: #ffffff;
     white-space: nowrap;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
   }
 `;
 

@@ -35,6 +35,7 @@ const CheckOutComp = () => {
   const { cartItems, cartQuantityIs, cartAmountIs, cartTotalAmountIs } =
     useSelector((state) => state.cart);
   const { isDesktop, isSmallMobile, isMobile, isTablet } = useBreakpoint();
+
   useEffect(() => {
     dispatch(getCartTotalAmount());
     // eslint-disable-next-line
