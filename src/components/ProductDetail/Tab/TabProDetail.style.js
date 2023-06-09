@@ -218,9 +218,11 @@ export const BtnSection = styled.div`
     line-height: 23px;
     color: #ffffff;
     white-space: nowrap;
-    width: 100%;
     padding: 15px;
     background: transparent;
+    @media screen and (max-width: 400px) {
+      font-size: 18px;
+    }
   }
 `;
 
