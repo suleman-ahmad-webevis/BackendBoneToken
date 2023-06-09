@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Address,
   AmountIs,
@@ -32,8 +32,20 @@ import Tick from "../../../../assets/images/PayMethod/Tick.png";
 import SmallTick from "../../../../assets/images/PayMethod/SmallTick.png";
 import { CardOpt, CardOptBox, SelectCard } from "../CheckoutTab.style";
 
-const COutData = () => {
+const COutData = ({ cartAmountIs }) => {
   const [PM, setPM] = useState(null);
+  const nameRef = useRef(null);
+  const copyName = () => {
+    const name = nameRef.current.textContent;
+    navigator.clipboard
+      .writeText(name)
+      .then(() => {
+        console.log("The ", name);
+      })
+      .catch((error) => {
+        console.log("The error", error);
+      });
+  };
   return (
     <CheckoutData>
       <h2>Checkout</h2>
@@ -41,10 +53,10 @@ const COutData = () => {
       <SInfoWrapper>
         <SInfoHeader>
           <p>Shipping Information</p>
-          <Img src={Copy} alt="Copy" />
+          <Img src={Copy} alt="Copy" onClick={copyName} />
         </SInfoHeader>
         <SNameAddress>
-          <h5>Name</h5>
+          <h5 ref={nameRef}>Name</h5>
           <Address>
             <LocationImg>
               <Img src={Location} alt="location" />
@@ -114,8 +126,8 @@ const COutData = () => {
                 <Img src={Tick} alt="Tick" />
               </CardHeader>
               <CardInfo>
-                <h5>5135 2159 3169 1231</h5>
-                <p>Gustavo Septimus</p>
+                <h5>0000 0000 0000 0000</h5>
+                <p>Cardholder name</p>
               </CardInfo>
             </CardData>
           </CardWrapper>
@@ -140,20 +152,20 @@ const COutData = () => {
         <AmountSec>
           <AmountIs>
             <TitleIs>Subtotal</TitleIs>
-            <Price>$000.00</Price>
+            <Price>&euro; {cartAmountIs.toFixed(2)}</Price>
           </AmountIs>
           <AmountIs>
             <TitleIs>Delivery</TitleIs>
-            <Price>$000.00</Price>
+            <Price>&euro; 18</Price>
           </AmountIs>
           <AmountIs>
             <TitleIs>VAT (18%)</TitleIs>
-            <Price>$000.00</Price>
+            <Price>&euro; 10.44</Price>
           </AmountIs>
           <hr />
           <AmountIs>
             <TitleIs>Shopping Cart Total:</TitleIs>
-            <Price>$000.00</Price>
+            <Price>&euro; 000.00</Price>
           </AmountIs>
         </AmountSec>
       </SummarySec>
