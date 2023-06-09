@@ -13,7 +13,7 @@ export const CTabContainer = styled.div`
     padding: 20px 0px 20px 25px;
   }
   @media screen and (max-width: 400px) {
-    padding: 20px 0px 20px 15px;
+    padding: 20px 5px 20px 15px;
   }
 `;
 
