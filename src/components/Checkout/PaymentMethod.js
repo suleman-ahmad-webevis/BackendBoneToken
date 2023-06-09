@@ -11,7 +11,7 @@ import { createCheckoutSession } from "../../redux/payment/paymentSlice";
 
 const PaymentMethod = ({ cartItems }) => {
   const { userInfo } = useSelector((state) => state.user);
-  const { user } = userInfo;
+  const user = userInfo ? userInfo.user : null;
   const dispatch = useDispatch();
   return (
     <>
