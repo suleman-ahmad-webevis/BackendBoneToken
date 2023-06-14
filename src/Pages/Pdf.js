@@ -12,12 +12,15 @@ import { useState } from "react";
 import Loader from "../components/Loader/Loader";
 
 const Pdf = () => {
-  const nftIdIs = sessionStorage?.getItem("nftId");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDogNft({ nftId: nftIdIs }));
-    generatePDF();
+    const nftIdIs = sessionStorage?.getItem("nftId");
+    if (nftIdIs) {
+      dispatch(getDogNft({ nftId: nftIdIs }));
+      generatePDF();
+    }
+
     // eslint-disable-next-line
   }, []);
 
