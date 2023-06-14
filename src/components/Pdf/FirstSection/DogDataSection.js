@@ -29,7 +29,7 @@ const DogDataSection = ({ dog }) => {
         </DogDataSec>
         <DogDataSec AlignItem="flex-start">
           <Title>Breed</Title>
-          <Value>{dog.breed}</Value>
+          <Value>{dog?.breed}</Value>
           <Title>Name</Title>
           <Value>{dog?.dogName}</Value>
           <Title>Microchip number</Title>
