@@ -13,16 +13,12 @@ import Loader from "../components/Loader/Loader";
 
 const Pdf = () => {
   const dispatch = useDispatch();
+  const nftIdIs = sessionStorage?.getItem("nftId");
 
   useEffect(() => {
-    const nftIdIs = sessionStorage?.getItem("nftId");
-    console.log("The nftIdIs", nftIdIs);
-    console.log("The nftIdIs", typeof nftIdIs);
+    dispatch(getDogNft({ nftId: nftIdIs }));
+    generatePDF();
 
-    if (nftIdIs.length) {
-      dispatch(getDogNft({ nftId: nftIdIs }));
-      generatePDF();
-    }
     // eslint-disable-next-line
   }, []);
 
