@@ -17,6 +17,7 @@ const Pdf = () => {
   useEffect(() => {
     const nftIdIs = sessionStorage?.getItem("nftId");
     if (nftIdIs) {
+      console.log("The nftIdIs", nftIdIs);
       dispatch(getDogNft({ nftId: nftIdIs }));
       generatePDF();
     }
