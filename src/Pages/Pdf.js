@@ -16,9 +16,9 @@ const Pdf = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // eslint-disable-next-line
     dispatch(getDogNft({ nftId: nftIdIs }));
     generatePDF();
+    // eslint-disable-next-line
   }, []);
 
   const { singleDogNft } = useSelector((state) => state.dogNft);

@@ -11,6 +11,7 @@ const ViewPdf = () => {
 
   useEffect(() => {
     dispatch(getDogNft({ nftId: nftIdIs }));
+    // eslint-disable-next-line
   }, []);
 
   const { singleDogNft } = useSelector((state) => state.dogNft);
