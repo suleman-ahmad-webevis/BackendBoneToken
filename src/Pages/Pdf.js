@@ -30,7 +30,7 @@ const Pdf = () => {
   const generatePDF = () => {
     setLoading(true);
     const pdf = new jsPDF();
-    const pageHeight = pdf.internal.pageSize.getHeight();
+    // const pageHeight = pdf.internal.pageSize.getHeight();
     // First Component
     const firstComponent = document.getElementById("first");
     html2canvas(firstComponent).then((canvas) => {
