@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ownerSchema = new mongoose.Schema(
+const dogOwnerSchema = new mongoose.Schema(
   {
     ownerName: {
       type: String,
@@ -54,4 +54,4 @@ const ownerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Owner", ownerSchema);
+module.exports = mongoose.model("DogOwner", dogOwnerSchema);

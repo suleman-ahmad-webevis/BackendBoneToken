@@ -9,17 +9,17 @@ const dogNftSchema = new mongoose.Schema(
     },
     owner: {
       type: mongoose.Schema.ObjectId,
-      ref: "Owner",
+      ref: "DogOwner",
       required: false,
     },
     veterinary: {
       type: mongoose.Schema.ObjectId,
-      ref: "Veterinary",
+      ref: "DogVeterinary",
       required: false,
     },
     insurance: {
       type: mongoose.Schema.ObjectId,
-      ref: "Insurance",
+      ref: "DogInsurance",
       required: false,
     },
     dogShow: {

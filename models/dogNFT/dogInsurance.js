@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const insuranceSchema = new mongoose.Schema(
+const dogInsuranceSchema = new mongoose.Schema(
   {
     insuranceCertificateNo: {
       type: String,
@@ -22,4 +22,4 @@ const insuranceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Insurance", insuranceSchema);
+module.exports = mongoose.model("DogInsurance", dogInsuranceSchema);

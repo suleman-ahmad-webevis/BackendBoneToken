@@ -1,9 +1,9 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const DogNft = require("../models/dogNFT/dogNft");
 const DogReg = require("../models/dogNFT/dogReg");
-const Owner = require("../models/dogNFT/owner");
-const Veterinary = require("../models/dogNFT/veterinary");
-const Insurance = require("../models/dogNFT/insurance");
+const DogOwner = require("../models/dogNFT/dogOwner");
+const DogVeterinary = require("../models/dogNFT/dogVeterinary");
+const DogInsurance = require("../models/dogNFT/dogInsurance");
 const DogShow = require("../models/dogNFT/dogShow");
 const { StatusCodes } = require("http-status-codes");
 const cloudinary = require("../utils/cloudinary");
@@ -66,17 +66,17 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
     dogFatherPicCloudinaryId: uploadedDogFatherPic?.public_id ?? "",
   });
   dogReg.save();
-  const owner = new Owner({
+  const owner = new DogOwner({
     ...parsedRegisterOwner,
     ownerPic: uploadedOwnerPic?.secure_url ?? "",
     ownerPicCloudinaryId: uploadedOwnerPic?.public_id ?? "",
   });
   owner.save();
-  const veterinary = new Veterinary({
+  const veterinary = new DogVeterinary({
     ...parsedRegisterVeterinary,
   });
   veterinary.save();
-  const insurance = new Insurance({
+  const insurance = new DogInsurance({
     ...parsedRegisterInsurance,
   });
   insurance.save();
@@ -92,7 +92,9 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
     dogShow: dogShow._id,
   });
   dogNft.save();
-  return res.status(StatusCodes.CREATED).json({ message: "DogNFT created" });
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ message: "DogNFT created", nftId: dogNft._id });
 });
 
 const getAllDogNfts = catchAsyncErrors(async (req, res, next) => {
