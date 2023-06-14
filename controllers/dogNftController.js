@@ -92,9 +92,11 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
     dogShow: dogShow._id,
   });
   dogNft.save();
+  nftId = dogNft._id;
+  nftId = nftId.toString();
   return res
     .status(StatusCodes.CREATED)
-    .json({ message: "DogNFT created", nftId: dogNft._id });
+    .json({ message: "DogNFT created", nftId });
 });
 
 const getAllDogNfts = catchAsyncErrors(async (req, res, next) => {
