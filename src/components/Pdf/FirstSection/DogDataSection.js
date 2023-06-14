@@ -17,7 +17,7 @@ const DogDataSection = ({ dog }) => {
           <Title>Date of birth</Title>
           <Value>{dog?.dob}</Value>
           <Title>Country Birth</Title>
-          <Value>{dog.countryOfBirth}</Value>
+          <Value>{dog?.countryOfBirth}</Value>
           <Title>Height</Title>
           <Value>{dog?.height}</Value>
           <Title>Weight</Title>
