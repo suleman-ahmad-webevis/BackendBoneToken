@@ -43,6 +43,9 @@ import TOKENOMICS from "./Pages/Tokenomics/Tokenomics";
 import SETTINGS from "./Pages/Settings/Settings";
 import WHITEPAPER from "./Pages/WhitePaper/WhitePaper";
 import PITCHDECK from "./Pages/PitchDesk/PitchDesk";
+import PDF from "./Pages/Pdf";
+import VIEWPDF from "./Pages/ViewPdf";
+
 //NotFoundRoutes
 import AIRDROP from "./Pages/AirDrop/AirDrop";
 import NOTFOUND from "./Pages/404/NotFound";
@@ -180,6 +183,14 @@ const router = createBrowserRouter([
       {
         path: "/otp",
         element: <OTP />,
+      },
+      {
+        path: "/pdf",
+        element: <PDF />,
+      },
+      {
+        path: "/view-pdf",
+        element: <VIEWPDF />,
       },
       // {
       //   path: "/instagram-handler",

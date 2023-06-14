@@ -11,6 +11,7 @@ export const CreateDogNftBtn = styled.button`
   font-size: 24px;
   line-height: 41px;
   color: #ffffff;
+  cursor: pointer;
   /* margin-top: 40px; */
   @media screen and (max-width: 880px) {
     font-size: 20px;

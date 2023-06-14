@@ -7,22 +7,28 @@ import Mail from "../../../../assets/images/CreateNFT/Mail.png";
 import Copy from "../../../../assets/images/CreateNFT/Copy.png";
 import URL from "../../../../assets/images/CreateNFT/URL.png";
 import { useNavigate } from "react-router-dom";
-import QRCode from "../../../../assets/images/CreateNFT/QRCode.png";
+// import QRCode from "../../../../assets/images/CreateNFT/QRCode.png";
 import Download from "../../../../assets/images/CreateNFT/Download.png";
 import Tag from "../../../../assets/images/CreateNFT/Tags.png";
 import useBreakpoint from "../../../../hooks/useBreakPoint";
 // import { FormFooter } from "../../UserStyles";
+import QRCode from "react-qr-code";
 
 const Confirmation = () => {
   const navigate = useNavigate();
-
+  const nftIdIs = sessionStorage?.getItem("nftId");
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
     <ConfirmationContainer>
       <CertificateInfo>
-        <CertificateTitle>
-          <Img src={QRCode} alt="QRCode" />
-        </CertificateTitle>
+        <QR>
+          <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value="http://localhost:3000/view-pdf"
+            viewBox={`0 0 256 256`}
+          />
+        </QR>
         <CertificateTitle>
           <p style={{ color: "#000" }}>QR code </p>
         </CertificateTitle>
@@ -46,17 +52,16 @@ const Confirmation = () => {
       <ConfirmationButton BGColor="#3F197D">
         View Blockchain Certificate
       </ConfirmationButton>
-      <ConfirmationButton
-        BGColor="#0E626D"
-        onClick={() => navigate("/certificate")}
-      >
+      <ConfirmationButton BGColor="#0E626D" onClick={() => navigate("/pdf")}>
         <p>Download Certificate</p>
         <Img src={Download} />
       </ConfirmationButton>
       {isDesktop ? (
         <ConfirmationButton>
           <Img src={URL} alt="URL" />{" "}
-          <a href='google.com'>https://bscscan.com/token/0x438fc473ba340d0734e2d05acdf.....</a>
+          <a href="google.com">
+            https://bscscan.com/token/0x438fc473ba340d0734e2d05acdf.....
+          </a>
           <Img src={Copy} alt="Copy" />
         </ConfirmationButton>
       ) : (
@@ -98,7 +103,15 @@ const CertificateInfo = styled.div`
   grid-gap: 15px;
 `;
 
-const CertificateTitle = styled.div``;
+const QR = styled.div`
+  width: 10%;
+`;
+
+const CertificateTitle = styled.div`
+  p {
+    color: "#000";
+  }
+`;
 
 const Title = styled.div`
   align-self: center;

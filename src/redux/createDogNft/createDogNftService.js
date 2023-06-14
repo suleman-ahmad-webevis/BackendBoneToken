@@ -6,8 +6,9 @@ const createDogNft = async ({ obj, allFormsData }) => {
   const res = await API.post(API_URL, allFormsData);
   if (res.status === 200 || res.status === 201) {
     obj.navigate("/create-dog-nft/congratulations");
+    sessionStorage.setItem("nftId", res?.data?.nftId);
   }
-  toast.success(res.data.message, { theme: "colored" });
+  toast.success(res?.data?.message, { theme: "colored" });
   return res.data;
 };
 
@@ -18,7 +19,7 @@ const getAllDogNft = async () => {
 };
 
 const getDogNft = async (obj) => {
-  let API_URL = `dogNft/getDogNft/${obj.id}`;
+  let API_URL = `dogNft/getDogNft/${obj.nftId}`;
   const res = await API.get(API_URL);
   return res.data;
 };

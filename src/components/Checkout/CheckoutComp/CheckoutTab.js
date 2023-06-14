@@ -140,13 +140,14 @@ const CheckoutTab = ({
             </CartDetails>
           </>
         )}
-        {page === 3 && <COutForm />}
         {page === 2 && (
           <COutData
             cartAmountIs={cartAmountIs}
             cartTotalAmountIs={cartTotalAmountIs}
+            setPage={setPage}
           />
         )}
+        {page === 3 && <COutForm />}
       </CTabContainer>
     </>
   );

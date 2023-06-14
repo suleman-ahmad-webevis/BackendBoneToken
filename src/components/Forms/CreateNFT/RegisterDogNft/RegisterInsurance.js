@@ -46,7 +46,6 @@ const RegisterInsurance = () => {
   const handleSave = (e) => {
     e.preventDefault();
     setIns((prev) => {
-      console.log("ins", ins);
       const updatedIns = [...prev, insurance];
       sessionStorage.setItem("registerInsurance", JSON.stringify(updatedIns));
       return updatedIns;
@@ -186,13 +185,13 @@ const RegisterInsurance = () => {
               src={Back}
               alt="back"
               onClick={() => {
-                navigate("/createDogNFT/veterinaryRegister");
+                navigate("/createDogNFT/register-veterinary");
               }}
             />
           </NextButton>
           <NextButton
             onClick={() => {
-              navigate("/createDogNFT/register-dogShow");
+              navigate("/create-dog-nft/register-dogShow");
             }}
           >
             <Img src={Next} alt="next" />

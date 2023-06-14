@@ -12,7 +12,6 @@ export const getTheVideos = createAsyncThunk(
   "product/getTheProducts",
   async (obj, thunkAPI) => {
     try {
-      console.log(obj);
       return await DogShowService.getTheVideosService();
     } catch (error) {
       const message = error.message;

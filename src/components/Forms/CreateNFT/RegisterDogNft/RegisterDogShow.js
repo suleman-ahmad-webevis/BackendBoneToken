@@ -245,7 +245,9 @@ const RegisterDogShow = () => {
               <h1>Save</h1>
             </SaveText>
           </SaveNftBtn>
-          <CreateDogNftBtn type="submit">Create Dog NFT</CreateDogNftBtn>
+          <CreateDogNftBtn onClick={handleSubmit}>
+            Create Dog NFT
+          </CreateDogNftBtn>
         </SaveCreateNft>
         <PageChanged>
           <NextButton Back>
@@ -253,7 +255,7 @@ const RegisterDogShow = () => {
               src={Back}
               alt="back"
               onClick={() => {
-                navigate("/create-dog-nft/register-insurance");
+                navigate("/create-dog-nft/register-veterinary");
               }}
             />
           </NextButton>

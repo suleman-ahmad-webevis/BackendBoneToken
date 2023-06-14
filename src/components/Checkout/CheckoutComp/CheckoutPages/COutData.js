@@ -32,7 +32,7 @@ import Tick from "../../../../assets/images/PayMethod/Tick.png";
 import SmallTick from "../../../../assets/images/PayMethod/SmallTick.png";
 import { CardOpt, CardOptBox, SelectCard } from "../CheckoutTab.style";
 
-const COutData = ({ cartAmountIs, cartTotalAmountIs }) => {
+const COutData = ({ cartAmountIs, cartTotalAmountIs, setPage }) => {
   const [PM, setPM] = useState(null);
   const nameRef = useRef(null);
   const copyName = () => {
@@ -171,7 +171,7 @@ const COutData = ({ cartAmountIs, cartTotalAmountIs }) => {
       </SummarySec>
       {/* PlaceOrderBtn */}
       <POBtn>
-        <button>PLACE ORDER</button>
+        <button onClick={() => setPage(3)}>PLACE ORDER</button>
       </POBtn>
     </CheckoutData>
   );
