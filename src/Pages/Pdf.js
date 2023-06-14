@@ -20,7 +20,6 @@ const Pdf = () => {
       dispatch(getDogNft({ nftId: nftIdIs }));
       generatePDF();
     }
-
     // eslint-disable-next-line
   }, []);
 
