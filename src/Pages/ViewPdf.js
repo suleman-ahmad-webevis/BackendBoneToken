@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import FirstSection from "../components/Pdf/FirstSection/FirstSection";
 import SecondSection from "../components/Pdf/SecondSection/SecondSection";
 import { getDogNft } from "../redux/createDogNft/createDogNftSlice";

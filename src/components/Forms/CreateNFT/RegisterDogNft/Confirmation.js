@@ -16,7 +16,7 @@ import QRCode from "react-qr-code";
 
 const Confirmation = () => {
   const navigate = useNavigate();
-  const nftIdIs = sessionStorage?.getItem("nftId");
+  // const nftIdIs = sessionStorage?.getItem("nftId");
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
   return (
     <ConfirmationContainer>

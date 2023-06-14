@@ -26,6 +26,7 @@ const RegisterInsurance = () => {
     JSON.parse(sessionStorage.getItem("registerInsurance")) ?? {}
   );
   const [ins, setIns] = useState([]);
+  console.log("The ins", ins);
   const [insurance, setInsurance] = useState({
     contactName: sessionData[0]?.contactName ?? "",
     certificateNo: sessionData[0]?.certificateNo ?? "",

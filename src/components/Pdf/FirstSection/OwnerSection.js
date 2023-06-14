@@ -6,7 +6,7 @@ import { Img } from "../../../GlobalStyles";
 import styled from "styled-components";
 import OwnerPaw from "../../../assets/images/Pdf/OwnerPaw.png";
 import Site from "../../../assets/images/Pdf/Site.png";
-import { PdfImgHolder } from "../../../Pages/Pdf";
+// import { PdfImgHolder } from "../../../Pages/Pdf";
 
 const OwnerSection = ({ owner }) => {
   return (
