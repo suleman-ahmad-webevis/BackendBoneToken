@@ -5,7 +5,6 @@ dotenv.config({ path: "config.env" });
 const cors = require("cors");
 const connectDB = require("./config/database");
 const errorMiddleware = require("./middleware/error");
-
 //Routes
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
