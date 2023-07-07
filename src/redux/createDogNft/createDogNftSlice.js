@@ -41,8 +41,8 @@ export const getAllNfts = createAsyncThunk(
     try {
       return await createDogNftService.getAllDogNft();
     } catch (err) {
-      const message = err.message;
-      toast.error(message, { theme: "colored" });
+      const message = err.response.data.message;
+      // toast.error(message, { theme: "colored" });
       return thunkAPI.rejectWithValue(message);
     }
   }

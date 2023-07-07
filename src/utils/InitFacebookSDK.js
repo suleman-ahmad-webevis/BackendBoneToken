@@ -12,10 +12,8 @@
 //         xfbml: true,
 //         version: "v15.0",
 //       });
-
 //       resolve();
 //     };
-
 //     // Load the Facebook SDK script.
 //     (function (d, s, id) {
 //       var js,
