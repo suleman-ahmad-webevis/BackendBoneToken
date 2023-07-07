@@ -282,7 +282,6 @@ const productFeaturedPost = catchAsyncErrors(async (req, res, next) => {
 
 //Post/Put Product Review
 // const postProductReview = catchAsyncErrors(async (req, res,next) => {
-  console.log('Called');
 //   const { rating, productId } = req.body;
 //   const review = {
 //     userId: req.userId,

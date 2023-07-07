@@ -105,6 +105,8 @@ const getAllDogNfts = catchAsyncErrors(async (req, res, next) => {
   );
   if (allDogNfts.length) {
     return res.status(StatusCodes.OK).json({ data: allDogNfts });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ message: "DogNFT not found" });
   }
 });
 
