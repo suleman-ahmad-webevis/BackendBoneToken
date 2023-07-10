@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import {
+  AddQRSec,
   BChain,
   BChainsWrapper,
+  EnterQR,
   SBCContainer,
   SBCHeading,
+  QR,
 } from "./CreateNFT.style";
 import Binance from "../../../../assets/images/CreateNFT/SBC/Binance.png";
 import Solana from "../../../../assets/images/CreateNFT/SBC/Solana.png";
@@ -13,6 +16,7 @@ import Skip from "../../../../assets/images/CreateNFT/Skip.png";
 import { Img } from "../../../../GlobalStyles";
 import { NextButton } from "../../UserStyles";
 import { useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
 
 const SelectBlockChain = () => {
   const navigate = useNavigate();
@@ -51,6 +55,20 @@ const SelectBlockChain = () => {
           <Img src={Binance} />
         </BChain>
       </BChainsWrapper>
+      <AddQRSec>
+        <h5>Add a QR code...</h5>
+      </AddQRSec>
+      <EnterQR>
+        <QR>
+          <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value="https://kennel.ai/view-pdf"
+            viewBox={`0 0 256 256`}
+          />
+        </QR>
+        <input placeholder="Qr Code" />
+      </EnterQR>
       <NextButton onClick={() => navigate("/create-dog-nft/register-dogData")}>
         <Img src={Skip} alt="skip" />
       </NextButton>

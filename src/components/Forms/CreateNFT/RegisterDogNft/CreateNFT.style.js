@@ -105,6 +105,35 @@ export const BChainsWrapper = styled.div`
   justify-content: center;
 `;
 
+export const AddQRSec = styled.div`
+  h5 {
+    color: #0e626d;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 95%;
+  }
+`;
+
+export const QR = styled.div`
+  width: 15%;
+`;
+
+export const EnterQR = styled.div`
+  display: flex;
+  align-items: center;
+  grid-gap: 20px;
+  input {
+    border-radius: 8px;
+    border: 2px solid rgba(121, 153, 157, 0.15);
+    background: #fff;
+    padding: 10px;
+    height: 50px;
+    outline: none;
+    width: 452px;
+  }
+`;
+
 export const BChain = styled.div`
   display: flex;
   justify-content: center;
