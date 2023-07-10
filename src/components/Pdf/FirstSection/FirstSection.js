@@ -16,11 +16,12 @@ import Logo from "../../../assets/images/Pdf/Logo.png";
 import Qr from "../../../assets/images/Pdf/Qr.png";
 import RightPaw from "../../../assets/images/Pdf/RightPaw.png";
 import LeftPaw from "../../../assets/images/Pdf/LeftPaw.png";
+import BG from "../../../assets/images/Pdf/BG.png";
 
 const FirstSection = ({ dog, owner, veterinary }) => {
   return (
     <FSPer>
-      <FSWrapper id="first">
+      <FSWrapper id="first" BG={BG}>
         {" "}
         <Header>
           <RightHead>
@@ -67,9 +68,13 @@ export const FSWrapper = styled.div`
   padding-top: 30px;
   margin: auto;
   /* width: 587px;*/
-  width: 1122px;
+  width: 100%;
+  max-width: 1122px;
   /* height: 834px; */
   height: 1587px;
+  background-image: ${({ BG }) => `url(${BG})`};
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const FSPer = styled.div`

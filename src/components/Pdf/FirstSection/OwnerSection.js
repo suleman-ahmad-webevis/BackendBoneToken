@@ -17,8 +17,12 @@ const OwnerSection = ({ owner }) => {
           <h5>Owner</h5>
         </OwnerBasicInfo>
         <SocialIcons>
-          <Img src={Facebook} alt="Facebook" />
-          <Img src={Twitter} alt="Facebook" />
+          <a href={owner?.fbPage} target="_blank" rel="noreferrer">
+            <Img src={Facebook} alt="Facebook" />
+          </a>
+          <a href={owner?.fbPage} target="_blank" rel="noreferrer">
+            <Img src={Twitter} alt="Twitter" />
+          </a>
         </SocialIcons>
       </OSHead>
       <OwnerInfo>
@@ -35,22 +39,38 @@ const OwnerSection = ({ owner }) => {
           <Img src={OwnerPaw} alt="OwnerPaw" />
         </PawItems>
         <OwnerValues>
-          <h5>{owner?.ownerName}</h5>
-          <h5>{owner?.breederKennelName}</h5>
-          <h5>{owner?.email}</h5>
-          <h5>{owner?.phone}</h5>
+          <h5>{owner?.ownerName ? owner?.ownerName : "-"}</h5>
+          <h5>{owner?.breederKennelName ? owner?.breederKennelName : "-"}</h5>
+          <h5>{owner?.email ? owner?.email : "-"}</h5>
+          <h5>{owner?.phone ? owner?.phone : "-"}</h5>
         </OwnerValues>
       </OwnerInfo>
       <OwnerSites>
         <OwnerSite>
           <Img src={Site} alt="Site" />
           <h5>Breeder website :</h5>
-          <span>https//moonbasekennels.com</span>
+          <a
+            href={owner?.breederWebsite ? owner?.breederWebsite : "-"}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              textDecoration: owner?.breederWebsite ? "underline" : "none",
+            }}
+          >
+            {owner?.breederWebsite ? owner?.breederWebsite : "-"}
+          </a>
         </OwnerSite>
         <OwnerSite>
           <Img src={Site} alt="Site" />
           <h5> Owner website :</h5>
-          <span>https//samsondobes.com</span>
+          <a
+            href={owner?.website}
+            target="_blank"
+            rel="noreferrer"
+            style={{ textDecoration: owner?.website ? "underline" : "none" }}
+          >
+            {owner?.website ? owner?.website : "-"}
+          </a>
         </OwnerSite>
       </OwnerSites>
     </OSWrapper>
@@ -73,7 +93,7 @@ export const OSHead = styled.div`
   width: 20%;
   h5 {
     font-weight: 900;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -83,6 +103,9 @@ export const OwnerBasicInfo = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 10px;
+  img {
+    border-radius: 20px;
+  }
 `;
 
 export const SocialIcons = styled.div`
@@ -96,8 +119,9 @@ export const OwnerInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  width: 35%;
+  width: 60%;
   padding-left: 80px;
+  font-size: 20px;
 `;
 
 export const OwnerDetails = styled.div`
@@ -125,7 +149,7 @@ export const PawItems = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 10px;
-  height: 100%;
+  height: 85%;
   justify-content: space-between;
 `;
 
@@ -133,8 +157,9 @@ export const OwnerSites = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
-  width: 55%;
+  width: 60%;
   padding-left: 80px;
+  font-size: 18px;
 `;
 
 export const OwnerSite = styled.div`
@@ -143,6 +168,7 @@ export const OwnerSite = styled.div`
   grid-gap: 10px;
   h5 {
     color: #000000;
+    white-space: nowrap;
   }
   span {
     color: rgba(47, 83, 182, 1);

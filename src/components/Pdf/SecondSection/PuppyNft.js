@@ -11,33 +11,33 @@ const PuppyNft = () => {
         <h5>Puppy NFTS</h5>
       </PNFTHead>
       <PNFTData>
-        <PNFTSec AlignItem="center">
+        <PNFTSec>
           <Title>Male/Female</Title>
-          <Value>Female</Value>
+          <Value>-</Value>
           <Title>Date of birth</Title>
-          <Value>10/01/2023</Value>
+          <Value>-</Value>
           <Title>Country Birth</Title>
-          <Value>Netherlands</Value>
+          <Value>-</Value>
           <Title>Height</Title>
-          <Value>20cm</Value>
+          <Value>-</Value>
           <Title>Weight</Title>
-          <Value>32kg</Value>
+          <Value>-</Value>
           <Title>Length</Title>
-          <Value>24cm</Value>
+          <Value>-</Value>
           <Title>Coat type</Title>
-          <Value>Smooth</Value>
+          <Value>-</Value>
         </PNFTSec>
         <PNFTSec AlignItem="flex-start">
           <Title>Breed</Title>
-          <Value>Doberman</Value>
+          <Value>-</Value>
           <Title>Name</Title>
-          <Value>Jane</Value>
+          <Value>-</Value>
           <Title>Microchip number</Title>
-          <Value>4347dewfhjwek</Value>
+          <Value>-</Value>
           <Title> QR number </Title>
-          <Value>1727281819 </Value>
+          <Value>- </Value>
           <Title>BSC Scan</Title>
-          <Value>https://bscscan.com/</Value>
+          <Value>-</Value>
         </PNFTSec>
       </PNFTData>
     </PNFTWrapper>
@@ -63,7 +63,7 @@ export const PNFTHead = styled.div`
   }
   h5 {
     font-weight: 900;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -73,8 +73,9 @@ export const PNFTData = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding-left: 80px;
+  font-size: 20px;
 `;
 
 export const PNFTSec = styled.div`
@@ -87,8 +88,10 @@ export const PNFTSec = styled.div`
 
 export const Title = styled.div`
   width: 50%;
+  padding: 5px 0px;
 `;
 
 export const Value = styled.div`
   width: 50%;
+  padding: 5px 0px;
 `;

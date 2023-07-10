@@ -3,7 +3,7 @@ import DogShow from "../../../assets/images/Pdf/DogShow.png";
 import styled from "styled-components";
 import { Img } from "../../../GlobalStyles";
 
-const DogShowSection = () => {
+const DogShowSection = ({ dogShow }) => {
   return (
     <DSWrapper>
       <DSHead>
@@ -11,24 +11,28 @@ const DogShowSection = () => {
         <h5>DogShows Results</h5>
       </DSHead>
       <DSDataWrapper>
-        <DSData>
-          <DSItem>Show name</DSItem>
-          <DSItem>Komarom</DSItem>
-          <DSItem>Country</DSItem>
-          <DSItem>Hungary</DSItem>
-          <DSItem>Date</DSItem>
-          <DSItem>01-03 October 2020</DSItem>
-          <DSItem>Judge</DSItem>
-          <DSItem>Norbert Schlosser</DSItem>
-          <DSItem>Class</DSItem>
-          <DSItem> Group 5</DSItem>
-          <DSItem>Place</DSItem>
-          <DSItem> Reserve</DSItem>
-          <DSItem>Show Critique</DSItem>
-          <DSItem> ✅</DSItem>
-          <DSItem> Podium Photos</DSItem>
-          <DSItem> ✅</DSItem>
-        </DSData>
+        {dogShow?.shows.length
+          ? dogShow?.shows.map((val, idx) => (
+              <DSData key={idx}>
+                <DSItem>Show name</DSItem>
+                <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
+                <DSItem>Country</DSItem>
+                <DSItem Colored>{val?.country ? val?.country : "-"}</DSItem>
+                <DSItem>Date</DSItem>
+                <DSItem Colored>{val?.date ? val?.date : "-"}</DSItem>
+                <DSItem>Judge</DSItem>
+                <DSItem Colored>{val?.judge ? val?.judge : "-"}</DSItem>
+                <DSItem>Class</DSItem>
+                <DSItem Colored> {val?.class ? val?.class : "-"}</DSItem>
+                <DSItem>Place</DSItem>
+                <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
+                <DSItem>Show Critique</DSItem>
+                <DSItem> ✅</DSItem>
+                <DSItem> Podium Photos</DSItem>
+                <DSItem> ✅</DSItem>
+              </DSData>
+            ))
+          : null}
       </DSDataWrapper>
     </DSWrapper>
   );
@@ -53,7 +57,7 @@ export const DSHead = styled.div`
   }
   h5 {
     font-weight: 900;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -74,8 +78,10 @@ export const DSData = styled.div`
   flex-wrap: wrap;
   width: 50%;
   grid-gap: 5px 0px;
+  font-size: 20px;
 `;
 
 export const DSItem = styled.div`
   width: 50%;
+  color: ${({ Colored }) => (Colored ? "#455B96" : "#000")};
 `;

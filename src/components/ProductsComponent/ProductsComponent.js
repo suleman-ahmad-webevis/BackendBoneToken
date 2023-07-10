@@ -67,15 +67,15 @@ const ProductsListComponent = () => {
       {isLoading && <Loader />}
       {allProducts?.length ? (
         <ProductsList id="ProductListContainer">
-          {allProducts.map((product) => (
-            <ProductCard product={product} />
+          {allProducts.map((product, idx) => (
+            <ProductCard product={product} key={idx} />
           ))}
           <InfiniteScroll
             dataLength={allProducts?.length}
             next={fetchMore}
             hasMore={allProducts?.length < total ? true : false}
             scrollableTarget="ProductListContainer"
-          ></InfiniteScroll>
+          />
         </ProductsList>
       ) : (
         <NoProducts>

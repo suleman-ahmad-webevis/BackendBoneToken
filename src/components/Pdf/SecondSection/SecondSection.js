@@ -16,10 +16,11 @@ import {
 import InsuranceSection from "./InsuranceSection";
 import DogShowSection from "./DogShow";
 import PuppyNft from "./PuppyNft";
+import BG from "../../../assets/images/Pdf/BG.png";
 
-const SecondSection = () => {
+const SecondSection = ({ insurance, dogShow }) => {
   return (
-    <SSWrapper id="second">
+    <SSWrapper id="second" BG={BG}>
       <Header>
         <RightHead>
           <Img src={Logo} alt="Logo" />
@@ -36,8 +37,8 @@ const SecondSection = () => {
           <Img src={Qr} alt="Qr" />
         </LeftHead>
       </Header>
-      <InsuranceSection />
-      <DogShowSection />
+      <InsuranceSection insurance={insurance} />
+      <DogShowSection dogShow={dogShow} />
       <PuppyNft />
       <Footer>
         <Img src={LeftPaw} alt="LeftPaw" />
@@ -65,4 +66,7 @@ export const SSWrapper = styled.div`
   /* height: 834px; */
   height: 1587px;
   justify-content: space-between;
+  background-image: ${({ BG }) => `url(${BG})`};
+  background-repeat: no-repeat;
+  background-position: center;
 `;

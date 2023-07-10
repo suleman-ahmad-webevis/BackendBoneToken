@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Img } from "../../../../GlobalStyles";
 import Congratulation from "../../../../assets/images/CreateNFT/Congratulation.png";
@@ -13,11 +13,19 @@ import Tag from "../../../../assets/images/CreateNFT/Tags.png";
 import useBreakpoint from "../../../../hooks/useBreakPoint";
 // import { FormFooter } from "../../UserStyles";
 import QRCode from "react-qr-code";
+import { getDogNft } from "../../../../redux/createDogNft/createDogNftSlice";
+import { useDispatch } from "react-redux";
 
 const Confirmation = () => {
   const navigate = useNavigate();
   // const nftIdIs = sessionStorage?.getItem("nftId");
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
+  const dispatch = useDispatch();
+  const nftIdIs = sessionStorage?.getItem("nftId");
+  useEffect(() => {
+    dispatch(getDogNft({ nftId: nftIdIs }));
+  }, []);
+
   return (
     <ConfirmationContainer>
       <CertificateInfo>

@@ -4,25 +4,20 @@ import FirstSection from "../components/Pdf/FirstSection/FirstSection";
 import SecondSection from "../components/Pdf/SecondSection/SecondSection";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { getDogNft } from "../redux/createDogNft/createDogNftSlice";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../components/Loader/Loader";
 
 const Pdf = () => {
-  const dispatch = useDispatch();
-  const nftIdIs = sessionStorage?.getItem("nftId");
+  const { singleDogNft } = useSelector((state) => state.dogNft);
+  const { dog, owner, veterinary, insurance, dogShow } = singleDogNft;
 
   useEffect(() => {
-    dispatch(getDogNft({ nftId: nftIdIs }));
     generatePDF();
     // eslint-disable-next-line
   }, []);
-
-  const { singleDogNft } = useSelector((state) => state.dogNft);
-  const { dog, owner, veterinary } = singleDogNft;
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -53,11 +48,12 @@ const Pdf = () => {
       });
     });
   };
+
   return (
     <>
       {loading && <Loader />}
       <FirstSection dog={dog} owner={owner} veterinary={veterinary} />
-      <SecondSection />
+      <SecondSection insurance={insurance} dogShow={dogShow} />
     </>
   );
 };
@@ -100,12 +96,12 @@ export const DDUserId = styled.div`
   align-items: center;
   span {
     font-weight: 600;
-    font-size: 9px;
+    font-size: 15px;
     line-height: 14px;
     color: rgba(0, 0, 0, 0.7);
   }
   h5 {
-    font-size: 9px;
+    font-size: 15px;
     line-height: 14px;
     color: rgba(0, 0, 0, 0.7);
     font-weight: bold;
@@ -118,13 +114,13 @@ export const CerNo = styled.div`
   align-items: center;
   h5:nth-child(1) {
     font-weight: 600;
-    font-size: 9px;
+    font-size: 15px;
     line-height: 95%;
     color: #455b96;
   }
   h5:nth-child(2) {
     font-weight: 800;
-    font-size: 9px;
+    font-size: 15px;
     line-height: 14px;
     color: rgba(0, 0, 0, 0.7);
   }

@@ -3,39 +3,46 @@ import Insurance from "../../../assets/images/Pdf/Insurance.png";
 import styled from "styled-components";
 import { Img } from "../../../GlobalStyles";
 
-const InsuranceSection = () => {
+const InsuranceSection = ({ insurance }) => {
   return (
     <ISWrapper>
       <ISHead>
         <Img src={Insurance} alt="Insurance" />
         <h5>Insurance Certificate</h5>
       </ISHead>
-      <ISDataWrapper>
-        <ISData>
-          <ISItem> Contact Name</ISItem>
-          <ISItem>2y8463467267</ISItem>
-        </ISData>
-        <ISData>
-          <ISItem>Certificate Number</ISItem>
-          <ISItem>2y8463467267 </ISItem>
-        </ISData>
-        <ISData>
-          <ISItem> Insurance Company Contact</ISItem>
-          <ISItem>+46000000000</ISItem>
-        </ISData>
-        <ISData>
-          <ISItem> Emergency Contact</ISItem>
-          <ISItem> +46 000000000</ISItem>
-        </ISData>
-        <ISData>
-          <ISItem> Start Date</ISItem>
-          <ISItem> DD/MM/YY </ISItem>
-        </ISData>
-        <ISData>
-          <ISItem> Expiry Date</ISItem>
-          <ISItem> DD/MM/YY </ISItem>
-        </ISData>
-      </ISDataWrapper>
+      {insurance?.insurances?.length ?
+        insurance?.insurances?.map((val, idx) => (
+          <ISDataWrapper key={idx}>
+            <ISData>
+              <ISItem> Contact Name</ISItem>
+              <ISItem Colored>
+                {val?.contactName ? val?.contactName : "-"}
+              </ISItem>
+            </ISData>
+            <ISData>
+              <ISItem>Certificate Number</ISItem>
+              <ISItem Colored>
+                {val?.certificateNo ? val?.certificateNo : "-"}{" "}
+              </ISItem>
+            </ISData>
+            <ISData>
+              <ISItem> Insurance Company Contact</ISItem>
+              <ISItem Colored>{val?.phoneOne ? val?.phoneOne : "-"}</ISItem>
+            </ISData>
+            <ISData>
+              <ISItem> Emergency Contact</ISItem>
+              <ISItem Colored> {val?.phoneTwo ? val?.phoneTwo : "-"}</ISItem>
+            </ISData>
+            <ISData>
+              <ISItem> Start Date</ISItem>
+              <ISItem Colored> {val?.startDate ? val?.startDate : "-"} </ISItem>
+            </ISData>
+            <ISData>
+              <ISItem> Expiry Date</ISItem>
+              <ISItem Colored>{val?.endDate ? val?.endDate : "-"} </ISItem>
+            </ISData>
+          </ISDataWrapper>
+        )) : null}
     </ISWrapper>
   );
 };
@@ -59,7 +66,7 @@ export const ISHead = styled.div`
   }
   h5 {
     font-weight: 900;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -75,11 +82,14 @@ export const IBasicInfo = styled.div`
 export const ISData = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 50%;
 `;
 
-export const ISItem = styled.div``;
+export const ISItem = styled.div`
+  color: ${({ Colored }) => (Colored ? "#455B96" : "#000")};
+  width: 50%;
+`;
 
 export const ISDataWrapper = styled.div`
   width: 90%;
@@ -87,4 +97,5 @@ export const ISDataWrapper = styled.div`
   flex-direction: column;
   grid-gap: 15px;
   padding-left: 80px;
+  font-size: 20px;
 `;
