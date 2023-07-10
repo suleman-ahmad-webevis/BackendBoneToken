@@ -22,33 +22,33 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
   let uploadedDogFatherPic;
   let uploadedOwnerPic;
 
-  if (parsedRegisterDog.dogPic) {
+  if (parsedRegisterDog?.dogPic) {
     uploadedDogPic = await cloudinary.uploader.upload(
-      parsedRegisterDog.dogPic,
+      parsedRegisterDog?.dogPic,
       {
         folder: "DogNFT",
       }
     );
   }
-  if (parsedRegisterDog.dogMotherPic) {
+  if (parsedRegisterDog?.dogMotherPic) {
     uploadedDogMother = await cloudinary.uploader.upload(
-      parsedRegisterDog.dogMotherPic,
+      parsedRegisterDog?.dogMotherPic,
       {
         folder: "DogNFT",
       }
     );
   }
-  if (parsedRegisterDog.dogFatherPic) {
+  if (parsedRegisterDog?.dogFatherPic) {
     uploadedDogFatherPic = await cloudinary.uploader.upload(
-      parsedRegisterDog.dogFatherPic,
+      parsedRegisterDog?.dogFatherPic,
       {
         folder: "DogNFT",
       }
     );
   }
-  if (parsedRegisterOwner.ownerPic) {
+  if (parsedRegisterOwner?.ownerPic) {
     uploadedOwnerPic = await cloudinary.uploader.upload(
-      parsedRegisterOwner.ownerPic,
+      parsedRegisterOwner?.ownerPic,
       {
         folder: "DogNFT",
       }
@@ -73,15 +73,17 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
   });
   owner.save();
   const veterinary = new DogVeterinary({
-    ...parsedRegisterVeterinary,
+    vaccines: parsedRegisterVeterinary ? [...parsedRegisterVeterinary] : [],
   });
   veterinary.save();
   const insurance = new DogInsurance({
-    ...parsedRegisterInsurance,
+    insurances: parsedRegisterInsurance ? [...parsedRegisterInsurance] : [],
+    // insurances: [...parsedRegisterInsurance],
   });
   insurance.save();
   const dogShow = new DogShow({
-    ...parsedRegisterDogShow,
+    shows: parsedRegisterDogShow ? [...parsedRegisterDogShow] : [],
+    // shows: [...parsedRegisterDogShow],
   });
   dogShow.save();
   const dogNft = new DogNft({

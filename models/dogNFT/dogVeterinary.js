@@ -2,10 +2,22 @@ const mongoose = require("mongoose");
 
 const dogVeterinarySchema = new mongoose.Schema(
   {
-    vaccinationTypes: {
-      type: String,
-      required: false,
-    },
+    vaccines: [
+      {
+        vacType: {
+          type: String,
+          required: false,
+        },
+        vacSerialNo: {
+          type: String,
+          required: false,
+        },
+        vacExpiryDate: {
+          type: Date,
+          required: false,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
