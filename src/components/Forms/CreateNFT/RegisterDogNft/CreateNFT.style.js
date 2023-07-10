@@ -110,7 +110,8 @@ export const BChain = styled.div`
   justify-content: center;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #79999d;
+  border: ${(props) =>
+    props.isSelected ? "2px solid #79999d" : "1px solid #DFDFDF"};
   border-radius: 8px;
   width: 24%;
   height: 104px;

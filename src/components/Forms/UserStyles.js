@@ -275,6 +275,10 @@ export const FileAccept = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
   video {
     position: absolute;
     width: 100%;

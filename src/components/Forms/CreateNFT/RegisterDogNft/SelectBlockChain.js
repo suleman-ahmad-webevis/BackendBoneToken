@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BChain,
   BChainsWrapper,
@@ -16,20 +16,38 @@ import { useNavigate } from "react-router-dom";
 
 const SelectBlockChain = () => {
   const navigate = useNavigate();
+
+  const [blockChain, setBlockChain] = useState(null);
+
+  const handleBlockChain = (param) => {
+    setBlockChain(param);
+  };
   return (
     <SBCContainer>
       <SBCHeading>Select Blockchain to create your Pet Dog NFT</SBCHeading>
       <BChainsWrapper>
-        <BChain>
+        <BChain
+          isSelected={blockChain === "solana"}
+          onClick={() => handleBlockChain("solana")}
+        >
           <Img src={Solana} />
         </BChain>
-        <BChain>
+        <BChain
+          isSelected={blockChain === "bitcoin"}
+          onClick={() => handleBlockChain("bitcoin")}
+        >
           <Img src={Bitcoin} />
         </BChain>
-        <BChain>
+        <BChain
+          isSelected={blockChain === "ethereum"}
+          onClick={() => handleBlockChain("ethereum")}
+        >
           <Img src={Ethereum} />
         </BChain>
-        <BChain>
+        <BChain
+          isSelected={blockChain === "binance"}
+          onClick={() => handleBlockChain("binance")}
+        >
           <Img src={Binance} />
         </BChain>
       </BChainsWrapper>
