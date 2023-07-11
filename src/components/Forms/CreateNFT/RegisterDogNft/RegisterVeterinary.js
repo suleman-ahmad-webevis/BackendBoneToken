@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 // import { registerVeterinarySchema } from "../../../../schema/createDogNftSchema";
 import VaccinationTypes from "../../VaccinationTypes";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
+import { toast } from "react-toastify";
 
 const RegisterVeterinay = () => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
@@ -47,6 +48,7 @@ const RegisterVeterinay = () => {
       sessionStorage.setItem("registerVeterinary", JSON.stringify(updatedVac));
       return updatedVac;
     });
+    toast.info("Vaccination added", { theme: "colored" });
   };
 
   return (

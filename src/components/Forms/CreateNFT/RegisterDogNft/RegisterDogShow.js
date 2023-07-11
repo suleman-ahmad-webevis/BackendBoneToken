@@ -33,8 +33,10 @@ import {
   DogShowBtns,
 } from "./CreateNFT.style";
 import Back from "../../../../assets/images/Back.png";
+import { toast } from "react-toastify";
 
 const RegisterDogShow = () => {
+  const [blockChain, setBlockChain] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sessionData] = useState(
@@ -68,12 +70,18 @@ const RegisterDogShow = () => {
       sessionStorage.setItem("registerDogShow", JSON.stringify(updatedDogShow));
       return updatedDogShow;
     });
+    toast.info("DogShow added", { theme: "colored" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createDogNft({ navigate, dogS }));
   };
+
+  const handleBlockChain = (param) => {
+    setBlockChain(param);
+  };
+
   return (
     <RegisterDogContainer>
       <Form width="90%" onSubmit={handleSubmit}>
@@ -223,16 +231,28 @@ const RegisterDogShow = () => {
       <SBCContainer>
         <SBCHeading>Select Blockchain to create your Pet Dog NFT</SBCHeading>
         <BChainsWrapper>
-          <BChain>
+          <BChain
+            isSelected={blockChain === "solana"}
+            onClick={() => handleBlockChain("solana")}
+          >
             <Img src={Solana} />
           </BChain>
-          <BChain>
+          <BChain
+            isSelected={blockChain === "solana"}
+            onClick={() => handleBlockChain("solana")}
+          >
             <Img src={Bitcoin} />
           </BChain>
-          <BChain>
+          <BChain
+            isSelected={blockChain === "solana"}
+            onClick={() => handleBlockChain("solana")}
+          >
             <Img src={Ethereum} />
           </BChain>
-          <BChain>
+          <BChain
+            isSelected={blockChain === "solana"}
+            onClick={() => handleBlockChain("solana")}
+          >
             <Img src={Binance} />
           </BChain>
         </BChainsWrapper>

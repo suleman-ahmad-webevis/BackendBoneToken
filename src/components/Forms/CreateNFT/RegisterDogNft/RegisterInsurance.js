@@ -18,6 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 // import { registerInsuranceSchema } from "../../../../schema/createDogNftSchema";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
+import { toast } from "react-toastify";
 
 const RegisterInsurance = () => {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ const RegisterInsurance = () => {
       sessionStorage.setItem("registerInsurance", JSON.stringify(updatedIns));
       return updatedIns;
     });
+    toast.info("Insurance added", { theme: "colored" });
   };
 
   return (

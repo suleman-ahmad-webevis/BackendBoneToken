@@ -63,6 +63,7 @@ const Button = styled(NavLink)`
   @media screen and (max-width: 1650px) {
     padding: 18px;
     font-size: 16px;
+    white-space: nowrap;
   }
   @media screen and (max-width: 1260px) {
     font-size: 14px;
@@ -88,7 +89,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 10px;
-
 `;
 
 export default FormFilter;

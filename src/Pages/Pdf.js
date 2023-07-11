@@ -29,6 +29,37 @@ const Pdf = () => {
     // First Component
     const firstComponent = document.getElementById("first");
     html2canvas(firstComponent).then((canvas) => {
+      pdf.link(42, 47, 3, 6, {
+        url: owner?.fbPage,
+        linkAction: 'this.openLink("_blank", owner?.instaPage)',
+        // target: {
+        //   url: owner?.website,
+        //   enabled: true,
+        //   newWindow: true,
+        // },
+      });
+      pdf.link(47, 47, 3, 6, {
+        url: owner?.instaPage,
+        target: {
+          url: owner?.website,
+          enabled: true,
+          newWindow: true,
+        },
+      });
+      pdf.link(55, 90, 50, 10, {
+        url: owner?.website,
+        target: {
+          url: owner?.website,
+          enabled: true,
+          newWindow: true,
+        },
+      });
+      // pdf.textWithLink("Vist StackOverflow here", 20, 40, {
+      //   url: "https://stackoverflow.com/",
+      //   font: "Helvetica",
+      //   fontSize: 12,
+      //   color: "blue",
+      // });
       const imgData = canvas.toDataURL("image/png");
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
