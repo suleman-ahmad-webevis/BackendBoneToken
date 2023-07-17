@@ -276,11 +276,10 @@ export const DogVideo = styled.div`
   margin: auto;
   gap: 20px;
   img {
-    width: 120px;
+    width: 100%;
     height: 76px;
-    background-position: center;
-    background-size: cover;
     border-radius: 8px;
+    object-fit: contain;
   }
   video {
     border-radius: 10px;

@@ -180,7 +180,12 @@ const EditRegisterInsurance = () => {
         <PageChanged>
           <div></div>
           {/* Empty <div> to put next on end */}
-          <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
+          <SaveEditNftBtn
+            onClick={() => handleSubmit()}
+            style={{ marginBottom: "20px" }}
+          >
+            Save
+          </SaveEditNftBtn>
         </PageChanged>
       </Form>
     </RegisterDogContainer>

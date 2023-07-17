@@ -111,6 +111,7 @@ export const ConBtn = styled.div`
     font-weight: 700;
     font-size: 16px;
     color: #ffffff;
+    cursor:pointer;
   }
 `;
 

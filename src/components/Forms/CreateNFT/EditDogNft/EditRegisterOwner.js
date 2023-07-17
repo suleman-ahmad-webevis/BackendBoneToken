@@ -24,7 +24,7 @@ import { registerOwnerSchema } from "../../../../schema/createDogNftSchema";
 import Transparent from "../../../../assets/images/transparent.png";
 import { SaveEditNftBtn } from "../RegisterDogNft/CreateNFT.style";
 
-const EditRegisterOwner = () => {
+const EditRegisterOwner = ({ owner }) => {
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerOwner")) ?? {}
@@ -41,17 +41,18 @@ const EditRegisterOwner = () => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      ownerName: sessionData.ownerName ?? "",
-      photo: sessionData.photo ?? "",
-      video: sessionData.video ?? "",
-      areYouBreeder: sessionData.areYouBreeder ?? "",
-      breederName: sessionData.breederName ?? "",
-      email: sessionData.email ?? "",
-      website: sessionData.website ?? "",
-      phone: sessionData.phone ?? "",
-      location: sessionData.location ?? "",
-      fbPage: sessionData.fbPage ?? "",
-      instaPage: sessionData.instaPage ?? "",
+      ownerName: sessionData.ownerName ?? owner?.ownerName,
+      ownerPic: sessionData.photo ?? owner?.ownerPic,
+      ownerVideoLink: sessionData.ownerVideoLink ?? owner?.ownerVideoLink,
+      areYouBreeder: sessionData.areYouBreeder ?? owner?.areYouBreeder,
+      breederKennelName:
+        sessionData.breederKennelName ?? owner?.breederKennelName,
+      email: sessionData.email ?? owner?.email,
+      website: sessionData.website ?? owner?.website,
+      phone: sessionData.phone ?? owner?.phone,
+      location: sessionData.location ?? owner?.location,
+      fbPage: sessionData.fbPage ?? owner?.fbPage,
+      instaPage: sessionData.instaPage ?? owner?.instaPage,
     },
     validationSchema: registerOwnerSchema,
     onSubmit: (data) => {
@@ -106,8 +107,8 @@ const EditRegisterOwner = () => {
                   display: "none",
                 }}
               />
-              <img src={uploadImage} alt="img" />
-              <UploadText>Photo upload</UploadText>
+              <img src={owner?.ownerPic ?? uploadImage} alt="img" />
+              {!owner?.ownerPic && <UploadText>Photo upload</UploadText>}
               <FileAccept>
                 <Img ref={uploadedImage} src={Transparent} alt="img" />
               </FileAccept>
@@ -152,14 +153,14 @@ const EditRegisterOwner = () => {
             id="outlined-basic"
             label="Breeder Kennel name"
             variant="outlined"
-            name="breederName"
-            value={values.breederName}
+            name="breederKennelName"
+            value={values.breederKennelName}
             onChange={handleChange}
             onBlur={handleBlur}
           />
           <FieldError>
-            {touched.breederName && errors.breederName && (
-              <>{errors.breederName}</>
+            {touched.breederKennelName && errors.breederKennelName && (
+              <>{errors.breederKennelName}</>
             )}
           </FieldError>
         </FormField>
@@ -256,7 +257,12 @@ const EditRegisterOwner = () => {
         <PageChanged>
           <div></div>
           {/* Empty <div> to put next on end */}
-          <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
+          <SaveEditNftBtn
+            onClick={() => handleSubmit()}
+            style={{ marginBottom: "20px" }}
+          >
+            Save
+          </SaveEditNftBtn>
         </PageChanged>
       </Form>
     </RegisterDogContainer>

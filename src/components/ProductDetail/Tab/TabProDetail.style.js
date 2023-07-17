@@ -126,7 +126,6 @@ export const DetailItem = styled.div`
     font-size: 12px;
     color: #9095a6;
     font-weight: 500;
-    white-space: nowrap;
   }
 
   @media screen and (max-width: 850px) {

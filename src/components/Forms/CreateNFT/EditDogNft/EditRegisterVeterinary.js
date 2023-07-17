@@ -19,7 +19,7 @@ import {
   SaveText,
 } from "../RegisterDogNft/CreateNFT.style";
 
-const EditRegisterVeterinary = () => {
+const EditRegisterVeterinary = ({ veterinary }) => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
@@ -120,7 +120,12 @@ const EditRegisterVeterinary = () => {
         <PageChanged>
           <div></div>
           {/* Empty <div> to put next on end */}
-          <SaveEditNftBtn onClick={() => handleSubmit()}>Save</SaveEditNftBtn>
+          <SaveEditNftBtn
+            onClick={() => handleSubmit()}
+            style={{ marginBottom: "20px" }}
+          >
+            Save
+          </SaveEditNftBtn>
         </PageChanged>
       </Form>
     </RegisterDogContainer>

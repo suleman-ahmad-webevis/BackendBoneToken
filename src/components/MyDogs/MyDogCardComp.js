@@ -15,6 +15,7 @@ import { GlobalHeading, Img } from "../../GlobalStyles";
 import MyDogSetting from "../../assets/images/MyDog/MyDogSetting.png";
 import { useNavigate } from "react-router-dom";
 const MyDogCardComp = ({ expand, setExpand, value }) => {
+  console.log("The value", value._id);
   const navigate = useNavigate();
   return (
     <>
@@ -60,7 +61,25 @@ const MyDogCardComp = ({ expand, setExpand, value }) => {
               </DetailsSec>
               <DetailsSec>
                 <GlobalHeading
+                  Color={"#8F98A8"}
+                  FontSize={"12px"}
+                  FontWeight={"400"}
+                  LineHeight={"18px"}
+                >
+                  DOB:
+                </GlobalHeading>
+                <GlobalHeading
                   Color={"#282C34"}
+                  FontSize={"12px"}
+                  FontWeight={"400"}
+                  LineHeight={"18px"}
+                >
+                  {value?.dog?.dob}
+                </GlobalHeading>
+              </DetailsSec>
+              <DetailsSec>
+                <GlobalHeading
+                  Color={"#8F98A8"}
                   FontSize={"12px"}
                   FontWeight={"400"}
                   LineHeight={"18px"}
@@ -136,6 +155,13 @@ const MyDogCardComp = ({ expand, setExpand, value }) => {
                   bg="#0E626D"
                   border="1px solid #0E626D"
                   color="#FFFFFF"
+                  onClick={() =>
+                    navigate(`/edit-dog-nft/dog-register`, {
+                      state: {
+                        dogId: value._id,
+                      },
+                    })
+                  }
                 >
                   Edit
                 </ButtonExpand>
@@ -166,7 +192,7 @@ const MyDogCardComp = ({ expand, setExpand, value }) => {
             </ExpandedBtnContainer>
           </>
         )}
-        <p onClick={() => setExpand(!expand)}>
+        <p onClick={() => setExpand(!expand)} style={{ cursor: "pointer" }}>
           {!expand ? "Expand View" : "Minimize view"}
         </p>
       </MyDogCard>

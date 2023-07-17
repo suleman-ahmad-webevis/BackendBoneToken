@@ -60,6 +60,7 @@ export const PNFTHead = styled.div`
   grid-gap: 20px;
   img {
     border-radius: 20px;
+    width: 15%;
   }
   h5 {
     font-weight: 900;

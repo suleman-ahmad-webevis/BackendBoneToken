@@ -52,17 +52,19 @@ const EditRegisterDog = ({ dog }) => {
       dob: sessionData.dob ?? dog?.dob,
       gender: sessionData.gender ?? dog?.gender,
       countryOfBirth: sessionData.countryOfBirth ?? dog?.countryOfBirth,
+      location: sessionData.location ?? dog?.location,
+      dogMotherName: sessionData.dogMotherName ?? dog?.dogMotherName,
+      dogMotherPic: sessionData.dogMotherPic ?? dog?.dogMotherPic,
+      dogMotherNftNo: sessionData.dogMotherNftNo ?? dog?.dogMotherNftNo,
+      dogFatherName: sessionData.dogFatherName ?? dog?.dogFatherName,
+      dogFatherPic: sessionData.dogFatherPic ?? dog?.dogFatherPic,
+      dogFatherNftNo: sessionData.dogFatherNftNo ?? dog?.dogFatherNftNo,
       weight: sessionData.weight ?? dog?.weight,
       height: sessionData.height ?? dog?.height,
       length: sessionData.length ?? dog?.length,
       coatType: sessionData.coatType ?? dog?.coatType,
       price: sessionData.price ?? dog?.price,
-      motherName: sessionData.motherName ?? dog?.motherName,
-      motherNFTNumber: sessionData.motherNFTNumber ?? dog?.motherNFTNumber,
-      fatherName: sessionData.fatherName ?? dog?.fatherName,
-      fatherNFTNumber: sessionData.fatherNFTNumber ?? dog?.fatherNFTNumber,
       currency: sessionData.currency ?? dog?.currency,
-      location: sessionData.location ?? dog?.location,
     },
     validationSchema: registerDogSchema,
     onSubmit: (data) => {
@@ -136,8 +138,9 @@ const EditRegisterDog = ({ dog }) => {
                   display: "none",
                 }}
               />
-              <img src={uploadImage} alt="img" />
-              <UploadText>Photo upload</UploadText>
+              <img src={values.dogPic ?? uploadImage} alt="img" />
+              {!values?.dogPic && <UploadText>Photo upload</UploadText>}
+
               <FileAccept>
                 <Img ref={uploadedImage} src={Transparent} alt="img" />
               </FileAccept>
@@ -218,15 +221,15 @@ const EditRegisterDog = ({ dog }) => {
               <FormTextField
                 id="outlined-basic"
                 label="Mother Name"
-                variant="outlined"
-                name="motherName"
-                value={values.motherName}
+                // variant="outlined"
+                name="dogMotherName"
+                value={values.dogMotherName}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <FieldError>
-                {touched.motherName && errors.motherName && (
-                  <>{errors.motherName}</>
+                {touched.dogMotherName && errors.dogMotherName && (
+                  <>{errors.dogMotherName}</>
                 )}
               </FieldError>
             </FormField>
@@ -270,15 +273,15 @@ const EditRegisterDog = ({ dog }) => {
             <FormTextField
               id="outlined-basic"
               label="Mother NFT number"
-              name="motherNFTNumber"
+              name="dogMotherNftNo"
               variant="outlined"
-              value={values.motherNFTNumber}
+              value={values.dogMotherNftNo}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <FieldError>
-              {touched.motherNFTNumber && errors.motherNFTNumber && (
-                <>{errors.motherNFTNumber}</>
+              {touched.dogMotherNftNo && errors.dogMotherNftNo && (
+                <>{errors.dogMotherNftNo}</>
               )}
             </FieldError>
           </FormField>
@@ -303,15 +306,15 @@ const EditRegisterDog = ({ dog }) => {
               <FormTextField
                 id="outlined-basic"
                 label="Father Name"
-                variant="outlined"
-                name="fatherName"
-                value={values.fatherName}
+                // variant="outlined"
+                name="dogFatherName"
+                value={values.dogFatherName}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <FieldError>
-                {touched.fatherName && errors.fatherName && (
-                  <>{errors.fatherName}</>
+                {touched.dogFatherName && errors.dogFatherName && (
+                  <>{errors.dogFatherName}</>
                 )}
               </FieldError>
             </FormField>
@@ -356,14 +359,14 @@ const EditRegisterDog = ({ dog }) => {
               id="outlined-basic"
               label="Father NFT number"
               variant="outlined"
-              name="fatherNFTNumber"
-              value={values.fatherNFTNumber}
+              name="dogFatherNftNo"
+              value={values.dogFatherNftNo}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <FieldError>
-              {touched.fatherNFTNumber && errors.fatherNFTNumber && (
-                <>{errors.fatherNFTNumber}</>
+              {touched.dogFatherNftNo && errors.dogFatherNftNo && (
+                <>{errors.dogFatherNftNo}</>
               )}
             </FieldError>
           </FormField>
@@ -402,7 +405,7 @@ const EditRegisterDog = ({ dog }) => {
         <PageChanged>
           <div></div>
           {/* Empty <div> to put next on end */}
-          <SaveEditNftBtn>Save</SaveEditNftBtn>
+          <SaveEditNftBtn style={{ marginBottom: "20px" }}>Save</SaveEditNftBtn>
         </PageChanged>
       </Form>
     </RegisterDogContainer>

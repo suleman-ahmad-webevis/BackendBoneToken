@@ -10,39 +10,43 @@ const InsuranceSection = ({ insurance }) => {
         <Img src={Insurance} alt="Insurance" />
         <h5>Insurance Certificate</h5>
       </ISHead>
-      {insurance?.insurances?.length ?
-        insurance?.insurances?.map((val, idx) => (
-          <ISDataWrapper key={idx}>
-            <ISData>
-              <ISItem> Contact Name</ISItem>
-              <ISItem Colored>
-                {val?.contactName ? val?.contactName : "-"}
-              </ISItem>
-            </ISData>
-            <ISData>
-              <ISItem>Certificate Number</ISItem>
-              <ISItem Colored>
-                {val?.certificateNo ? val?.certificateNo : "-"}{" "}
-              </ISItem>
-            </ISData>
-            <ISData>
-              <ISItem> Insurance Company Contact</ISItem>
-              <ISItem Colored>{val?.phoneOne ? val?.phoneOne : "-"}</ISItem>
-            </ISData>
-            <ISData>
-              <ISItem> Emergency Contact</ISItem>
-              <ISItem Colored> {val?.phoneTwo ? val?.phoneTwo : "-"}</ISItem>
-            </ISData>
-            <ISData>
-              <ISItem> Start Date</ISItem>
-              <ISItem Colored> {val?.startDate ? val?.startDate : "-"} </ISItem>
-            </ISData>
-            <ISData>
-              <ISItem> Expiry Date</ISItem>
-              <ISItem Colored>{val?.endDate ? val?.endDate : "-"} </ISItem>
-            </ISData>
-          </ISDataWrapper>
-        )) : null}
+      {insurance?.insurances?.length
+        ? insurance?.insurances?.map((val, idx) => (
+            <ISDataWrapper key={idx}>
+              <ISData>
+                <ISItem> Contact Name</ISItem>
+                <ISItem Colored>
+                  {val?.contactName ? val?.contactName : "-"}
+                </ISItem>
+              </ISData>
+              <ISData>
+                <ISItem>Certificate Number</ISItem>
+                <ISItem Colored>
+                  {val?.certificateNo ? val?.certificateNo : "-"}{" "}
+                </ISItem>
+              </ISData>
+              <ISData>
+                <ISItem> Insurance Company Contact</ISItem>
+                <ISItem Colored>{val?.phoneOne ? val?.phoneOne : "-"}</ISItem>
+              </ISData>
+              <ISData>
+                <ISItem> Emergency Contact</ISItem>
+                <ISItem Colored> {val?.phoneTwo ? val?.phoneTwo : "-"}</ISItem>
+              </ISData>
+              <ISData>
+                <ISItem> Start Date</ISItem>
+                <ISItem Colored>
+                  {" "}
+                  {val?.startDate ? val?.startDate : "-"}{" "}
+                </ISItem>
+              </ISData>
+              <ISData>
+                <ISItem> Expiry Date</ISItem>
+                <ISItem Colored>{val?.endDate ? val?.endDate : "-"} </ISItem>
+              </ISData>
+            </ISDataWrapper>
+          ))
+        : null}
     </ISWrapper>
   );
 };
@@ -63,6 +67,7 @@ export const ISHead = styled.div`
   grid-gap: 20px;
   img {
     border-radius: 20px;
+    width: 15%;
   }
   h5 {
     font-weight: 900;

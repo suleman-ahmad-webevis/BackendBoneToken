@@ -13,7 +13,7 @@ const OwnerSection = ({ owner }) => {
     <OSWrapper>
       <OSHead>
         <OwnerBasicInfo>
-          <Img src={Owner} alt="owner" />
+          <Img src={owner?.ownerPic ? owner?.ownerPic : Owner} alt="owner" />
           <h5>Owner</h5>
         </OwnerBasicInfo>
         <SocialIcons>
@@ -105,6 +105,7 @@ export const OwnerBasicInfo = styled.div`
   grid-gap: 10px;
   img {
     border-radius: 20px;
+    width: 36%;
   }
 `;
 
@@ -112,6 +113,11 @@ export const SocialIcons = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 10px;
+  width: 100%;
+  justify-content: center;
+  img {
+    height: 17px;
+  }
 `;
 
 export const OwnerInfo = styled.div`

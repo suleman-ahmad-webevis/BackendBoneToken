@@ -238,20 +238,20 @@ const RegisterDogShow = () => {
             <Img src={Solana} />
           </BChain>
           <BChain
-            isSelected={blockChain === "solana"}
-            onClick={() => handleBlockChain("solana")}
+            isSelected={blockChain === "bitcoin"}
+            onClick={() => handleBlockChain("bitcoin")}
           >
             <Img src={Bitcoin} />
           </BChain>
           <BChain
-            isSelected={blockChain === "solana"}
-            onClick={() => handleBlockChain("solana")}
+            isSelected={blockChain === "ethereum"}
+            onClick={() => handleBlockChain("ethereum")}
           >
             <Img src={Ethereum} />
           </BChain>
           <BChain
-            isSelected={blockChain === "solana"}
-            onClick={() => handleBlockChain("solana")}
+            isSelected={blockChain === "binance"}
+            onClick={() => handleBlockChain("binance")}
           >
             <Img src={Binance} />
           </BChain>

@@ -22,7 +22,7 @@ const ThirdForm = () => {
   const onSubmit = (values) => {
     const firstForm = sessionStorage.getItem("firstForm");
     const secondForm = sessionStorage.getItem("secondForm");
-    const sub = values.checkboxOpt[0].value;
+    const sub = values.checkboxOpt[0]?.value;
     delete values.checkboxOpt;
     dispatch(registerTheUser({ firstForm, secondForm, values, sub }));
   };
@@ -88,6 +88,7 @@ export const RegBtn = styled.div`
     font-weight: 700;
     font-size: 16px;
     color: #ffffff;
+     cursor:pointer;
   }
 `;
 export default ThirdForm;

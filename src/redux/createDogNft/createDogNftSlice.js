@@ -51,6 +51,7 @@ export const getAllNfts = createAsyncThunk(
 export const getDogNft = createAsyncThunk(
   "dogNft/getDogNft",
   async (obj, thunkAPI) => {
+    console.log("The obj", obj);
     try {
       return await createDogNftService.getDogNft(obj);
     } catch (err) {

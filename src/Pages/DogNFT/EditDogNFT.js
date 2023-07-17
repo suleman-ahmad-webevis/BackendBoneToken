@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import EditFormFilter from "../../components/Forms/CreateNFT/EditDogNft/EditFormsFilterbar";
 import EditRegisterDog from "../../components/Forms/CreateNFT/EditDogNft/EditRegisterDog";
 import EditRegisterOwner from "../../components/Forms/CreateNFT/EditDogNft/EditRegisterOwner";
@@ -12,16 +12,14 @@ import { getDogNft } from "../../redux/createDogNft/createDogNftSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const EditDogNFT = () => {
-  const { pageName, id } = useParams();
+  const { state } = useLocation();
+  const { pageName } = useParams();
   const dispatch = useDispatch();
   const { singleDogNft } = useSelector((state) => state.dogNft);
-
-
   useEffect(() => {
-    dispatch(getDogNft({ id }));
+    dispatch(getDogNft({ dogId: state?.dogId }));
     // eslint-disable-next-line
-  }, []); 
-
+  }, []);
   const getPage = () => {
     switch (pageName) {
       case "dog-register":

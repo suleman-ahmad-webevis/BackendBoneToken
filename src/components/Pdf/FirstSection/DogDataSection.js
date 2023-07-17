@@ -7,7 +7,7 @@ const DogDataSection = ({ dog }) => {
   return (
     <DDWrapper>
       <DDHead>
-        <Img src={Dog} alt="Dog" />
+        <Img src={dog?.dogPic ? dog?.dogPic : Dog} alt="Dog" />
         <h5>DogData</h5>
       </DDHead>
       <DogDataData>
@@ -67,6 +67,7 @@ export const DDHead = styled.div`
   width: 30%;
   img {
     border-radius: 20px;
+    width: 15%;
   }
   h5 {
     font-weight: 900;

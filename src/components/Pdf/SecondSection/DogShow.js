@@ -54,6 +54,7 @@ export const DSHead = styled.div`
   width: 30%;
   img {
     border-radius: 20px;
+    width: 15%;
   }
   h5 {
     font-weight: 900;

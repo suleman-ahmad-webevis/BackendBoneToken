@@ -67,8 +67,10 @@ const MyDog = () => {
         <MyDogsWrapper>
           {allDogNfts.length ? (
             <DogDetail>
-              {allDogNfts.map((value) => (
+              {allDogNfts.map((value, idx) => (
                 <MyDogCardComp
+                  idx={idx}
+                  key={idx}
                   expand={expand}
                   setExpand={setExpand}
                   value={value}
