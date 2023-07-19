@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import trophy from "../../../../assets/images/Trophy.png";
 // import search from "../../../../assets/images/Search.png";
 import person from "../../../../assets/images/Person.png";
@@ -24,10 +24,12 @@ import {
 } from "../RegisterDogNft/CreateNFT.style";
 import DogShows from "./DogShows";
 
-const EditRegisterDogShow = () => {
+const EditRegisterDogShow = ({ dogShow }) => {
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
+  const [showIdx, setShowIdx] = useState(0);
+  console.log("The showIdx", showIdx);
   const {
     values,
     touched,
@@ -38,15 +40,15 @@ const EditRegisterDogShow = () => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      showName: sessionData.showName ?? "",
-      officialShowName: sessionData.officialShowName ?? "",
-      descriptionOfEvent: sessionData.descriptionOfEvent ?? "",
-      country: sessionData.country ?? "",
-      location: sessionData.location ?? "",
-      date: sessionData.date ?? "",
-      class: sessionData.class ?? "",
-      judge: sessionData.judge ?? "",
-      result: sessionData.result ?? "",
+      showName: dogShow?.shows[1]?.showName ?? "",
+      officialShowName: dogShow?.shows[showIdx]?.officialShowName ?? "",
+      descriptionOfEvent: dogShow?.shows[showIdx]?.descriptionOfEvent ?? "",
+      country: dogShow?.shows[showIdx]?.country ?? "",
+      location: dogShow?.shows[showIdx]?.location ?? "",
+      date: dogShow?.shows[showIdx]?.date ?? "",
+      class: dogShow?.shows[showIdx]?.class ?? "",
+      judge: dogShow?.shows[showIdx]?.judge ?? "",
+      result: dogShow?.shows[showIdx]?.result ?? "",
     },
     validationSchema: registerDogShowSchema,
     onSubmit: (data) => {
@@ -55,6 +57,53 @@ const EditRegisterDogShow = () => {
       alert("Now dispatch");
     },
   });
+
+  useEffect(() => {
+    setFieldValue(
+      "showName",
+      dogShow?.shows[showIdx]?.showName ? dogShow?.shows[showIdx]?.showName : ""
+    );
+    setFieldValue(
+      "officialShowName",
+      dogShow?.shows[showIdx]?.officialShowName
+        ? dogShow?.shows[showIdx]?.officialShowName
+        : ""
+    );
+    setFieldValue(
+      "descriptionOfEvent",
+      dogShow?.shows[showIdx]?.descriptionOfEvent
+        ? dogShow?.shows[showIdx]?.descriptionOfEvent
+        : ""
+    );
+    setFieldValue(
+      "country",
+      dogShow?.shows[showIdx]?.country ? dogShow?.shows[showIdx]?.country : ""
+    );
+    setFieldValue(
+      "location",
+      dogShow?.shows[showIdx]?.location ? dogShow?.shows[showIdx]?.location : ""
+    );
+
+    setFieldValue(
+      "date",
+      dogShow?.shows[showIdx]?.date ? dogShow?.shows[showIdx]?.date : ""
+    );
+
+    setFieldValue(
+      "class",
+      dogShow?.shows[showIdx]?.class ? dogShow?.shows[showIdx]?.class : ""
+    );
+
+    setFieldValue(
+      "judge",
+      dogShow?.shows[showIdx]?.judge ? dogShow?.shows[showIdx]?.judge : ""
+    );
+
+    setFieldValue(
+      "result",
+      dogShow?.shows[showIdx]?.result ? dogShow?.shows[showIdx]?.result : ""
+    );
+  }, [showIdx]);
   return (
     <>
       <RegisterDogContainer>
@@ -220,7 +269,7 @@ const EditRegisterDogShow = () => {
           </PageChanged>
         </Form>
       </RegisterDogContainer>
-      <DogShows />
+      <DogShows dogShow={dogShow} setShowIdx={setShowIdx} />
     </>
   );
 };

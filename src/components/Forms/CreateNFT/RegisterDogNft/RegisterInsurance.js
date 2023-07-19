@@ -18,46 +18,34 @@ import {
 import { useNavigate } from "react-router-dom";
 // import { registerInsuranceSchema } from "../../../../schema/createDogNftSchema";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
-import { toast } from "react-toastify";
+import { useFormik } from "formik";
 
 const RegisterInsurance = () => {
   const navigate = useNavigate();
 
-  const [sessionData] = useState(
-    JSON.parse(sessionStorage.getItem("registerInsurance")) ?? {}
+  const [sessionData, setSessionData] = useState(
+    JSON.parse(sessionStorage.getItem("registerDog")) ?? {}
   );
-  const [ins, setIns] = useState([]);
-  console.log("The ins", ins);
-  const [insurance, setInsurance] = useState({
-    contactName: sessionData[0]?.contactName ?? "",
-    certificateNo: sessionData[0]?.certificateNo ?? "",
-    phoneOne: sessionData[0]?.phoneOne ?? "",
-    phoneTwo: sessionData[0]?.phoneTwo ?? "",
-    startDate: sessionData[0]?.startDate ?? "",
-    endDate: sessionData[0]?.endDate ?? "",
+
+  const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
+    initialValues: {
+      contactName: sessionData.contactName ?? "",
+      certificateNo: sessionData.certificateNo ?? "",
+      phoneOne: sessionData.phoneOne ?? "",
+      phoneTwo: sessionData.phoneTwo ?? "",
+      startDate: sessionData.startDate ?? "",
+      endDate: sessionData.endDate ?? "",
+    },
+    onSubmit: (data) => {
+      console.log("The data", data);
+      sessionStorage.setItem("registerInsurance", JSON.stringify(data));
+      setSessionData(JSON.parse(sessionStorage.getItem("registerInsurance")));
+    },
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInsurance({
-      ...insurance,
-      [name]: value,
-    });
-  };
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    setIns((prev) => {
-      const updatedIns = [...prev, insurance];
-      sessionStorage.setItem("registerInsurance", JSON.stringify(updatedIns));
-      return updatedIns;
-    });
-    toast.info("Insurance added", { theme: "colored" });
-  };
 
   return (
     <RegisterDogContainer>
-      <Form width="90%">
+      <Form width="90%" onSubmit={handleSubmit}>
         <FormHeading>
           {/* <Img src={insurance} alt="insurance" /> */}
         </FormHeading>
@@ -67,8 +55,8 @@ const RegisterInsurance = () => {
             label="Contact Name"
             variant="outlined"
             name="contactName"
-            value={insurance.contactName}
-            onChange={(e) => handleChange(e)}
+            value={values.contactName}
+            onChange={handleChange}
             // onBlur={handleBlur}
           />
           {/* <FieldError>
@@ -83,8 +71,8 @@ const RegisterInsurance = () => {
             label="Certificate Number"
             variant="outlined"
             name="certificateNo"
-            value={insurance.certificateNo}
-            onChange={(e) => handleChange(e)}
+            value={values.certificateNo}
+            onChange={handleChange}
             // onBlur={handleBlur}
           />
           {/* <FieldError>
@@ -101,8 +89,8 @@ const RegisterInsurance = () => {
             limitMaxLength={true}
             placeholder="(+44) 00000000"
             name="phoneOne"
-            value={insurance.phoneOne}
-            onChange={(e) => setInsurance({ ...insurance, phoneOne: e })}
+            value={values.phoneOne}
+            onChange={(phone) => setFieldValue("phoneOne", phone)}
             // onBlur={handleBlur}
           />
           <PhoneIcon>
@@ -122,8 +110,8 @@ const RegisterInsurance = () => {
             limitMaxLength={true}
             placeholder="(+44) 00000000"
             name="phoneTwo"
-            value={insurance.phoneTwo}
-            onChange={(e) => setInsurance({ ...insurance, phoneTwo: e })}
+            value={values.phoneTwo}
+            onChange={(phone) => setFieldValue("phoneTwo", phone)}
             // onBlur={handleBlur}
           />
           <PhoneIcon>
@@ -141,10 +129,8 @@ const RegisterInsurance = () => {
             label="Start Date"
             type="date"
             name="startDate"
-            value={insurance.startDate}
-            onChange={(e) =>
-              setInsurance({ ...insurance, startDate: e.target.value })
-            }
+            value={values.startDate}
+            onChange={handleChange}
             InputLabelProps={{
               shrink: true,
             }}
@@ -162,10 +148,8 @@ const RegisterInsurance = () => {
             label="End Date"
             type="date"
             name="endDate"
-            value={insurance.endDate}
-            onChange={(e) =>
-              setInsurance({ ...insurance, endDate: e.target.value })
-            }
+            value={values.endDate}
+            onChange={handleChange}
             InputLabelProps={{
               shrink: true,
             }}
@@ -177,7 +161,7 @@ const RegisterInsurance = () => {
             {touched.endDate && errors.endDate && <>{errors.endDate}</>}
           </FieldError> */}
         </FormField>
-        <SaveNftBtn onClick={handleSave}>
+        <SaveNftBtn onClick={handleSubmit}>
           <SaveText>
             <h1>Save</h1>
           </SaveText>

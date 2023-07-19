@@ -10,43 +10,39 @@ const InsuranceSection = ({ insurance }) => {
         <Img src={Insurance} alt="Insurance" />
         <h5>Insurance Certificate</h5>
       </ISHead>
-      {insurance?.insurances?.length
-        ? insurance?.insurances?.map((val, idx) => (
-            <ISDataWrapper key={idx}>
+            <ISDataWrapper >
               <ISData>
                 <ISItem> Contact Name</ISItem>
                 <ISItem Colored>
-                  {val?.contactName ? val?.contactName : "-"}
+                  {insurance?.contactName ? insurance?.contactName : "-"}
                 </ISItem>
               </ISData>
               <ISData>
                 <ISItem>Certificate Number</ISItem>
                 <ISItem Colored>
-                  {val?.certificateNo ? val?.certificateNo : "-"}{" "}
+                  {insurance?.certificateNo ? insurance?.certificateNo : "-"}{" "}
                 </ISItem>
               </ISData>
               <ISData>
                 <ISItem> Insurance Company Contact</ISItem>
-                <ISItem Colored>{val?.phoneOne ? val?.phoneOne : "-"}</ISItem>
+                <ISItem Colored>{insurance?.phoneOne ? insurance?.phoneOne : "-"}</ISItem>
               </ISData>
               <ISData>
                 <ISItem> Emergency Contact</ISItem>
-                <ISItem Colored> {val?.phoneTwo ? val?.phoneTwo : "-"}</ISItem>
+                <ISItem Colored> {insurance?.phoneTwo ? insurance?.phoneTwo : "-"}</ISItem>
               </ISData>
               <ISData>
                 <ISItem> Start Date</ISItem>
                 <ISItem Colored>
                   {" "}
-                  {val?.startDate ? val?.startDate : "-"}{" "}
+                  {insurance?.startDate ? insurance?.startDate : "-"}{" "}
                 </ISItem>
               </ISData>
               <ISData>
                 <ISItem> Expiry Date</ISItem>
-                <ISItem Colored>{val?.endDate ? val?.endDate : "-"} </ISItem>
+                <ISItem Colored>{insurance?.endDate ? insurance?.endDate : "-"} </ISItem>
               </ISData>
             </ISDataWrapper>
-          ))
-        : null}
     </ISWrapper>
   );
 };

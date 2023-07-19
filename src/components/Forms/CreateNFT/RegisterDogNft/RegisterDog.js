@@ -159,8 +159,12 @@ const RegisterDog = () => {
                     display: "none",
                   }}
                 />
-                <img src={uploadImage} alt="img" />
-                <UploadText>Photo upload</UploadText>
+                {!values?.dogPic && (
+                  <>
+                    <img src={uploadImage} alt="img" />
+                    <UploadText>Photo upload</UploadText>
+                  </>
+                )}
                 <FileAccept>
                   <Img ref={dogPicUploaded} src={Transparent} alt="img" />
                 </FileAccept>
@@ -268,10 +272,14 @@ const RegisterDog = () => {
                       display: "none",
                     }}
                   />
-                  <SmallImage>
-                    <img src={uploadImage} alt="img" />
-                  </SmallImage>
-                  <UploadText Differ>Photo upload</UploadText>
+                  {!values?.dogMotherPic && (
+                    <>
+                      <SmallImage>
+                        <img src={uploadImage} alt="img" />
+                      </SmallImage>
+                      <UploadText Differ>Photo upload</UploadText>
+                    </>
+                  )}
                   <FileAccept>
                     <Img
                       ref={dogMotherPicUploaded}
@@ -360,10 +368,14 @@ const RegisterDog = () => {
                       display: "none",
                     }}
                   />
-                  <SmallImage>
-                    <img src={uploadImage} alt="img" />
-                  </SmallImage>
-                  <UploadText Differ>Photo upload</UploadText>
+                  {!values?.dogFatherPic && (
+                    <>
+                      <SmallImage>
+                        <img src={uploadImage} alt="img" />
+                      </SmallImage>
+                      <UploadText Differ>Photo upload</UploadText>
+                    </>
+                  )}
                   <FileAccept>
                     <Img
                       ref={dogFatherPicUploaded}

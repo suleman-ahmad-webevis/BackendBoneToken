@@ -15,7 +15,7 @@ const EditDogNFT = () => {
   const { state } = useLocation();
   const { pageName } = useParams();
   const dispatch = useDispatch();
-  const { singleDogNft } = useSelector((state) => state.dogNft);
+  const { singleDogNft, isLoading } = useSelector((state) => state.dogNft);
   useEffect(() => {
     dispatch(getDogNft({ dogId: state?.dogId }));
     // eslint-disable-next-line

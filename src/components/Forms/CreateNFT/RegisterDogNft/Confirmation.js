@@ -18,12 +18,11 @@ import { useDispatch } from "react-redux";
 
 const Confirmation = () => {
   const navigate = useNavigate();
-  // const nftIdIs = sessionStorage?.getItem("nftId");
   const { isDesktop, isTablet, isSmallMobile, isMobile } = useBreakpoint();
   const dispatch = useDispatch();
   const nftIdIs = sessionStorage?.getItem("nftId");
   useEffect(() => {
-    dispatch(getDogNft({ nftId: nftIdIs }));
+    dispatch(getDogNft({ dogId: nftIdIs }));
   }, []);
 
   return (
@@ -77,7 +76,6 @@ const Confirmation = () => {
           <ConfirmationButton>View BSC SCAN</ConfirmationButton>
         )
       )}
-
       <Title>
         <Img src={Tag} alt="Tag" />
       </Title>

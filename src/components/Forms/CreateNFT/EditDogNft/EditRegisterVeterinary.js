@@ -12,7 +12,7 @@ import {
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { registerVeterinarySchema } from "../../../../schema/createDogNftSchema";
-import VaccinationTypes from "../../VaccinationTypes";
+import VaccinationTypes from "./VaccinationTypes";
 import {
   SaveEditNftBtn,
   SaveNftBtn,
@@ -20,42 +20,48 @@ import {
 } from "../RegisterDogNft/CreateNFT.style";
 
 const EditRegisterVeterinary = ({ veterinary }) => {
-  const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const navigate = useNavigate();
-  const [sessionData, setSessionData] = useState(
-    JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
-  );
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = useFormik({
-    initialValues: {
-      vaccinationTypes: sessionData.vaccinationTypes ?? "Rabies 1 year",
-    },
-    validationSchema: registerVeterinarySchema,
-    onSubmit: (data) => {
-      sessionStorage.setItem("registerVeterinary", JSON.stringify(data));
-      setSessionData(JSON.parse(sessionStorage.getItem("registerOwner")));
-      navigate("/createDogNFT/insuranceRegister");
-    },
-  });
+  const [vaccinationPadding, setVaccinationPadding] = useState("100px");
+  const [selectedVac, setSelectedVac] = useState();
+  const [vaccines, setVaccines] = useState([...veterinary.vaccines]);
+  console.log("The vacc", vaccines);
+
+  const handleSubmit = (e) => {
+    // const [sessionData, setSessionData] = useState(
+    //   JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
+    // );
+    // navigate("/createDogNFT/insuranceRegister");
+    // sessionStorage.setItem("registerVeterinary", JSON.stringify(data));
+    e.preventDefault();
+    setVaccines((prev) => [
+      ...prev,
+      {
+        vacType: selectedVac.vacType ?? "",
+        vacSerialNo: vacSerialNo ?? "",
+        vacExpiryDate: expiryDate ?? "",
+      },
+    ]);
+
+    console.log(
+      "The ",
+      setVaccines((prev) => console.log("The prev", prev))
+    );
+  };
+
+  const [expiryDate, setExpiryDate] = useState();
+  const [vacSerialNo, setVacSerialNo] = useState();
   return (
     <RegisterDogContainer>
-      <Form onSubmit={handleSubmit} width="90%">
+      <Form width="90%">
         <FormHeading>
           {/* <Img src={veterinayImage} alt="veterinayImage" /> */}
         </FormHeading>
         <FormField>
           <CategoriesField>
             <VaccinationTypes
-              vaccinationTypes={values.vaccinationTypes}
-              setFieldValue={setFieldValue}
               setVaccinationPadding={setVaccinationPadding}
+              vaccines={vaccines}
+              setSelectedVac={setSelectedVac}
             />
           </CategoriesField>
         </FormField>
@@ -64,16 +70,11 @@ const EditRegisterVeterinary = ({ veterinary }) => {
             id="outlined-basic"
             label="Vaccination Serial Number"
             variant="outlined"
-            name="price"
-            value={values.price}
-            onChange={handleChange}
-            onBlur={handleBlur}
             position="relative"
             paddingLeft={vaccinationPadding}
+            value={vacSerialNo}
+            onChange={(e) => setVacSerialNo(e.target.value)}
           />
-          <FieldError>
-            {touched.price && errors.price && <>{errors.price}</>}
-          </FieldError>
           <h5
             style={{
               position: "absolute",
@@ -82,7 +83,7 @@ const EditRegisterVeterinary = ({ veterinary }) => {
               color: "#b7b7b7",
             }}
           >
-            {values.vaccinationTypes ?? ""}
+            {selectedVac?.vacType ? selectedVac?.vacType : vaccines[0]?.vacType}
           </h5>
         </FormField>
         <FormField>
@@ -90,19 +91,12 @@ const EditRegisterVeterinary = ({ veterinary }) => {
             id="insuranceExpiryDate"
             label="Expiry Date"
             type="date"
-            value={values.insuranceExpiryDate}
-            setFieldValue={setFieldValue}
-            onChange={handleChange}
-            onBlur={handleBlur}
             InputLabelProps={{
               shrink: true,
             }}
+            value={expiryDate}
+            onChange={(e) => setExpiryDate(e.target.value)}
           />
-          <FieldError>
-            {touched.insuranceExpiryDate && errors.insuranceExpiryDate && (
-              <>{errors.insuranceExpiryDate}</>
-            )}
-          </FieldError>
         </FormField>
         <div
           style={{
@@ -111,7 +105,7 @@ const EditRegisterVeterinary = ({ veterinary }) => {
             justifyContent: "center",
           }}
         >
-          <SaveNftBtn>
+          <SaveNftBtn onClick={(e) => handleSubmit(e)}>
             <SaveText>
               <h1>Save</h1>
             </SaveText>
@@ -121,7 +115,7 @@ const EditRegisterVeterinary = ({ veterinary }) => {
           <div></div>
           {/* Empty <div> to put next on end */}
           <SaveEditNftBtn
-            onClick={() => handleSubmit()}
+            // onClick={(e) => handleSubmit(e)}
             style={{ marginBottom: "20px" }}
           >
             Save

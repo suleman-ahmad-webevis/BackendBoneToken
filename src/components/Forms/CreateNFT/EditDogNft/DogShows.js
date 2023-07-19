@@ -3,72 +3,23 @@ import DogShowSelector from "../../../../assets/images/CreateNFT/DogShowSelector
 import styled from "styled-components";
 import { Img } from "../../../../GlobalStyles";
 
-const DogShows = () => {
-  const [dogShowName] = useState("Name of dog show");
+const DogShows = ({ dogShow, setShowIdx }) => {
   return (
     <DogShowsContainer>
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
-
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
-
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
-      <DogShowImage>
-        <Img src={DogShowSelector} />
-        <div>
-          <p>
-            {dogShowName.length > 9
-              ? `${dogShowName.slice(0, 9)}...`
-              : dogShowName}
-          </p>
-        </div>
-      </DogShowImage>
+      {dogShow?.shows?.length
+        ? dogShow?.shows?.map((val, idx) => (
+            <DogShowImage key={idx} onClick={() => setShowIdx(idx)}>
+              <Img src={DogShowSelector} />
+              <div>
+                <p style={{ cursor: "pointer" }}>
+                  {val?.showName?.length > 9
+                    ? `${val?.showName?.slice(0, 9)}...`
+                    : val?.showName}
+                </p>
+              </div>
+            </DogShowImage>
+          ))
+        : null}
     </DogShowsContainer>
   );
 };
@@ -94,6 +45,7 @@ const DogShowImage = styled.div`
   p {
     font-size: 10px;
     text-align: center;
+    line-break: anywhere;
   }
 `;
 

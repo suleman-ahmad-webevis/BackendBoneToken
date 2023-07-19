@@ -22,7 +22,7 @@ import {
   SaveText,
 } from "../RegisterDogNft/CreateNFT.style";
 
-const EditRegisterInsurance = () => {
+const EditRegisterInsurance = ({ insurance }) => {
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
@@ -37,11 +37,12 @@ const EditRegisterInsurance = () => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      contactName: sessionData.contactName ?? "",
-      certificateNo: sessionData.certificateNo ?? "",
-      insuranceContactNo: sessionData.insuranceContactNo ?? "",
-      startDate: sessionData.startDate ?? "",
-      endDate: sessionData.endDate ?? "",
+      contactName: sessionData?.contactName ?? insurance?.contactName,
+      certificateNo: sessionData?.certificateNo ?? insurance?.certificateNo,
+      phoneOne: sessionData?.phoneOne ?? String(insurance?.phoneOne),
+      phoneTwo: sessionData?.phoneTwo ?? String(insurance?.phoneTwo),
+      startDate: sessionData?.startDate ?? insurance?.startDate,
+      endDate: sessionData?.endDate ?? insurance?.endDate,
     },
     validationSchema: registerVeterinarySchema,
     onSubmit: (data) => {
@@ -94,10 +95,9 @@ const EditRegisterInsurance = () => {
             countryCallingCodeEditable={true}
             limitMaxLength={true}
             placeholder="(+44) 00000000"
-            name="insuranceContactNo"
-            value={values.emergencyContactNo}
-            onChange={(phone) => setFieldValue("insuranceContactNo", phone)}
-            onBlur={handleBlur}
+            name="phoneOne"
+            value={values.phoneOne || ""}
+            onChange={(phone) => setFieldValue("phoneOne", phone)}
           />
           <PhoneIcon>
             <Img src={Phone} alt="phone" />
@@ -115,10 +115,9 @@ const EditRegisterInsurance = () => {
             countryCallingCodeEditable={true}
             limitMaxLength={true}
             placeholder="(+44) 00000000"
-            name="insuranceContactNo"
-            value={values.emergencyContactNo}
-            onChange={(phone) => setFieldValue("insuranceContactNo", phone)}
-            onBlur={handleBlur}
+            name="phoneTwo"
+            value={values.phoneTwo || ""}
+            onChange={(phone) => setFieldValue("phoneTwo", phone)}
           />
           <PhoneIcon>
             <Img src={Phone} alt="phone" />

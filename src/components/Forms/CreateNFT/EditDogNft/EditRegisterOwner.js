@@ -41,18 +41,18 @@ const EditRegisterOwner = ({ owner }) => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      ownerName: sessionData.ownerName ?? owner?.ownerName,
-      ownerPic: sessionData.photo ?? owner?.ownerPic,
-      ownerVideoLink: sessionData.ownerVideoLink ?? owner?.ownerVideoLink,
-      areYouBreeder: sessionData.areYouBreeder ?? owner?.areYouBreeder,
+      ownerName: sessionData?.ownerName ?? owner?.ownerName,
+      ownerPic: sessionData?.ownerPic ?? owner?.ownerPic,
+      ownerVideoLink: sessionData?.ownerVideoLink ?? owner?.ownerVideoLink,
+      areYouBreeder: sessionData?.areYouBreeder ?? owner?.areYouBreeder,
       breederKennelName:
-        sessionData.breederKennelName ?? owner?.breederKennelName,
-      email: sessionData.email ?? owner?.email,
-      website: sessionData.website ?? owner?.website,
-      phone: sessionData.phone ?? owner?.phone,
-      location: sessionData.location ?? owner?.location,
-      fbPage: sessionData.fbPage ?? owner?.fbPage,
-      instaPage: sessionData.instaPage ?? owner?.instaPage,
+        sessionData?.breederKennelName ?? owner?.breederKennelName,
+      email: sessionData?.email ?? owner?.email,
+      website: sessionData?.website ?? owner?.website,
+      phone: sessionData?.phone ?? owner?.phone,
+      location: sessionData?.location ?? owner?.location,
+      fbPage: sessionData?.fbPage ?? owner?.fbPage,
+      instaPage: sessionData?.instaPage ?? owner?.instaPage,
     },
     validationSchema: registerOwnerSchema,
     onSubmit: (data) => {
@@ -131,7 +131,6 @@ const EditRegisterOwner = ({ owner }) => {
             )}
           </FieldError>
         </FormField>
-
         <FormField>
           <FormTextField
             id="outlined-basic"

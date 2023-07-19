@@ -60,7 +60,7 @@ const ArrowUpIcon = styled.div`
   align-items: center;
 `;
 
-const BreedSelector = ({ setFieldValue }) => {
+const BreedSelector = ({ editBreed, setFieldValue }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Breed Select *");
 
@@ -70,7 +70,9 @@ const BreedSelector = ({ setFieldValue }) => {
     setFieldValue("breed", value);
     setIsOpen(false);
   };
-
+  // if (editBreed) {
+  //   setFieldValue("breed", editBreed);
+  // }
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
