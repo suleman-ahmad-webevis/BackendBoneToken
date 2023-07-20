@@ -318,7 +318,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
                 <FileAccept>
                   <Img
                     ref={dogMotherPicUploaded}
-                    src={dog?.dogMotherPic ?? Transparent}
+                    src={dog?.dogMotherPic ? dog?.dogMotherPic : Transparent}
                     alt="img"
                   />
                 </FileAccept>
@@ -414,7 +414,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
                 <FileAccept>
                   <Img
                     ref={dogFatherPicUploaded}
-                    src={dog?.dogFatherPic ?? Transparent}
+                    src={dog?.dogFatherPic ? dog?.dogFatherPic : Transparent}
                     alt="img"
                   />
                 </FileAccept>

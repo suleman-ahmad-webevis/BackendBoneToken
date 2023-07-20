@@ -7,7 +7,11 @@ const DogDataSection = ({ dog }) => {
   return (
     <DDWrapper>
       <DDHead>
-        <Img src={dog?.dogPic ? dog?.dogPic : Dog} alt="Dog" />
+        <img
+          src={dog?.dogPic ? dog?.dogPic : Dog}
+          alt="Dog"
+          style={{ height: "1250px", width: "1200px" }}
+        />
         <h5>DogData</h5>
       </DDHead>
       <DogDataData>

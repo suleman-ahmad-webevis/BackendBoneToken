@@ -15,7 +15,7 @@ const Pdf = () => {
   const { dog, owner, veterinary, insurance, dogShow } = singleDogNft;
 
   useEffect(() => {
-    generatePDF();
+    // generatePDF();
     // eslint-disable-next-line
   }, []);
 
