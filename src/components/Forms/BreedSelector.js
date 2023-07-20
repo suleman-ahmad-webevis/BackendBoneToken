@@ -65,7 +65,7 @@ const BreedSelector = ({ setFieldValue }) => {
   const [selectedOption, setSelectedOption] = useState("Breed Select *");
 
   const toggling = () => setIsOpen(!isOpen);
-  const onOptionClicked = (value) => () => {
+  const onOptionClicked = (value) => () => { 
     setSelectedOption(value);
     setFieldValue("breed", value);
     setIsOpen(false);
