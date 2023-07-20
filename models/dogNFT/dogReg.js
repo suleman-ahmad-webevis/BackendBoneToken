@@ -55,7 +55,7 @@ const dogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    dogMotherNFTNo: {
+    dogMotherNftNo: {
       type: String,
       required: false,
     },
@@ -71,7 +71,7 @@ const dogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    dogFatherNFTNo: {
+    dogFatherNftNo: {
       type: String,
       required: false,
     },
