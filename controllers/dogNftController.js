@@ -113,11 +113,9 @@ const createDogNft = catchAsyncErrors(async (req, res, next) => {
 });
 
 const updateDogNft = catchAsyncErrors(async (req, res, next) => {
-  const session = await DogNft.startSession();
-
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
-    session.startTransaction();
-
     const foundNft = await DogNft.findById({ _id: req.params.id }).session(
       session
     );
@@ -128,18 +126,15 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
         .status(StatusCodes.NOT_FOUND)
         .json({ message: "Nft not found" });
     }
-
     const parsedRegisterDog = JSON.parse(req.body.registerDog);
     const parsedRegisterOwner = JSON.parse(req.body.registerOwner);
     const parsedRegisterInsurance = JSON.parse(req.body.registerInsurance);
     const parsedRegisterDogShow = JSON.parse(req.body.registerDogShow);
-
     //CloudinaryUpload
     let uploadedDogPic;
     let uploadedDogMother;
     let uploadedDogFatherPic;
     let uploadedOwnerPic;
-
     if (parsedRegisterDog?.dogPic) {
       uploadedDogPic = await cloudinary.uploader.upload(
         parsedRegisterDog?.dogPic,
@@ -148,7 +143,6 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
         }
       );
     }
-
     if (parsedRegisterDog?.dogMotherPic) {
       uploadedDogMother = await cloudinary.uploader.upload(
         parsedRegisterDog?.dogMotherPic,
@@ -157,7 +151,6 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
         }
       );
     }
-
     if (parsedRegisterDog?.dogFatherPic) {
       uploadedDogFatherPic = await cloudinary.uploader.upload(
         parsedRegisterDog?.dogFatherPic,
@@ -166,7 +159,6 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
         }
       );
     }
-
     if (parsedRegisterOwner?.ownerPic) {
       uploadedOwnerPic = await cloudinary.uploader.upload(
         parsedRegisterOwner?.ownerPic,
@@ -175,7 +167,6 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
         }
       );
     }
-
     const dog = await DogReg.findById({ _id: foundNft.dog }).session(session);
     const owner = await DogOwner.findById({ _id: foundNft.owner }).session(
       session
@@ -186,7 +177,6 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
     const dogShow = await DogShow.findById({ _id: foundNft.dogShow }).session(
       session
     );
-
     if (parsedRegisterDog) {
       const { _id, ...updatedDog } = parsedRegisterDog;
       Object.assign(dog, updatedDog);
@@ -214,27 +204,22 @@ const updateDogNft = catchAsyncErrors(async (req, res, next) => {
       }
       await owner.save();
     }
-
     if (parsedRegisterInsurance) {
       const { _id, ...updatedInsurance } = parsedRegisterInsurance;
       Object.assign(insurance, updatedInsurance);
       await insurance.save();
     }
-
     if (parsedRegisterDogShow) {
       dogShow.shows = parsedRegisterDogShow;
       await dogShow.save();
     }
-
     foundNft.dog = dog._id;
     foundNft.owner = owner._id;
     foundNft.insurance = insurance._id;
     foundNft.dogShow = dogShow._id;
     await foundNft.save();
-
     await session.commitTransaction();
     session.endSession();
-
     return res.status(StatusCodes.CREATED).json({ message: "DogNFT updated" });
   } catch (e) {
     await session.abortTransaction();
