@@ -70,7 +70,7 @@ const ArrowUpIcon = styled.div`
   align-items: center;
 `;
 
-const Countries = ({ dogShow, setDogShow }) => {
+const Countries = ({ dogShow, setDogShow, country }) => {
   const countries = [
     { code: "AD", label: "Andorra", phone: "376" },
     {
@@ -497,7 +497,9 @@ const Countries = ({ dogShow, setDogShow }) => {
   ];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Country");
+  const [selectedOption, setSelectedOption] = useState(
+    country ? country : "Country"
+  );
 
   const toggling = () => setIsOpen(!isOpen);
   const onOptionClicked = (value) => () => {

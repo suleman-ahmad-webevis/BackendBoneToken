@@ -73,9 +73,11 @@ const ArrowUpIcon = styled.div`
   align-items: center;
 `;
 
-const Location = ({ setFieldValue }) => {
+const Location = ({ setFieldValue, location }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Location");
+  const [selectedOption, setSelectedOption] = useState(
+    location ? location : "Location"
+  );
 
   const toggling = () => setIsOpen(!isOpen);
   const onOptionClicked = (value) => () => {

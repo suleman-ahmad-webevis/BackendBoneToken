@@ -35,6 +35,31 @@ export const createDogNft = createAsyncThunk(
   }
 );
 
+export const updateDogNft = createAsyncThunk(
+  "dogNft/updateDogNft",
+  async (obj, thunkAPI) => {
+    const registerDog = sessionStorage.getItem("registerDog");
+    const registerOwner = sessionStorage.getItem("registerOwner");
+    // const registerVeterinary = sessionStorage.getItem("registerVeterinary");
+    const registerInsurance = sessionStorage.getItem("registerInsurance");
+    const registerDogShow = sessionStorage.getItem("registerDogShow");
+    const allFormsData = {
+      registerDog,
+      registerOwner,
+      // registerVeterinary,
+      registerInsurance,
+      registerDogShow,
+    };
+    try {
+      return await createDogNftService.updateDogNft({ obj, allFormsData });
+    } catch (err) {
+      const message = err.message;
+      toast.error(message, { theme: "colored" });
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const getAllNfts = createAsyncThunk(
   "dogNft/getAllNfts",
   async (obj, thunkAPI) => {
@@ -80,6 +105,17 @@ export const dogNFTSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(createDogNft.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(updateDogNft.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateDogNft.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(updateDogNft.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       })

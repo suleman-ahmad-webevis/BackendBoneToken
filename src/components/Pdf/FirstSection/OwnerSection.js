@@ -105,7 +105,7 @@ export const OwnerBasicInfo = styled.div`
   grid-gap: 10px;
   img {
     border-radius: 20px;
-    width: 36%;
+    max-width: 36%;
   }
 `;
 

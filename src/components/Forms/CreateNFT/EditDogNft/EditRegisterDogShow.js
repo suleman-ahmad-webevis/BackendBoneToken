@@ -23,13 +23,18 @@ import {
   SaveText,
 } from "../RegisterDogNft/CreateNFT.style";
 import DogShows from "./DogShows";
+import { updateDogNft } from "../../../../redux/createDogNft/createDogNftSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const EditRegisterDogShow = ({ dogShow }) => {
+const EditRegisterDogShow = ({ dogShow, nftId }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [shows, setShows] = useState(dogShow?.shows);
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDogShow")) ?? {}
   );
   const [showIdx, setShowIdx] = useState(0);
-  console.log("The showIdx", showIdx);
   const {
     values,
     touched,
@@ -40,7 +45,7 @@ const EditRegisterDogShow = ({ dogShow }) => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      showName: dogShow?.shows[1]?.showName ?? "",
+      showName: dogShow?.shows[showIdx]?.showName ?? "",
       officialShowName: dogShow?.shows[showIdx]?.officialShowName ?? "",
       descriptionOfEvent: dogShow?.shows[showIdx]?.descriptionOfEvent ?? "",
       country: dogShow?.shows[showIdx]?.country ?? "",
@@ -52,9 +57,13 @@ const EditRegisterDogShow = ({ dogShow }) => {
     },
     validationSchema: registerDogShowSchema,
     onSubmit: (data) => {
-      sessionStorage.setItem("registerDogShow", JSON.stringify(data));
+      setShows((prev) => {
+        const showsAre = [...prev];
+        showsAre[showIdx] = data;
+        return showsAre;
+      });
+      sessionStorage.setItem("registerDogShow", JSON.stringify(shows));
       setSessionData(JSON.parse(sessionStorage.getItem("registerDogShow")));
-      alert("Now dispatch");
     },
   });
 
@@ -83,27 +92,28 @@ const EditRegisterDogShow = ({ dogShow }) => {
       "location",
       dogShow?.shows[showIdx]?.location ? dogShow?.shows[showIdx]?.location : ""
     );
-
     setFieldValue(
       "date",
       dogShow?.shows[showIdx]?.date ? dogShow?.shows[showIdx]?.date : ""
     );
-
     setFieldValue(
       "class",
       dogShow?.shows[showIdx]?.class ? dogShow?.shows[showIdx]?.class : ""
     );
-
     setFieldValue(
       "judge",
       dogShow?.shows[showIdx]?.judge ? dogShow?.shows[showIdx]?.judge : ""
     );
-
     setFieldValue(
       "result",
       dogShow?.shows[showIdx]?.result ? dogShow?.shows[showIdx]?.result : ""
     );
   }, [showIdx]);
+
+  const handleClick = () => {
+    dispatch(updateDogNft({ nftId, navigate }));
+  };
+
   return (
     <>
       <RegisterDogContainer>
@@ -251,7 +261,7 @@ const EditRegisterDogShow = ({ dogShow }) => {
               justifyContent: "center",
             }}
           >
-            <SaveNftBtn>
+            <SaveNftBtn onClick={handleSubmit}>
               <SaveText>
                 <h1>Save</h1>
               </SaveText>
@@ -261,7 +271,7 @@ const EditRegisterDogShow = ({ dogShow }) => {
             <div></div>
             {/* Empty <div> to put next on end */}
             <SaveEditNftBtn
-              onClick={() => handleSubmit()}
+              onClick={() => handleClick()}
               style={{ marginBottom: "20px" }}
             >
               Save

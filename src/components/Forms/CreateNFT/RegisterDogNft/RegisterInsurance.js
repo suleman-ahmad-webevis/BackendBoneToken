@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 // import { registerInsuranceSchema } from "../../../../schema/createDogNftSchema";
 import { SaveNftBtn, SaveText } from "./CreateNFT.style";
 import { useFormik } from "formik";
+import { toast } from "react-toastify";
 
 const RegisterInsurance = () => {
   const navigate = useNavigate();
@@ -37,9 +38,9 @@ const RegisterInsurance = () => {
       endDate: sessionData.endDate ?? "",
     },
     onSubmit: (data) => {
-      console.log("The data", data);
       sessionStorage.setItem("registerInsurance", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerInsurance")));
+      toast.info("Insurance added", { theme: "colored" });
     },
   });
 

@@ -60,9 +60,11 @@ const ArrowUpIcon = styled.div`
   align-items: center;
 `;
 
-const BreedSelector = ({ editBreed, setFieldValue }) => {
+const BreedSelector = ({ breed, setFieldValue }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Breed Select *");
+  const [selectedOption, setSelectedOption] = useState(
+    breed ? breed : "Breed *"
+  );
 
   const toggling = () => setIsOpen(!isOpen);
   const onOptionClicked = (value) => () => {
@@ -70,9 +72,7 @@ const BreedSelector = ({ editBreed, setFieldValue }) => {
     setFieldValue("breed", value);
     setIsOpen(false);
   };
-  // if (editBreed) {
-  //   setFieldValue("breed", editBreed);
-  // }
+
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>

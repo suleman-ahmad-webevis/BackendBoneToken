@@ -7,7 +7,7 @@ import EditRegisterOwner from "../../components/Forms/CreateNFT/EditDogNft/EditR
 import EditRegisterVeterinary from "../../components/Forms/CreateNFT/EditDogNft/EditRegisterVeterinary";
 import EditRegisterInsurance from "../../components/Forms/CreateNFT/EditDogNft/EditRegisterInsurance";
 import EditRegisterDogShow from "../../components/Forms/CreateNFT/EditDogNft/EditRegisterDogShow";
-import Confirmation from "../../components/Forms/CreateNFT/RegisterDogNft/Confirmation";
+import Confirmation from "../../components/Forms/CreateNFT/EditDogNft/Confirmation";
 import { getDogNft } from "../../redux/createDogNft/createDogNftSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -37,7 +37,7 @@ const EditDogNFT = () => {
             nftId={singleDogNft?._id}
           />
         );
-      case "confirmation":
+      case "congratulations":
         return <Confirmation />;
       default:
         return <h1>Page Not Found</h1>;

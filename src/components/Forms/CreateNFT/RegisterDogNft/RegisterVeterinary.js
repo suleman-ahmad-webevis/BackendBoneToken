@@ -41,7 +41,6 @@ const RegisterVeterinay = () => {
     });
   };
   const handleSave = (e) => {
-    console.log("The vac", vac);
     e.preventDefault();
     setVac((prev) => {
       const updatedVac = [...prev, vaccination];

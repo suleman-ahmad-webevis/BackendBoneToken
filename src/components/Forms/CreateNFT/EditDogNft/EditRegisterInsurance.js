@@ -46,9 +46,8 @@ const EditRegisterInsurance = ({ insurance }) => {
     },
     validationSchema: registerVeterinarySchema,
     onSubmit: (data) => {
-      sessionStorage.setItem("registerVeterinary", JSON.stringify(data));
-      setSessionData(JSON.parse(sessionStorage.getItem("registerOwner")));
-      navigate("/createDogNFT/dogShowRegister");
+      sessionStorage.setItem("registerInsurance", JSON.stringify(data));
+      setSessionData(JSON.parse(sessionStorage.getItem("registerInsurance")));
     },
   });
 
@@ -170,7 +169,7 @@ const EditRegisterInsurance = ({ insurance }) => {
             justifyContent: "center",
           }}
         >
-          <SaveNftBtn>
+          <SaveNftBtn onClick={handleSubmit}>
             <SaveText>
               <h1>Save</h1>
             </SaveText>
@@ -180,7 +179,7 @@ const EditRegisterInsurance = ({ insurance }) => {
           <div></div>
           {/* Empty <div> to put next on end */}
           <SaveEditNftBtn
-            onClick={() => handleSubmit()}
+            onClick={() => navigate("/edit-dog-nft/dogShow-register")}
             style={{ marginBottom: "20px" }}
           >
             Save

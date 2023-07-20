@@ -72,9 +72,11 @@ const ArrowUpIcon = styled.div`
   align-items: center;
 `;
 
-const CountryBirth = ({ setFieldValue }) => {
+const CountryBirth = ({ countryOfBirth, setFieldValue }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Country Birth");
+  const [selectedOption, setSelectedOption] = useState(
+    countryOfBirth ? countryOfBirth : "Country Birth"
+  );
 
   const toggling = () => setIsOpen(!isOpen);
   const onOptionClicked = (value) => () => {
@@ -85,9 +87,7 @@ const CountryBirth = ({ setFieldValue }) => {
 
   return (
     <DropDownContainer>
-      <DropDownHeader
-        onClick={toggling}
-      >
+      <DropDownHeader onClick={toggling}>
         {selectedOption}
         <ArrowDownIcon isOpen={isOpen}>
           <Img src={GrayArrowDown} alt="ArrowDown" />

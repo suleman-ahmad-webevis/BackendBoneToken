@@ -104,7 +104,6 @@ const RegisterOwner = () => {
               </FieldError>
             </FormField>
             <FormField style={{ width: "50%" }}>
-              <CombinedFields>
                 <Upload onClick={() => imageUploader.current.click()}>
                   <input
                     type="file"
@@ -116,18 +115,21 @@ const RegisterOwner = () => {
                       display: "none",
                     }}
                   />
-                  <img src={uploadImage} alt="img" />
-                  <UploadText>Photo upload</UploadText>
+                  {!values?.ownerPic && (
+                    <>
+                      <img src={uploadImage} alt="img" />
+                      <UploadText>Photo upload</UploadText>
+                    </>
+                  )}
                   <FileAccept>
                     <Img ref={uploadedImage} src={Transparent} alt="img" />
                   </FileAccept>
                 </Upload>
-              </CombinedFields>
             </FormField>
             <FormField>
               <FormTextField
                 id="outlined-basic"
-                label="Owner Video Link *"
+                label="Owner Video Link"
                 variant="outlined"
                 name="ownerVideoLink"
                 value={values.ownerVideoLink}

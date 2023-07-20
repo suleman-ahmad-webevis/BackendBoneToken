@@ -11,28 +11,47 @@ const DogShowSection = ({ dogShow }) => {
         <h5>DogShows Results</h5>
       </DSHead>
       <DSDataWrapper>
-        {dogShow?.shows.length
-          ? dogShow?.shows.map((val, idx) => (
-              <DSData key={idx}>
-                <DSItem>Show name</DSItem>
-                <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
-                <DSItem>Country</DSItem>
-                <DSItem Colored>{val?.country ? val?.country : "-"}</DSItem>
-                <DSItem>Date</DSItem>
-                <DSItem Colored>{val?.date ? val?.date : "-"}</DSItem>
-                <DSItem>Judge</DSItem>
-                <DSItem Colored>{val?.judge ? val?.judge : "-"}</DSItem>
-                <DSItem>Class</DSItem>
-                <DSItem Colored> {val?.class ? val?.class : "-"}</DSItem>
-                <DSItem>Place</DSItem>
-                <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
-                <DSItem>Show Critique</DSItem>
-                <DSItem> ✅</DSItem>
-                <DSItem> Podium Photos</DSItem>
-                <DSItem> ✅</DSItem>
-              </DSData>
-            ))
-          : null}
+        {dogShow?.shows.length ? (
+          dogShow?.shows.map((val, idx) => (
+            <DSData key={idx}>
+              <DSItem>Show name</DSItem>
+              <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
+              <DSItem>Country</DSItem>
+              <DSItem Colored>{val?.country ? val?.country : "-"}</DSItem>
+              <DSItem>Date</DSItem>
+              <DSItem Colored>{val?.date ? val?.date : "-"}</DSItem>
+              <DSItem>Judge</DSItem>
+              <DSItem Colored>{val?.judge ? val?.judge : "-"}</DSItem>
+              <DSItem>Class</DSItem>
+              <DSItem Colored> {val?.class ? val?.class : "-"}</DSItem>
+              <DSItem>Place</DSItem>
+              <DSItem Colored>{val?.showName ? val?.showName : "-"}</DSItem>
+              <DSItem>Show Critique</DSItem>
+              <DSItem> ✅</DSItem>
+              <DSItem> Podium Photos</DSItem>
+              <DSItem> ✅</DSItem>
+            </DSData>
+          ))
+        ) : (
+          <DSData>
+            <DSItem>Show name</DSItem>
+            <DSItem Colored>-</DSItem>
+            <DSItem>Country</DSItem>
+            <DSItem Colored> -</DSItem>
+            <DSItem>Date</DSItem>
+            <DSItem Colored>-</DSItem>
+            <DSItem>Judge</DSItem>
+            <DSItem Colored>-</DSItem>
+            <DSItem>Class</DSItem>
+            <DSItem Colored>-</DSItem>
+            <DSItem>Place</DSItem>
+            <DSItem Colored>-</DSItem>
+            <DSItem>Show Critique</DSItem>
+            <DSItem> ✅</DSItem>
+            <DSItem> Podium Photos</DSItem>
+            <DSItem> ✅</DSItem>
+          </DSData>
+        )}
       </DSDataWrapper>
     </DSWrapper>
   );

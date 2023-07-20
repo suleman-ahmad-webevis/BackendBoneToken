@@ -34,6 +34,7 @@ export const SaveEditNftBtn = styled.button`
   line-height: 28px;
   color: #ffffff;
   border: none;
+  cursor: pointer;
 `;
 
 export const SaveNftBtn = styled.button`

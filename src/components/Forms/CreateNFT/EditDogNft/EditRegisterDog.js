@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Img } from "../../../../GlobalStyles";
 import CategoryButton from "../../DogCategories";
 import uploadImage from "../../../../assets/images/upload.png";
@@ -30,13 +30,16 @@ import { SaveEditNftBtn } from "../RegisterDogNft/CreateNFT.style";
 import Loader from "../../../Loader/Loader";
 
 const EditRegisterDog = ({ dog, isLoading }) => {
-  console.log("The dog", dog);
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
     JSON.parse(sessionStorage.getItem("registerDog")) ?? {}
   );
-  const uploadedImage = React.useRef(null);
-  const imageUploader = React.useRef(null);
+  const dogPicUploaded = useRef(null);
+  const dogPicUploader = useRef(null);
+  const dogMotherPicUploaded = useRef(null);
+  const dogMotherPicUploader = useRef(null);
+  const dogFatherPicUploaded = useRef(null);
+  const dogFatherPicUploader = useRef(null);
   const {
     values,
     errors,
@@ -47,32 +50,32 @@ const EditRegisterDog = ({ dog, isLoading }) => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      dogName: sessionData.dogName ?? dog?.dogName,
-      breed: sessionData.breed ?? dog?.breed,
-      dogPic: sessionData.dogPic ?? dog?.dogPic,
-      dogVideoLink: sessionData.dogVideoLink ?? dog?.dogVideoLink,
-      dob: sessionData.dob ?? dog?.dob,
-      gender: sessionData.gender ?? dog?.gender,
-      countryOfBirth: sessionData.countryOfBirth ?? dog?.countryOfBirth,
-      location: sessionData.location ?? dog?.location,
-      dogMotherName: sessionData.dogMotherName ?? dog?.dogMotherName,
-      dogMotherPic: sessionData.dogMotherPic ?? dog?.dogMotherPic,
-      dogMotherNftNo: sessionData.dogMotherNftNo ?? dog?.dogMotherNftNo,
-      dogFatherName: sessionData.dogFatherName ?? dog?.dogFatherName,
-      dogFatherPic: sessionData.dogFatherPic ?? dog?.dogFatherPic,
-      dogFatherNftNo: sessionData.dogFatherNftNo ?? dog?.dogFatherNftNo,
-      weight: sessionData.weight ?? dog?.weight,
-      height: sessionData.height ?? dog?.height,
-      length: sessionData.length ?? dog?.length,
-      coatType: sessionData.coatType ?? dog?.coatType,
-      price: sessionData.price ?? dog?.price,
-      currency: sessionData.currency ?? dog?.currency,
+      dogName: sessionData?.dogName ?? dog?.dogName,
+      breed: sessionData?.breed ?? dog?.breed,
+      dogPic: sessionData?.dogPic ?? dog?.dogPic,
+      dogVideoLink: sessionData?.dogVideoLink ?? dog?.dogVideoLink,
+      dob: sessionData?.dob ?? dog?.dob,
+      gender: sessionData?.gender ?? dog?.gender,
+      countryOfBirth: sessionData?.countryOfBirth ?? dog?.countryOfBirth,
+      location: sessionData?.location ?? dog?.location,
+      dogMotherName: sessionData?.dogMotherName ?? dog?.dogMotherName,
+      dogMotherPic: sessionData?.dogMotherPic ?? dog?.dogMotherPic,
+      dogMotherNftNo: sessionData?.dogMotherNftNo ?? dog?.dogMotherNftNo,
+      dogFatherName: sessionData?.dogFatherName ?? dog?.dogFatherName,
+      dogFatherPic: sessionData?.dogFatherPic ?? dog?.dogFatherPic,
+      dogFatherNftNo: sessionData?.dogFatherNftNo ?? dog?.dogFatherNftNo,
+      weight: sessionData?.weight ?? dog?.weight,
+      height: sessionData?.height ?? dog?.height,
+      length: sessionData?.length ?? dog?.length,
+      coatType: sessionData?.coatType ?? dog?.coatType,
+      price: sessionData?.price ?? dog?.price,
+      currency: sessionData?.currency ?? dog?.currency,
     },
     validationSchema: registerDogSchema,
     onSubmit: (data) => {
       sessionStorage.setItem("registerDog", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerDog")));
-      navigate("/createDogNFT/ownerRegister");
+      navigate("/edit-dog-nft/owner-register");
     },
   });
 
@@ -113,22 +116,29 @@ const EditRegisterDog = ({ dog, isLoading }) => {
     setFieldValue("price", sessionData?.price ?? dog?.price);
     setFieldValue("currency", sessionData?.currency ?? dog?.currency);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dog]);
+  }, []);
 
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
+  const handleImageUpload = (event) => {
+    const [file] = event.target.files;
     if (file) {
       const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
       reader.onload = (e) => {
-        current.src = e.target.result;
-        setFieldValue("adminImage", current.src);
+        if (event.target.name === "dogPic") {
+          console.log("The e.target.name", event.target.name);
+          console.log("The e.target.result", e.target.result);
+          dogPicUploaded.current.src = e.target.result;
+          setFieldValue("dogPic", dogPicUploaded.current.src);
+        } else if (event.target.name === "dogMotherPic") {
+          dogMotherPicUploaded.current.src = e.target.result;
+          setFieldValue("dogMotherPic", dogMotherPicUploaded.current.src);
+        } else if (event.target.name === "dogFatherPic") {
+          dogFatherPicUploaded.current.src = e.target.result;
+          setFieldValue("dogFatherPic", dogFatherPicUploaded.current.src);
+        }
       };
       reader.readAsDataURL(file);
     }
   };
-
   const priceIcon = (price) => {
     switch (price) {
       case "EUR":
@@ -163,38 +173,37 @@ const EditRegisterDog = ({ dog, isLoading }) => {
             </FieldError>
           </FormField>
           <FormField>
-            <BreedSelector
-              editBreed={dog?.breed}
-              setFieldValue={setFieldValue}
-            />
+            <BreedSelector breed={dog?.breed} setFieldValue={setFieldValue} />
             <FieldError>
               {touched.breed && errors.breed && <>{errors.breed}</>}
             </FieldError>
           </FormField>
           <FormField style={{ width: "50%" }}>
-            <CombinedFields>
-              <Upload onClick={() => imageUploader.current.click()}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  name="dogPic"
-                  onChange={(e) => handleImageUpload(e)}
-                  ref={imageUploader}
-                  style={{
-                    display: "none",
-                  }}
-                />
-                <img
-                  src={values?.dogPic ?? uploadImage}
+            <Upload onClick={() => dogPicUploader.current.click()}>
+              <input
+                type="file"
+                accept="image/*"
+                name="dogPic"
+                onChange={(e) => handleImageUpload(e)}
+                ref={dogPicUploader}
+                style={{
+                  display: "none",
+                }}
+              />
+              {!dog?.dogPic && (
+                <>
+                  <img src={uploadImage} alt="img" />
+                  <UploadText>Photo upload</UploadText>
+                </>
+              )}
+              <FileAccept>
+                <Img
+                  ref={dogPicUploaded}
+                  src={dog?.dogPic ?? Transparent}
                   alt="img"
-                  style={{ width: "50%" }}
                 />
-                {!values?.dogPic && <UploadText>Photo upload</UploadText>}
-                <FileAccept>
-                  <Img ref={uploadedImage} src={Transparent} alt="img" />
-                </FileAccept>
-              </Upload>
-            </CombinedFields>
+              </FileAccept>
+            </Upload>
           </FormField>
           <FormField>
             <FormTextField
@@ -234,7 +243,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
               </FormField>
               {/* <DateInput type="date" date={values.date} setFieldValue={setFieldValue} /> */}
               <GenderButton
-                gender={values.gender}
+                gender={values?.gender}
                 setFieldValue={setFieldValue}
               />
             </CombinedFields>
@@ -246,7 +255,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
             <CombinedFields>
               <FormField>
                 <CountryBirth
-                  countryOfBirth={values.countryOfBirth}
+                  countryOfBirth={values?.countryOfBirth}
                   setFieldValue={setFieldValue}
                 />
                 <FieldError>
@@ -257,7 +266,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
               </FormField>
               <FormField>
                 <Location
-                  location={values.location}
+                  location={values?.location}
                   setFieldValue={setFieldValue}
                 />
                 <FieldError>
@@ -284,25 +293,34 @@ const EditRegisterDog = ({ dog, isLoading }) => {
                   )}
                 </FieldError>
               </FormField>
-              <Upload Differ onClick={() => imageUploader.current.click()}>
+              <Upload
+                Differ
+                onClick={() => dogMotherPicUploader.current.click()}
+              >
                 <input
                   type="file"
                   accept="image/*"
-                  name="adminImage"
+                  name="dogMotherPic"
                   onChange={(e) => handleImageUpload(e)}
-                  ref={imageUploader}
+                  ref={dogMotherPicUploader}
                   style={{
                     display: "none",
                   }}
                 />
-                <SmallImage>
-                  <img src={values.dogMotherPic ?? uploadImage} alt="img" />
-                </SmallImage>
-                {!values?.dogPic && (
-                  <UploadText Differ>Photo upload</UploadText>
+                {!dog?.dogMotherPic && (
+                  <>
+                    <SmallImage>
+                      <img src={uploadImage} alt="img" />
+                    </SmallImage>
+                    <UploadText Differ>Photo upload</UploadText>
+                  </>
                 )}
                 <FileAccept>
-                  <Img ref={uploadedImage} src={Transparent} alt="img" />
+                  <Img
+                    ref={dogMotherPicUploaded}
+                    src={dog?.dogMotherPic ?? Transparent}
+                    alt="img"
+                  />
                 </FileAccept>
               </Upload>
             </CombinedFields>
@@ -371,25 +389,34 @@ const EditRegisterDog = ({ dog, isLoading }) => {
                   )}
                 </FieldError>
               </FormField>
-              <Upload Differ onClick={() => imageUploader.current.click()}>
+              <Upload
+                Differ
+                onClick={() => dogFatherPicUploader.current.click()}
+              >
                 <input
                   type="file"
                   accept="image/*"
-                  name="adminImage"
+                  name="dogFatherPic"
                   onChange={(e) => handleImageUpload(e)}
-                  ref={imageUploader}
+                  ref={dogFatherPicUploader}
                   style={{
                     display: "none",
                   }}
                 />
-                <SmallImage>
-                  <img src={values.dogFatherPic ?? uploadImage} alt="img" />
-                </SmallImage>
-                {!values?.dogFatherPic && (
-                  <UploadText Differ>Photo upload</UploadText>
+                {!dog?.dogFatherPic && (
+                  <>
+                    <SmallImage>
+                      <img src={uploadImage} alt="img" />
+                    </SmallImage>
+                    <UploadText Differ>Photo upload</UploadText>
+                  </>
                 )}
                 <FileAccept>
-                  <Img ref={uploadedImage} src={Transparent} alt="img" />
+                  <Img
+                    ref={dogFatherPicUploaded}
+                    src={dog?.dogFatherPic ?? Transparent}
+                    alt="img"
+                  />
                 </FileAccept>
               </Upload>
             </CombinedFields>
@@ -460,7 +487,10 @@ const EditRegisterDog = ({ dog, isLoading }) => {
           <PageChanged>
             <div></div>
             {/* Empty <div> to put next on end */}
-            <SaveEditNftBtn style={{ marginBottom: "20px" }}>
+            <SaveEditNftBtn
+              style={{ marginBottom: "20px" }}
+              onClick={handleSubmit}
+            >
               Save
             </SaveEditNftBtn>
           </PageChanged>

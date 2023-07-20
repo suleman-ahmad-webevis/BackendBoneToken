@@ -11,30 +11,45 @@ const VacSection = ({ veterinary }) => {
         <h5>Vaccinations</h5>
       </VSHead>
       <VacData>
-        {veterinary?.vaccines?.length
-          ? veterinary?.vaccines.map((val, idx) => (
-              <VacItems key={idx}>
-                <h5>{val?.vacType}</h5>
-                <VacInfo>
-                  <ul>
-                    <VacItem>
-                      <li>Date Vaccination Expiry: </li>
-                      <span>
-                        {" "}
-                        {new Date(val?.vacExpiryDate)
-                          .toLocaleString()
-                          .substring(0, 9)}{" "}
-                      </span>
-                    </VacItem>
-                    <VacItem>
-                      <li>Vacination Serial Number: </li>{" "}
-                      <span>{val?.vacSerialNo} </span>
-                    </VacItem>
-                  </ul>
-                </VacInfo>
-              </VacItems>
-            ))
-          : null}
+        {veterinary?.vaccines?.length ? (
+          veterinary?.vaccines?.map((val, idx) => (
+            <VacItems key={idx}>
+              <h5>{val?.vacType ? val.vacType : "-"}</h5>
+              <VacInfo>
+                <ul>
+                  <VacItem>
+                    <li>Date Vaccination Expiry: </li>
+                    <span>
+                      {" "}
+                      {new Date(val?.vacExpiryDate ? val?.vacExpiryDate : "-")
+                        .toLocaleString()
+                        .substring(0, 9)}{" "}
+                    </span>
+                  </VacItem>
+                  <VacItem>
+                    <li>Vacination Serial Number: </li>{" "}
+                    <span>{val?.vacSerialNo ? val?.vacSerialNo : "-"} </span>
+                  </VacItem>
+                </ul>
+              </VacInfo>
+            </VacItems>
+          ))
+        ) : (
+          <VacItems>
+            <h5>None</h5>
+            <VacInfo>
+              <ul>
+                <VacItem>
+                  <li>Date Vaccination Expiry: </li>
+                  <span>-</span>
+                </VacItem>
+                <VacItem>
+                  <li>Vacination Serial Number: </li> <span>- </span>
+                </VacItem>
+              </ul>
+            </VacInfo>
+          </VacItems>
+        )}
       </VacData>
     </VSWrapper>
   );

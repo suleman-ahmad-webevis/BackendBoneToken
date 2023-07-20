@@ -24,14 +24,10 @@ const EditRegisterVeterinary = ({ veterinary }) => {
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
   const [selectedVac, setSelectedVac] = useState();
   const [vaccines, setVaccines] = useState([...veterinary.vaccines]);
-  console.log("The vacc", vaccines);
+  const [expiryDate, setExpiryDate] = useState();
+  const [vacSerialNo, setVacSerialNo] = useState();
 
   const handleSubmit = (e) => {
-    // const [sessionData, setSessionData] = useState(
-    //   JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
-    // );
-    // navigate("/createDogNFT/insuranceRegister");
-    // sessionStorage.setItem("registerVeterinary", JSON.stringify(data));
     e.preventDefault();
     setVaccines((prev) => [
       ...prev,
@@ -41,15 +37,9 @@ const EditRegisterVeterinary = ({ veterinary }) => {
         vacExpiryDate: expiryDate ?? "",
       },
     ]);
-
-    console.log(
-      "The ",
-      setVaccines((prev) => console.log("The prev", prev))
-    );
+    sessionStorage.setItem("registerVeterinary", JSON.stringify(vaccines));
   };
 
-  const [expiryDate, setExpiryDate] = useState();
-  const [vacSerialNo, setVacSerialNo] = useState();
   return (
     <RegisterDogContainer>
       <Form width="90%">
@@ -115,7 +105,7 @@ const EditRegisterVeterinary = ({ veterinary }) => {
           <div></div>
           {/* Empty <div> to put next on end */}
           <SaveEditNftBtn
-            // onClick={(e) => handleSubmit(e)}
+            onClick={() => navigate("/edit-dog-nft/insurance-register")}
             style={{ marginBottom: "20px" }}
           >
             Save

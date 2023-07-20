@@ -277,7 +277,7 @@ export const FileAccept = styled.div`
   bottom: 0;
   img {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   video {
     position: absolute;
@@ -301,8 +301,7 @@ export const UploadText = styled.div`
 
 export const SmallImage = styled.div`
   img {
-    width: 20px;
-    height: 18px;
+    width: 100%;
   }
 `;
 

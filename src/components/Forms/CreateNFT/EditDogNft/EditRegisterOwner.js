@@ -58,7 +58,7 @@ const EditRegisterOwner = ({ owner }) => {
     onSubmit: (data) => {
       sessionStorage.setItem("registerOwner", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerOwner")));
-      navigate("/createDogNFT/veterinaryRegister");
+      navigate("/edit-dog-nft/veterinary-register");
     },
   });
 
@@ -95,30 +95,36 @@ const EditRegisterOwner = ({ owner }) => {
           </FieldError>
         </FormField>
         <FormField style={{ width: "50%" }}>
-          <CombinedFields>
-            <Upload onClick={() => imageUploader.current.click()}>
-              <input
-                type="file"
-                accept="image/*"
-                name="adminImage"
-                onChange={(e) => handleImageUpload(e)}
-                ref={imageUploader}
-                style={{
-                  display: "none",
-                }}
+          <Upload onClick={() => imageUploader.current.click()}>
+            <input
+              type="file"
+              accept="image/*"
+              name="ownerPic"
+              onChange={(e) => handleImageUpload(e)}
+              ref={imageUploader}
+              style={{
+                display: "none",
+              }}
+            />
+            {!owner?.ownerPic && (
+              <>
+                <img src={uploadImage} alt="img" />
+                <UploadText>Photo upload</UploadText>
+              </>
+            )}
+            <FileAccept>
+              <Img
+                ref={uploadedImage}
+                src={owner?.ownerPic ?? Transparent}
+                alt="img"
               />
-              <img src={owner?.ownerPic ?? uploadImage} alt="img" />
-              {!owner?.ownerPic && <UploadText>Photo upload</UploadText>}
-              <FileAccept>
-                <Img ref={uploadedImage} src={Transparent} alt="img" />
-              </FileAccept>
-            </Upload>
-          </CombinedFields>
+            </FileAccept>
+          </Upload>
         </FormField>
         <FormField>
           <FormTextField
             id="outlined-basic"
-            label="Owner Video Link *"
+            label="Owner Video Link"
             variant="outlined"
             name="ownerVideoLink"
             value={values.ownerVideoLink}

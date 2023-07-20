@@ -15,7 +15,6 @@ import { GlobalHeading, Img } from "../../GlobalStyles";
 import MyDogSetting from "../../assets/images/MyDog/MyDogSetting.png";
 import { useNavigate } from "react-router-dom";
 const MyDogCardComp = ({ expand, setExpand, value }) => {
-  console.log("The value", value._id);
   const navigate = useNavigate();
   return (
     <>
