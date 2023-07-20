@@ -3,6 +3,7 @@ import jsPDF from "jspdf";
 
 function generatePdf(elemId) {
   html2canvas(document.querySelector(`#${elemId}`)).then((canvas) => {
+    console.log("The canvas", canvas);
     const imgData = canvas.toDataURL("image/png", 1.0);
     //pdf document
     const pdf = new jsPDF({
