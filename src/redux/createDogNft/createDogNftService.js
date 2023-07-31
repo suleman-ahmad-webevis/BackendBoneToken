@@ -7,6 +7,11 @@ const createDogNft = async ({ obj, allFormsData }) => {
   if (res.status === 200 || res.status === 201) {
     obj.navigate("/create-dog-nft/congratulations");
     sessionStorage.setItem("nftId", res?.data?.nftId);
+    sessionStorage.removeItem("registerOwner");
+    sessionStorage.removeItem("registerDog");
+    sessionStorage.removeItem("registerVeterinary");
+    sessionStorage.removeItem("registerInsurance");
+    sessionStorage.removeItem("registerDogShow");
   }
   toast.success(res?.data?.message, { theme: "colored" });
   return res.data;
@@ -18,6 +23,11 @@ const updateDogNft = async ({ obj, allFormsData }) => {
   sessionStorage.setItem("nftId", obj?.nftId);
   if (res.status === 200 || res.status === 201) {
     obj.navigate("/edit-dog-nft/congratulations");
+    sessionStorage.removeItem("registerOwner");
+    sessionStorage.removeItem("registerDog");
+    sessionStorage.removeItem("registerVeterinary");
+    sessionStorage.removeItem("registerInsurance");
+    sessionStorage.removeItem("registerDogShow");
   }
   toast.success(res?.data?.message, { theme: "colored" });
   return res.data;
@@ -33,7 +43,11 @@ const getDogNft = async (obj) => {
   let API_URL = `dogNft/getDogNft/${obj.dogId}`;
   const res = await API.get(API_URL);
   if (res.status === 200 || res.status === 201) {
-    sessionStorage.clear();
+    sessionStorage.removeItem("registerOwner");
+    sessionStorage.removeItem("registerDog");
+    sessionStorage.removeItem("registerVeterinary");
+    sessionStorage.removeItem("registerInsurance");
+    sessionStorage.removeItem("registerDogShow");
   }
   return res.data;
 };

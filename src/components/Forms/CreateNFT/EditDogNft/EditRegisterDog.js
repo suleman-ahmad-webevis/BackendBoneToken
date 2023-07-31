@@ -84,12 +84,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
   useEffect(() => {
     setFieldValue("dogName", sessionData?.dogName ?? dog?.dogName);
     setFieldValue("breed", sessionData?.breed ?? dog?.breed);
-    setFieldValue(
-      "dogPic",
-      sessionData?.dogPic
-        ? dog?.dogPic
-        : "https://img.freepik.com/free-photo/background_53876-32170.jpg?w=996&t=st=1690730938~exp=1690731538~hmac=97cfad588dcc1af5398470e8f4d43a81fdd7749fdb0befa1d5dd43c5828cf47d"
-    );
+    setFieldValue("dogPic", sessionData?.dogPic ? dog?.dogPic : Transparent);
     setFieldValue(
       "dogVideoLink",
       sessionData?.dogVideoLink ?? dog?.dogVideoLink
@@ -109,8 +104,16 @@ const EditRegisterDog = ({ dog, isLoading }) => {
       sessionData?.dogFatherName ?? dog?.dogFatherName
     );
     setFieldValue(
+      "dogMotherPic",
+      sessionData?.dogMotherPic ?? dog?.dogMotherPic
+    );
+    setFieldValue(
       "dogFatherPic",
       sessionData?.dogFatherPic ?? dog?.dogFatherPic
+    );
+    setFieldValue(
+      "dogMotherNftNo",
+      sessionData?.dogFatherNftNo ?? dog?.dogFatherNftNo
     );
     setFieldValue(
       "dogFatherNftNo",
@@ -322,11 +325,7 @@ const EditRegisterDog = ({ dog, isLoading }) => {
                 <FileAccept>
                   <Img
                     ref={dogMotherPicUploaded}
-                    src={
-                      dog?.dogMotherPic
-                        ? dog?.dogMotherPic
-                        : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAEsCAMAAABgwwj8AAAAP1BMVEX9/f39/vn8/f39/fv9/f/5/vz9/vr0/f74/f3y/v71/f/2/v3t/v3w/v7z/vz2//v++vP5+PXo/v/r/P//+fR8p2CTAAABIUlEQVR4nO3Yy27CMBBAUezYsfMCGvr/31pAqmCBBJs2sXTOMqurcTxScjgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBfSVsHfCTnGrdu+ESajm2ExlLq1g0fObUSOg5jaeLor6G1hVsfx6E0EBpTHsYpb53xXkz12MA8r0s0nhpZ94fYwLnftXDuAAAA8G9SjDmXKYe9fzHHPJYynPrQbV3yRqzLMq/5HPrfJ13f7y86xrHM6+XydX60dWF/0035OMzzupbz3kPTuCzrfDl9P+JC6EPYtOqFVMsyL0MJT0MMN1tGvRLrVOtxys93/jrPx8XajXj/gdt1zy9lv8POdIjptujT07ZP1+q9L38AAIDW/ABivwT1SNSFJgAAAABJRU5ErkJggg=="
-                    }
+                    src={dog?.dogMotherPic ? dog?.dogMotherPic : Transparent}
                     alt="img"
                   />
                 </FileAccept>
