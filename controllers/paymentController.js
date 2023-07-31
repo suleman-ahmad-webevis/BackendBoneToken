@@ -44,8 +44,8 @@ const makeIntent = catchAsyncErrors(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: `${process.env.STRIPE_LOCAL_URL}/order-history`,
-    cancel_url: `${process.env.STRIPE_LOCAL_URL}/checkout`,
+    success_url: `${process.env.STRIPE_DEPLOYED_URL}/order-history`,
+    cancel_url: `${process.env.STRIPE_DEPLOYED_URL}/checkout`,
   });
 
   const newOrder = async () => {
