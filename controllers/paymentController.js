@@ -44,8 +44,10 @@ const makeIntent = catchAsyncErrors(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: `${process.env.STRIPE_DEPLOYED_URL}/order-history`,
-    cancel_url: `${process.env.STRIPE_DEPLOYED_URL}/checkout`,
+    // success_url: `${process.env.STRIPE_DEPLOYED_URL}/order-history`,
+    // cancel_url: `${process.env.STRIPE_DEPLOYED_URL}/checkout`,
+    success_url: `https://kennel.ai/.com/order-history`,
+    cancel_url: `https://kennel.ai/.com/checkout`,
   });
 
   const newOrder = async () => {
