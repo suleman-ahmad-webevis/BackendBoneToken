@@ -27,11 +27,11 @@ const dogNftSchema = new mongoose.Schema(
       ref: "DogShow",
       required: false,
     },
-    // nftCreator: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );

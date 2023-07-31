@@ -13,7 +13,7 @@ const newOrder = catchAsyncErrors(async (req, res, next) => {
     orderItems,
     paymentInfo,
     paidAt: Date.now(),
-    user: "6333fe6e80088e0d01ea97f1",
+    // user: "6333fe6e80088e0d01ea97f1",
   });
   if (order) {
     res.status(StatusCodes.CREATED).json({
@@ -55,7 +55,7 @@ const myOrders = catchAsyncErrors(async (req, res, next) => {
 
 //DeleteOrder
 const deleteOrder = catchAsyncErrors(async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
+  const order = await Order.find({ "orderItems._id": req.params.id });
   if (!order) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -68,9 +68,23 @@ const deleteOrder = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+const getAllOrders = catchAsyncErrors(async (req, res, next) => {
+  const allOrders = await Order.find({}).populate("user", "name email");
+  if (allOrders) {
+    res.status(StatusCodes.OK).json({
+      success: true,
+      data: allOrders,
+    });
+  } else {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Orders not found" });
+  }
+});
 module.exports = {
   newOrder,
   getSingleOrder,
   myOrders,
   deleteOrder,
+  getAllOrders,
 };

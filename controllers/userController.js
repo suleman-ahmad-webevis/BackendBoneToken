@@ -15,7 +15,6 @@ const register = catchAsyncErrors(async (req, res, next) => {
   const firstForm = JSON.parse(req.body.firstForm);
   const secondForm = JSON.parse(req.body.secondForm);
   const { email } = firstForm;
-
   if (req.body.values.password !== req.body.values.repeatPassword) {
     return next(
       new ErrorHandler(

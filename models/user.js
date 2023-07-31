@@ -12,11 +12,10 @@ const userSchema = new mongoose.Schema(
     mName: {
       type: String,
     },
-    lName: {
-      type: String,
-      required: [true, "Please enter lastname"],
-      unique: [true, "Email already exist"],
-    },
+    // lName: {
+    //   type: String,
+    //   required: [true, "Please enter lastname"],
+    // },
     dob: {
       type: String,
       required: [true, "Please enter date of birth"],
