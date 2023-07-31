@@ -32,6 +32,9 @@ const getAllDogNft = async () => {
 const getDogNft = async (obj) => {
   let API_URL = `dogNft/getDogNft/${obj.dogId}`;
   const res = await API.get(API_URL);
+  if (res.status === 200 || res.status === 201) {
+    sessionStorage.clear();
+  }
   return res.data;
 };
 

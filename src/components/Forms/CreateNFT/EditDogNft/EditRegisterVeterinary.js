@@ -30,7 +30,6 @@ const EditRegisterVeterinary = ({ veterinary }) => {
   const [activeIdx, setActiveIdx] = useState(0);
   let filteredArray;
   const handleSubmit = (e) => {
-    alert("dsa");
     e.preventDefault();
     const newVacc = {
       vacType: vacType,
