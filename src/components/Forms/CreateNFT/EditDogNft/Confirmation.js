@@ -23,6 +23,7 @@ const Confirmation = () => {
   const nftIdIs = sessionStorage?.getItem("nftId");
   useEffect(() => {
     dispatch(getDogNft({ dogId: nftIdIs }));
+    sessionStorage.clear();
   }, []);
 
   return (

@@ -141,6 +141,13 @@ const ProductDetail = () => {
     // eslint-disable-next-line
   }, [checkIndex, handleQuantity]);
 
+  useEffect(() => {
+    // This block will run whenever newProInventory is updated
+    if (checkIndex) {
+      setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
+    }
+  }, [newProInventory]);
+
   if (isLoading) {
     return <LoadingBar />;
   }
@@ -179,9 +186,9 @@ const ProductDetail = () => {
       tempInventory[index].minRetailPrice * tempInventory[index].quantity;
     setCheckIndex(selectedIndex);
     setNewProInventory(tempInventory);
-    if (selectedIndex) {
-      setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
-    }
+    // if (selectedIndex) {
+    //   setSelectedPro(newProInventory.filter((e) => e.quantity !== 0));
+    // }
   };
 
   return (

@@ -18,16 +18,20 @@ const VacSection = ({ veterinary }) => {
               <VacInfo>
                 <ul>
                   <VacItem>
-                    <li>Date Vaccination Expiry: </li>
+                    <li style={{ paddingLeft: "5px" }}>
+                      Date Vaccination Expiry:{" "}
+                    </li>
                     <span>
                       {" "}
                       {new Date(val?.vacExpiryDate ? val?.vacExpiryDate : "-")
                         .toLocaleString()
-                        .substring(0, 9)}{" "}
+                        .substring(0, 8)}{" "}
                     </span>
                   </VacItem>
                   <VacItem>
-                    <li>Vacination Serial Number: </li>{" "}
+                    <li style={{ paddingLeft: "5px" }}>
+                      Vacination Serial Number:{" "}
+                    </li>{" "}
                     <span>{val?.vacSerialNo ? val?.vacSerialNo : "-"} </span>
                   </VacItem>
                 </ul>
@@ -40,11 +44,17 @@ const VacSection = ({ veterinary }) => {
             <VacInfo>
               <ul>
                 <VacItem>
-                  <li>Date Vaccination Expiry: </li>
+                  <li style={{ paddingLeft: "5px" }}>
+                    {" "}
+                    Date Vaccination Expiry:{" "}
+                  </li>
                   <span>-</span>
                 </VacItem>
                 <VacItem>
-                  <li>Vacination Serial Number: </li> <span>- </span>
+                  <li style={{ paddingLeft: "5px" }}>
+                    Vacination Serial Number:{" "}
+                  </li>{" "}
+                  <span>- </span>
                 </VacItem>
               </ul>
             </VacInfo>
@@ -58,7 +68,7 @@ const VacSection = ({ veterinary }) => {
 export default VacSection;
 
 export const VSWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
@@ -75,7 +85,7 @@ export const VSHead = styled.div`
   }
   h5 {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 25px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -107,4 +117,5 @@ export const VacItem = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 5px;
+  justify-content: space-between;
 `;

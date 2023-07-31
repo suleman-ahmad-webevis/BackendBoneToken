@@ -10,7 +10,7 @@ const DogDataSection = ({ dog }) => {
         <img
           src={dog?.dogPic ? dog?.dogPic : Dog}
           alt="Dog"
-          style={{ height: "1250px", width: "1200px" }}
+          style={{ borderRadius: "50px" }}
         />
         <h5>DogData</h5>
       </DDHead>
@@ -58,7 +58,7 @@ const DogDataSection = ({ dog }) => {
 export default DogDataSection;
 
 export const DDWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
@@ -70,12 +70,12 @@ export const DDHead = styled.div`
   align-items: center;
   width: 30%;
   img {
-    border-radius: 20px;
-    width: 15%;
+    border-radius: 20px solid transparent;
+    width: 25%;
   }
   h5 {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 25px;
     line-height: 95%;
     color: #b1933c;
   }

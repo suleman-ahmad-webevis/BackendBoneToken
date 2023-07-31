@@ -56,7 +56,7 @@ import "./App.css";
 
 //Authorization
 // import PaymentMethod from "./components/Checkout/PaymentMethod";
-// import { PrivateRouteCheckout } from "./utils/PrivateRoutes";
+import { PrivateRoutes } from "./utils/PrivateRoutes";
 // import StripeModal from "./components/Checkout/StripeModal";
 
 let persistor = persistStore(store);
@@ -98,7 +98,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/order-history",
-        element: <ORDERHISTORY />,
+        element: (
+          <PrivateRoutes>
+            <ORDERHISTORY />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/blogs",
@@ -138,7 +142,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-dogs",
-        element: <MYDOGS />,
+        element: (
+          <PrivateRoutes>
+            <MYDOGS />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dog-shows",

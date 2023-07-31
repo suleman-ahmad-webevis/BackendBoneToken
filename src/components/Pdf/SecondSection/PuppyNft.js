@@ -47,7 +47,7 @@ const PuppyNft = () => {
 export default PuppyNft;
 
 export const PNFTWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
@@ -56,7 +56,7 @@ export const PNFTWrapper = styled.div`
 export const PNFTHead = styled.div`
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 40%;
   grid-gap: 20px;
   img {
     border-radius: 20px;
@@ -64,7 +64,8 @@ export const PNFTHead = styled.div`
   }
   h5 {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 25px;
+
     line-height: 95%;
     color: #b1933c;
   }

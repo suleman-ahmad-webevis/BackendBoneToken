@@ -59,49 +59,39 @@ const types = [
   },
 ];
 
-const VaccinationTypes = ({ setVaccinationPadding, vaccines , setSelectedVac}) => {
+const VaccinationTypes = ({
+  setVaccinationPadding,
+  setVacType,
+  newVaccines,
+  activeIdx,
+  setActiveIdx,
+}) => {
   const [active, setActive] = useState("");
 
   const vacHandler = (value) => {
-    setActive(value.vacType);
-    // setVaccination({
-    //   ...vaccination,
-    //   vacType: value.type,
-    // });
-    setVaccinationPadding(value.padding);
-    setSelectedVac(value)
+    setActive(value?.vacType);
+    setVaccinationPadding(value?.padding);
+    setVacType(value?.vacType);
+
+    const exist = newVaccines.find((item) => item?.vacType === value?.vacType);
+    setActiveIdx(exist);
   };
 
-  const mergedArray = types.map((type) => {
-    const match = vaccines?.find(
-      (item) => item.vacType === type.vacType
+  return types.map((value, index) => {
+    const exist = newVaccines.find((item) => item?.vacType === value?.vacType);
+    return (
+      <ButtonGroup key={index}>
+        <ButtonToggle
+          key={value.vacType}
+          isActive={exist}
+          active={active === value?.vacType}
+          onClick={() => vacHandler(value)}
+        >
+          {value.vacType}
+        </ButtonToggle>
+      </ButtonGroup>
     );
-    if (match) {
-      return {
-        ...type,
-        isActive: true,
-        vacSerialNo: match.vacSerialNo,
-        vacExpiryDate: match.vacExpiryDate,
-      };
-    } else {
-      return type;
-    }
   });
-
-  console.log("The mergeArray", mergedArray);
-
-  return mergedArray.map((value, index) => (
-    <ButtonGroup key={index}>
-      <ButtonToggle
-        key={value.vacType}
-        isActive={value.isActive}
-        active={active === value.vacType}
-        onClick={() => vacHandler(value)}
-      >
-        {value.vacType}
-      </ButtonToggle>
-    </ButtonGroup>
-  ));
 };
 
 const Button = styled.div`

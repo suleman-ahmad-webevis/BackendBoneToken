@@ -3,7 +3,7 @@ import * as yup from "yup";
 export const firstFormSchema = yup.object({
   name: yup.string().required("Required!"),
   lName: yup.string().required("Required!"),
-  //dob
+  dob:yup.string().required('Required'),
   email: yup.string().email("Invalid email").required("Required!"),
 });
 

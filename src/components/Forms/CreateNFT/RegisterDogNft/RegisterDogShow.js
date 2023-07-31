@@ -79,7 +79,7 @@ const RegisterDogShow = () => {
   const handleSubmit = (e) => {
     if (userInfo?.token) {
       e.preventDefault();
-      dispatch(createDogNft({ navigate, dogS }));
+      dispatch(createDogNft({ navigate, dogS, userId: userInfo?.user?._id }));
     } else {
       toast.info("Please Login");
     }

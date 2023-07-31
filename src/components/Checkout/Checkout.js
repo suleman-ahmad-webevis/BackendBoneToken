@@ -41,6 +41,22 @@ const CheckOutComp = () => {
     // eslint-disable-next-line
   }, [cartQuantityIs]);
 
+  const [name, setName] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [vatNo, setVatNo] = useState(null);
+
+  const shippingInfo = {
+    name,
+    address,
+    email,
+    description,
+    phone,
+    vatNo,
+  };
+
   return (
     <>
       {isDesktop ? (
@@ -49,7 +65,7 @@ const CheckOutComp = () => {
             {cartItems.length ? (
               <CheckedOutItems>
                 {cartItems?.map((cartItem, index) => (
-                  <CheckoutCardCom cartItem={cartItem} index={index} />
+                  <CheckoutCardCom cartItem={cartItem} key={index} />
                 ))}
               </CheckedOutItems>
             ) : (
@@ -83,7 +99,11 @@ const CheckOutComp = () => {
                   active={active}
                   hideModal={() => setActive(false)}
                 >
-                  <PaymentMethod cartItems={cartItems} />
+                  <PaymentMethod
+                    cartItems={cartItems}
+                    cartAmountIs={cartAmountIs}
+                    shippingInfo={shippingInfo}
+                  />
                 </Modal>
               </TotalBill>
             </CheckoutPrices>
@@ -94,13 +114,22 @@ const CheckOutComp = () => {
                 <Label>
                   Name<span> *</span>
                 </Label>
-                <FormInput placeholder="" />
+                <FormInput
+                  placeholder=""
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </FormField>
               <FormField>
                 <Label>
                   Address<span> *</span>
                 </Label>
-                <FormInput placeholder="" style={{ paddingLeft: "35px" }} />
+                <FormInput
+                  placeholder=""
+                  style={{ paddingLeft: "35px" }}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
                 <AddressFieldIcon>
                   <Img src={AddressIcon} alt="icon" />
                 </AddressFieldIcon>
@@ -109,7 +138,11 @@ const CheckOutComp = () => {
                 <Label>
                   Email<span> *</span>
                 </Label>
-                <FormInput type="email" />
+                <FormInput
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </FormField>
               <FormField>
                 <Label>
@@ -137,11 +170,15 @@ const CheckOutComp = () => {
                     borderRadius: "8px",
                     fontFamily: "Inter-Regular",
                   }}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </FormField>
               <FormField>
                 <PhoneInput
                   international
+                  value={phone}
+                  onChange={(phone) => setPhone(phone)}
                   country="gb"
                   countryCallingCodeEditable={true}
                   limitMaxLength={true}
@@ -199,7 +236,11 @@ const CheckOutComp = () => {
               </FormField>
               <FormField>
                 <Label>VAT Number</Label>
-                <FormInput placeholder="Vat Number" />
+                <FormInput
+                  placeholder="Vat Number"
+                  value={vatNo}
+                  onChange={(e) => setVatNo(e.target.value)}
+                />
               </FormField>
             </CheckoutForm>
           </CheckoutSec>

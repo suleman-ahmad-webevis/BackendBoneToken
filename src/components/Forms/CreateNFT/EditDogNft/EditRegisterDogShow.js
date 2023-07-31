@@ -26,6 +26,7 @@ import DogShows from "./DogShows";
 import { updateDogNft } from "../../../../redux/createDogNft/createDogNftSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditRegisterDogShow = ({ dogShow, nftId }) => {
   const navigate = useNavigate();
@@ -62,10 +63,13 @@ const EditRegisterDogShow = ({ dogShow, nftId }) => {
         showsAre[showIdx] = data;
         return showsAre;
       });
-      sessionStorage.setItem("registerDogShow", JSON.stringify(shows));
-      setSessionData(JSON.parse(sessionStorage.getItem("registerDogShow")));
     },
   });
+
+  useEffect(() => {
+    sessionStorage.setItem("registerDogShow", JSON.stringify(shows));
+    setSessionData(JSON.parse(sessionStorage.getItem("registerDogShow")));
+  }, [shows]);
 
   useEffect(() => {
     setFieldValue(

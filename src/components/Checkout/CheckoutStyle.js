@@ -549,8 +549,12 @@ export const OrderHistoryContainer = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
-  width: 100%;
+  width: 95%;
   padding: 20px 10px;
+  border-radius: 15px;
+  margin: auto;
+  background: #f5f9fc;
+ 
 `;
 
 export const OrderHistoryCard = styled.div`
@@ -563,4 +567,25 @@ export const OrderHistoryCard = styled.div`
   gap: 7.5rem;
   padding: 15px;
   width: 100%;
+`;
+
+export const OrderTotal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 130px;
+  padding: 20px 0px;
+  background-color: rgba(245, 249, 252, 1);
+  width: 95%;
+  margin: auto;
+  border-radius: 15px;
+  margin-top: 50px;
+  p {
+    color: #434343;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
 `;

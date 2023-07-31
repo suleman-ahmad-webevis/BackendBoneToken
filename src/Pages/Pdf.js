@@ -41,7 +41,7 @@ const Pdf = () => {
       pdf.link(47, 47, 3, 6, {
         url: owner?.instaPage,
         target: {
-          url: owner?.website,
+          url: owner?.instaPage,
           enabled: true,
           newWindow: true,
         },
@@ -113,12 +113,16 @@ export const RightHead = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 20px;
+  justify-content: flex-start;
+  width: 50%;
 `;
 
 export const LeftHead = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 20px;
+  justify-content: flex-end;
+  width: 50%;
 `;
 
 export const DDUserId = styled.div`

@@ -12,6 +12,7 @@ const Register = () => {
   const { isTablet, isSmallMobile, isMobile } = useBreakpoint();
   //Pages
   const [page, setPage] = useState(0);
+
   const components = [
     <FirstForm setPage={setPage} />,
     <SecondForm setPage={setPage} />,
@@ -111,7 +112,7 @@ export const ConBtn = styled.div`
     font-weight: 700;
     font-size: 16px;
     color: #ffffff;
-    cursor:pointer;
+    cursor: pointer;
   }
 `;
 

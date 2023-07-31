@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import MyDogCardComp from "./MyDogCardComp";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNfts } from "../../redux/createDogNft/createDogNftSlice";
+import { getAllNfts, getDogNftByUser } from "../../redux/createDogNft/createDogNftSlice";
 // import Loader from "../Loader/Loader";
 import { Img } from "../../GlobalStyles";
 import MsgIcon from "../../assets/images/MyDog/MsgIcon.png";
@@ -25,9 +25,11 @@ const MyDog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [expand, setExpand] = useState(false);
-  const { allDogNfts } = useSelector((state) => state.dogNft);
+  const { userNfts } = useSelector((state) => state.dogNft);
+  const { userInfo } = useSelector((state) => state.user);
+  // const { allDogNfts } = useSelector((state) => state.dogNft);
   useEffect(() => {
-    dispatch(getAllNfts());
+    dispatch(getDogNftByUser({userId:userInfo?.user?._id}));
     // eslint-disable-next-line
   }, []);
 
@@ -65,9 +67,9 @@ const MyDog = () => {
           {/* <Icon /> */}
         </MyDogHeadBtns>
         <MyDogsWrapper>
-          {allDogNfts.length ? (
+          {userNfts?.length ? (
             <DogDetail>
-              {allDogNfts.map((value, idx) => (
+              {userNfts?.map((value, idx) => (
                 <MyDogCardComp
                   idx={idx}
                   key={idx}

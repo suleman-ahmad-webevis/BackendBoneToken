@@ -14,6 +14,8 @@ import {
 import { GlobalHeading, Img } from "../../GlobalStyles";
 import MyDogSetting from "../../assets/images/MyDog/MyDogSetting.png";
 import { useNavigate } from "react-router-dom";
+import Transparent from "../../assets/images/transparent.png";
+
 const MyDogCardComp = ({ expand, setExpand, value }) => {
   const navigate = useNavigate();
   return (
@@ -98,7 +100,11 @@ const MyDogCardComp = ({ expand, setExpand, value }) => {
           </>
         )}
         <DogVideo>
-          <img src={value?.dog?.dogPic} alt="MyDog" />
+          <img
+            src={value?.dog?.dogPic ? value?.dog?.dogPic : Transparent}
+            alt="MyDog"
+            style={{ maxWidth: "50%" }}
+          />
           <video width="120px" height="76px" controls>
             <source src={value?.dog?.dogVideoLink} type="video/mp4"></source>
             Your browser does not support the video tag.

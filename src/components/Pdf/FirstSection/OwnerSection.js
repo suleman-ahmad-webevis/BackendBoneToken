@@ -13,7 +13,11 @@ const OwnerSection = ({ owner }) => {
     <OSWrapper>
       <OSHead>
         <OwnerBasicInfo>
-          <Img src={owner?.ownerPic ? owner?.ownerPic : Owner} alt="owner" />
+          <Img
+            src={owner.ownerPic ? owner.ownerPic : Owner}
+            alt="owner"
+            style={{ borderRadius: "50px" }}
+          />
           <h5>Owner</h5>
         </OwnerBasicInfo>
         <SocialIcons>
@@ -27,10 +31,10 @@ const OwnerSection = ({ owner }) => {
       </OSHead>
       <OwnerInfo>
         <OwnerItems>
-          <h5>Name</h5>
-          <h5>Breeder Kennel name</h5>
-          <h5>Email</h5>
-          <h5>Telephone</h5>
+          <h4>Name</h4>
+          <h4>Breeder Kennel name</h4>
+          <h4>Email</h4>
+          <h4>Telephone</h4>
         </OwnerItems>
         <PawItems>
           <Img src={OwnerPaw} alt="OwnerPaw" />
@@ -39,16 +43,16 @@ const OwnerSection = ({ owner }) => {
           <Img src={OwnerPaw} alt="OwnerPaw" />
         </PawItems>
         <OwnerValues>
-          <h5>{owner?.ownerName ? owner?.ownerName : "-"}</h5>
-          <h5>{owner?.breederKennelName ? owner?.breederKennelName : "-"}</h5>
-          <h5>{owner?.email ? owner?.email : "-"}</h5>
-          <h5>{owner?.phone ? owner?.phone : "-"}</h5>
+          <h4>{owner?.ownerName ? owner?.ownerName : "-"}</h4>
+          <h4>{owner?.breederKennelName ? owner?.breederKennelName : "-"}</h4>
+          <h4>{owner?.email ? owner?.email : "-"}</h4>
+          <h4>{owner?.phone ? owner?.phone : "-"}</h4>
         </OwnerValues>
       </OwnerInfo>
       <OwnerSites>
         <OwnerSite>
           <Img src={Site} alt="Site" />
-          <h5>Breeder website :</h5>
+          <h4>Breeder website :</h4>
           <a
             href={owner?.breederWebsite ? owner?.breederWebsite : "-"}
             target="_blank"
@@ -62,7 +66,7 @@ const OwnerSection = ({ owner }) => {
         </OwnerSite>
         <OwnerSite>
           <Img src={Site} alt="Site" />
-          <h5> Owner website :</h5>
+          <h4> Owner website :</h4>
           <a
             href={owner?.website}
             target="_blank"
@@ -80,7 +84,7 @@ const OwnerSection = ({ owner }) => {
 export default OwnerSection;
 
 export const OSWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
@@ -90,10 +94,10 @@ export const OSHead = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 20%;
+  width: 30%;
   h5 {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 25px;
     line-height: 95%;
     color: #b1933c;
   }
@@ -104,8 +108,8 @@ export const OwnerBasicInfo = styled.div`
   align-items: center;
   grid-gap: 10px;
   img {
-    border-radius: 20px;
-    max-width: 36%;
+    border-radius: 20px solid transparent;
+    width: 35%;
   }
 `;
 
@@ -116,7 +120,7 @@ export const SocialIcons = styled.div`
   width: 100%;
   justify-content: center;
   img {
-    height: 17px;
+    height: 20px;
   }
 `;
 
@@ -125,7 +129,7 @@ export const OwnerInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  width: 60%;
+  width: 80%;
   padding-left: 80px;
   font-size: 20px;
 `;

@@ -17,6 +17,7 @@ import Qr from "../../../assets/images/Pdf/Qr.png";
 import RightPaw from "../../../assets/images/Pdf/RightPaw.png";
 import LeftPaw from "../../../assets/images/Pdf/LeftPaw.png";
 import BG from "../../../assets/images/Pdf/BG.png";
+import QRCode from "react-qr-code";
 
 const FirstSection = ({ dog, owner, veterinary }) => {
   return (
@@ -25,7 +26,7 @@ const FirstSection = ({ dog, owner, veterinary }) => {
         {" "}
         <Header>
           <RightHead>
-            <Img src={Logo} alt="Logo" />
+            <Img src={Logo} alt="Logo" style={{ width: "20%" }} />
             <DDUserId>
               <span>DogData user ID</span>
               <h5>00001</h5>
@@ -36,7 +37,12 @@ const FirstSection = ({ dog, owner, veterinary }) => {
               <h5>Erc721 certificate number</h5>
               <h5>00000001</h5>
             </CerNo>
-            <Img src={Qr} alt="Qr" />
+            <QRCode
+              size={10}
+              style={{ height: "auto", maxWidth: "20%", width: "20%" }}
+              value="https://kennel.ai/"
+              viewBox={`0 0 256 256`}
+            />
           </LeftHead>
         </Header>
         <OwnerSection owner={owner} />

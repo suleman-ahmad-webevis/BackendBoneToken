@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { registerOwnerSchema } from "../../../../schema/createDogNftSchema";
 import Transparent from "../../../../assets/images/transparent.png";
 import { SaveEditNftBtn } from "../RegisterDogNft/CreateNFT.style";
+import { toast } from "react-toastify";
 
 const EditRegisterOwner = ({ owner }) => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const EditRegisterOwner = ({ owner }) => {
       sessionStorage.setItem("registerOwner", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerOwner")));
       navigate("/edit-dog-nft/veterinary-register");
+      toast.info("Owner info edited", { theme: "colored" });
     },
   });
 
@@ -115,7 +117,7 @@ const EditRegisterOwner = ({ owner }) => {
             <FileAccept>
               <Img
                 ref={uploadedImage}
-                src={owner?.ownerPic ?? Transparent}
+                src={owner?.ownerPic ? owner?.ownerPic : Transparent}
                 alt="img"
               />
             </FileAccept>

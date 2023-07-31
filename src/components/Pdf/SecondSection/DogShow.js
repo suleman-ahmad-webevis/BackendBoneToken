@@ -60,7 +60,7 @@ const DogShowSection = ({ dogShow }) => {
 export default DogShowSection;
 
 export const DSWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
@@ -70,14 +70,14 @@ export const DSHead = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 20px;
-  width: 30%;
+  width: 40%;
   img {
     border-radius: 20px;
     width: 15%;
   }
   h5 {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 25px;
     line-height: 95%;
     color: #b1933c;
   }

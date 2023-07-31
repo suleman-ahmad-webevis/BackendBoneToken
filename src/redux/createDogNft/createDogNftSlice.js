@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  userNfts: [],
 };
 
 export const createDogNft = createAsyncThunk(
@@ -24,6 +25,7 @@ export const createDogNft = createAsyncThunk(
       registerVeterinary,
       registerInsurance,
       registerDogShow,
+      userId: obj.userId,
     };
     try {
       return await createDogNftService.createDogNft({ obj, allFormsData });
@@ -40,13 +42,13 @@ export const updateDogNft = createAsyncThunk(
   async (obj, thunkAPI) => {
     const registerDog = sessionStorage.getItem("registerDog");
     const registerOwner = sessionStorage.getItem("registerOwner");
-    // const registerVeterinary = sessionStorage.getItem("registerVeterinary");
+    const registerVeterinary = sessionStorage.getItem("registerVeterinary");
     const registerInsurance = sessionStorage.getItem("registerInsurance");
     const registerDogShow = sessionStorage.getItem("registerDogShow");
     const allFormsData = {
       registerDog,
       registerOwner,
-      // registerVeterinary,
+      registerVeterinary,
       registerInsurance,
       registerDogShow,
     };
@@ -78,6 +80,19 @@ export const getDogNft = createAsyncThunk(
   async (obj, thunkAPI) => {
     try {
       return await createDogNftService.getDogNft(obj);
+    } catch (err) {
+      const message = err.message;
+      toast.error(message, { theme: "colored" });
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getDogNftByUser = createAsyncThunk(
+  "dogNft/getDogNftByUser",
+  async (obj, thunkAPI) => {
+    try {
+      return await createDogNftService.getDogNftByUser(obj);
     } catch (err) {
       const message = err.message;
       toast.error(message, { theme: "colored" });
@@ -140,6 +155,18 @@ export const dogNFTSlice = createSlice({
         state.singleDogNft = action.payload;
       })
       .addCase(getDogNft.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(getDogNftByUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDogNftByUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userNfts = action.payload.data;
+      })
+      .addCase(getDogNftByUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });

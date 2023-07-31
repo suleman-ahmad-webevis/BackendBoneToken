@@ -1,19 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import paymentService from "./paymentService";
+import orderService from "./orderService";
 import { toast } from "react-toastify";
 
 const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  isPayment: false,
+  myOrder: [],
+  isOrder: false,
 };
 
-export const createCheckoutSession = createAsyncThunk(
-  "payment/createCheckoutSession",
+export const getUserOrders = createAsyncThunk(
+  "order/getUserOrders",
   async (obj, thunkAPI) => {
     try {
-      return await paymentService.createCheckoutSession(obj);
+      return await orderService.getUserOrders(obj);
     } catch (error) {
       const message = error.message;
       toast.error(message, { theme: "colored" });
@@ -22,11 +23,11 @@ export const createCheckoutSession = createAsyncThunk(
   }
 );
 
-export const createOrder = createAsyncThunk(
-  "order/newOrder",
+export const removeOrderItem = createAsyncThunk(
+  "order/deleteOrder",
   async (obj, thunkAPI) => {
     try {
-      return await paymentService.createOrder(obj);
+      return await orderService.deleteOrderById(obj);
     } catch (error) {
       const message = error.message;
       toast.error(message, { theme: "colored" });
@@ -35,12 +36,12 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-export const paymentSlice = createSlice({
-  name: "payment",
+export const orderSlice = createSlice({
+  name: "order",
   initialState,
   reducers: {
     reset: (state) => {
-      // state.user = null;
+      state.myOrder = [];
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
@@ -49,30 +50,31 @@ export const paymentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createCheckoutSession.pending, (state, action) => {
+      .addCase(getUserOrders.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(createCheckoutSession.fulfilled, (state, action) => {
+      .addCase(getUserOrders.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isPayment = !state.isPayment;
+        state.myOrder = action?.payload?.data;
       })
-      .addCase(createCheckoutSession.rejected, (state, action) => {
+      .addCase(getUserOrders.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
       })
-      .addCase(createOrder.pending, (state, action) => {
+      .addCase(removeOrderItem.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(createOrder.fulfilled, (state, action) => {
+      .addCase(removeOrderItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isOrder = !state.isOrder;
       })
-      .addCase(createOrder.rejected, (state, action) => {
+      .addCase(removeOrderItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-      })
+      });
   },
 });
 
-export default paymentSlice.reducer;
+export default orderSlice.reducer;

@@ -35,11 +35,18 @@ const getDogNft = async (obj) => {
   return res.data;
 };
 
+const getDogNftByUser = async (obj) => {
+  let API_URL = `dogNft/getDogNftByUser/${obj.userId}`;
+  const res = await API.get(API_URL);
+  return res.data;
+};
+
 const categoryService = {
   createDogNft,
   updateDogNft,
   getAllDogNft,
   getDogNft,
+  getDogNftByUser,
 };
 
 export default categoryService;

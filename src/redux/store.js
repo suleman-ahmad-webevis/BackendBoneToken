@@ -19,6 +19,8 @@ import dogNftReducer from "./createDogNft/createDogNftSlice";
 import paymentReducer from "./payment/paymentSlice";
 //DogShow
 import dogShowReducer from "./dogShow/dogShowSlice";
+//Order
+import orderReducer from "./order/orderSlice";
 
 //Other configs
 import storage from "redux-persist/lib/storage";
@@ -55,6 +57,8 @@ const rootReducer = combineReducers({
   payment: paymentReducer,
   //DogShow
   dogShow: dogShowReducer,
+  //Order
+  order: orderReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -16,7 +16,8 @@ export const registerTheUser = createAsyncThunk(
     try {
       return await userService.registerTheUserService(obj);
     } catch (error) {
-      const message = error.message;
+      console.log("The error", error);
+      const message = error.response.data.message;
       toast.error(message, { theme: "colored" });
       return thunkAPI.rejectWithValue(message);
     }

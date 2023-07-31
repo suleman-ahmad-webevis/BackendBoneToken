@@ -17,13 +17,14 @@ import InsuranceSection from "./InsuranceSection";
 import DogShowSection from "./DogShow";
 import PuppyNft from "./PuppyNft";
 import BG from "../../../assets/images/Pdf/BG.png";
+import QRCode from "react-qr-code";
 
 const SecondSection = ({ insurance, dogShow }) => {
   return (
     <SSWrapper id="second" BG={BG}>
       <Header>
         <RightHead>
-          <Img src={Logo} alt="Logo" />
+          <Img src={Logo} alt="Logo" style={{ width: "20%" }} />
           <DDUserId>
             <span>DogData user ID</span>
             <h5>00001</h5>
@@ -34,7 +35,12 @@ const SecondSection = ({ insurance, dogShow }) => {
             <span>Erc721 certificate number</span>
             <h5>00000001</h5>
           </CerNo>
-          <Img src={Qr} alt="Qr" />
+          <QRCode
+            size={10}
+            style={{ height: "auto", maxWidth: "20%", width: "20%" }}
+            value="https://kennel.ai/"
+            viewBox={`0 0 256 256`}
+          />
         </LeftHead>
       </Header>
       <InsuranceSection insurance={insurance} />

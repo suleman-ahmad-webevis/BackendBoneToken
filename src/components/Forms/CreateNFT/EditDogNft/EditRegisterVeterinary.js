@@ -18,26 +18,31 @@ import {
   SaveNftBtn,
   SaveText,
 } from "../RegisterDogNft/CreateNFT.style";
+import { toast } from "react-toastify";
 
 const EditRegisterVeterinary = ({ veterinary }) => {
   const navigate = useNavigate();
   const [vaccinationPadding, setVaccinationPadding] = useState("100px");
-  const [selectedVac, setSelectedVac] = useState();
-  const [vaccines, setVaccines] = useState([...veterinary.vaccines]);
-  const [expiryDate, setExpiryDate] = useState();
-  const [vacSerialNo, setVacSerialNo] = useState();
-
+  const [newVaccines, setNewVaccines] = useState([...veterinary?.vaccines]);
+  const [vacType, setVacType] = useState(null);
+  const [vacExpiryDate, setVacExpiryDate] = useState(null);
+  const [vacSerialNo, setVacSerialNo] = useState(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  let filteredArray;
   const handleSubmit = (e) => {
+    alert("dsa");
     e.preventDefault();
-    setVaccines((prev) => [
-      ...prev,
-      {
-        vacType: selectedVac.vacType ?? "",
-        vacSerialNo: vacSerialNo ?? "",
-        vacExpiryDate: expiryDate ?? "",
-      },
-    ]);
-    sessionStorage.setItem("registerVeterinary", JSON.stringify(vaccines));
+    const newVacc = {
+      vacType: vacType,
+      vacSerialNo: vacSerialNo,
+      vacExpiryDate: vacExpiryDate,
+    };
+    newVaccines.push(newVacc);
+    filteredArray = newVaccines?.filter(
+      (obj) => obj?.vacType !== newVacc?.vacType
+    );
+    filteredArray?.push(newVacc);
+    toast.info("Vaccine info edited", { theme: "colored" });
   };
 
   return (
@@ -50,15 +55,18 @@ const EditRegisterVeterinary = ({ veterinary }) => {
           <CategoriesField>
             <VaccinationTypes
               setVaccinationPadding={setVaccinationPadding}
-              vaccines={vaccines}
-              setSelectedVac={setSelectedVac}
+              vacType={vacType}
+              setVacType={setVacType}
+              newVaccines={newVaccines}
+              activeIdx={activeIdx}
+              setActiveIdx={setActiveIdx}
             />
           </CategoriesField>
         </FormField>
         <FormField>
           <FormTextField
             id="outlined-basic"
-            label="Vaccination Serial Number"
+            label={activeIdx?.vacSerialNo}
             variant="outlined"
             position="relative"
             paddingLeft={vaccinationPadding}
@@ -73,7 +81,7 @@ const EditRegisterVeterinary = ({ veterinary }) => {
               color: "#b7b7b7",
             }}
           >
-            {selectedVac?.vacType ? selectedVac?.vacType : vaccines[0]?.vacType}
+            {vacType ? vacType : newVaccines[0]?.vacType}
           </h5>
         </FormField>
         <FormField>
@@ -84,8 +92,8 @@ const EditRegisterVeterinary = ({ veterinary }) => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            value={vacExpiryDate}
+            onChange={(e) => setVacExpiryDate(e.target.value)}
           />
         </FormField>
         <div
@@ -105,7 +113,28 @@ const EditRegisterVeterinary = ({ veterinary }) => {
           <div></div>
           {/* Empty <div> to put next on end */}
           <SaveEditNftBtn
-            onClick={() => navigate("/edit-dog-nft/insurance-register")}
+            onClick={() => {
+              const withoutIds = filteredArray?.filter(
+                (val) => !val.hasOwnProperty("_id")
+              );
+              if (withoutIds?.length) {
+                const stored = {
+                  _id: veterinary?._id,
+                  createdAt: veterinary?.createdAt,
+                  vaccines: [...withoutIds],
+                  updatedAt: veterinary?.updatedAt,
+                  __v: 0,
+                };
+                sessionStorage.setItem(
+                  "registerVeterinary",
+                  JSON.stringify(stored)
+                );
+
+                navigate("/edit-dog-nft/insurance-register");
+              } else {
+                navigate("/edit-dog-nft/insurance-register");
+              }
+            }}
             style={{ marginBottom: "20px" }}
           >
             Save

@@ -21,11 +21,12 @@ import {
   SaveNftBtn,
   SaveText,
 } from "../RegisterDogNft/CreateNFT.style";
+import { toast } from "react-toastify";
 
 const EditRegisterInsurance = ({ insurance }) => {
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(
-    JSON.parse(sessionStorage.getItem("registerVeterinary")) ?? {}
+    JSON.parse(sessionStorage.getItem("registerInsurance")) ?? {}
   );
   const {
     values,
@@ -39,18 +40,18 @@ const EditRegisterInsurance = ({ insurance }) => {
     initialValues: {
       contactName: sessionData?.contactName ?? insurance?.contactName,
       certificateNo: sessionData?.certificateNo ?? insurance?.certificateNo,
-      phoneOne: sessionData?.phoneOne ?? String(insurance?.phoneOne),
-      phoneTwo: sessionData?.phoneTwo ?? String(insurance?.phoneTwo),
+      phoneOne: sessionData?.phoneOne ? String(insurance?.phoneOne) : 0,
+      phoneTwo: sessionData?.phoneTwo ? String(insurance?.phoneTwo) : 0,
       startDate: sessionData?.startDate ?? insurance?.startDate,
       endDate: sessionData?.endDate ?? insurance?.endDate,
     },
     validationSchema: registerVeterinarySchema,
     onSubmit: (data) => {
+      toast.info("Insurance info edited", { theme: "colored" });
       sessionStorage.setItem("registerInsurance", JSON.stringify(data));
       setSessionData(JSON.parse(sessionStorage.getItem("registerInsurance")));
     },
   });
-
   return (
     <RegisterDogContainer>
       <Form onSubmit={handleSubmit} width="90%">

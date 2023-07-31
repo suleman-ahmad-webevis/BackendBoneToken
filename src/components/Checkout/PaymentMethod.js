@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Img } from "../../GlobalStyles";
 import MethodOne from "../../assets/images/PayMethod/MethodOne.png";
@@ -7,12 +7,36 @@ import MethodThree from "../../assets/images/PayMethod/MethodThree.png";
 import MethodFour from "../../assets/images/PayMethod/MethodFour.png";
 import MethodFive from "../../assets/images/PayMethod/MethodFive.png";
 import { useDispatch, useSelector } from "react-redux";
-import { createCheckoutSession } from "../../redux/payment/paymentSlice";
+import {
+  createCheckoutSession,
+  createOrder,
+} from "../../redux/payment/paymentSlice";
+import { toast } from "react-toastify";
 
-const PaymentMethod = ({ cartItems }) => {
+const PaymentMethod = ({ cartItems, cartAmountIs, shippingInfo }) => {
   const { userInfo } = useSelector((state) => state.user);
+  const { isPayment } = useSelector((state) => state.payment);
   const user = userInfo ? userInfo.user : null;
   const dispatch = useDispatch();
+
+  const isUser = () => {
+    userInfo?.user
+      ? dispatch(
+          createCheckoutSession({
+            cartItems,
+            userId: user?._id,
+            cartAmountIs,
+            shippingInfo,
+          })
+        )
+      : toast.info("Login to proceed");
+  };
+
+  useEffect(() => {
+    createOrder({ cartItems, userId: user?._id });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPayment]);
+
   return (
     <>
       <PaymentMethodContainer>
@@ -20,15 +44,7 @@ const PaymentMethod = ({ cartItems }) => {
         <Divider />
         <PaymentMethodContent>
           <DefaultMethod>
-            <Img
-              src={MethodOne}
-              alt="MethodOne"
-              onClick={() =>
-                dispatch(
-                  createCheckoutSession({ cartItems, userId: user?._id })
-                )
-              }
-            />
+            <Img src={MethodOne} alt="MethodOne" onClick={isUser} />
             <Img src={MethodTwo} alt="MethodTwo" />
           </DefaultMethod>
           <OtherMethods>
