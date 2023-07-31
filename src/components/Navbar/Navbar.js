@@ -15,6 +15,8 @@ import SmartSearch from "../../assets/images/Navbar/smartSearch.png";
 import Flags from "../../assets/images/Navbar/Flags.png";
 import FlagsDropDown from "../../assets/images/Navbar/FlagsDropDown.png";
 import searchIcon from "../../assets/images/Navbar/search.png";
+import discord from "../../assets/images/Navbar/discord.png";
+import medium from "../../assets/images/Navbar/medium.png";
 import SmartSearchContent from "../SmartSearchModal/SmartSearchContent";
 import {
   NavbarContainer,
@@ -158,6 +160,22 @@ const Navbar = ({ cartQuantityIs, favouritesTotalQuantity }) => {
                 rel="noreferrer"
               >
                 <Img src={instagram} alt="instagram" />
+              </a>
+              <a
+                href="https://discord.com/invite/XeSupJZQMx/"
+                target="_blank"
+                rel="noreferrer"
+                className="new-logo"
+              >
+                <Img src={discord} alt="discord" />
+              </a>
+              <a
+                href="https://medium.com/@kennelclubtoken/"
+                target="_blank"
+                rel="noreferrer"
+                className="new-logo"
+              >
+                <Img src={medium} alt="medium" />
               </a>
               <Img src={dogProfile} alt="dogProfile" />
               <LangSelect>

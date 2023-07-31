@@ -145,6 +145,14 @@ export const NavbarIcons = styled.div`
   align-items: center;
   gap: 10px;
   margin: 0 10px;
+
+  .new-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50px;
+    background: rgb(0, 0, 0);
+    padding: 3px;
+  }
 `;
 
 export const Items = styled.div`
