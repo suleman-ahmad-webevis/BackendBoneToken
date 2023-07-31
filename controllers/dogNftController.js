@@ -8,6 +8,8 @@ const DogShow = require("../models/dogNFT/dogShow");
 const { StatusCodes } = require("http-status-codes");
 const cloudinary = require("../utils/cloudinary");
 const { mongoose } = require("mongoose");
+const base64url = require('base64-url');
+const axios = require('axios');
 
 // const createDogNft = catchAsyncErrors(async (req, res, next) => {
 //   const session = await mongoose.startSession();
@@ -451,11 +453,24 @@ const getDogNft = catchAsyncErrors(async (req, res, next) => {
     "dog owner veterinary insurance dogShow"
   );
   if (dogNft) {
-    res.json(dogNft);
+    let dogPicBase64 = dogNft?.dog?.dogPic;
+    const resOne = await axios.get(dogPicBase64, { responseType: 'arraybuffer' });
+    const dogBase64 = Buffer.from(resOne.data, 'binary').toString('base64');
+    let ownerPicBase64 = dogNft?.owner?.ownerPic;
+    const resTwo = await axios.get(ownerPicBase64, { responseType: 'arraybuffer' });
+    const ownerBase64 = Buffer.from(resTwo.data, 'binary').toString('base64');
+    res.json(
+      {
+        dogNft,
+        dogBase64,
+        ownerBase64
+      }
+    );
   } else {
     res.status(StatusCodes.NOT_FOUND).json({ message: "DogNFT not found" });
   }
 });
+
 
 const getDogNftByUser = catchAsyncErrors(async (req, res, next) => {
   const dogNftOfUser = await DogNft.find({ user: req?.params?.id }).populate(
