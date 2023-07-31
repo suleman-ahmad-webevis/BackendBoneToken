@@ -14,7 +14,7 @@ const OwnerSection = ({ owner }) => {
       <OSHead>
         <OwnerBasicInfo>
           <Img
-            src={owner.ownerPic ? owner.ownerPic : Owner}
+            src={owner?.ownerPic ? owner?.ownerPic : Owner}
             alt="owner"
             style={{ borderRadius: "50px" }}
           />
