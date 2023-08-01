@@ -46,7 +46,7 @@ const makeIntent = catchAsyncErrors(async (req, res, next) => {
     mode: "payment",
     // success_url: `${process.env.STRIPE_DEPLOYED_URL}/order-history`,
     // cancel_url: `${process.env.STRIPE_DEPLOYED_URL}/checkout`,
-    success_url: `https://kennel.ai/.com/order-history`,
+    success_url: `https://kennel.ai/order-history`,
     cancel_url: `https://kennel.ai/.com/checkout`,
   });
 
