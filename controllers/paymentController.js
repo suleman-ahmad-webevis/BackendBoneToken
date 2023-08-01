@@ -1,6 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Stripe = require("stripe");
-const stripe = Stripe(process.env.STRIPE_SECRET);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const Order = require("../models/order");
 
 //MakeIntent
